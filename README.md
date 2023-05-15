@@ -74,10 +74,9 @@
   			FOREIGN KEY (`user_id`)
           	REFERENCES `users` (`user_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
-
+  
 - comments
 
   ```sql
@@ -93,32 +92,46 @@
   			FOREIGN KEY (`user_id`)
           	REFERENCES `users` (`user_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE,
       	CONSTRAINT `fk_comment_post`
   			FOREIGN KEY (`post_id`)
           	REFERENCES `posts` (`post_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
-
+  
 - follows
 
   ```sql
   CREATE TABLE IF NOT EXISTS `follows` (
   		`follow_id` INT AUTO_INCREMENT PRIMARY KEY,
-  		`follower_id` INT NOT NULL, # 외래키 날 팔로우 하는 사람
-  		`user_id` INT NOT NULL, # 외래키 내가 팔로우 하는 사람
-      	CONSTRAINT `fk_follow_follower`
-  			FOREIGN KEY (`follower_id`)
-          	REFERENCES `users` (`user_id`)
-          	ON DELETE CASCADE
-      		ON UPDATE CASCADE,
-      	CONSTRAINT `fk_follow_following`
+  		`user_id` INT NOT NULL, # 외래키 날 팔로우 하는 사람
+  		`following_id` INT NOT NULL, # 외래키 내가 팔로우 하는 사람
+      	CONSTRAINT `fk_follows_user`
   			FOREIGN KEY (`user_id`)
           	REFERENCES `users` (`user_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE
+      	CONSTRAINT `fk_follows_following`
+  			FOREIGN KEY (`following_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  ```
+  
+- post_likes
+
+  ```sql
+  CREATE TABLE IF NOT EXISTS `post_likes`(
+  	   `post_like_id` INT AUTO_INCREMENT PRIMARY KEY,
+  	   `user_id` INT NOT NULL,
+   	   `post_id` INT NOT NULL,
+  	    CONSTRAINT `fk_postlikes_user`
+  	    	FOREIGN KEY (`user_id`)
+   		   	REFERENCES 	`users`(`user_id`)
+      		ON DELETE CASCADE
+      	CONSTRAINT `fk_postlikes_post`
+      		FOREIGN KEY (`post_id`)
+      		REFERENCES `posts` (`post_id`)
+      		ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -133,12 +146,10 @@
   			FOREIGN KEY (`user_id`)
           	REFERENCES `users` (`user_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE,
       	CONSTRAINT `fk_commentlikes_comment`
   			FOREIGN KEY (`comment_id`)
           	REFERENCES `comments` (`comment_id`)
           	ON DELETE CASCADE
-      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
