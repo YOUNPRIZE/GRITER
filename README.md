@@ -3,11 +3,16 @@
 ## **0️⃣ 프로젝트 개요**
 
 - 프로젝트명 : 그리터(GRITER)
+
 - 프로젝트 컨셉 :
+
 - 개발 기간 : 23.05.15 ~ 23.05.25 (11일)
+
 - 팀원 : 박재민, 조윤상
-- 사용 기술스택 : SpringBoot, Java, Vue.js, JavaScript, MySQL, Ngrok
-- <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
+
+- 사용 기술스택
+
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
 
 ## **1️⃣ 팀원 정보 및 업무 분담 내역**
 
@@ -36,24 +41,6 @@
   DROP TABLE IF EXISTS images;
   ```
 
-- posts
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `posts` (
-  		`post_id` INT AUTO_INCREMENT PRIMARY KEY,
-  		`user_id` INT NOT NULL,
-  		`title` VARCHAR(50) NOT NULL,
-  		`content` TEXT NOT NULL,
-  		`generated_date` VARCHAR(20) NOT NULL,
-  		`modified_date` VARCHAR(20) NOT NULL,
-  		`view_cnt` INT NOT NULL,
-  		`like_cnt` INT NOT NULL,
-  		`category` VARCHAR(50) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  // (댓글은 comment table에 외래키 걸기)
-  // (사진은 comment table에 외래키 걸기 : 선택사항)
-  ```
-
 - users
 
   ```sql
@@ -65,7 +52,29 @@
   		`name` VARCHAR(20) NOT NULL,
   		`nickname` VARCHAR(20) NOT NULL,
   		`regist_date` VARCHAR(20) NOT NULL,
-  		`image` VARCHAR(100)
+  		`image` VARCHAR(100) # image에 외래키
+  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  ```
+
+- posts
+
+  ```sql
+  CREATE TABLE IF NOT EXISTS `posts` (
+  		`post_id` INT AUTO_INCREMENT PRIMARY KEY,
+  		`user_id` INT NOT NULL, # users의 user_id에 외래키 걸기
+  		`title` VARCHAR(50) NOT NULL,
+  		`content` TEXT NOT NULL,
+  		`generated_date` VARCHAR(20) NOT NULL,
+  		`modified_date` VARCHAR(20) NOT NULL,
+  		`view_cnt` INT NOT NULL,
+  		`like_cnt` INT NOT NULL,
+  		`category` VARCHAR(50) NOT NULL,
+      	`image` VARCHAR(100), # image 외래키
+      	CONSTRAINT `fk_post_user`
+  			FOREIGN KEY (`user_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -75,9 +84,21 @@
   CREATE TABLE IF NOT EXISTS `comments` (
   		`comment_id` INT AUTO_INCREMENT PRIMARY KEY,
   		`content` VARCHAR(200) NOT NULL,
-  		`parent_id` INT, // 대댓글 기능
-  		`user_id` INT NOT NULL, // 외래키
-  		`post_id` INT NOT NULL // 외래키
+  		`parent_id` INT, # 대댓글 기능
+  		`user_id` INT NOT NULL, # 외래키
+  		`post_id` INT NOT NULL, # 외래키
+     	 	`generated_date` VARCHAR(20) NOT NULL,
+  		`modified_date` VARCHAR(20) NOT NULL,
+      	CONSTRAINT `fk_comment_user`
+  			FOREIGN KEY (`user_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE,
+      	CONSTRAINT `fk_comment_post`
+  			FOREIGN KEY (`post_id`)
+          	REFERENCES `posts` (`post_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -86,8 +107,18 @@
   ```sql
   CREATE TABLE IF NOT EXISTS `follows` (
   		`follow_id` INT AUTO_INCREMENT PRIMARY KEY,
-  		`follower_id` INT NOT NULL, // 외래키
-  		`user_id` INT NOT NULL // 외래키
+  		`follower_id` INT NOT NULL, # 외래키 날 팔로우 하는 사람
+  		`user_id` INT NOT NULL, # 외래키 내가 팔로우 하는 사람
+      	CONSTRAINT `fk_follow_follower`
+  			FOREIGN KEY (`follower_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE,
+      	CONSTRAINT `fk_follow_following`
+  			FOREIGN KEY (`user_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -97,7 +128,17 @@
   CREATE TABLE IF NOT EXISTS `comment_likes` (
   		`comment_like_id` INT AUTO_INCREMENT PRIMARY KEY,
   		`user_id` INT NOT NULL,
-  		`comment_id` INT NOT NULL
+  		`comment_id` INT NOT NULL,
+      	CONSTRAINT `fk_commentlikes_user`
+  			FOREIGN KEY (`user_id`)
+          	REFERENCES `users` (`user_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE,
+      	CONSTRAINT `fk_commentlikes_comment`
+  			FOREIGN KEY (`comment_id`)
+          	REFERENCES `comments` (`comment_id`)
+          	ON DELETE CASCADE
+      		ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -109,6 +150,7 @@
   		`img_path` VARCHAR(200) NOT NULL,
   		`post_id` INT NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  # user profile 사진은 어떻게 할건지 재민이랑 상의.
   ```
 
 ## **5️⃣ 컴포넌트 구조**
