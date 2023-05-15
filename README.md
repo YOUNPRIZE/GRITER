@@ -1,25 +1,26 @@
-# GRITER
+# 🏋️‍♂️ GRITER
 
-## **0. 프로젝트 개요**
+## **0️⃣ 프로젝트 개요**
 
 - 프로젝트명 : 그리터(GRITER)
 - 프로젝트 컨셉 :
 - 개발 기간 : 23.05.15 ~ 23.05.25 (11일)
 - 팀원 : 박재민, 조윤상
 - 사용 기술스택 : SpringBoot, Java, Vue.js, JavaScript, MySQL, Ngrok
+- <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
 
-## **1. 팀원 정보 및 업무 분담 내역**
+## **1️⃣ 팀원 정보 및 업무 분담 내역**
 
 | 이름   | 역할 | 설명 |
 | ------ | ---- | ---- |
 | 박재민 | ?    | ?    |
 | 조윤상 | ?    | ?    |
 
-## **2. UI 디자인 및 프로토타입**
+## **2️⃣ UI 디자인 및 프로토타입**
 
-## **3. 목표 서비스 구현 및 실제 구현 정도**
+## **3️⃣ 목표 서비스 구현 및 실제 구현 정도**
 
-## **4. 데이터베이스 모델링 (ERD)**
+## **4️⃣ 데이터베이스 모델링 (ERD)**
 
 - start
 
@@ -110,10 +111,10 @@
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
-## **5. 컴포넌트 구조**
+## **5️⃣ 컴포넌트 구조**
 
-## **6. 서비스 대표 기능 및 실제 구현 화면**
+## **6️⃣ 서비스 대표 기능 및 실제 구현 화면**
 
-## **7. 배포 서버 URL**
+## **7️⃣ 배포 서버 URL**
 
-## **8. 기타 (느낀 점 및 후기)**
+## **8️⃣ 기타 (느낀 점 및 후기)**
