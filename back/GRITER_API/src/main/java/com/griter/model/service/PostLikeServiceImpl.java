@@ -13,21 +13,6 @@ public class PostLikeServiceImpl implements PostLikeService {
 
 	@Autowired
 	private PostLikeDao postLikeDao;
-	
-	@Override
-	public List<PostLike> selectAll() {
-		return postLikeDao.selectAll();
-	}
-
-	@Override
-	public PostLike selectByUser(int user_id) {
-		return postLikeDao.selectByUser(user_id);
-	}
-
-	@Override
-	public PostLike selectByPost(int post_id) {
-		return postLikeDao.selectByPost(post_id);
-	}
 
 	@Override
 	public void create(PostLike postlike) {
@@ -35,8 +20,19 @@ public class PostLikeServiceImpl implements PostLikeService {
 	}
 
 	@Override
+	public List<PostLike> selectByUser(int user_id) {
+		return postLikeDao.selectByUser(user_id);
+	}
+
+	@Override
+	public List<PostLike> selectByPost(int post_id) {
+		return postLikeDao.selectByPost(post_id);
+	}
+
+	@Override
 	public int delete(int post_like_id) {
 		return postLikeDao.delete(post_like_id);
 	}
+	
 
 }

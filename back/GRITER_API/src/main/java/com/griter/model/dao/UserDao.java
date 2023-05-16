@@ -5,14 +5,14 @@ import java.util.List;
 import com.griter.model.dto.User;
 
 public interface UserDao {
+	// 사용자 생성
+	void create(User user);
+	
 	// 모든 사용자
 	List<User> selectAll();
 	
 	// 아이디로 검색
-	User selectById(int user_id);
-	
-	// 사용자 생성
-	void create(User user);
+	User selectById(String nickname);
 	
 	// 사용자 수정
 	int update(User user);

@@ -8,19 +8,19 @@ public class Follow {
 	@ApiModelProperty(value = "팔로우 고유번호")
 	private int follow_id;
 	
-	@ApiModelProperty(value = "followed")
+	@ApiModelProperty(value = "user")
 	private int user_id;
 	
-	@ApiModelProperty(value = "following")
-	private int following_id;
+	@ApiModelProperty(value = "followed")
+	private int followed_id;
 	
 	public Follow() {}
 
-	public Follow(int follow_id, int user_id, int following_id) {
+	public Follow(int follow_id, int user_id, int followed_id) {
 		super();
 		this.follow_id = follow_id;
 		this.user_id = user_id;
-		this.following_id = following_id;
+		this.followed_id = followed_id;
 	}
 
 	public int getFollow_id() {
@@ -39,16 +39,16 @@ public class Follow {
 		this.user_id = user_id;
 	}
 
-	public int getFollowing_id() {
-		return following_id;
+	public int getFollowed_id() {
+		return followed_id;
 	}
 
-	public void setFollowing_id(int following_id) {
-		this.following_id = following_id;
+	public void setFollowed_id(int followed_id) {
+		this.followed_id = followed_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Follow [follow_id=" + follow_id + ", user_id=" + user_id + ", following_id=" + following_id + "]";
+		return "Follow [follow_id=" + follow_id + ", user_id=" + user_id + ", followed_id=" + followed_id + "]";
 	}
 }
