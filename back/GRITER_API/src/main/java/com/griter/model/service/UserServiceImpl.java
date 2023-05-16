@@ -13,20 +13,20 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
+	@Override
+	public void create(User user) {
+		userDao.create(user);
+	}
+
 	@Override
 	public List<User> selectAll() {
 		return userDao.selectAll();
 	}
 
 	@Override
-	public User selectById(int user_id) {
-		return userDao.selectById(user_id);
-	}
-
-	@Override
-	public void create(User user) {
-		userDao.create(user);
+	public User selectById(String nickname) {
+		return userDao.selectById(nickname);
 	}
 
 	@Override
@@ -38,5 +38,5 @@ public class UserServiceImpl implements UserService {
 	public int delete(int user_id) {
 		return userDao.delete(user_id);
 	}
-
+	
 }

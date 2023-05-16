@@ -13,7 +13,12 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao postDao;
-	
+
+	@Override
+	public void create(Post post) {
+		postDao.create(post);
+	}
+
 	@Override
 	public List<Post> selectAll() {
 		return postDao.selectAll();
@@ -25,13 +30,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post select(int user_id) {
-		return postDao.select(user_id);
-	}
-
-	@Override
-	public void create(Post post) {
-		postDao.create(post);
+	public List<Post> selectByUserId(int user_id) {
+		return postDao.selectByUserId(user_id);
 	}
 
 	@Override
@@ -43,5 +43,6 @@ public class PostServiceImpl implements PostService {
 	public int delete(int post_id) {
 		return postDao.delete(post_id);
 	}
+	
 
 }
