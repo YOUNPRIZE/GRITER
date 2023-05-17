@@ -6,13 +6,17 @@
 
 - 프로젝트 컨셉 :
 
-- 개발 기간 : 23.05.15 ~ 23.05.25 (11일)
+- 개발 기간 : 23.05.18 ~ 23.05.25 (8일)
 
 - 팀원 : 박재민, 조윤상
 
 - 사용 기술스택
 
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
+
+## **1️⃣ 프로젝트 일정**
+
+![GANTT CHART](https://github.com/YOUNPRIZE/GRITER/assets/76830587/9d10c9db-bb8b-4cf1-abb7-04e8f8f17b9d)
 
 ## **1️⃣ 팀원 정보 및 업무 분담 내역**
 
@@ -173,8 +177,77 @@
 
 ## **5️⃣ 컴포넌트 구조**
 
+* FrontEnd
+
+  
+
+* BackEnd
+
+```java
+📂 src/main/java
+	ㄴ📦 com.griter
+		ㄴ📄 GriterApiApplication.java
+	ㄴ📦 com.griter.config
+		ㄴ📄 DBConfig.java
+		ㄴ📄 SwaggerConfig.java
+		ㄴ📄 WebConfing.java
+	ㄴ📦 com.griter.controller
+		ㄴ📄 PostRestController.java
+    	ㄴ📄 UserRestController.java
+	ㄴ📦 com.griter.exception
+		ㄴ📄 PostNotFoundException.java
+	ㄴ📦 com.griter.model.dao
+	    ㄴ📄 CommentDao.java
+    	ㄴ📄 CommentLikeDao.java
+    	ㄴ📄 FollowDao.java
+    	ㄴ📄 ImageDao.java
+    	ㄴ📄 PostDao.java
+    	ㄴ📄 PostLikeDao.java
+    	ㄴ📄 UserDao.java
+    ㄴ📦 com.griter.model.dto
+   	    ㄴ📄 Comment.java
+    	ㄴ📄 CommentLike.java
+    	ㄴ📄 Follow.java
+    	ㄴ📄 Image.java
+    	ㄴ📄 Post.java
+    	ㄴ📄 PostLike.java
+    	ㄴ📄 User.java
+    ㄴ📦 com.griter.model.service
+   	    ㄴ📄 CommentLikeService.java
+    	ㄴ📄 CommentLikeServiceImpl.java
+    	ㄴ📄 CommentService.java
+    	ㄴ📄 CommentServiceImpl.java
+    	ㄴ📄 FollowService.java
+    	ㄴ📄 FollowServiceImpl.java
+    	ㄴ📄 ImageService.java
+   	    ㄴ📄 ImageServiceImpl.java
+    	ㄴ📄 PostLikeService.java
+    	ㄴ📄 PostLikeServiceImpl.java
+    	ㄴ📄 PostService.java
+    	ㄴ📄 PostServiceImpl.java
+    	ㄴ📄 UserService.java
+    	ㄴ📄 UserServiceImpl.java
+📂 src/main/resources
+	ㄴ📂 mappers
+		ㄴ📄 Comment.xml
+    	ㄴ📄 CommentLike.xml
+    	ㄴ📄 Follow.xml
+    	ㄴ📄 Image.xml
+    	ㄴ📄 Post.xml
+    	ㄴ📄 PostLike.xml
+    	ㄴ📄 User.xml
+	ㄴ📄 application.properties
+📄 pom.xml
+```
+
 ## **6️⃣ 서비스 대표 기능 및 실제 구현 화면**
 
 ## **7️⃣ 배포 서버 URL**
 
 ## **8️⃣ 기타 (느낀 점 및 후기)**
+
+* 박재민
+
+
+
+* 조윤상
