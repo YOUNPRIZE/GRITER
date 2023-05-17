@@ -15,5 +15,5 @@ public interface PostLikeDao {
 	List<PostLike> selectByPost(int post_id);
 	
 	// 좋아요 취소
-	int delete(int post_like_id);
+	int delete(PostLike postLike);
 }

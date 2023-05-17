@@ -30,8 +30,8 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public int deleteFollow(int user_id, int followed_id) {
-		return followDao.deleteFollow(user_id, followed_id);
+	public int deleteFollow(Follow follow) {
+		return followDao.deleteFollow(follow);
 	}
 
 }

@@ -1,1 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.griter.model.dao.PostLikeDao">
+	
+	<insert id="create" parameterType="PostLike">
+		INSERT INTO postLikes (post_like_id, user_id, post_id)
+		VALUES (0, #{user_id}, #{post_id})
+	</insert>
+	
+	<select id="selectByUser" parameterType="int" resultType="PostLike">
+		SELECT * FROM postLikes
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectByPost" parameterType="int" resultType="PostLike">
+		SELECT * FROM postLikes
+		WHERE post_id = #{post_id}
+	</select>
+	
+	<delete id="delete" parameterType="PostLike">
+		DELETE FROM postLikes
+		WHERE user_id = #{user_id} AND post_id = #{post_id}
+	</delete>
+
+</mapper>

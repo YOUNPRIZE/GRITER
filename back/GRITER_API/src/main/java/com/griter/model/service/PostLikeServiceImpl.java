@@ -30,8 +30,8 @@ public class PostLikeServiceImpl implements PostLikeService {
 	}
 
 	@Override
-	public int delete(int post_like_id) {
-		return postLikeDao.delete(post_like_id);
+	public int delete(PostLike postLike) {
+		return postLikeDao.delete(postLike);
 	}
 	
 

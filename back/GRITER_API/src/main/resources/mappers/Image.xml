@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.griter.model.dao.ImageDao">
+	
+	<insert id="create" parameterType="Image">
+		INSERT INTO images (image_id, img_path, post_id)
+		VALUES (0, #{img_path}, #{post_id})
+	</insert>
+	
+	<select id="selectByPost" parameterType="int" resultType="Image">
+		SELECT * FROM images
+		WHERE post_id = #{post_id}
+	</select>
+	
+	<delete id="delete" parameterType="image_id">
+		DELETE FROM images
+		WHERE image_id = #{image_id}
+	</delete>
+
+</mapper>

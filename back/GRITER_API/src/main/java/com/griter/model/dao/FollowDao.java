@@ -15,5 +15,5 @@ public interface FollowDao {
 	List<Follow> selectByFollowedId(int followed_id);
 
 	// 언팔
-	int deleteFollow(int user_id, int followed_id);
+	int deleteFollow(Follow follow);
 }

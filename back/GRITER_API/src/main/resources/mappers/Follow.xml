@@ -1,1 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.griter.model.dao.FollowDao">
+
+	<insert id="createFollow" parameterType="Follow">
+		INSERT INTO follows (follow_id, user_id, followed_id)
+		VALUES (0, #{user_id}, #{followed_id})
+	</insert>
+	
+	<select id="selectByUserId" parameterType="int" resultType="Follow">
+		SELECT * FROM follows 
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectByFollowedId" parameterType="int" resultType="Follow">
+		SELECT * FROM follows
+		WHERE followed_id = #{followed_id}
+	</select>
+	
+	<delete id="deleteFollow" parameterType="Follow">
+		DELETE FROM follows
+		WHERE user_id = #{user_id} AND followed_id = #{followed_id}
+	</delete>
+</mapper>
