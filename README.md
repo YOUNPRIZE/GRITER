@@ -27,7 +27,8 @@
 
 ## **4️⃣ 데이터베이스 모델링 (ERD)**
 - ERD
-![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/bcf615f4-7c10-4fa4-8322-d9792b100b4e)
+
+  ![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/bcf615f4-7c10-4fa4-8322-d9792b100b4e)
 
 - start
 
