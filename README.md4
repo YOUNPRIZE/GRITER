@@ -193,50 +193,50 @@
 		ㄴ📄 WebConfing.java
 	ㄴ📦 com.griter.controller
 		ㄴ📄 PostRestController.java
-    	ㄴ📄 UserRestController.java
+    		ㄴ📄 UserRestController.java
 	ㄴ📦 com.griter.exception
 		ㄴ📄 PostNotFoundException.java
 	ㄴ📦 com.griter.model.dao
-	    ㄴ📄 CommentDao.java
-    	ㄴ📄 CommentLikeDao.java
-    	ㄴ📄 FollowDao.java
-    	ㄴ📄 ImageDao.java
-    	ㄴ📄 PostDao.java
-    	ㄴ📄 PostLikeDao.java
-    	ㄴ📄 UserDao.java
-    ㄴ📦 com.griter.model.dto
-   	    ㄴ📄 Comment.java
-    	ㄴ📄 CommentLike.java
-    	ㄴ📄 Follow.java
-    	ㄴ📄 Image.java
-    	ㄴ📄 Post.java
-    	ㄴ📄 PostLike.java
-    	ㄴ📄 User.java
-    ㄴ📦 com.griter.model.service
-   	    ㄴ📄 CommentLikeService.java
-    	ㄴ📄 CommentLikeServiceImpl.java
-    	ㄴ📄 CommentService.java
-    	ㄴ📄 CommentServiceImpl.java
-    	ㄴ📄 FollowService.java
-    	ㄴ📄 FollowServiceImpl.java
-    	ㄴ📄 ImageService.java
-   	    ㄴ📄 ImageServiceImpl.java
-    	ㄴ📄 PostLikeService.java
-    	ㄴ📄 PostLikeServiceImpl.java
-    	ㄴ📄 PostService.java
-    	ㄴ📄 PostServiceImpl.java
-    	ㄴ📄 UserService.java
-    	ㄴ📄 UserServiceImpl.java
+	    	ㄴ📄 CommentDao.java
+		ㄴ📄 CommentLikeDao.java
+		ㄴ📄 FollowDao.java
+		ㄴ📄 ImageDao.java
+		ㄴ📄 PostDao.java
+		ㄴ📄 PostLikeDao.java
+		ㄴ📄 UserDao.java
+    	ㄴ📦 com.griter.model.dto
+   	   	 ㄴ📄 Comment.java
+		ㄴ📄 CommentLike.java
+		ㄴ📄 Follow.java
+		ㄴ📄 Image.java
+		ㄴ📄 Post.java
+		ㄴ📄 PostLike.java
+		ㄴ📄 User.java
+    	ㄴ📦 com.griter.model.service
+		ㄴ📄 CommentLikeService.java
+		ㄴ📄 CommentLikeServiceImpl.java
+		ㄴ📄 CommentService.java
+		ㄴ📄 CommentServiceImpl.java
+		ㄴ📄 FollowService.java
+		ㄴ📄 FollowServiceImpl.java
+		ㄴ📄 ImageService.java
+   	   	ㄴ📄 ImageServiceImpl.java
+		ㄴ📄 PostLikeService.java
+		ㄴ📄 PostLikeServiceImpl.java
+		ㄴ📄 PostService.java
+		ㄴ📄 PostServiceImpl.java
+		ㄴ📄 UserService.java
+		ㄴ📄 UserServiceImpl.java
 📂 src/main/resources
 	ㄴ📂 mappers
 		ㄴ📄 Comment.xml
-    	ㄴ📄 CommentLike.xml
-    	ㄴ📄 Follow.xml
-    	ㄴ📄 Image.xml
-    	ㄴ📄 Post.xml
-    	ㄴ📄 PostLike.xml
-    	ㄴ📄 User.xml
-	ㄴ📄 application.properties
+		ㄴ📄 CommentLike.xml
+		ㄴ📄 Follow.xml
+		ㄴ📄 Image.xml
+		ㄴ📄 Post.xml
+		ㄴ📄 PostLike.xml
+		ㄴ📄 User.xml
+		ㄴ📄 application.properties
 📄 pom.xml
 ```
 
