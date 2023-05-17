@@ -52,7 +52,7 @@
       `name` VARCHAR(20) NOT NULL,
       `nickname` VARCHAR(20) NOT NULL,
       `regist_date` VARCHAR(20) NOT NULL,
-      `image` VARCHAR(100) # image에 외래키
+      `image` VARCHAR(100) # 프로필 사진이 1개이므로 외래키 필요 X
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
 
@@ -61,7 +61,7 @@
   ```sql
   CREATE TABLE IF NOT EXISTS `posts` (
       `post_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `user_id` INT NOT NULL, # users의 user_id에 외래키 걸기
+      `user_id` INT NOT NULL,
       `title` VARCHAR(50) NOT NULL,
       `content` TEXT NOT NULL,
       `generated_date` VARCHAR(20) NOT NULL,
@@ -69,11 +69,14 @@
       `view_cnt` INT NOT NULL,
       `like_cnt` INT NOT NULL,
       `category` VARCHAR(50) NOT NULL,
-      `image` VARCHAR(100), # image 외래키
+      `image` VARCHAR(100),
       CONSTRAINT `fk_post_user`
       FOREIGN KEY (`user_id`)
       REFERENCES `users` (`user_id`)
       	ON DELETE CASCADE
+      CONSTRAINT `fk_post_image`
+      FOREIGN KEY (`image`)
+      REFERENCES `images` (`post_id`)
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
   ```
   
@@ -84,8 +87,8 @@
       `comment_id` INT AUTO_INCREMENT PRIMARY KEY,
       `content` VARCHAR(200) NOT NULL,
       `parent_id` INT, # 대댓글 기능
-      `user_id` INT NOT NULL, # 외래키
-      `post_id` INT NOT NULL, # 외래키
+      `user_id` INT NOT NULL,
+      `post_id` INT NOT NULL,
       `generated_date` VARCHAR(20) NOT NULL,
       `modified_date` VARCHAR(20) NOT NULL,
       CONSTRAINT `fk_comment_user`
@@ -161,7 +164,6 @@
       `img_path` VARCHAR(200) NOT NULL,
       `post_id` INT NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  # user profile 사진은 어떻게 할건지 재민이랑 상의.
   ```
 
 ## **5️⃣ 컴포넌트 구조**
