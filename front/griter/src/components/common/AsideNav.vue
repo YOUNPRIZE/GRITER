@@ -28,7 +28,7 @@
               <span class="nav_name">Dashboard</span>
             </a>
             <a href="#" class="nav_link">
-              <i class="bx bx-calendar nav_icon"></i> <span class="nav_name">Users</span>
+              <i class="bx bx-calendar nav_icon"></i> <span class="nav_name">Calendar</span>
             </a>
             <a href="#" class="nav_link">
               <i class="bx bx-message-square-detail nav_icon"></i>
