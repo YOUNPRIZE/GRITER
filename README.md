@@ -30,6 +30,7 @@
 <!--## **3️⃣ 목표 서비스 구현 및 실제 구현 정도** -->
 ## **3️⃣ 서비스 명세서**
 - [API 명세서](https://www.notion.so/63605c790ee94654a969fbd19b5dc299?v=a80ec7fc2ccf42888ef39c8d1050ee3e)
+- [API 명세서](https://circular-ear-098.notion.site/63605c790ee94654a969fbd19b5dc299?v=a80ec7fc2ccf42888ef39c8d1050ee3e)
 
 ## **4️⃣ 데이터베이스 모델링 (ERD)**
 - ERD
