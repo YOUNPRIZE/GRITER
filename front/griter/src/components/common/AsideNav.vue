@@ -20,7 +20,7 @@
         <div>
           <a href="/" class="nav_logo">
             <span class="nav-logo">G</span>
-            <span class="nav_logo-name">GLITER</span>
+            <span class="nav_logo-name">GRITER</span>
           </a>
           <div class="nav_list">
             <a href="#" class="nav_link active">
