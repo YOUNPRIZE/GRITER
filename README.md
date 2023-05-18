@@ -181,7 +181,8 @@
   CREATE TABLE IF NOT EXISTS `routines` (
       `routine_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
       `user_id` INT NOT NULL,
-      `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목
+      `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목 ex) 달리기, 스쿼트
+      `type` VARCHAR(100) NOT NULL, # ex) 유산소, 하체, 어깨, 이두 etc..
       `date` DATE NOT NULL, # 운동한 날짜
       `time` INT, # 운동 시간 (선택적?)
       `sets` INT, # 유산소 운동 했을 경우 sets, reps, weight 필요 없으므로 NULLABLE
