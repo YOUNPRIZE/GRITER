@@ -1,4 +1,4 @@
-#CREATE DATABASE griter;
+CREATE DATABASE griter;
 USE griter;
 
 DROP TABLE IF EXISTS `users`;
