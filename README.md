@@ -205,7 +205,7 @@
 		ㄴ📄 PostLikeDao.java
 		ㄴ📄 UserDao.java
     	ㄴ📦 com.griter.model.dto
-   	   	 ㄴ📄 Comment.java
+   	   	ㄴ📄 Comment.java
 		ㄴ📄 CommentLike.java
 		ㄴ📄 Follow.java
 		ㄴ📄 Image.java
