@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.griter.model.dao.RoutineDao">
+
+	<insert id="create" parameterType="Routine">
+		INSERT INTO users (routine_id, user_id, exercise, type, date, time, sets, reps, weight)
+		VALUES(0, #{user_id}, #{exercise}, #{type}, #{date}, #{time}, #{sets}, #{reps}, #{weight})
+	</insert>
+	
+	<select id="selectALl" parameterType="Routines">
+		SELECT * FROM routines
+	</select>
+	
+	<select id="selectByDate" parameterType="String" resultType="Routines">
+		SELECT * FROM diets
+		WHERE date = #{date}
+	</select>
+	
+	<update id="update" parameterType="Routine">
+		UPDATE routines
+		SET exercise = #{exercise}, type = #{type}, time = #{time}, sets = #{sets}, reps = #{reps}, weight = #{weight}
+		WHERE routine_id = #{routine_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM routines
+		WHERE routine_id = #{routine_id}
+	</delete>
+</mapper>
