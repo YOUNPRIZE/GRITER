@@ -13,18 +13,14 @@ const routes = [
     component: HomeView,
   },
   {
-    path: 'posts',
+    path: '/posts',
     component: PostsView,
     children: [
       {
         path: "",
-        name: 'posts',
+        name: 'PostsList',
         component: PostsList,
       },
-      {
-        path: "",
-        name: ''
-      }
     ]
   }
 ]

@@ -78,12 +78,7 @@ export default {
 }
 </script>
 
-
 <style>
-* {
-  /* border: solid green; */
-}
-
 body {
   /* border: solid green; */
   background-color: #F5F6F8;
@@ -95,7 +90,9 @@ body {
   padding-bottom: 4rem;
   padding-right: 2.5rem;
 }
+</style>
 
+<style scoped>
 .dashboard,
 .userInfo,
 .calendar {
