@@ -27,7 +27,26 @@
 
 ## **2️⃣ UI 디자인 및 프로토타입**
 
+* 로그인![LogIn](https://github.com/YOUNPRIZE/GRITER/assets/76830587/4965eccb-1000-4557-b880-fd4738cebd6a)
+
+* 회원가입![Sign Up](https://github.com/YOUNPRIZE/GRITER/assets/76830587/63ed5591-2209-40ce-96f1-ea77f5b20a58)
+
+* 홈페이지![Home](https://github.com/YOUNPRIZE/GRITER/assets/76830587/a17b99fb-dcb4-4ef1-8e9d-458d41540ebb)
+
+* 게시판![DashBoard](https://github.com/YOUNPRIZE/GRITER/assets/76830587/d9b4fb22-2817-493b-a7a6-2d8b9b23cd1d)
+
+* 글 등록![Post](https://github.com/YOUNPRIZE/GRITER/assets/76830587/6d6748fa-d49d-4756-92eb-582e5e5cf686)
+
+* 글 상세![Detail](https://github.com/YOUNPRIZE/GRITER/assets/76830587/361bfe15-3e1a-498e-9326-80b82264e91e)
+
+* 마이 페이지![MyPage](https://github.com/YOUNPRIZE/GRITER/assets/76830587/33ae3e32-8bbd-4bc2-bf39-1bf2dc163ea1)
+
+* 달력
+
+  ![Calender](https://github.com/YOUNPRIZE/GRITER/assets/76830587/b09a7aad-cd4e-4305-84d9-41a3ea1a701e)
+
 <!--## **3️⃣ 목표 서비스 구현 및 실제 구현 정도** -->
+
 ## **3️⃣ 서비스 명세서**
 - [API 명세서](https://circular-ear-098.notion.site/63605c790ee94654a969fbd19b5dc299?v=a80ec7fc2ccf42888ef39c8d1050ee3e)
 
