@@ -13,11 +13,10 @@ public class RoutineServiceImpl implements RoutineService {
 
 	@Autowired
 	private RoutineDao routineDao;
-	
+
 	@Override
-	public void create(Routine routine) {
-		// TODO Auto-generated method stub
-		
+	public int create(Routine routine) {
+		return routineDao.create(routine);
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class RoutineServiceImpl implements RoutineService {
 	}
 
 	@Override
-	public int delete(Routine routine) {
-		return routineDao.delete(routine);
+	public int delete(int routine_id) {
+		return routineDao.delete(routine_id);
 	}
 
 }

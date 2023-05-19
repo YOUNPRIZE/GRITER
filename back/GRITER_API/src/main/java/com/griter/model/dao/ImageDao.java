@@ -6,7 +6,7 @@ import com.griter.model.dto.Image;
 
 public interface ImageDao {
 	// 이미지 등록
-	void create(Image img);
+	int create(Image img);
 	
 	// 게시물 별 이미지
 	List<Image> selectByPost(int post_id);

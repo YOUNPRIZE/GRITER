@@ -6,7 +6,7 @@ import com.griter.model.dto.Follow;
 
 public interface FollowDao {
 	// create
-	void createFollow(Follow follow);
+	int createFollow(Follow follow);
 	
 	// user(내가 팔로우 하는 사람들 리스트 추출)
 	List<Follow> selectByUserId(int user_id);

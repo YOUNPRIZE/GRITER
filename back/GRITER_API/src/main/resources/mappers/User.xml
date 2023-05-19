@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(0, #{password}, #{email}, #{gender}, #{name}, #{nickname}, #{regist_date}, #{image})
 	</insert>
 	
-	<select id="selectALl" parameterType="User">
+	<select id="selectAll" resultType="User">
 		SELECT * FROM users
 	</select>
 	

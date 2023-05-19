@@ -14,31 +14,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.griter.model.dto.Diet;
-import com.griter.model.dto.Follow;
 import com.griter.model.dto.Routine;
-import com.griter.model.dto.User;
-import com.griter.model.service.DietService;
-import com.griter.model.service.FollowService;
 import com.griter.model.service.RoutineService;
-import com.griter.model.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
 
-// User
+// Routine
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/routines")
 @CrossOrigin("*")
-public class UserRestController {
+public class RoutineRestController {
 	// 의존성 주입
 	@Autowired
-	private UserService us;
+	private RoutineService rs;
 
 	@PostMapping("/")
-	@ApiOperation(value = "사용자 정보를 등록한다.", response = User.class)
-	public ResponseEntity<?> create(User user) {
+	@ApiOperation(value = "운동 루틴 등록", response = Routine.class)
+	public ResponseEntity<?> createRoutine(Routine routine) {
 		try {
-			int create = us.create(user);
+			int create = rs.create(routine);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
@@ -46,54 +40,54 @@ public class UserRestController {
 	}
 
 	@GetMapping("/")
-	@ApiOperation(value = "등록된 모든 사용자 정보를 반환한다.", response = User.class)
-	public ResponseEntity<?> selectAll() {
+	@ApiOperation(value = "모든 운동 루틴 조회", response = Routine.class)
+	public ResponseEntity<?> selectAllRoutines() {
 		try {
-			List<User> list = us.selectAll();
-			System.out.println(us.selectAll());
-			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+			List<Routine> select = rs.selectAll();
+			return new ResponseEntity<List<Routine>>(select, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 
-	@GetMapping("/{nickname}")
-	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 반환한다.", response = User.class)
-	public ResponseEntity<?> select(@PathVariable String nickname) {
+	@GetMapping("/{date}")
+	@ApiOperation(value = "해당 날짜의 운동 루틴 조회", response = Routine.class)
+	public ResponseEntity<?> selectRoutineByDate(@PathVariable int date) {
 		try {
-			User user = us.selectByNickname(nickname);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			List<Routine> select = rs.selectByDate(date);
+			return new ResponseEntity<List<Routine>>(select, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 
 	@PutMapping("/")
-	@ApiOperation(value = "사용자 정보를 수정한다.", response = User.class)
-	public ResponseEntity<?> update(User user) {
+	@ApiOperation(value = "운동 루틴 수정", response = Routine.class)
+	public ResponseEntity<?> updateRoutine(Routine routine) {
 		try {
-			int update = us.update(user);
+			int update = rs.update(routine);
 			return new ResponseEntity<Integer>(update, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 
-	@DeleteMapping("/{nickname}")
-	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 삭제한다.", response = User.class)
-	public ResponseEntity<?> delete(@PathVariable int user_id) {
+	@DeleteMapping("/{routine_id}")
+	@ApiOperation(value = "운동 루틴 삭제", response = Routine.class)
+	public ResponseEntity<?> deleteRoutine(@PathVariable int routine_id) {
 		try {
-			int delete = us.delete(user_id);
+			int delete = rs.delete(routine_id);
 			return new ResponseEntity<Integer>(delete, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
-	
+
 	// ***************************************Exception***************************************
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();
 		return new ResponseEntity<String>("Sorry: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	// ***************************************************************************************
+
 }

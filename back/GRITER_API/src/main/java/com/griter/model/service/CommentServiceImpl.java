@@ -15,6 +15,11 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	@Override
+	public int create(Comment comment) {
+		return commentDao.create(comment);
+	}
+	
+	@Override
 	public List<Comment> selectAll() {
 		return commentDao.selectAll();
 	}
@@ -32,11 +37,6 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> selectByComment(int parent_id) {
 		return commentDao.selectByComment(parent_id);
-	}
-
-	@Override
-	public void create(Comment comment) {
-		commentDao.create(comment);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.griter.model.dto.PostLike;
 
 public interface PostLikeDao {
 	// 좋아요 생성
-	void create(PostLike postlike);
+	int create(PostLike postlike);
 	
 	// 사용자로 불러오기
 	List<PostLike> selectByUser(int user_id);

@@ -15,8 +15,8 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 	private CommentLikeDao commentLikeDao;
 
 	@Override
-	public void create(CommentLike commentlike) {
-		commentLikeDao.create(commentlike);
+	public int create(CommentLike commentlike) {
+		return commentLikeDao.create(commentlike);
 	}
 	
 	@Override

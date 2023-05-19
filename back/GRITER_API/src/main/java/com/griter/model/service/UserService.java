@@ -6,7 +6,7 @@ import com.griter.model.dto.User;
 
 public interface UserService {
 	// 사용자 생성
-	void create(User user);
+	int create(User user);
 	
 	// 모든 사용자
 	List<User> selectAll();

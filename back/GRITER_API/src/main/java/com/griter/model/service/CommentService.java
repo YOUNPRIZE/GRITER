@@ -6,7 +6,7 @@ import com.griter.model.dto.Comment;
 
 public interface CommentService {
 	// 댓글 생성
-	void create(Comment comment);
+	int create(Comment comment);
 	
 	// 모든 댓글 불러오기
 	List<Comment> selectAll();

@@ -15,8 +15,8 @@ public class PostLikeServiceImpl implements PostLikeService {
 	private PostLikeDao postLikeDao;
 
 	@Override
-	public void create(PostLike postlike) {
-		postLikeDao.create(postlike);
+	public int create(PostLike postlike) {
+		return postLikeDao.create(postlike);
 	}
 
 	@Override
