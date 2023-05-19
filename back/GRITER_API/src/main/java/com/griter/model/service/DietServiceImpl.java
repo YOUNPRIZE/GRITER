@@ -15,8 +15,8 @@ public class DietServiceImpl implements DietService {
 	private DietDao dietDao;
 	
 	@Override
-	public void create(Diet diet) {
-		dietDao.create(diet);
+	public int create(Diet diet) {
+		return dietDao.create(diet);
 	}
 
 	@Override

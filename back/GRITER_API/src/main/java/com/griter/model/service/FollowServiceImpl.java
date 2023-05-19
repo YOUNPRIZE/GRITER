@@ -15,8 +15,8 @@ public class FollowServiceImpl implements FollowService {
 	private FollowDao followDao;
 
 	@Override
-	public void createFollow(Follow follow) {
-		followDao.createFollow(follow);;
+	public int createFollow(Follow follow) {
+		return followDao.createFollow(follow);
 	}
 
 	@Override

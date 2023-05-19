@@ -5,7 +5,7 @@ import com.griter.model.dto.Diet;
 
 public interface DietDao {
 	// 식단 등록
-	void create(Diet diet);
+	int create(Diet diet);
 	
 	// 모든 식단 조회
 	List<Diet> selectAll();

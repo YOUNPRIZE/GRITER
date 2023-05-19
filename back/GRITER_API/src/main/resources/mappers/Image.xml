@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE post_id = #{post_id}
 	</select>
 	
-	<delete id="delete" parameterType="image_id">
+	<delete id="delete" parameterType="int">
 		DELETE FROM images
 		WHERE image_id = #{image_id}
 	</delete>

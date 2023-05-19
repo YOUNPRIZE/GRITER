@@ -29,14 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE parent_id = #{parent_id}
 	</select>
 	
-<!-- 	<!-- 검색기능 --> -->
+	 	<!-- 검색기능 -->
 <!-- 	<select id="search" resultType="Comment" parameterType="SearchCondition"> -->
 <!-- 		SELECT * FROM comments -->
-<!-- 		<!-- 검색 기준  --> -->
+		<!-- 검색 기준  -->
 <!-- 		<if test="key != 'none'"> -->
 <!-- 			WHERE ${key} like concat('%', #{word}, '%') -->
 <!-- 		</if> -->
-<!-- 		<!-- 어떤기준으로 어느방향으로 정렬할거냐  --> -->
+ 		<!-- 어떤기준으로 어느방향으로 정렬할거냐  -->
 <!-- 		<if test="orderBy != 'none'"> -->
 <!-- 			order by ${orderBy} ${orderByDir} -->
 <!-- 		</if> -->

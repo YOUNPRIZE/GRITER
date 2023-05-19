@@ -6,7 +6,7 @@ import com.griter.model.dto.Routine;
 
 public interface RoutineDao {
 	// 운동 루틴 등록
-	void create(Routine routine);
+	int create(Routine routine);
 	
 	// 모든 운동 루틴 조회
 	List<Routine> selectAll();
@@ -18,5 +18,5 @@ public interface RoutineDao {
 	int update(Routine routine);
 	
 	// 운동 루틴 삭제
-	int delete(Routine routine);
+	int delete(int routine_id);
 }

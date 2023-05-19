@@ -6,7 +6,7 @@ import com.griter.model.dto.Post;
 
 public interface PostDao {
 	// 게시글 등록
-	void create(Post post);
+	int create(Post post);
 	
 	// 모든 게시글
 	List<Post> selectAll();

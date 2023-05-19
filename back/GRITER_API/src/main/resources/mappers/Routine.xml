@@ -9,11 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(0, #{user_id}, #{exercise}, #{type}, #{date}, #{time}, #{sets}, #{reps}, #{weight})
 	</insert>
 	
-	<select id="selectALl" parameterType="Routines">
+	<select id="selectALl" parameterType="Routine">
 		SELECT * FROM routines
 	</select>
 	
-	<select id="selectByDate" parameterType="String" resultType="Routines">
+	<select id="selectByDate" parameterType="String" resultType="Routine">
 		SELECT * FROM diets
 		WHERE date = #{date}
 	</select>

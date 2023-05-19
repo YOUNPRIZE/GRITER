@@ -15,8 +15,8 @@ public class PostServiceImpl implements PostService {
 	private PostDao postDao;
 
 	@Override
-	public void create(Post post) {
-		postDao.create(post);
+	public int create(Post post) {
+		return postDao.create(post);
 	}
 
 	@Override
