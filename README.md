@@ -16,7 +16,8 @@
 
 ## **1️⃣ 프로젝트 일정**
 
-![GANTT CHART](https://github.com/YOUNPRIZE/GRITER/assets/76830587/9d10c9db-bb8b-4cf1-abb7-04e8f8f17b9d)
+![GANTT CHART](https://github.com/YOUNPRIZE/GRITER/assets/76830587/3df3ea7f-5403-4686-84cb-cf681c89dfd6)
+
 <br>
 ## **1️⃣ 팀원 정보 및 업무 분담 내역**
 
