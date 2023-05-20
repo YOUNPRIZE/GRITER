@@ -11,31 +11,34 @@ import io.swagger.annotations.ApiModelProperty;
 public class User {
 	@ApiModelProperty(value = "아이디")
 	private int user_id;
-	
+
 	@ApiModelProperty(value = "비밀번호")
 	private String password;
-	
+
 	@ApiModelProperty(value = "이메일")
 	private String email;
-	
+
 	@ApiModelProperty(value = "성별")
 	private String gender;
-	
+
 	@ApiModelProperty(value = "이름")
 	private String name;
-	
+
 	@ApiModelProperty(value = "닉네임")
 	private String nickname;
-	
+
 	@ApiModelProperty(value = "등록일")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date regist_date;
-	
+
 	@ApiModelProperty(value = "프로필 사진")
 	private String image;
-	
-	public User() {}
+
+	private String orgImage;
+
+	public User() {
+	}
 
 	public User(int user_id, String password, String email, String gender, String name, String nickname,
 			Date regist_date, String image) {
@@ -112,6 +115,14 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getOrgImage() {
+		return orgImage;
+	}
+
+	public void setOrgImage(String orgImage) {
+		this.orgImage = orgImage;
 	}
 
 	@Override

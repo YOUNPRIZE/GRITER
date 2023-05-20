@@ -1,8 +1,11 @@
 package com.griter.controller;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,15 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.griter.model.dto.Diet;
-import com.griter.model.dto.Follow;
-import com.griter.model.dto.Routine;
 import com.griter.model.dto.User;
-import com.griter.model.service.DietService;
-import com.griter.model.service.FollowService;
-import com.griter.model.service.RoutineService;
 import com.griter.model.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -33,11 +32,25 @@ public class UserRestController {
 	// 의존성 주입
 	@Autowired
 	private UserService us;
+	
+	@Autowired
+	ResourceLoader resLoader;
 
 	@PostMapping("/")
 	@ApiOperation(value = "사용자 정보를 등록한다.", response = User.class)
-	public ResponseEntity<?> create(User user) {
+	public ResponseEntity<?> create(User user, @RequestPart(required=false) MultipartFile file) {
 		try {
+			
+			if (file != null && file.getSize() > 0) {
+//				Resource res = resLoader.getResource("classpath:/static/resources/upload");
+				Resource res = resLoader.getResource("/");
+				System.out.println(res);
+				user.setImage(System.currentTimeMillis() + "_" + file.getOriginalFilename());
+				
+				user.setOrgImage(file.getOriginalFilename());
+				System.out.println(user.getImage());
+				file.transferTo(new File(res.getFile().getCanonicalPath() + "/" + user.getImage()));
+			}
 			int create = us.create(user);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);
 		} catch (Exception e) {
