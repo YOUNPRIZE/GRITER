@@ -1,20 +1,35 @@
 <template>
   <div id="app">
-    <aside-nav />
+    <div v-if="useNav">
+      <aside-nav />
+    </div>
     <router-view />
   </div>
 </template>
 
-
 <script>
-import AsideNav from '@/components/common/AsideNav.vue'
+import AsideNav from "@/components/common/AsideNav.vue";
 
 export default {
   name: "app",
+  data() {
+    return {
+      useNav: true,
+    };
+  },
   components: {
     AsideNav,
   },
   mounted() {
+    console.log(this.$router.currentRoute.name);
+    if (
+      this.$router.currentRoute.name == "login" ||
+      this.$router.currentRoute.name == "register"
+    ) {
+      this.useNav = false;
+      return;
+    }
+    console.log(this.useNav);
     const showNavbar = (navId, bodyId) => {
       const nav = document.getElementById(navId),
         bodypd = document.getElementById(bodyId);
@@ -22,7 +37,8 @@ export default {
       // Validate that all variables exist
       if (nav && bodypd) {
         bodypd.addEventListener("click", (e) => {
-          console.log(e.target.class);
+          console.log(e.target.className);
+          console.log(this.$router.currentRoute.name);
           if (e.target.id === "nav-bar" || e.target.id === "nav") {
             // show navbar
             nav.classList.toggle("show");
@@ -48,13 +64,12 @@ export default {
         bodypd = document.getElementById(bodyId);
 
       document.addEventListener("click", () => {
-        if (nav.className === 'l-navbar show') {
+        if (nav.className === "l-navbar show") {
           document.addEventListener("click", () => {
             // show navbar
             nav.classList.toggle("show");
             // add padding to body
             bodypd.classList.toggle("body-pd");
-
           });
         }
       });
@@ -76,7 +91,6 @@ html {
   text-align: center;
   color: #2c3e50;
 }
-
 
 nav {
   padding: 30px;

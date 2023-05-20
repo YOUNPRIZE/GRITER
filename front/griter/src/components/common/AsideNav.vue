@@ -9,21 +9,21 @@
               <span class="nav_logo-name">GRITER</span>
             </div>
           </router-link>
-          <hr style="margin-left: 1rem;">
+          <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
             <router-link to="users">
               <div class="nav_link">
-                <img src="" class="profile-img" alt="">
+                <img src="" class="profile-img" alt="" />
                 <div class="login-info">
-                  <span>Catbirdseat</span><br>
+                  <span>Catbirdseat</span><br />
                   <span>catbirdseat@naver.com</span>
                 </div>
               </div>
             </router-link>
-            <hr style="margin-left: 1rem;">
+            <hr style="margin-left: 1rem" />
             <router-link to="/">
-              <div class="nav_link active">
+              <div class="nav_link">
                 <i class="bx bx-home nav_icon"></i>
                 <span class="nav_name">Home</span>
               </div>
@@ -35,18 +35,34 @@
               </div>
             </router-link>
             <a href="#" class="nav_link">
-              <i class="bx bx-calendar nav_icon"></i> <span class="nav_name">Calendar</span>
+              <i class="bx bx-calendar nav_icon"></i>
+              <span class="nav_name">Calendar</span>
             </a>
-            <a href="#" class="nav_link">
-              <i class="bx bx-user nav_icon"></i>
-              <span class="nav_name">MyPage</span>
-            </a>
+            <router-link to="follows">
+              <div class="nav_link">
+                <i class="bx bxs-contact nav_icon"></i>
+                <span class="nav_name">Relations</span>
+              </div>
+            </router-link>
+          </div>
+          <hr style="margin-left: 1rem" />
+          <a href="#" class="nav_link">
+            <i class="bx bx-log-out nav_icon"></i>
+            <span class="nav_name">SignOut</span>
+          </a>
+        </div>
+        <div class="nav_link" id="dark-mode">
+          <i class="bx bxs-moon nav_icon"></i>
+          <span>DarkMode</span>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
           </div>
         </div>
-        <a href="#" class="nav_link">
-          <i class="bx bx-log-out nav_icon"></i>
-          <span class="nav_name">SignOut</span>
-        </a>
       </nav>
     </div>
   </aside>
@@ -54,18 +70,26 @@
 
 <script>
 export default {
+  mounted() {
+    window.onload = function () {
+      console.log(this.$router);
+    };
+  },
 };
 </script>
 
 <style>
+#dark-mode{
+  display: flex;
+}
 .nav_logo {
-  color: #2388F5;
+  color: #2388f5;
   font-size: x-large;
   margin-left: 0.1rem;
 }
 
 html {
-  background-color: #F5F6F8;
+  background-color: #f5f6f8;
 }
 
 .profile-img {
@@ -82,7 +106,7 @@ html {
   font-weight: lighter;
 }
 
-.login-info>span:first-child {
+.login-info > span:first-child {
   font-weight: bolder;
 }
 
@@ -90,9 +114,9 @@ html {
 
 :root {
   --nav-width: 68px;
-  --first-color: #FFFFFF;
+  --first-color: #ffffff;
   --first-color-light: #afa5d9;
-  --white-color: #2388F5;
+  --white-color: #2388f5;
   --body-font: "Nunito", sans-serif;
   --normal-font-size: 1rem;
   --z-fixed: 100;

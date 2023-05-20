@@ -1,0 +1,102 @@
+<template>
+  <body>
+    <div class="login-box">
+      <div class="logo">GRITER</div>
+      <form action="" class="login-form">
+        <div class="login-form-input">
+          <div class="label">ID</div>
+          <input type="text" class="id" required/>
+          <div class="label">Password</div>
+          <input type="password" class="password" required/>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-primary" id="login-btn">Login</button>
+          <router-link to="register">
+            <button class="btn btn-outline-primary">Sign up</button>
+          </router-link>
+        </div>
+      </form>
+    </div>
+  </body>
+</template>
+
+<script>
+export default {
+  name: "UsersLogin",
+};
+</script>
+
+<style scoped>
+* {
+  /* border: 1px solid #000; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  color: #2388f5;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.login-box {
+  /* border: solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 1.5rem rgb(167, 167, 167);
+  background-color: #ffffff;
+  padding: 4rem;
+  height: 80vh;
+  width: 35vw;
+  min-width: 30rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 5rem;
+}
+
+.login-form-input {
+  /* border: solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.label {
+  display: flex;
+  color: rgb(141, 141, 141);
+}
+
+input {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  border: none;
+  border-bottom: solid 1px rgb(200, 200, 200);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  width: 10rem;
+  height: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+#login-btn {
+  box-shadow: 0 0 5px rgb(141, 141, 141);
+}
+</style>
