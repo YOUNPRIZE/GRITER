@@ -12,7 +12,7 @@
         <div class="buttons">
           <button class="btn btn-primary" id="login-btn">Login</button>
           <router-link to="register">
-            <button class="btn btn-outline-primary">Sign up</button>
+            <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
         </div>
       </form>
@@ -98,5 +98,16 @@ button {
 
 #login-btn {
   box-shadow: 0 0 5px rgb(141, 141, 141);
+  background-color: #2388f5;
+}
+#login-btn:hover{
+  background-color: #1b6fca;
+}
+
+#signUp-btn{
+  border: solid 1px #2388f5;
+}
+#signUp-btn:hover{
+  background-color: #2388f5;
 }
 </style>

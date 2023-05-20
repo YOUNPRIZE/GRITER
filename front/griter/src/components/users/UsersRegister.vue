@@ -137,6 +137,10 @@ button {
   background-color: #2388f5;
   border: none;
 }
+#submit-btn:hover{
+  background-color: #1b6fca;
+}
+
 #GoToLogIn-btn{
   border: solid 1px #2388f5;
 }

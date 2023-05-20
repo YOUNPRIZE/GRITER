@@ -12,7 +12,7 @@
           <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
-            <router-link to="users">
+            <router-link :to="{name: 'userInfo', params: {nickname}}">
               <div class="nav_link">
                 <img src="" class="profile-img" alt="" />
                 <div class="login-info">
@@ -28,7 +28,7 @@
                 <span class="nav_name">Home</span>
               </div>
             </router-link>
-            <router-link to="posts">
+            <router-link :to="{ name: 'PostsList' }">
               <div class="nav_link">
                 <i class="bx bx-grid-alt nav_icon"></i>
                 <span class="nav_name">Dashboard</span>
@@ -38,7 +38,7 @@
               <i class="bx bx-calendar nav_icon"></i>
               <span class="nav_name">Calendar</span>
             </a>
-            <router-link to="follows">
+            <router-link :to="{ name: 'follows' }">
               <div class="nav_link">
                 <i class="bx bxs-contact nav_icon"></i>
                 <span class="nav_name">Relations</span>
@@ -51,7 +51,7 @@
             <span class="nav_name">SignOut</span>
           </a>
         </div>
-        <div class="nav_link" id="dark-mode">
+        <div class="nav_link" id="dark-mode" disabled>
           <i class="bx bxs-moon nav_icon"></i>
           <span>DarkMode</span>
           <div class="form-check form-switch">
@@ -70,6 +70,12 @@
 
 <script>
 export default {
+  name: "AsideNav",
+  data() {
+    return {
+      nickname: "catbirdseat",
+    };
+  },
   mounted() {
     window.onload = function () {
       console.log(this.$router);
@@ -79,7 +85,7 @@ export default {
 </script>
 
 <style>
-#dark-mode{
+#dark-mode {
   display: flex;
 }
 .nav_logo {

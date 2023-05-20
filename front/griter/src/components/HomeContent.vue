@@ -10,7 +10,118 @@
       </div>
       <hr>
       <div class="dashboard-content">
+        <!-- 대시보드 미리보기 항목들 -->
         <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link>
+        <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link>
+        <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link>
+        <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link>
+        <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link>
+        <router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link><router-link to="/">
+          <div class="dashboard-content-post">
+            <div class="dashboard-content-post-left">
+              <div class="dashboard-content-post-title">
+                <span>제목 젬고 제목</span>
+              </div>
+              <div class="dashboard-content-post-writerInfo">
+                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <span class="dashboard-content-post-writer">catbirdseat</span>
+              </div>
+            </div>
+            <div class="dashboard-content-post-right">
+              <span class="dashboard-content-post-created">December, 23, 2022</span>
+            </div>
+          </div>
+        </router-link><router-link to="/">
           <div class="dashboard-content-post">
             <div class="dashboard-content-post-left">
               <div class="dashboard-content-post-title">
@@ -103,7 +214,27 @@ body {
 }
 
 .dashboard {
+  display: flex;
+  flex-direction: column;
   min-width: 30rem;
+}
+
+.dashboard-content{
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding-bottom: 2rem;
+}
+.dashboard-content::-webkit-scrollbar,
+.dashboard-content::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.dashboard-content::-webkit-scrollbar-thumb,
+.dashboard-content::-webkit-scrollbar-thumb {
+  background-color: rgb(190, 190, 190);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
 }
 
 .userInfo,
@@ -172,10 +303,11 @@ hr {
   flex-direction: row;
   justify-content: space-between;
   color: black;
-  margin: 2rem;
+  margin: 2rem 2rem 0 2rem;
   padding: 1rem;
   box-shadow: 0 0 5px rgb(185, 185, 185);
   border-radius: 2px;
+  height: 10rem;
 }
 
 .dashboard-content-post-title {

@@ -7,6 +7,7 @@ import UserView from '@/views/UserView.vue'
 import UsersLogin from '@/components/users/UsersLogin.vue'
 import UsersRegister from '@/components/users/UsersRegister.vue'
 import UsersInfo from '@/components/users/UsersInfo.vue'
+import UsersFollows from '@/components/users/UsersFollows.vue'
 
 
 Vue.use(VueRouter)
@@ -43,7 +44,12 @@ const routes = [
         component: UsersRegister,
       },
       {
-        path: ':nickname',
+        path: "follows",
+        name: 'follows',
+        component: UsersFollows,
+      },
+      {
+        path: ":nickname",
         name: 'userInfo',
         component: UsersInfo,
       },
