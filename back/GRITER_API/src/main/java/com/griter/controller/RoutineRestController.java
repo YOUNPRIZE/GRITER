@@ -41,7 +41,7 @@ public class RoutineRestController {
 
 	@GetMapping("/")
 	@ApiOperation(value = "모든 운동 루틴 조회", response = Routine.class)
-	public ResponseEntity<?> selectAllRoutines() {
+	public ResponseEntity<?> selectAll() {
 		try {
 			List<Routine> select = rs.selectAll();
 			return new ResponseEntity<List<Routine>>(select, HttpStatus.OK);

@@ -12,7 +12,7 @@ public interface FollowDao {
 	List<Follow> selectByUserId(int user_id);
 
 	// followed user(나를 팔로우 하는 사람들 리스트 추출)
-	List<Follow> selectByFollowedId(int followed_id);
+	List<Follow> selectByFollowingId(int following_id);
 
 	// 언팔
 	int deleteFollow(Follow follow);

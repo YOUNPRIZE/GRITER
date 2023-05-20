@@ -37,8 +37,8 @@ public class FollowRestController {
 		}
 	}
 
-	@GetMapping("/following/{user_id}")
-	@ApiOperation(value = "현재 사용자가 팔로우하는 사용자들을 조회", response = Follow.class)
+	@GetMapping("/followed/{user_id}")
+	@ApiOperation(value = "현재 사용자를 팔로우하는 사용자들을 조회", response = Follow.class)
 	public ResponseEntity<?> selectByUserId(@PathVariable int user_id) {
 		try {
 			List<Follow> select = fs.selectByUserId(user_id);
@@ -48,11 +48,11 @@ public class FollowRestController {
 		}
 	}
 
-	@GetMapping("/followed/{followed_id}")
-	@ApiOperation(value = "현재 사용자를 팔로우하는 사용자들을 조회", response = Follow.class)
-	public ResponseEntity<?> selectByFollowedId(@PathVariable int followed_id) {
+	@GetMapping("/following/{following_id}")
+	@ApiOperation(value = "현재 사용자가 팔로우하는 사용자들을 조회", response = Follow.class)
+	public ResponseEntity<?> selectByFollowingId(@PathVariable int following_id) {
 		try {
-			List<Follow> select = fs.selectByFollowedId(followed_id);
+			List<Follow> select = fs.selectByFollowingId(following_id);
 			return new ResponseEntity<List<Follow>>(select, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

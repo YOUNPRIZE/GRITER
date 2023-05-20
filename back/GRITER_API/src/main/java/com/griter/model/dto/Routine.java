@@ -1,5 +1,9 @@
 package com.griter.model.dto;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,7 +22,8 @@ public class Routine {
 	private String type;
 	
 	@ApiModelProperty(value = "날짜")
-	private String date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
 	
 	@ApiModelProperty(value = "운동 시간")
 	private int time;
@@ -34,7 +39,7 @@ public class Routine {
 	
 	public Routine() {}
 
-	public Routine(int routine_id, int user_id, String exercise, String type, String date, int time, int sets, int reps,
+	public Routine(int routine_id, int user_id, String exercise, String type, Date date, int time, int sets, int reps,
 			int weight) {
 		super();
 		this.routine_id = routine_id;
@@ -80,11 +85,11 @@ public class Routine {
 		this.type = type;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

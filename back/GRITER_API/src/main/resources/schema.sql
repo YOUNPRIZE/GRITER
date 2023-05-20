@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
     `user_id` INT NOT NULL, # 작성자 ID
     `title` VARCHAR(50) NOT NULL, # 제목
     `content` TEXT NOT NULL, # 내용
-    `generated_date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 작성일
-    `modified_date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 수정일 (작성 시에는 작성일과 수정일이 같음)
+    `generated_date` DATETIME DEFAULT (CURRENT_TIMESTAMP) NOT NULL, # 작성일
+    `modified_date` DATETIME DEFAULT (CURRENT_TIMESTAMP) NOT NULL, # 수정일 (작성 시에는 작성일과 수정일이 같음)
     `view_cnt` INT DEFAULT 0 NOT NULL, # 조회수
     `like_cnt` INT DEFAULT 0 NOT NULL, # 좋아요 수
     `category` VARCHAR(50) NOT NULL, # 카테고리
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `user_id` INT NOT NULL, # 사용자 ID
     `content` VARCHAR(200) NOT NULL, # 댓글 내용
     `parent_id` INT DEFAULT NULL, # 대댓글
-    `generated_date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 작성일
-    `modified_date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 수정일
+    `generated_date` DATETIME DEFAULT (CURRENT_TIMESTAMP) NOT NULL, # 작성일
+    `modified_date` DATETIME DEFAULT (CURRENT_TIMESTAMP) NOT NULL, # 수정일
     CONSTRAINT `fk_comment_post`
     	FOREIGN KEY (`post_id`)
     	REFERENCES `posts` (`post_id`)
