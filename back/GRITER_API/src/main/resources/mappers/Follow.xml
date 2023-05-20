@@ -14,13 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_id = #{user_id}
 	</select>
 	
-	<select id="selectByFollowedId" parameterType="int" resultType="Follow">
+	<select id="selectByFollowingId" parameterType="int" resultType="Follow">
 		SELECT * FROM follows
-		WHERE followed_id = #{followed_id}
+		WHERE following_id = #{following_id}
 	</select>
 	
 	<delete id="deleteFollow" parameterType="Follow">
 		DELETE FROM follows
-		WHERE user_id = #{user_id} AND followed_id = #{followed_id}
+		WHERE user_id = #{user_id} AND following_id = #{following_id}
 	</delete>
 </mapper>

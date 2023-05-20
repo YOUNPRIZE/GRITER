@@ -5,16 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.RoutineDao">
 
 	<insert id="create" parameterType="Routine">
-		INSERT INTO users (routine_id, user_id, exercise, type, date, time, sets, reps, weight)
+		INSERT INTO routines (routine_id, user_id, exercise, type, date, time, sets, reps, weight)
 		VALUES(0, #{user_id}, #{exercise}, #{type}, #{date}, #{time}, #{sets}, #{reps}, #{weight})
 	</insert>
 	
-	<select id="selectALl" parameterType="Routine">
+	<select id="selectAll" resultType="Routine">
 		SELECT * FROM routines
 	</select>
 	
 	<select id="selectByDate" parameterType="String" resultType="Routine">
-		SELECT * FROM diets
+		SELECT * FROM routines
 		WHERE date = #{date}
 	</select>
 	

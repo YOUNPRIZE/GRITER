@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.DietDao">
 
 	<insert id="create" parameterType="Diet">
-		INSERT INTO users (diet_id, user_id, date, meal, kind, gram, calories)
+		INSERT INTO diets (diet_id, user_id, date, meal, kind, gram, calories)
 		VALUES(0, #{user_id}, #{date}, #{meal}, #{kind}, #{gram}, #{calories})
 	</insert>
-	
-	<select id="selectALl" parameterType="Diet">
+
+	<select id="selectAll" resultType="Diet">
 		SELECT * FROM diets
 	</select>
 	

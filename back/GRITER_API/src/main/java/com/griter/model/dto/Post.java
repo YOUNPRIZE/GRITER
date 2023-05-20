@@ -1,5 +1,7 @@
 package com.griter.model.dto;
 
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,10 +20,10 @@ public class Post {
 	private String content;
 	
 	@ApiModelProperty(value = "생성일")
-	private String generated_date;
+	private Date generated_date;
 	
 	@ApiModelProperty(value = "수정일")
-	private String modified_date;
+	private Date modified_date;
 	
 	@ApiModelProperty(value = "조회수")
 	private int view_cnt;
@@ -34,7 +36,7 @@ public class Post {
 	
 	public Post() {}
 
-	public Post(int post_id, int user_id, String title, String content, String generated_date, String modified_date,
+	public Post(int post_id, int user_id, String title, String content, Date generated_date, Date modified_date,
 			int view_cnt, int like_cnt, String category) {
 		super();
 		this.post_id = post_id;
@@ -80,19 +82,19 @@ public class Post {
 		this.content = content;
 	}
 
-	public String getGenerated_date() {
+	public Date getGenerated_date() {
 		return generated_date;
 	}
 
-	public void setGenerated_date(String generated_date) {
+	public void setGenerated_date(Date generated_date) {
 		this.generated_date = generated_date;
 	}
 
-	public String getModified_date() {
+	public Date getModified_date() {
 		return modified_date;
 	}
 
-	public void setModified_date(String modified_date) {
+	public void setModified_date(Date modified_date) {
 		this.modified_date = modified_date;
 	}
 

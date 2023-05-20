@@ -10,7 +10,7 @@ import com.griter.model.dto.Follow;
 
 @Service
 public class FollowServiceImpl implements FollowService {
-	
+
 	@Autowired
 	private FollowDao followDao;
 
@@ -25,8 +25,8 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public List<Follow> selectByFollowedId(int followed_id) {
-		return followDao.selectByFollowedId(followed_id);
+	public List<Follow> selectByFollowingId(int following_id) {
+		return followDao.selectByFollowingId(following_id);
 	}
 
 	@Override

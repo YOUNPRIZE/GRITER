@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.CommentDao">
 
 	<!-- 댓글 등록 -->
-	<insert id="insert" parameterType="Comment" keyProperty="id">
-		INSERT INTO comments (comment_id, content, parent_id, user_id, post_id, generated_date, modified_date)
-		VALUES (0, #{content}, #{parent_id}, #{user_id}, #{post_id}, #{generated_date}, #{modified_date})
+	<insert id="create" parameterType="Comment" keyProperty="id">
+		INSERT INTO comments (comment_id, content, parent_id, user_id, post_id)
+		VALUES (0, #{content}, #{parent_id}, #{user_id}, #{post_id})
 	</insert>
 	
 	<select id="selectAll" resultType="Comment">
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="update" parameterType="Comment">
 		UPDATE comments
-		SET content = #{content}, modified_date = #{modified_date}
+		SET content = #{content}, modified_date = CURRENT_TIMESTAMP
 		WHERE comment_id = #{comment_id}
 	</update>
 	

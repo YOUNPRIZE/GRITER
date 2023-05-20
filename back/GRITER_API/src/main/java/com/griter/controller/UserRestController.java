@@ -79,7 +79,7 @@ public class UserRestController {
 		}
 	}
 
-	@DeleteMapping("/{nickname}")
+	@DeleteMapping("/{user_id}")
 	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 삭제한다.", response = User.class)
 	public ResponseEntity<?> delete(@PathVariable int user_id) {
 		try {

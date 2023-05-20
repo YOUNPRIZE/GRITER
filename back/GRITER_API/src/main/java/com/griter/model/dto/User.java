@@ -1,5 +1,9 @@
 package com.griter.model.dto;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,7 +28,9 @@ public class User {
 	private String nickname;
 	
 	@ApiModelProperty(value = "등록일")
-	private String regist_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private Date regist_date;
 	
 	@ApiModelProperty(value = "프로필 사진")
 	private String image;
@@ -32,7 +38,7 @@ public class User {
 	public User() {}
 
 	public User(int user_id, String password, String email, String gender, String name, String nickname,
-			String regist_date, String image) {
+			Date regist_date, String image) {
 		super();
 		this.user_id = user_id;
 		this.password = password;
@@ -92,11 +98,11 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public String getRegist_date() {
+	public Date getRegist_date() {
 		return regist_date;
 	}
 
-	public void setRegist_date(String regist_date) {
+	public void setRegist_date(Date regist_date) {
 		this.regist_date = regist_date;
 	}
 
