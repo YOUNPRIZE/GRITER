@@ -20,6 +20,12 @@ export default {
   components: {
     AsideNav,
   },
+  beforeMount(){
+    console.log(document.querySelector("html"));
+    // if(){
+
+    // }
+  },
   mounted() {
     console.log(this.$router.currentRoute.name);
     if (
