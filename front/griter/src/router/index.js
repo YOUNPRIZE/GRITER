@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// import Vuex from 'vuex';
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PostsView from '@/views/PostsView.vue'
@@ -11,6 +12,7 @@ import UsersFollows from '@/components/users/UsersFollows.vue'
 
 
 Vue.use(VueRouter)
+// Vue.use(Vuex)
 
 const routes = [
   {

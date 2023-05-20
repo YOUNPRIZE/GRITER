@@ -9,25 +9,31 @@
 
 <script>
 import AsideNav from "@/components/common/AsideNav.vue";
+import { mapMutations, mapState, } from "vuex";
 
 export default {
   name: "app",
   data() {
     return {
       useNav: true,
+      // nightmode: '',
     };
   },
   components: {
     AsideNav,
   },
-  beforeMount(){
-    console.log(document.querySelector("html"));
-    // if(){
-
-    // }
+  computed: {
+    ...mapState(["nightmode"]),
+  },
+  methods:{
+    ...mapMutations(["setMode"]),
+  },
+  beforeMount() {
+    console.log("nightmode: " + this.$store.state.nightmode);
   },
   mounted() {
     console.log(this.$router.currentRoute.name);
+    console.log(this.$store);
     if (
       this.$router.currentRoute.name == "login" ||
       this.$router.currentRoute.name == "register"
@@ -81,6 +87,14 @@ export default {
       });
     };
     hideNavbar("nav-bar", "body-pd");
+  },
+  created() {
+    console.log(document.querySelector('body'));
+    console.log(document.documentElement.getAttribute('nightmode'));
+    if(this.$store.state.nightmode){
+      document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+      document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    }
   },
 };
 </script>

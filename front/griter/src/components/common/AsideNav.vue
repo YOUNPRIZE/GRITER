@@ -12,7 +12,7 @@
           <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
-            <router-link :to="{name: 'userInfo', params: {nickname}}">
+            <router-link :to="{ name: 'userInfo', params: { nickname } }">
               <div class="nav_link">
                 <img src="" class="profile-img" alt="" />
                 <div class="login-info">
@@ -51,7 +51,7 @@
             <span class="nav_name">SignOut</span>
           </a>
         </div>
-        <div class="nav_link" id="dark-mode" disabled>
+        <div class="nav_link" id="dark-mode">
           <i class="bx bxs-moon nav_icon"></i>
           <span>DarkMode</span>
           <div class="form-check form-switch">
@@ -59,7 +59,8 @@
               class="form-check-input"
               type="checkbox"
               role="switch"
-              id="flexSwitchCheckDefault"
+              id="nightmode"
+              @click="changeMode"
             />
           </div>
         </div>
@@ -80,6 +81,19 @@ export default {
     window.onload = function () {
       console.log(this.$router);
     };
+    if (this.$store.state.nightmode) {
+      document.getElementById("nightmode").checked = true;
+    }
+  },
+  methods: {
+    changeMode() {
+      this.$store.dispatch("callModeSet");
+      const btn = document.getElementById("nightmode");
+      document.documentElement.setAttribute("nightmode", this.$store.state.nightmode);
+      console.log(btn.checked);
+      this.$router.go(0);
+      // console.log(this.$store.state.nightmode);
+    },
   },
 };
 </script>
@@ -96,6 +110,8 @@ export default {
 
 html {
   background-color: #f5f6f8;
+  /* 나중에 없애야됨  */
+  color: rgb(91, 91, 91);
 }
 
 .profile-img {
@@ -230,4 +246,5 @@ a {
     width: calc(var(--nav-width) + 200px);
   }
 }
+
 </style>
