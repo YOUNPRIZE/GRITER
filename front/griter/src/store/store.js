@@ -1,3 +1,4 @@
+import router from '@/router';
 import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -56,11 +57,11 @@ export default new Vuex.Store({
       .then((res) => {
         console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
-        commit("USER_LOGIN", loginUser); // 필요하다면
-        
+        commit("USER_LOGIN", loginUser);
       })
       .catch((err) => {
         console.log(err);
+        router.push({name:"login"});
       });
     },
     getLoginUserInfo({commit}, nickname) {
