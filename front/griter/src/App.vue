@@ -89,6 +89,12 @@ export default {
     hideNavbar("nav-bar", "body-pd");
   },
   created() {
+    const loginUser = sessionStorage.getItem("access-token");
+    console.log(this.$router.currentRoute);
+    if (this.$router.currentRoute.name !== 'login' && !loginUser) {
+      alert("로그인을 해주세요");
+      this.$router.push({ name: "login" });
+    }
     console.log(document.querySelector("body"));
     if (this.$store.state.nightmode) {
       document.documentElement.setAttribute("nightmode", true);
@@ -139,5 +145,4 @@ nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 </style>

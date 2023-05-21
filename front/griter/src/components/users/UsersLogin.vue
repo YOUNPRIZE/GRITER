@@ -35,8 +35,14 @@ export default {
   },
   methods: {
     login(){
-      this.$store.dispatch('userLogin', this.user)
-      this.$router.push({name:'home'})
+      const loginUser = sessionStorage.getItem('access-token');
+      if(loginUser){
+        this.$store.dispatch('userLogin', this.user)
+        this.$router.push({name:'home'})
+      } else{
+        alert('아이디 혹은 패스워드가 틀립니다.');
+        this.$router.go(0);
+      }
     }
   }
 };
