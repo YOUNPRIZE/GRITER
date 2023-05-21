@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view @create-post="createPost" :posts="posts" />
+    <router-view />
   </div>
 </template>
 
@@ -11,9 +11,6 @@ export default {
     return {
       posts: [],
     };
-  },
-  methods: {
-    createPost() {},
   },
 };
 </script>
