@@ -6,7 +6,7 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input type="text" class="form-control" id="id" v-model="user.id" required/>
+          <input type="text" class="form-control" id="nickname" v-model="user.nickname" required/>
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
           <input type="password" class="form-control" id="password" v-model="user.password" required/>
