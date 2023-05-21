@@ -9,7 +9,11 @@
       </div>
       <div class="line"></div>
       <div class="userinfo-content">
-        <img src="" alt="" style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%" />
+        <img
+          src=""
+          alt=""
+          style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
+        />
         <div class="userinfo-content-info">
           <div class="userinfo-content-info-item">
             <span>Name</span>
@@ -45,19 +49,23 @@
       <div class="line"></div>
       <div class="myPost-content">
         <!-- link 좌표 바꿔야 됨 상세보기로, params도 받아와야 함-->
-        <router-link :to="{ name: 'PostsDetail', params: { postId } }">
+        <router-link :to="{ name: 'PostsDetail', params: { post_id } }">
           <div class="myPost-content-post">
             <div class="myPost-content-post-left">
               <div class="myPost-content-post-title">
                 <span>제목 젬고 제목</span>
               </div>
               <div class="myPost-content-post-writerInfo">
-                <img src="" alt="" style="
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 100%;
-                        border: solid 1px red;
-                      " />
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="myPost-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -82,12 +90,16 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+              <img
+                src=""
+                alt=""
+                style="
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
+              />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -101,12 +113,16 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+              <img
+                src=""
+                alt=""
+                style="
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
+              />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -120,12 +136,16 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+              <img
+                src=""
+                alt=""
+                style="
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
+              />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -139,12 +159,16 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+              <img
+                src=""
+                alt=""
+                style="
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
+              />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -158,12 +182,16 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+              <img
+                src=""
+                alt=""
+                style="
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
+              />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -177,17 +205,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
-  name: 'UserInfo',
+  name: "UserInfo",
   computed: {
-    ...mapState(['loginUser']),
+    ...mapState(["loginUser"]),
   },
   created() {
     console.log(this.loginUser);
     const nickname = this.loginUser.nickname;
-    this.$store.dispatch('getLoginUserInfo', nickname);
+    this.$store.dispatch("getLoginUserInfo", nickname);
   },
   data() {
     return {
@@ -228,10 +256,11 @@ main {
 }
 
 .userinfo-header,
-.myPost>span:nth-child(1) {
+.myPost > span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: var(--font-color-2);
 }
 
 .userinfo-header {
@@ -246,7 +275,6 @@ main {
 #edit-btn {
   color: grey;
 }
-
 
 .userinfo-content {
   /* border: solid 1px green; */
@@ -273,14 +301,14 @@ main {
   flex-direction: row;
 }
 
-.userinfo-content-info-item>span:nth-child(1) {
+.userinfo-content-info-item > span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
 
-.userinfo-content-info-item>span:nth-child(2) {
+.userinfo-content-info-item > span:nth-child(2) {
   /* border: solid 1px green; */
   margin-left: 2rem;
   width: 100%;
@@ -296,7 +324,7 @@ main {
   height: 100%;
 }
 
-.introduce>span:nth-child(1) {
+.introduce > span:nth-child(1) {
   font-size: large;
   font-weight: bold;
 }

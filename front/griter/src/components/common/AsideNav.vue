@@ -46,10 +46,10 @@
             </router-link>
           </div>
           <hr style="margin-left: 1rem" />
-          <a href="#" class="nav_link">
+          <div class="nav_link" id="logout-btn" @click="logout">
             <i class="bx bx-log-out nav_icon"></i>
-            <span class="nav_name">SignOut</span>
-          </a>
+            <span class="nav_name">LogOut</span>
+          </div>
         </div>
         <div class="nav_link" id="dark-mode">
           <i class="bx bxs-moon nav_icon"></i>
@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex';
+
 export default {
   name: "AsideNav",
   data() {
@@ -88,13 +90,17 @@ export default {
   },
   methods: {
     changeMode() {
-      this.$store.dispatch("callModeSet");
-      document.querySelector(".l-navbar").classList.toggle("nightmode");
-      document.documentElement.setAttribute("nightmode", this.$store.state.nightmode);
+      // this.$store.dispatch("callModeSet");
+      mapActions('nightmode', ['callModeSet']);
+      document.documentElement.setAttribute("nightmode", mapState('nightmode', ['nightmode']));
       console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
       console.log(btn.checked);
       setTimeout(() => this.$router.go(0), 500);
+    },
+    logout() {
+      sessionStorage.removeItem("access-token");
+      this.$router.push({ name: "login" });
     },
   },
 };
@@ -226,6 +232,10 @@ a {
   width: 2px;
   height: 32px;
   background-color: var(--white-color);
+}
+
+#logout-btn:hover {
+  cursor: pointer;
 }
 
 .height-100 {

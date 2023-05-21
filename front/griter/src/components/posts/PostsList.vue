@@ -10,7 +10,7 @@
           </div>
         </form>
       </div>
-      <hr style="margin-top: 0.5rem" />
+      <div class="line" style="margin: 0.5rem 0 1rem 0;"></div>
       <div class="dashboard-container-content">
         <div class="dashboard-container-content-buttons">
           <!-- 여유되면 카테고리랑 부위 버튼 넣을 자리-->
@@ -69,6 +69,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  color: var(--font-color-2);
 }
 
 hr {

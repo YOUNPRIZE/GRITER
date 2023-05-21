@@ -10,7 +10,7 @@
           </div>
         </form>
       </div>
-      <hr />
+      <div class="line"></div>
       <div class="followers-head">
         <span>Img</span>
         <span>Name</span>
@@ -230,7 +230,7 @@
           </div>
         </form>
       </div>
-      <hr />
+      <div class="line"></div>
       <div class="following-head">
         <span>Img</span>
         <span>Name</span>
@@ -251,6 +251,10 @@ main {
   /* border: solid green; */
 }
 
+.line{
+  margin: 0.5rem 0 1rem 0;
+}
+
 .followers,
 .following {
   display: flex;
@@ -264,10 +268,11 @@ main {
   background-color: var(--box-bg-color);
 }
 
-.follows-header{
+.follows-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  color: var(--font-color-2);
 }
 
 .followers-logo,

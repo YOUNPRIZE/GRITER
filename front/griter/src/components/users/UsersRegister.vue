@@ -21,7 +21,7 @@
               id="option1"
               autocomplete="off"
             />
-            <label class="btn btn-outline-primary" for="option1">Male</label>
+            <label class="btn btn-outline-primary" for="option1" id="gender-select">Male</label>
             <input
               type="radio"
               class="btn-check"
@@ -29,7 +29,7 @@
               id="option2"
               autocomplete="off"
             />
-            <label class="btn btn-outline-primary" for="option2">Female</label>
+            <label class="btn btn-outline-primary" for="option2" id="gender-select">Female</label>
           </div>
           <div class="label">Profile Image</div>
           <input type="text" class="profileImage" required />
@@ -138,6 +138,10 @@ button {
   height: 2.5rem;
   margin: 2rem;
 }
+#gender-select{
+  color: var(--font-color-3);
+  border: solid 1px var(--font-color-3);
+}
 
 #submit-btn {
   box-shadow: 0 0 1rem rgb(141, 141, 141);
@@ -152,6 +156,7 @@ button {
 #GoToLogIn-btn {
   border: solid 1px #2388f5;
   width: 10rem !important;
+  color: var(--font-color-3);
 }
 #GoToLogIn-btn:hover {
   background-color: #2388f5;
