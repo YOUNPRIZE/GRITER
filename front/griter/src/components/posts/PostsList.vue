@@ -38,7 +38,7 @@ export default {
   components: {},
   methods:{
     movePage(){
-      this.$router.push('createPost');
+      this.$router.push({name: "PostCreate"});
     }
   }
 };
@@ -52,7 +52,7 @@ export default {
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 5px rgb(190, 190, 190);
+  box-shadow: 0 0 1rem rgb(190, 190, 190);
   background-color: white;
   padding: 1.5rem;
   width: 90vw;
@@ -76,6 +76,9 @@ hr {
   background-color: #2388f5;
   padding-left: 2rem;
   padding-right: 2rem;
+}
+#newPost:hover{
+  background-color: #1056a1;
 }
 
 .search-form {
