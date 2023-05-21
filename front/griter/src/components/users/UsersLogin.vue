@@ -13,7 +13,7 @@
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
-          <router-link to="register">
+          <router-link :to="{name : 'register'}">
             <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
         </div>

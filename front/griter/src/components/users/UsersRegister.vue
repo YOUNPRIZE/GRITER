@@ -36,8 +36,10 @@
         </div>
         <div class="buttons">
           <button class="btn btn-primary" id="submit-btn">Submit</button>
-          <router-link to="login">
-            <button class="btn btn-outline-primary" id="GoToLogIn-btn">Go To Log In</button>
+          <router-link :to="{ name: 'login' }">
+            <button class="btn btn-outline-primary" id="GoToLogIn-btn">
+              Go To Log In
+            </button>
           </router-link>
         </div>
       </form>
@@ -108,13 +110,13 @@ input {
   border-bottom: solid 1px rgb(200, 200, 200);
 }
 
-.gender-radiobox{
+.gender-radiobox {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.gender-radiobox > label{
+.gender-radiobox > label {
   margin: 1rem;
   width: 10rem;
 }
@@ -137,14 +139,14 @@ button {
   background-color: #2388f5;
   border: none;
 }
-#submit-btn:hover{
+#submit-btn:hover {
   background-color: #1b6fca;
 }
 
-#GoToLogIn-btn{
+#GoToLogIn-btn {
   border: solid 1px #2388f5;
 }
-#GoToLogIn-btn:hover{
+#GoToLogIn-btn:hover {
   background-color: #2388f5;
 }
 </style>
