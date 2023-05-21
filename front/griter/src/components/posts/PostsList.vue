@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <div class="dashboard-container">
       <div class="dashboard-container-header">
         <h5>DashBoard</h5>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </main>
 </template>
 
 <script>

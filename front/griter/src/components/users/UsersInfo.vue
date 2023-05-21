@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <div class="userinfo">
       <div class="userinfo-header">
         <span>User Information</span>
@@ -201,7 +201,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </main>
 </template>
 
 <script>
@@ -218,7 +218,7 @@ export default {
 * {
   /* border: solid; */
 }
-body {
+main {
   display: flex;
   flex-direction: row;
 }

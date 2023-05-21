@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <div class="login-box">
       <div class="logo">GRITER</div>
       <form action="" class="login-form">
@@ -19,7 +19,7 @@
         </div>
       </form>
     </div>
-  </body>
+  </main>
 </template>
 
 <script>
@@ -46,7 +46,7 @@ export default {
   /* border: 1px solid #000; */
 }
 
-body {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;

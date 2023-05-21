@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <div class="followers">
       <span class="followers-logo">Followers</span>
       <hr />
@@ -225,13 +225,13 @@
         
       </div>
     </div>
-  </body>
+  </main>
 </template>
 <script>
 export default {};
 </script>
 <style scoped>
-body {
+main {
   display: flex;
   flex-direction: row;
   /* border: solid green; */

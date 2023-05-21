@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <!-- dashboard -->
     <div class="dashboard">
       <div id="dashboard-title">
@@ -179,34 +179,33 @@
         </div>
       </div>
     </div>
-  </body>
+  </main>
 </template>
 
 
 <script>
 export default {
   created() {
-    console.log(document.querySelector('body'));
-    // if(this.$store.state.nightmode){
-    //   document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-    //   document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-    //   document.querySelectorAll('div').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-    // }
+    if(this.$store.state.nightmode){
+      document.querySelector(".container").style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    }
   },
 }
 </script>
 
 <style>
-body {
+main {
   /* border: solid green; */
   background-color: #F5F6F8;
   display: flex;
   flex-direction: row;
   height: 94vh;
   width: 95vw;
-  padding-top: 2rem;
+  padding: 2rem 2.5rem 4rem 1rem;
+  /* padding-top: 2rem;
   padding-bottom: 4rem;
-  padding-right: 2.5rem;
+  padding-right: 2.5rem; */
+  margin: 2rem;
 }
 </style>
 
