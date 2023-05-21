@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 
 // User
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @CrossOrigin("*")
 public class UserRestController {
 	// 의존성 주입
@@ -50,7 +50,6 @@ public class UserRestController {
 	public ResponseEntity<Map<String, Object>> login(User user) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
 		try {
 			if (user.getNickname() != null || user.getNickname().length() > 0) {
 				result.put("access-token", jwtUtil.createToken(user.getNickname()));

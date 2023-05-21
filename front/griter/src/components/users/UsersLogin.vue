@@ -6,7 +6,7 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input type="text" class="id" v-model="user.id" required/>
+          <input type="text" class="id" v-model="user.nickname" required/>
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
           <input type="password" class="password" v-model="user.password" required/>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       user : {
-        id : "",
+        nickname : "",
         password : "",
       }
     }
@@ -36,6 +36,7 @@ export default {
   methods: {
     login(){
       this.$store.dispatch('userLogin', this.user)
+      this.$router.push({name:''})
     }
   }
 };
