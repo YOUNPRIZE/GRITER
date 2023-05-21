@@ -185,13 +185,13 @@
 
 <script>
 export default {
-  mounted() {
+  created() {
     console.log(document.querySelector('body'));
-    if(this.$store.state.nightmode){
-      document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-      document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-      document.querySelectorAll('div').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-    }
+    // if(this.$store.state.nightmode){
+    //   document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    //   document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    //   document.querySelectorAll('div').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    // }
   },
 }
 </script>

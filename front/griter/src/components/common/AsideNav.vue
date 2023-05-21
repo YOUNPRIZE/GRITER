@@ -84,14 +84,17 @@ export default {
     if (this.$store.state.nightmode) {
       document.getElementById("nightmode").checked = true;
     }
+    console.log(window)
   },
   methods: {
     changeMode() {
       this.$store.dispatch("callModeSet");
+      document.querySelector('.l-navbar').classList.toggle('nightmode');
+      document.documentElement.setAttribute('nightmode', this.$store.state.nightmode);
+      console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
-      document.documentElement.setAttribute("nightmode", this.$store.state.nightmode);
       console.log(btn.checked);
-      this.$router.go(0);
+      setTimeout(()=>this.$router.go(0), 400);
       // console.log(this.$store.state.nightmode);
     },
   },
@@ -143,7 +146,6 @@ html {
   --normal-font-size: 1rem;
   --z-fixed: 100;
 }
-
 *,
 ::before,
 ::after {
@@ -247,4 +249,15 @@ a {
   }
 }
 
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --nav-width: 68px;
+    --first-color: #464646;
+    --first-color-light: #afa5d9;
+    --white-color: #2388f5;
+    --body-font: "Nunito", sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100;
+  }
+} */
 </style>

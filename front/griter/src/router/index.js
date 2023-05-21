@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PostsView from '@/views/PostsView.vue'
 import PostsList from '@/components/posts/PostsList.vue'
+import PostsDetail from '@/components/posts/PostsDetail.vue'
 import UserView from '@/views/UserView.vue'
 import UsersLogin from '@/components/users/UsersLogin.vue'
 import UsersRegister from '@/components/users/UsersRegister.vue'
@@ -28,6 +29,11 @@ const routes = [
         path: "",
         name: 'PostsList',
         component: PostsList,
+      },
+      {
+        path: ":postId",
+        name: 'PostsDetail',
+        component: PostsDetail,
       },
     ]
   },

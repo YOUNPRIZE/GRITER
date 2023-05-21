@@ -252,9 +252,9 @@ body {
 
 .followers-logo,
 .following-logo {
-  font-size: xx-large;
+  align-self: flex-start;
+  font-size: x-large;
   font-weight: 500;
-  color: #2388f5;
 }
 
 .followers-content,
