@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       user : {
-        id : "",
+        nickname : "",
         password : "",
       }
     }
@@ -36,6 +36,7 @@ export default {
   methods: {
     login(){
       this.$store.dispatch('userLogin', this.user)
+      this.$router.push({name:''})
     }
   }
 };

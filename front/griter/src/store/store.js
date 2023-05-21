@@ -5,13 +5,12 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
-const REST_API = `http://localhost:9999`;
+const REST_API = `http://localhost:9999/api`;
 
 export default new Vuex.Store({
   state:{
     nightmode: false,
-    loginUser: {
-    },
+    loginUser: {},
     posts: [],
     post:{},
   },
@@ -36,13 +35,19 @@ export default new Vuex.Store({
     setPost(state, payload){
       state.post = payload;
     },
+    USER_LOGIN(state, payload) {
+      state.loginUser = payload;
+    },
+    USER_INFO(state, payload) {
+      state.loginUser = payload;
+    },
   },
   actions: {
     callModeSet(context){
       context.commit("setMode", !this.state.nightmode);
     },
     userLogin({commit}, loginUser) {
-      const API_URL = `${REST_API}/login`;
+      const API_URL = `${REST_API}/users/jwt`;
       axios({
         url: API_URL,
         method: "POST",
@@ -51,12 +56,25 @@ export default new Vuex.Store({
       .then((res) => {
         console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
-        commit("USER_LOGIN"); // 필요하다면
+        commit("USER_LOGIN", loginUser); // 필요하다면
+        
       })
       .catch((err) => {
         console.log(err);
       });
-    }
+    },
+    getLoginUserInfo({commit}, nickname) {
+      const API_URL = `${REST_API}/users/${nickname}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+      .then((res) => {
+        commit("USER_INFO", res.date);
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
   },
   modules: {
   },
