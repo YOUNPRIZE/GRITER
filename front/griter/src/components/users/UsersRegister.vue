@@ -5,13 +5,13 @@
       <form action="" class="register-form">
         <div class="register-form-input">
           <div class="label">Name</div>
-          <input type="text" class="name" required />
+          <input type="text" class="form-control" required />
           <div class="label">ID</div>
-          <input type="text" class="id" required />
+          <input type="text" class="form-control" required />
           <div class="label">Password</div>
-          <input type="password" class="password" required />
+          <input type="password" class="form-control" required />
           <div class="label">Email</div>
-          <input type="email" class="email" required />
+          <input type="email" class="form-control" required />
           <div class="label">Gender</div>
           <div class="gender-radiobox">
             <input
@@ -36,11 +36,9 @@
         </div>
         <div class="buttons">
           <button class="btn btn-primary" id="submit-btn">Submit</button>
-          <router-link :to="{ name: 'login' }">
-            <button class="btn btn-outline-primary" id="GoToLogIn-btn">
-              Go To Log In
-            </button>
-          </router-link>
+          <button class="btn btn-outline-primary" @click="goToLogin" id="GoToLogIn-btn">
+            Go To Log In
+          </button>
         </div>
       </form>
     </div>
@@ -50,6 +48,11 @@
 <script>
 export default {
   name: "UsersLogin",
+  methods: {
+    goToLogin() {
+      this.$router.push({ name: "login" });
+    },
+  },
 };
 </script>
 
@@ -77,11 +80,12 @@ main {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 1.5rem rgb(167, 167, 167);
-  background-color: #ffffff;
+  background-color: var(--box-bg-color);
+  color: var(--font-color-2);
   padding: 4rem;
   height: 80vh;
   width: 35vw;
-  min-width: 30rem;
+  min-width: 40rem;
 }
 
 .register-form {
@@ -108,6 +112,7 @@ input {
   margin-bottom: 1rem;
   border: none;
   border-bottom: solid 1px rgb(200, 200, 200);
+  background-color: var(--input-bg-color);
 }
 
 .gender-radiobox {
@@ -129,7 +134,7 @@ input {
 }
 
 button {
-  width: 10rem;
+  /* width: 10rem !important; */
   height: 2.5rem;
   margin: 2rem;
 }
@@ -138,6 +143,7 @@ button {
   box-shadow: 0 0 1rem rgb(141, 141, 141);
   background-color: #2388f5;
   border: none;
+  width: 10rem !important;
 }
 #submit-btn:hover {
   background-color: #1b6fca;
@@ -145,6 +151,7 @@ button {
 
 #GoToLogIn-btn {
   border: solid 1px #2388f5;
+  width: 10rem !important;
 }
 #GoToLogIn-btn:hover {
   background-color: #2388f5;

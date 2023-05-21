@@ -1,7 +1,15 @@
 <template>
   <main>
     <div class="followers">
-      <span class="followers-logo">Followers</span>
+      <div class="follows-header">
+        <span class="followers-logo">Followers</span>
+        <form action="" class="search-form">
+          <div class="input-group mb-3">
+            <span class="input-group-text"><box-icon name="search"></box-icon></span>
+            <input class="form-control" id="search" type="text" placeholder="Search" />
+          </div>
+        </form>
+      </div>
       <hr />
       <div class="followers-head">
         <span>Img</span>
@@ -213,7 +221,15 @@
       </div>
     </div>
     <div class="following">
-      <span class="following-logo">Following</span>
+      <div class="follows-header">
+        <span class="following-logo">Following</span>
+        <form action="" class="search-form">
+          <div class="input-group mb-3">
+            <span class="input-group-text"><box-icon name="search"></box-icon></span>
+            <input class="form-control" id="search" type="text" placeholder="Search" />
+          </div>
+        </form>
+      </div>
       <hr />
       <div class="following-head">
         <span>Img</span>
@@ -221,9 +237,7 @@
         <span>ID</span>
         <span>Email</span>
       </div>
-      <div class="following-content">
-        
-      </div>
+      <div class="following-content"></div>
     </div>
   </main>
 </template>
@@ -242,12 +256,18 @@ main {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 1rem rgb(190, 190, 190);
-  border-radius: 0.3rem;
+  border-radius: 0.2rem;
   width: 50%;
   min-width: 40rem;
   margin: 2rem;
   padding: 2rem;
-  background-color: white;
+  background-color: var(--box-bg-color);
+}
+
+.follows-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .followers-logo,

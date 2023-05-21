@@ -6,10 +6,10 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input type="text" class="id" v-model="user.nickname" required/>
+          <input type="text" class="form-control" id="id" v-model="user.id" required/>
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
-          <input type="password" class="password" v-model="user.password" required/>
+          <input type="password" class="form-control" id="password" v-model="user.password" required/>
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
@@ -43,14 +43,11 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* border: 1px solid #000; */
-}
-
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--first-color);
 }
 
 .logo {
@@ -66,7 +63,7 @@ main {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 1.5rem rgb(167, 167, 167);
-  background-color: #ffffff;
+  background-color: var(--box-bg-color);
   padding: 4rem;
   height: 80vh;
   width: 35vw;
@@ -89,7 +86,7 @@ main {
 
 .label {
   display: flex;
-  color: rgb(141, 141, 141);
+  color: var(--label-color);
 }
 
 input {
@@ -97,6 +94,7 @@ input {
   margin-bottom: 3rem;
   border: none;
   border-bottom: solid 1px rgb(200, 200, 200);
+  background-color: var(--input-bg-color);
 }
 
 .buttons {

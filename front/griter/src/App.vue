@@ -9,7 +9,7 @@
 
 <script>
 import AsideNav from "@/components/common/AsideNav.vue";
-import { mapMutations, mapState, } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "app",
@@ -25,7 +25,7 @@ export default {
   computed: {
     ...mapState(["nightmode"]),
   },
-  methods:{
+  methods: {
     ...mapMutations(["setMode"]),
   },
   beforeMount() {
@@ -89,20 +89,37 @@ export default {
     hideNavbar("nav-bar", "body-pd");
   },
   created() {
-    console.log(document.querySelector('body'));
-    console.log(document.documentElement.getAttribute('nightmode'));
-    if(this.$store.state.nightmode){
-      document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-      document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
-      document.querySelector('home').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    console.log(document.querySelector("body"));
+    if (this.$store.state.nightmode) {
+      document.documentElement.setAttribute("nightmode", true);
     }
   },
 };
 </script>
 
 <style>
+:root {
+  --first-color: #f5f6f8;
+  --box-bg-color: white;
+  --font-color: #2c3e50;
+  --font-color-2: black;
+  --input-bg-color: white;
+}
+[nightmode="true"] {
+  --first-color: #7c7c7c;
+  --box-bg-color: #565656;
+  --font-color: #7fbefd;
+  --font-color-2: white;
+  --input-bg-color: rgb(135, 135, 135);
+}
+
 html {
   height: 100%;
+  background-color: var(--first-color);
+}
+
+body {
+  background-color: var(--first-color);
 }
 
 #app {
@@ -110,8 +127,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: #F5F6F8;
+  color: var(--font-color);
+  background-color: var(--first-color);
 }
 
 nav {
@@ -122,4 +139,5 @@ nav a {
   font-weight: bold;
   color: #2c3e50;
 }
+
 </style>

@@ -245,7 +245,7 @@ main {
   min-width: 50rem;
   margin: 2rem;
   margin-top: 0rem;
-  background-color: white;
+  background-color: var(--box-bg-color);
 }
 .myPost {
   padding-bottom: 0;
@@ -367,7 +367,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: black;
+  color: var(--font-color-2);
   margin: 2rem 2rem 0 2rem;
   padding: 1rem;
   box-shadow: 0 0 5px rgb(185, 185, 185);
