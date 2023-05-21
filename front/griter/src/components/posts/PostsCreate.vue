@@ -28,7 +28,7 @@
             id="content"
             v-model="content"
             class="form-control"
-            placeholder="Enter Content here"
+            placeholder="Enter content here"
             required
           /><br />
           <button class="btn btn-primary" @click="createPost" id="post-btn">POST</button>
@@ -90,14 +90,11 @@ export default {
 };
 </script>
 <style scoped>
-main {
-  /* border: solid; */
-}
 .postcreate {
   box-shadow: 0 0 1rem grey;
   border-radius: 0.1rem;
   box-shadow: 0 0 4px rgb(184, 184, 184);
-  background-color: #ffffff;
+  background-color: var(--box-bg-color);
   width: 100%;
   padding: 2rem;
   padding-top: 1rem;
@@ -134,6 +131,7 @@ input {
   border: none;
   border-radius: 0.2rem;
   border-bottom: solid 1px rgb(200, 200, 200);
+  background-color: var(--input-bg-color);
 }
 .label {
   display: flex;
@@ -153,6 +151,7 @@ input {
 #category{
   width: 10rem;
   margin: 1rem 0 1rem 0 ;
+  background-color: var(--input-bg-color);
 }
 #content {
   height: stretch;
@@ -160,6 +159,7 @@ input {
   border-radius: 0.2rem;
   resize: none;
   margin-top: 0.5rem;
+  background-color: var(--input-bg-color);
 }
 
 #post-btn{

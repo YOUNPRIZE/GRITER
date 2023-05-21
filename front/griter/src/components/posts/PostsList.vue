@@ -36,24 +36,29 @@ export default {
     };
   },
   components: {},
-  methods:{
-    movePage(){
-      this.$router.push({name: "PostCreate"});
-    }
-  }
+  methods: {
+    movePage() {
+      this.$router.push({ name: "PostCreate" });
+    },
+  },
 };
 </script>
 
-<style scoped>
-* {
-  /* border: solid green; */
+<style>
+.search-form {
+  /* border: solid red; */
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
 }
+</style>
 
+<style scoped>
 .dashboard-container {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 1rem rgb(190, 190, 190);
-  background-color: white;
+  background-color: var(--box-bg-color);
   padding: 1.5rem;
   width: 90vw;
   height: 84vh;
@@ -77,15 +82,8 @@ hr {
   padding-left: 2rem;
   padding-right: 2rem;
 }
-#newPost:hover{
+#newPost:hover {
   background-color: #1056a1;
-}
-
-.search-form {
-  /* border: solid red; */
-  display: flex;
-  flex-direction: column;
-  height: 3rem;
 }
 
 .dashboard-container-content-buttons {

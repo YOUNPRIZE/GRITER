@@ -272,7 +272,6 @@ export default {
 <style>
 main {
   /* border: solid green; */
-  background-color: #f5f6f8;
   display: flex;
   flex-direction: row;
   height: 94vh;
@@ -297,7 +296,7 @@ main {
 .calendar {
   border-radius: 0.1rem;
   box-shadow: 0 0 1rem rgb(184, 184, 184);
-  background-color: #ffffff;
+  background-color: var(--box-bg-color);
   width: 100%;
 }
 
@@ -389,7 +388,7 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: black;
+  color: var(--font-color-2);
   margin: 2rem 2rem 0 2rem;
   padding: 1rem;
   box-shadow: 0 0 5px rgb(185, 185, 185);
@@ -402,6 +401,6 @@ hr {
 }
 
 .dashboard-content-post-created {
-  color: grey;
+  color: var(--font-color-3);
 }
 </style>

@@ -94,8 +94,7 @@ export default {
       console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
       console.log(btn.checked);
-      setTimeout(() => this.$router.go(0), 400);
-      // console.log(this.$store.state.nightmode);
+      setTimeout(() => this.$router.go(0), 500);
     },
   },
 };
@@ -139,7 +138,6 @@ html {
 
 :root {
   --nav-width: 68px;
-  --first-color: #ffffff;
   --first-color-light: #afa5d9;
   --white-color: #2388f5;
   --body-font: "Nunito", sans-serif;
@@ -171,7 +169,7 @@ a {
   left: -30%;
   width: var(--nav-width);
   height: 100vh;
-  background-color: var(--first-color);
+  background-color: var(--box-bg-color);
   /* padding: 0.5rem 1rem 0 0; */
   transition: 0.5s;
   z-index: var(--z-fixed);
@@ -248,16 +246,4 @@ a {
     width: calc(var(--nav-width) + 200px);
   }
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --nav-width: 68px;
-    --first-color: #464646;
-    --first-color-light: #afa5d9;
-    --white-color: #2388f5;
-    --body-font: "Nunito", sans-serif;
-    --normal-font-size: 1rem;
-    --z-fixed: 100;
-  }
-} */
 </style>
