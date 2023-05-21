@@ -5,10 +5,12 @@
       <div id="dashboard-title">
         <h5>DashBoard</h5>
         <a href="#">
-          <box-icon type='solid' name='plus-square'></box-icon>
+          <router-link :to="{ name: 'PostsList' }">
+            <box-icon type="solid" name="plus-square"></box-icon>
+          </router-link>
         </a>
       </div>
-      <hr>
+      <hr />
       <div class="dashboard-content">
         <!-- 대시보드 미리보기 항목들 -->
         <router-link to="/">
@@ -18,7 +20,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -34,7 +45,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -50,7 +70,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -66,7 +95,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -82,7 +120,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -98,37 +145,64 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
             <div class="dashboard-content-post-right">
               <span class="dashboard-content-post-created">December, 23, 2022</span>
             </div>
-          </div>
-        </router-link><router-link to="/">
+          </div> </router-link
+        ><router-link to="/">
           <div class="dashboard-content-post">
             <div class="dashboard-content-post-left">
               <div class="dashboard-content-post-title">
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
             <div class="dashboard-content-post-right">
               <span class="dashboard-content-post-created">December, 23, 2022</span>
             </div>
-          </div>
-        </router-link><router-link to="/">
+          </div> </router-link
+        ><router-link to="/">
           <div class="dashboard-content-post">
             <div class="dashboard-content-post-left">
               <div class="dashboard-content-post-title">
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="width: 30px; height: 30px; border-radius: 100%; border: solid 1px red;">
+                <img
+                  src=""
+                  alt=""
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -144,13 +218,13 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          <a href="#">
-            <box-icon type='solid' name='plus-square'></box-icon>
-          </a>
+          <router-link :to="{ name: 'userInfo', params: { nickname } }">
+            <box-icon type="solid" name="plus-square"></box-icon>
+          </router-link>
         </div>
-        <hr>
+        <hr />
         <div class="userInfo-content">
-          <img src="" id="profile-image" alt="">
+          <img src="" id="profile-image" alt="" />
           <div class="userInfo-info">
             <!-- 아이디 -->
             <h5>catbirdseat</h5>
@@ -171,32 +245,34 @@
         <div id="calendar-title">
           <h5>Calendar</h5>
           <a href="#">
-            <box-icon type='solid' name='plus-square'></box-icon>
+            <box-icon type="solid" name="plus-square"></box-icon>
           </a>
         </div>
-        <div class="calendar-content">
-
-        </div>
+        <div class="calendar-content"></div>
       </div>
     </div>
   </main>
 </template>
 
-
 <script>
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState(["loginUser"]),
+  },
   created() {
-    if(this.$store.state.nightmode){
-      document.querySelector(".container").style.cssText = 'background-color: rgb(91, 91, 91) !important';
+    if (this.$store.state.nightmode) {
+      document.querySelector(".container").style.cssText =
+        "background-color: rgb(91, 91, 91) !important";
     }
   },
-}
+};
 </script>
 
 <style>
 main {
   /* border: solid green; */
-  background-color: #F5F6F8;
+  background-color: #f5f6f8;
   display: flex;
   flex-direction: row;
   height: 94vh;
@@ -207,6 +283,12 @@ main {
   padding-right: 2.5rem; */
   margin: 2rem;
 }
+
+.line {
+  width: 100%;
+  height: 0.05rem;
+  background-color: rgb(186, 186, 186);
+}
 </style>
 
 <style scoped>
@@ -214,8 +296,8 @@ main {
 .userInfo,
 .calendar {
   border-radius: 0.1rem;
-  box-shadow: 0 0 4px rgb(184, 184, 184);
-  background-color: #FFFFFF;
+  box-shadow: 0 0 1rem rgb(184, 184, 184);
+  background-color: #ffffff;
   width: 100%;
 }
 
@@ -225,7 +307,7 @@ main {
   min-width: 30rem;
 }
 
-.dashboard-content{
+.dashboard-content {
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -288,7 +370,6 @@ main {
   width: 9rem;
   height: 9rem;
 }
-
 
 .userInfo-info-following,
 .userInfo-info-follower {
