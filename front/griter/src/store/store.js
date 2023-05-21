@@ -1,8 +1,11 @@
+import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
+
+const REST_API = `http://localhost:9999`;
 
 export default new Vuex.Store({
   state:{
@@ -23,6 +26,22 @@ export default new Vuex.Store({
   actions: {
     callModeSet(context){
       context.commit("setMode", !this.state.nightmode);
+    },
+    userLogin({commit}, loginUser) {
+      const API_URL = `${REST_API}/login`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: loginUser,
+      })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("access-token", res.data["access-token"]);
+        commit("USER_LOGIN"); // 필요하다면
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   },
   modules: {

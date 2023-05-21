@@ -34,7 +34,11 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(jwtInterceptor).addPathPatterns("/") // 기본 적용 경로
-				.excludePathPatterns(Arrays.asList("/")); // 적용 제외 경로
+		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**") // 기본 적용 경로
+//				.excludePathPatterns(Arrays.asList("/users/login")); // 적용 제외 경로
+				.excludePathPatterns("/users/login",
+						"/swagger-resources/**",
+						"/swagger-ui/**",
+						"/v2/api-docs");
 	}
 }

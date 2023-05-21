@@ -5,12 +5,14 @@
       <form action="" class="login-form">
         <div class="login-form-input">
           <div class="label">ID</div>
-          <input type="text" class="id" required/>
+          <!-- <input type="text" class="id" required/> -->
+          <input type="text" class="id" v-model="user.id" required/>
           <div class="label">Password</div>
-          <input type="password" class="password" required/>
+          <!-- <input type="password" class="password" required/> -->
+          <input type="password" class="password" v-model="user.password" required/>
         </div>
         <div class="buttons">
-          <button class="btn btn-primary" id="login-btn">Login</button>
+          <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
           <router-link to="register">
             <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
@@ -23,6 +25,19 @@
 <script>
 export default {
   name: "UsersLogin",
+  data() {
+    return {
+      user : {
+        id : "",
+        password : "",
+      }
+    }
+  },
+  methods: {
+    login(){
+      this.$store.dispatch('userLogin', this.user)
+    }
+  }
 };
 </script>
 
