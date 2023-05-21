@@ -1,7 +1,7 @@
 import Vue from 'vue'
-// import Vuex from 'vuex';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue'
 import PostsView from '@/views/PostsView.vue'
 import PostsList from '@/components/posts/PostsList.vue'
 import PostsDetail from '@/components/posts/PostsDetail.vue'
@@ -14,7 +14,7 @@ import UsersFollows from '@/components/users/UsersFollows.vue'
 
 
 Vue.use(VueRouter)
-// Vue.use(Vuex)
+Vue.use(Vuex)
 
 const routes = [
   {
@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: UsersLogin,
+    component: HomeView,
   },
   {
     path: '/posts',
