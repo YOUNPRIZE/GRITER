@@ -94,6 +94,7 @@ export default {
     if(this.$store.state.nightmode){
       document.querySelector('html').style.cssText = 'background-color: rgb(91, 91, 91) !important';
       document.querySelector('body').style.cssText = 'background-color: rgb(91, 91, 91) !important';
+      document.querySelector('home').style.cssText = 'background-color: rgb(91, 91, 91) !important';
     }
   },
 };

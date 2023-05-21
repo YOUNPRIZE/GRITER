@@ -41,7 +41,6 @@ export default new Vuex.Store({
     callModeSet(context){
       context.commit("setMode", !this.state.nightmode);
     },
-<<<<<<< HEAD
     userLogin({commit}, loginUser) {
       const API_URL = `${REST_API}/login`;
       axios({
@@ -57,29 +56,6 @@ export default new Vuex.Store({
       .catch((err) => {
         console.log(err);
       });
-=======
-    getPosts(context){
-      const postsList = JSON.getItem("postsList");
-      let newList = {
-        posts: [],
-      };
-      if(postsList){
-        newList = JSON.parse(postsList);
-      } else{
-        localStorage.setItem("postsList", JSON.stringify(newList));
-      }
-      context.commit("setPosts", newList.posts);
-
-    },
-    getPost(context, payload){
-      const postsList = JSON.parse(localStorage.getItem("postsList"));
-      for(let obj of postsList){
-        if(payload == obj.postId){
-          context.commit("setPost", obj);
-          break;
-        }
-      }
->>>>>>> 1fbfd0614cf1fb09e6086845a93c8be2f5d8edca
     }
   },
   modules: {
