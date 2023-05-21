@@ -270,11 +270,6 @@ main {
   color: grey;
 }
 
-.line {
-  width: 100%;
-  height: 0.05rem;
-  background-color: rgb(186, 186, 186);
-}
 
 .userinfo-content {
   /* border: solid 1px green; */

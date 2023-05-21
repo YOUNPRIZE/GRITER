@@ -3,7 +3,7 @@
     <div class="l-navbar" id="nav-bar">
       <nav class="nav" id="nav">
         <div>
-          <router-link to="/">
+          <router-link :to="{ name: 'home' }">
             <div class="nav_logo">
               <span class="nav-logo">G</span>
               <span class="nav_logo-name">GRITER</span>
@@ -22,7 +22,7 @@
               </div>
             </router-link>
             <hr style="margin-left: 1rem" />
-            <router-link to="/">
+            <router-link :to="{ name: 'home' }">
               <div class="nav_link">
                 <i class="bx bx-home nav_icon"></i>
                 <span class="nav_name">Home</span>
@@ -84,17 +84,17 @@ export default {
     if (this.$store.state.nightmode) {
       document.getElementById("nightmode").checked = true;
     }
-    console.log(window)
+    console.log(window);
   },
   methods: {
     changeMode() {
       this.$store.dispatch("callModeSet");
-      document.querySelector('.l-navbar').classList.toggle('nightmode');
-      document.documentElement.setAttribute('nightmode', this.$store.state.nightmode);
+      document.querySelector(".l-navbar").classList.toggle("nightmode");
+      document.documentElement.setAttribute("nightmode", this.$store.state.nightmode);
       console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
       console.log(btn.checked);
-      setTimeout(()=>this.$router.go(0), 400);
+      setTimeout(() => this.$router.go(0), 400);
       // console.log(this.$store.state.nightmode);
     },
   },

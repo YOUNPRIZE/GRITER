@@ -18,7 +18,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: "/",
+    name: 'login',
+    component: UsersLogin,
+  },
+  {
+    path: '/home',
     name: 'home',
     component: UsersLogin,
   },
@@ -38,7 +43,7 @@ const routes = [
       },
       {
         path: "createPost",
-        name: 'createPost',
+        name: 'PostCreate',
         component: PostsCreate,
       },
     ]
@@ -47,11 +52,6 @@ const routes = [
     path: '/users',
     component: UserView,
     children: [
-      {
-        path: "login",
-        name: 'login',
-        component: UsersLogin,
-      },
       {
         path: "register",
         name: 'register',
