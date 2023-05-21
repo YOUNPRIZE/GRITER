@@ -13,8 +13,9 @@
       <hr style="margin-top: 0.5rem" />
       <div class="dashboard-container-content">
         <div class="dashboard-container-content-buttons">
+          <!-- 여유되면 카테고리랑 부위 버튼 넣을 자리-->
           <div></div>
-          <button class="btn btn-primary" id="newPost">New Post</button>
+          <button class="btn btn-primary" id="newPost" @click="movePage">New Post</button>
         </div>
         <div class="dashboard-container-content-posts">
           <list-row v-for="(post, index) in posts" :key="index" />
@@ -35,6 +36,11 @@ export default {
     };
   },
   components: {},
+  methods:{
+    movePage(){
+      this.$router.push('createPost');
+    }
+  }
 };
 </script>
 

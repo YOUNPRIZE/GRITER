@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue'
 import PostsView from '@/views/PostsView.vue'
 import PostsList from '@/components/posts/PostsList.vue'
 import PostsDetail from '@/components/posts/PostsDetail.vue'
+import PostsCreate from '@/components/posts/PostsCreate.vue'
 import UserView from '@/views/UserView.vue'
 import UsersLogin from '@/components/users/UsersLogin.vue'
 import UsersRegister from '@/components/users/UsersRegister.vue'
@@ -31,9 +32,14 @@ const routes = [
         component: PostsList,
       },
       {
-        path: ":postId",
+        path: "postDetail/:postId",
         name: 'PostsDetail',
         component: PostsDetail,
+      },
+      {
+        path: "createPost",
+        nmae: 'createPost',
+        component: PostsCreate,
       },
     ]
   },
