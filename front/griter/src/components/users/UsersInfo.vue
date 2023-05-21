@@ -205,7 +205,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  name: 'UserInfo',
+  computed: {
+    ...mapState(['loginUser']),
+  },
+  created() {
+    const nickname = this.loginUser.nickname;
+    this.$store.dispatch('getLoginUserInfo', nickname);
+  },
   data() {
     return {
       postId: "asdf",
