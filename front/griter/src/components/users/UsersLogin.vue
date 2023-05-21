@@ -35,9 +35,10 @@ export default {
   },
   methods: {
     login(){
-      const loginUser = sessionStorage.getItem('access-token');
+      this.$store.dispatch('userLogin', this.user);
+      const loginUser = this.$store.state.loginUser;
+      console.log(loginUser);
       if(loginUser){
-        this.$store.dispatch('userLogin', this.user)
         this.$router.push({name:'home'})
       } else{
         alert('아이디 혹은 패스워드가 틀립니다.');
