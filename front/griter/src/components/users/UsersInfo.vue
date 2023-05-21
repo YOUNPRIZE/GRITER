@@ -9,27 +9,23 @@
       </div>
       <div class="line"></div>
       <div class="userinfo-content">
-        <img
-          src=""
-          alt=""
-          style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
-        />
+        <img src="" alt="" style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%" />
         <div class="userinfo-content-info">
           <div class="userinfo-content-info-item">
             <span>Name</span>
-            <span>JaeminPark</span>
+            <span>{{ loginUser.name }}</span>
           </div>
           <div class="userinfo-content-info-item">
             <span>ID</span>
-            <span>catbirdseat</span>
+            <span>{{ loginUser.nickname }}</span>
           </div>
           <div class="userinfo-content-info-item">
             <span>Email</span>
-            <span>catbirdseat@naver.com</span>
+            <span>{{ loginUser.email }}</span>
           </div>
           <div class="userinfo-content-info-item">
             <span>Gender</span>
-            <span>Male</span>
+            <span>{{ loginUser.gender }}</span>
           </div>
         </div>
       </div>
@@ -56,16 +52,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="myPost-content-post-writerInfo">
-                <img
-                  src=""
-                  alt=""
-                  style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  "
-                />
+                <img src="" alt="" style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: solid 1px red;
+                      " />
                 <span class="myPost-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -90,16 +82,12 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img
-                src=""
-                alt=""
-                style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-              />
+              <img src="" alt="" style="
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -113,16 +101,12 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img
-                src=""
-                alt=""
-                style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-              />
+              <img src="" alt="" style="
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -136,16 +120,12 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img
-                src=""
-                alt=""
-                style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-              />
+              <img src="" alt="" style="
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -159,16 +139,12 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img
-                src=""
-                alt=""
-                style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-              />
+              <img src="" alt="" style="
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -182,16 +158,12 @@
               <span>제목 젬고 제목</span>
             </div>
             <div class="myPost-content-post-writerInfo">
-              <img
-                src=""
-                alt=""
-                style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-              />
+              <img src="" alt="" style="
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
               <span class="myPost-content-post-writer">catbirdseat</span>
             </div>
           </div>
@@ -213,6 +185,7 @@ export default {
     ...mapState(['loginUser']),
   },
   created() {
+    console.log(this.loginUser);
     const nickname = this.loginUser.nickname;
     this.$store.dispatch('getLoginUserInfo', nickname);
   },
@@ -228,10 +201,12 @@ export default {
 * {
   /* border: solid; */
 }
+
 main {
   display: flex;
   flex-direction: row;
 }
+
 .userinfo,
 .myPost {
   /* border: solid 1px red; */
@@ -247,12 +222,13 @@ main {
   margin-top: 0rem;
   background-color: var(--box-bg-color);
 }
+
 .myPost {
   padding-bottom: 0;
 }
 
 .userinfo-header,
-.myPost > span:nth-child(1) {
+.myPost>span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -266,6 +242,7 @@ main {
   justify-content: space-between;
   align-items: center;
 }
+
 #edit-btn {
   color: grey;
 }
@@ -295,13 +272,15 @@ main {
   display: flex;
   flex-direction: row;
 }
-.userinfo-content-info-item > span:nth-child(1) {
+
+.userinfo-content-info-item>span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
-.userinfo-content-info-item > span:nth-child(2) {
+
+.userinfo-content-info-item>span:nth-child(2) {
   /* border: solid 1px green; */
   margin-left: 2rem;
   width: 100%;
@@ -316,7 +295,8 @@ main {
   width: 100%;
   height: 100%;
 }
-.introduce > span:nth-child(1) {
+
+.introduce>span:nth-child(1) {
   font-size: large;
   font-weight: bold;
 }
@@ -351,10 +331,12 @@ main {
   flex-direction: column;
   padding-bottom: 2rem;
 }
+
 .myPost-content::-webkit-scrollbar,
 .myPost-content::-webkit-scrollbar {
   width: 0.5rem;
 }
+
 .myPost-content::-webkit-scrollbar-thumb,
 .myPost-content::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
@@ -378,6 +360,7 @@ main {
 .myPost-content-post-title {
   margin-bottom: 2rem;
 }
+
 .myPost-content-post-left {
   /* border: solid; */
   display: flex;
@@ -391,6 +374,7 @@ main {
   justify-content: space-between;
   align-items: flex-end;
 }
+
 #myPost-btn {
   margin: 0 0.5rem 0 0.5rem;
   color: grey;
