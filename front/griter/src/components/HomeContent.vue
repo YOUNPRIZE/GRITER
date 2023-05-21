@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <main>
     <!-- dashboard -->
     <div class="dashboard">
       <div id="dashboard-title">
@@ -179,7 +179,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </main>
 </template>
 
 
@@ -194,16 +194,18 @@ export default {
 </script>
 
 <style>
-body {
+main {
   /* border: solid green; */
   background-color: #F5F6F8;
   display: flex;
   flex-direction: row;
   height: 94vh;
   width: 95vw;
-  padding-top: 2rem;
+  padding: 2rem 2.5rem 4rem 1rem;
+  /* padding-top: 2rem;
   padding-bottom: 4rem;
-  padding-right: 2.5rem;
+  padding-right: 2.5rem; */
+  margin: 2rem;
 }
 </style>
 

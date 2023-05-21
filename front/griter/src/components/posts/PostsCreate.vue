@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <main>
     <fieldset class="text-center">
       <label for="title">제목</label>
       <input type="text" id="title" v-model="title" class="view" /><br />
@@ -10,12 +10,12 @@
       <button class="btn" @click="createPost">등록</button>
       <button @click="moveList">목록</button>
     </fieldset>
-  </div>
+  </main>
 </template>
 
 <script>
 export default {
-  name:"createPost",
+  name: "createPost",
   data() {
     return {
       post_id: 0,
@@ -31,8 +31,8 @@ export default {
     };
   },
   methods: {
-    craetePost() {
-      // 로컬 스토리지 말고 서버에 저장해야됨 
+    createPost() {
+      // 로컬 스토리지 말고 서버에 저장해야됨
       const postsList = localStorage.getItem("postsList");
       let newPosts = {
         posts: [],
@@ -58,9 +58,9 @@ export default {
       alert("등록 완료");
       this.$router.push("/posts");
     },
-    moveList(){
+    moveList() {
       this.$router.push("/posts");
-    }
+    },
   },
 };
 </script>
