@@ -1,7 +1,10 @@
 package com.griter.controller;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.griter.model.dto.User;
 import com.griter.model.service.UserService;
+import com.griter.util.JwtUtil;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -34,8 +38,36 @@ public class UserRestController {
 	private UserService us;
 	
 	@Autowired
+	private JwtUtil jwtUtil;
+	
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
+	
+	@Autowired
 	ResourceLoader resLoader;
-
+	
+	@PostMapping("/jwt")
+	public ResponseEntity<Map<String, Object>> login(User user) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			if (user.getNickname() != null || user.getNickname().length() > 0) {
+				result.put("access-token", jwtUtil.createToken(user.getNickname()));
+				result.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} else {
+				result.put("message", FAIL);
+				status = HttpStatus.NO_CONTENT;
+			}
+		} catch (UnsupportedEncodingException e) {
+			result.put("message", FAIL);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(result, status);
+	}
+	
 	@PostMapping("/")
 	@ApiOperation(value = "사용자 정보를 등록한다.", response = User.class)
 	public ResponseEntity<?> create(User user, @RequestPart(required=false) MultipartFile file) {
@@ -46,7 +78,7 @@ public class UserRestController {
 				Resource res = resLoader.getResource("/");
 				System.out.println(res);
 				user.setImage(System.currentTimeMillis() + "_" + file.getOriginalFilename());
-				
+				// 현종 왈 : 이 경로 자체를 싹 다 보낸다.
 				user.setOrgImage(file.getOriginalFilename());
 				System.out.println(user.getImage());
 				file.transferTo(new File(res.getFile().getCanonicalPath() + "/" + user.getImage()));

@@ -1,5 +1,6 @@
 package com.griter.model.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.griter.model.dto.User;
@@ -19,4 +20,9 @@ public interface UserService {
 	
 	// 사용자 삭제
 	int delete(int user_id);
+
+	User signIn(String nickname, String password) throws UnsupportedEncodingException;
+	
+	// login
+	//User signIn(String nickname, String password);
 }

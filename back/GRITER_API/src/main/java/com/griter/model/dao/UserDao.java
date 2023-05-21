@@ -19,4 +19,7 @@ public interface UserDao {
 	
 	// 사용자 삭제
 	int delete(int user_id);
+	
+	// 비밀번호 반환
+	String login(String nickname);
 }

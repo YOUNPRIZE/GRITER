@@ -28,4 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM users
 		WHERE user_id = #{user_id}
 	</delete>
+	
+	<select id="login" parameterType="String" resultType="String">
+		SELECT password
+		FROM users
+		WHERE nickname = #{nickname};		
+	</select>
 </mapper>

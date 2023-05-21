@@ -36,6 +36,42 @@ public class User {
 	private String image;
 
 	private String orgImage;
+	
+	private String authToken;
+	
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+	private String refreshToken;
+
+	public User(int user_id, String password, String email, String gender, String name, String nickname,
+			Date regist_date, String image, String orgImage, String authToken, String refreshToken) {
+		super();
+		this.user_id = user_id;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.name = name;
+		this.nickname = nickname;
+		this.regist_date = regist_date;
+		this.image = image;
+		this.orgImage = orgImage;
+		this.authToken = authToken;
+		this.refreshToken = refreshToken;
+	}
 
 	public User() {
 	}
