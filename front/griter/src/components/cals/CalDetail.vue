@@ -1,148 +1,360 @@
 <template>
   <main>
-    <div class="dashboard-container">
-      <v-calendar 
-        is-expanded
-        class="custom-calendar max-w-full"
-        :masks="masks"
-        :attributes="attributes"
-        disable-page-swipe
-      >
-      <template v-slot:day-content="{day, attributes}">
-        <div class="flex flex-col h-full z-10 overflow-hidden">
-          <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
-          <div class="flex-grow overflow-y-auto overflow-x-auto">
-            <p
-              v-for="attr in attributes"
-              :key="attr.key"
-              class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-              
-            >
-              {{ attr.customData.title }}
-            </p>
+    <div class="followers">
+      <div class="follows-header">
+        <span class="followers-logo">Followers</span>
+        <form action="" class="search-form">
+          <div class="input-group mb-3">
+            <span class="input-group-text"><box-icon name="search"></box-icon></span>
+            <input class="form-control" id="search" type="text" placeholder="Search" />
           </div>
+        </form>
+      </div>
+      <div class="line"></div>
+      <div class="followers-head">
+        <span>Img</span>
+        <span>Name</span>
+        <span>ID</span>
+        <span>Email</span>
+      </div>
+      <div class="followers-content">
+        <!-- v-for 이용해서 아래 데이터 넣어야 됨-->
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
         </div>
-      </template>
-      </v-calendar>
+        <!-- 여기까지가 기본 형식-->
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>JaeminPark</span>
+            <span>catbirdseat</span>
+            <span>catbirdseat@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+        <div id="followers-content-userInfo">
+          <div class="followers-content-userInfo">
+            <img src="" alt="" />
+            <span>YounsangCho</span>
+            <span>younprize</span>
+            <span>ysang10@naver.com</span>
+          </div>
+          <hr style="margin: 0; margin-top: 0.5rem" />
+        </div>
+      </div>
+    </div>
+    <div class="following">
+      <div class="follows-header">
+        <span class="following-logo">Following</span>
+        <form action="" class="search-form">
+          <div class="input-group mb-3">
+            <span class="input-group-text"><box-icon name="search"></box-icon></span>
+            <input class="form-control" id="search" type="text" placeholder="Search" />
+          </div>
+        </form>
+      </div>
+      <div class="line"></div>
+      <div class="following-head">
+        <span>Img</span>
+        <span>Name</span>
+        <span>ID</span>
+        <span>Email</span>
+      </div>
+      <div class="following-content"></div>
     </div>
   </main>
 </template>
-
 <script>
-
-export default {
-  // name: "PostsList",
-  data() {
-    const month = new Date().getMonth();
-    const year = new Date().getFullYear();
-    return {
-      masks: {
-        weekdays: 'WWW',
-      },
-      attributes: [
-        {
-          key: 1,
-          customData: {
-            title: "점심약속",
-            class: 'bg-red-600 text-black',
-          },
-          dates: new Date(year, month, 1),
-        },
-        {
-          key: 2,
-          customData: {
-            title: "약속",
-            class: 'bg-red-600 text-black',
-          },
-          dates: new Date(year, month, 15),
-        },
-      ],
-    }
-  },
-  components: {},
-  methods: {}
-};
+export default {};
 </script>
-
-<style>
-.search-form {
-  /* border: solid red; */
-  display: flex;
-  flex-direction: column;
-  height: 3rem;
-}
-</style>
-
 <style scoped>
-.dashboard-container {
+main {
+  display: flex;
+  flex-direction: row;
+  /* border: solid green; */
+}
+
+.line {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.followers,
+.following {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 1rem rgb(190, 190, 190);
+  border-radius: 0.2rem;
+  width: 50%;
+  min-width: 40rem;
+  margin: 2rem;
+  padding: 2rem;
   background-color: var(--box-bg-color);
-  padding: 1.5rem;
-  width: 90vw;
-  height: 84vh;
 }
-.vc-container :nth-child(2) :nth-child(1) :nth-child(1) :nth-child(2) :nth-child(1) {
-  height: 5rem;
+
+.follows-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--font-color-2);
+}
+
+.followers-logo,
+.following-logo {
+  align-self: flex-start;
+  font-size: x-large;
+  font-weight: 500;
+}
+
+.followers-content,
+.following-content {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.followers-content::-webkit-scrollbar,
+.following-content::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.followers-content::-webkit-scrollbar-thumb,
+.following-content::-webkit-scrollbar-thumb {
+  background-color: rgb(190, 190, 190);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.followers-head,
+.following-head,
+.followers-content-userInfo {
+  /* border: solid 1px green; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.followers-head>span,
+.following-head>span {
+  /* border: solid 1px red; */
+  font-weight: bold;
+}
+
+.followers-head>span:nth-child(1),
+.following-head>span:nth-child(1),
+.followers-content-userInfo>img {
+  width: 10%;
+}
+
+.followers-head>span:nth-child(2),
+.following-head>span:nth-child(2),
+.followers-content-userInfo>span:nth-child(2) {
+  width: 23%;
+}
+
+.followers-head>span:nth-child(3),
+.following-head>span:nth-child(3),
+.followers-content-userInfo>span:nth-child(3) {
+  width: 23%;
+}
+
+.followers-head>span:nth-child(4),
+.following-head>span:nth-child(4),
+.followers-content-userInfo>span:nth-child(4) {
+  width: 44%;
+}
+
+.followers-content {
+  /* border: solid 1px green; */
+  display: flex;
+  flex-direction: column;
+}
+
+.followers-content-userInfo {
+  padding: 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+  height: 3rem;
+}
+
+.followers-content-userInfo>span {
+  /* border: solid 1px red; */
 }
 </style>
-
-<style lang="postcss" scoped>
-::-webkit-scrollbar {
-  width: 0px;
-}
-
-::-webkit-scrollbar-track {
-  display: none;
-}
-
-/deep/ .custom-calendar.vc-container {
-  --day-border: 1px solid #b8c2cc;
-  --day-border-highlight: 1px solid #b8c2cc;
-  --day-width: 90px;
-  --day-height: 90px;
-  --weekday-bg: #f8fafc;
-  --weekday-border: 1px solid #eaeaea;
-
-  border-radius: 0;
-  width: 100%;
-
-  & .vc-header {
-    background-color: #f1f5f8;
-    padding: 10px 0;
-  }
-  & .vc-weeks {
-    padding: 0;
-  }
-  & .vc-weekday {
-    background-color: var(--weekday-bg);
-    border-bottom: var(--weekday-border);
-    border-top: var(--weekday-border);
-    padding: 5px 0;
-  }
-  & .vc-day {
-    padding: 0 5px 3px 5px;
-    text-align: left;
-    height: var(--day-height);
-    min-width: var(--day-width);
-    background-color: white;
-    &.weekday-1,
-    &.weekday-7 {
-      background-color: #eff8ff;
-    }
-    &:not(.on-bottom) {
-      border-bottom: var(--day-border);
-      &.weekday-1 {
-        border-bottom: var(--day-border-highlight);
-      }
-    }
-    &:not(.on-right) {
-      border-right: var(--day-border);
-    }
-  }
-  & .vc-day-dots {
-    margin-bottom: 5px;
-  }
-}
-</style>
+  
