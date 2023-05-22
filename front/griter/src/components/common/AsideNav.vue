@@ -55,13 +55,7 @@
           <i class="bx bxs-moon nav_icon"></i>
           <span>DarkMode</span>
           <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="nightmode"
-              @click="changeMode"
-            />
+            <input class="form-check-input" type="checkbox" role="switch" id="nightmode" @click="changeMode" />
           </div>
         </div>
       </nav>
@@ -70,7 +64,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: "AsideNav",
@@ -79,20 +73,30 @@ export default {
       nickname: "catbirdseat",
     };
   },
+  computed: {
+    ...mapState('nightmodeModule', { currentMode: 'nightmode' }),
+  },
   mounted() {
     window.onload = function () {
       console.log(this.$router);
     };
-    if (this.$store.state.nightmode) {
+    console.log(this.currentMode);
+    if (this.currentMode) {
       document.getElementById("nightmode").checked = true;
     }
     console.log(window);
   },
   methods: {
+    ...mapActions('nightmodeModule', ['callModeSet']),
+    nightmode() {
+      return this.currentMode;
+    },
     changeMode() {
       // this.$store.dispatch("callModeSet");
-      mapActions('nightmode', ['callModeSet']);
-      document.documentElement.setAttribute("nightmode", mapState('nightmode', ['nightmode']));
+      // mapActions('nightmode', ['callModeSet']);
+      this.callModeSet();
+      console.log("변경 후: " + this.nightmode());
+      document.documentElement.setAttribute("nightmode", this.nightmode());
       console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
       console.log(btn.checked);
@@ -110,6 +114,7 @@ export default {
 #dark-mode {
   display: flex;
 }
+
 .nav_logo {
   color: #2388f5;
   font-size: x-large;
@@ -136,7 +141,7 @@ html {
   font-weight: lighter;
 }
 
-.login-info > span:first-child {
+.login-info>span:first-child {
   font-weight: bolder;
 }
 
@@ -150,6 +155,7 @@ html {
   --normal-font-size: 1rem;
   --z-fixed: 100;
 }
+
 *,
 ::before,
 ::after {

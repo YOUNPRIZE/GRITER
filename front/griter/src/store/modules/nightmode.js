@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const Nightmode = {
   namespaced: true,
   state: {
-    nightmode: true,
+    nightmode: "",
   },
   getters: {
     mode: state => () => state.nightmode,
@@ -15,7 +15,7 @@ const Nightmode = {
     setMode: (state, payload) => { state.nightmode = payload },
   },
   actions: {
-    callModeSet: (context) => { context.commit("setMode", !this.state.nightmode) }
+    callModeSet: (context) => { context.commit("setMode", !context.state.nightmode) }
   },
 };
 

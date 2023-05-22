@@ -6,22 +6,10 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input
-            type="text"
-            class="form-control"
-            id="nickname"
-            v-model="user.nickname"
-            required
-          />
+          <input type="text" class="form-control" id="nickname" v-model="user.nickname" required />
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            v-model="user.password"
-            required
-          />
+          <input type="password" class="form-control" id="password" v-model="user.password" required />
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
@@ -35,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "UsersLogin",
   data() {
@@ -47,32 +35,23 @@ export default {
     };
   },
   created() {
-    // if (self.name != "reload") {
-    //   self.name = "reload";
-    //   self.location.reload(true);
-    // } else self.name = "";
+    if (self.name != "reload") {
+      self.name = "reload";
+      self.location.reload(true);
+    } else self.name = "";
   },
   computed: {
-    // ...mapState('userModule', {
-    //   loginUser : 'loginUser'
-    // })
-    ...mapActions({ goLogin: "userModule" }, ["userLogin"]),
   },
   methods: {
+    ...mapActions("userModule", {
+      doLogin: 'userLogin',
+    }),
+    ...mapGetters("userModule", {
+      getLoginUser: 'getLoginUser'
+    }),
     login() {
-      // this.$store.dispatch('userLogin', this.user);
-      this.goLogin(this.user);
-      // const loginUser = this.$store.state.loginUser;
-      const loginUser = mapState("userModule", ["loginUser"]);
-      localStorage.setItem("lcoal", JSON.stringify(loginUser));
-      console.log(loginUser);
-      if (loginUser) {
-        // this.$router.push({name:'home'})
-        alert(loginUser);
-      } else {
-        alert("아이디 혹은 패스워드가 틀립니다.");
-        // this.$router.go(0);
-      }
+      console.log(this.user);
+      this.doLogin(this.user);
     },
   },
 };
@@ -150,6 +129,7 @@ button {
   box-shadow: 0 0 5px rgb(141, 141, 141);
   background-color: #2388f5;
 }
+
 #login-btn:hover {
   background-color: #1b6fca;
 }
@@ -157,6 +137,7 @@ button {
 #signUp-btn {
   border: solid 1px #2388f5;
 }
+
 #signUp-btn:hover {
   background-color: #2388f5;
 }

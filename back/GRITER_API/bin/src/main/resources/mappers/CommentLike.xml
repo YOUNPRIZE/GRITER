@@ -1,1 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.griter.model.dao.CommentLikeDao">
+
+	<insert id="create" parameterType="CommentLike">
+		INSERT INTO comment_likes (comment_like_id, user_id, comment_id)
+		VALUES(0, #{user_id}, #{comment_id})
+	</insert>
+	
+	<select id="selectByUser" parameterType="int" resultType="CommentLike">
+		SELECT * FROM comment_likes
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectByCommentId" parameterType="int" resultType="CommentLike">
+		SELECT * FROM comment_likes
+		WHERE comment_id = #{comment_id}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM comment_likes
+		WHERE comment_like_id = #{comment_like_id}
+	</delete>
+	
+</mapper>

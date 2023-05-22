@@ -16,20 +16,19 @@ export default {
   data() {
     return {
       useNav: true,
-      // nightmode: '',
     };
   },
   components: {
     AsideNav,
   },
   computed: {
-    ...mapState(["nightmode"]),
+    ...mapState('nightmodeModule', ["nightmode"]),
   },
   methods: {
-    ...mapMutations(["setMode"]),
+    ...mapMutations('nightmodeModule', ["setMode"]),
   },
   beforeMount() {
-    console.log("nightmode: " + this.$store.state.nightmode);
+    console.log("nightmode: " + this.nightmode);
   },
   mounted() {
     console.log(this.$router.currentRoute.name);
@@ -96,7 +95,7 @@ export default {
       // this.$router.push({ name: "login" });
     }
     console.log(document.querySelector("body"));
-    if (this.$store.state.nightmode) {
+    if (this.nightmode) {
       document.documentElement.setAttribute("nightmode", true);
     }
   },

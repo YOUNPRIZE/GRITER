@@ -256,7 +256,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState('user', ["loginUser"]),
+    ...mapState('userModule', ["loginUser"]),
   },
   created() {
     console.log(self.name);

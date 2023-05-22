@@ -13,6 +13,7 @@ const user = {
     loginUser: {},
   },
   getters: {
+    getLoginUser: (state) => state.loginUser,
   },
   mutations: {
     USER_LOGIN: (state, payload) => { state.loginUser = payload },
@@ -21,7 +22,7 @@ const user = {
   actions: {
     userLogin: ({ commit }, loginUser) => {
       const API_URL = `${REST_API}/users/jwt`;
-      localStorage.setItem("local", loginUser);
+      localStorage.setItem("local", JSON.stringify(loginUser));
       axios({
         url: API_URL,
         method: "POST",
@@ -29,14 +30,14 @@ const user = {
       })
         .then((res) => {
           console.log(res);
-          alert("여기는 성공");
           sessionStorage.setItem("access-token", res.data["access-token"]);
           commit("USER_LOGIN", loginUser);
+          router.push({ name: "home" });
         })
         .catch((err) => {
           console.log(err);
-          alert("여기는 실패");
-          // router.push({ name: "login" });
+          alert("로그인 실패");
+          router.push({ name: "login" }).catch(()=>{});
           console.log(router);
         });
     },

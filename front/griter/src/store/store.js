@@ -8,23 +8,23 @@ import User from "./modules/user.js";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state:{
+  state: {
     posts: [],
-    post:{},
+    post: {},
   },
-  getters:{
-    posts(state){
+  getters: {
+    posts(state) {
       return state.posts;
     },
-    post(state){
+    post(state) {
       return state.post;
     }
   },
   mutations: {
-    setPosts(state, payload){
+    setPosts(state, payload) {
       state.posts = payload;
     },
-    setPost(state, payload){
+    setPost(state, payload) {
       state.post = payload;
     },
   },
@@ -36,7 +36,7 @@ export default new Vuex.Store({
   },
   plugins: [
     createPersistedState({
-      paths:[
+      paths: [
         "nightmodeModule",
       ],
     }),
