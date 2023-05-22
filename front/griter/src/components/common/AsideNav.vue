@@ -34,10 +34,12 @@
                 <span class="nav_name">Dashboard</span>
               </div>
             </router-link>
-            <a href="#" class="nav_link">
-              <i class="bx bx-calendar nav_icon"></i>
-              <span class="nav_name">Calendar</span>
-            </a>
+            <router-link :to="{ name: 'calendar' }">
+              <div class="nav_link">
+                <i class="bx bx-calendar nav_icon"></i>
+                <span class="nav_name">Calendar</span>
+              </div>
+            </router-link>
             <router-link :to="{ name: 'follows' }">
               <div class="nav_link">
                 <i class="bx bxs-contact nav_icon"></i>

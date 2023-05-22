@@ -11,7 +11,7 @@ import UsersLogin from '@/components/users/UsersLogin.vue'
 import UsersRegister from '@/components/users/UsersRegister.vue'
 import UsersInfo from '@/components/users/UsersInfo.vue'
 import UsersFollows from '@/components/users/UsersFollows.vue'
-
+import CalDetail from '@/components/cals/CalDetail.vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
@@ -26,6 +26,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/cal',
+    name: 'calendar',
+    component: CalDetail,
   },
   {
     path: '/posts',

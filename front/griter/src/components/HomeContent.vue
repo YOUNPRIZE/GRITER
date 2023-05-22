@@ -250,16 +250,7 @@
           </a>
         </div>
         <div class="calendar-content">
-          <!-- <b-calendar
-            block
-            :hide-header="hideHeader"
-            @context="onContext"
-            locale="en-US"
-            selected-variant="success"
-            today-variant="info"
-            nav-button-variant="secondary"
-          ></b-calendar>-->
-          <v-calendar />
+          <v-calendar is-expanded />
         </div>
       </div>
     </div>
