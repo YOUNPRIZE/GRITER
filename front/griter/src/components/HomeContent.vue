@@ -19,11 +19,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -40,11 +40,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -61,11 +61,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -82,11 +82,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                                        width: 30px;
+                                        height: 30px;
+                                        border-radius: 100%;
+                                        border: solid 1px red;
+                                      " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -103,11 +103,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -124,11 +124,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -144,11 +144,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -164,11 +164,11 @@
               </div>
               <div class="dashboard-content-post-writerInfo">
                 <img src="" alt="" style="
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 100%;
-                                border: solid 1px red;
-                              " />
+                                        width: 30px;
+                                        height: 30px;
+                                        border-radius: 100%;
+                                        border: solid 1px red;
+                                      " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -184,14 +184,17 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          <box-icon type="solid" name="plus-square" @click="moveToUserDetail"></box-icon>
+          {{ loginUser.nickname }}
+          <router-link :to="`users/${loginUser.nickname}`">
+            <box-icon type="solid" name="plus-square"></box-icon>
+          </router-link>
         </div>
         <div class="line"></div>
         <div class="userInfo-content">
           <img src="" id="profile-image" alt="" />
           <div class="userInfo-info">
             <!-- 아이디 -->
-            <h5>{{ currentUser.nickname }}</h5>
+            <h5>{{ loginUser.nickname }}</h5>
             <!-- 팔로잉 -->
             <div class="userInfo-info-following">
               <h6>Following</h6>
@@ -219,26 +222,27 @@
 </template>
 
 <script>
-import router from "@/router";
+// import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapState('userModule', { currentUser: 'loginUser' }),
+    ...mapState("userModule", ['loginUser']),
+  },
+  mounted() {
+    // console.log(user);
   },
   methods: {
-    ...mapActions('userModule', { getUser: 'getUser' }),
+    ...mapActions("userModule", ['getUser']),
     moveToUserDetail() {
-      const nickname = localStorage.getItem('loginUser');
-      console.log(nickname);
-      router.push({ name: 'userInfo', query: nickname });
+      alert(this.loginUser.nickname);
+      // const nickname = this.loginUser.nickname;
+      this.$router.push({ name: 'userInfo', params: 'catbirdseat' });
     },
   },
   created() {
-    // console.log(JSON.stringify(this.get()));
     const nickname = localStorage.getItem('loginUser');
-    console.log(this.getUser(nickname));
-    this.currentUser = this.getUser(nickname);
-
+    // dispatch 역할
+    this.getUser(nickname);
     // 로그인하고 1회만 새로고침
     console.log(self.name);
     if (self.name != "reload") {

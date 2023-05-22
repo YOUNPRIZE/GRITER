@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 // CommentLike
 @RestController
-@RequestMapping("/posts/comments/likes")
+@RequestMapping("/api/posts/comments/likes")
 @CrossOrigin("*")
 public class CommentLikeRestController {
 	@Autowired

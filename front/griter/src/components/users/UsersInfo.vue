@@ -185,7 +185,7 @@ export default {
     ...mapState('userModule', ["loginUser"]),
   },
   created() {
-    console.log(this.loginUser);
+    console.log("userinfo : " + this.loginUser);
   },
   data() {
     return {
@@ -196,10 +196,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* border: solid; */
-}
-
 main {
   display: flex;
   flex-direction: row;

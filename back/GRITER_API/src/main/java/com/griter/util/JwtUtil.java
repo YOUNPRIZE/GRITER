@@ -26,7 +26,7 @@ public class JwtUtil {
 //				.setHeaderParam("typ", "JWT") // Header complete
 //				.setHeaderParam(claimId, data)
 //				.claim("userId", "ssafy")
-				.claim("user", user)
+				.claim("loginUser", user)
 				.setExpiration(new Date(System.currentTimeMillis()+1000*60*60)) // Payload complete
 				.signWith(SignatureAlgorithm.HS256, SALT.getBytes("UTF-8")) // signature complete
 				.compact();

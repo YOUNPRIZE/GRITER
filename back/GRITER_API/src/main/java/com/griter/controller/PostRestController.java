@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Post
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 @CrossOrigin("*")
 public class PostRestController {
 	// 의존성 주입

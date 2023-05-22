@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Follow
 @RestController
-@RequestMapping("/follows")
+@RequestMapping("/api/follows")
 @CrossOrigin("*")
 public class FollowRestController {
 	@Autowired

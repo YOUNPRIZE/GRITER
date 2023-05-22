@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Image
 @RestController
-@RequestMapping("/posts/images")
+@RequestMapping("/api/posts/images")
 @CrossOrigin("*")
 public class ImageRestController {
 	@Autowired
