@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Routine
 @RestController
-@RequestMapping("/routines")
+@RequestMapping("/api/routines")
 @CrossOrigin("*")
 public class RoutineRestController {
 	// 의존성 주입

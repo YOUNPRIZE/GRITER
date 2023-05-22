@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Diet
 @RestController
-@RequestMapping("/diets")
+@RequestMapping("/api/diets")
 @CrossOrigin("*")
 public class DietRestController {
 	@Autowired

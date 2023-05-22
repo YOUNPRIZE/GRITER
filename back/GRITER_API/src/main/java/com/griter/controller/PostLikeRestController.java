@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 // PostLike
 @RestController
-@RequestMapping("/posts/likes")
+@RequestMapping("/api/posts/likes")
 @CrossOrigin("*")
 public class PostLikeRestController {
 	// 의존성 주입

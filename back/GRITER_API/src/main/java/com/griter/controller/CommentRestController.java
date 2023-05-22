@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Comment
 @RestController
-@RequestMapping("/posts/comments")
+@RequestMapping("/api/posts/comments")
 @CrossOrigin("*")
 public class CommentRestController {
 	@Autowired

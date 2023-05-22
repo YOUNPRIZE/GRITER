@@ -3,17 +3,22 @@ import axios from 'axios';
 
 const REST_API = `http://localhost:9999/api`;
 
-const user = {
+const userModule = {
   namespaced: true,
   state: {
-    loginUser: {},
+    loginUser: {
+    },
   },
   getters: {
     getLoginUser: (state) => state.loginUser,
   },
   mutations: {
     USER_LOGIN: (state, payload) => { state.loginUser = payload },
-    GET_USER: (state, payload) => { state.loginUser = payload },
+    GET_USER: (state, payload) => {
+      console.log(payload);
+      state.loginUser = payload;
+      console.log(state.loginUser);
+    },
   },
   actions: {
     userLogin: ({ commit }, loginUser) => {
@@ -28,8 +33,7 @@ const user = {
           sessionStorage.setItem("access-token", res.data["access-token"]);
           localStorage.setItem("loginUser", loginUser.nickname);
           commit("USER_LOGIN", loginUser);
-          console.log(loginUser);
-          console.log("asdfasfdasfdasfdasfdafsdsfdsfdasfdaasfdafsdasfdsfad")
+          // console.log(loginUser);
           router.push({ name: "home" });
         })
         .catch((err) => {
@@ -46,11 +50,12 @@ const user = {
         method: "GET",
       })
         .then((res) => {
-          console.log("res: " + res);
-          commit("GET_USER");
+          console.log("res: " + JSON.stringify(res.data));
+          // console.log("res: " + JSON.stringify(res.data));
+          commit("GET_USER", res.data);
         })
     }
   },
 };
 
-export default user;
+export default userModule;

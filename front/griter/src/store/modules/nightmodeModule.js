@@ -1,4 +1,4 @@
-const Nightmode = {
+const nightmodeModule = {
   namespaced: true,
   state: {
     nightmode: "",
@@ -14,4 +14,4 @@ const Nightmode = {
   },
 };
 
-export default Nightmode;
+export default nightmodeModule;
