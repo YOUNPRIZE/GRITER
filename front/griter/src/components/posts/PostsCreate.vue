@@ -7,7 +7,7 @@
       </div>
       <div class="line"></div>
       <div class="postcreate-content">
-        <form action="" class="create-form">
+        <fieldset class="create-form">
           <div class="label">Title</div>
           <input type="text" id="title" v-model="title" class="form-control" placeholder="Enter title here" required /><br />
           <div class="label">Category</div>
@@ -32,7 +32,7 @@
             required
           /><br />
           <button class="btn btn-primary" @click="createPost" id="post-btn">POST</button>
-        </form>
+        </fieldset>
       </div>
     </div>
   </main>
@@ -45,7 +45,6 @@ export default {
   name: "createPost",
   data() {
     return {
-      post_id: 0,
       title: "",
       content: "",
       // generated_date: "",
@@ -62,11 +61,12 @@ export default {
   methods: {
     createPost() {
       const user_id = localStorage("loginUser");
+      console.log(user_id);
       const post = {
-        post_id: this.post_id,
         user_id: user_id,
         title: this.title,
         content: this.content,
+        category: this.category,
       }
       this.createPost(post);
     },

@@ -6,7 +6,13 @@
         <form action="" class="search-form">
           <div class="input-group mb-3">
             <span class="input-group-text"><box-icon name="search"></box-icon></span>
-            <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup($event)" />
+            <input
+              class="form-control"
+              id="search"
+              type="text"
+              placeholder="Search"
+              @input="searchGroup($event)"
+            />
           </div>
         </form>
       </div>
@@ -19,7 +25,7 @@
         </div>
         <div class="dashboard-content">
           <div v-for="(post, index) in posts" :key="index" class="group-item">
-            <router-link :to="`${post.post_id}`">
+            <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
               <div class="dashboard-content-post">
                 <div class="dashboard-content-post-left">
                   <div class="dashboard-content-post-title">
@@ -29,18 +35,26 @@
                     {{ post.content }}
                   </div>
                   <div class="dashboard-content-post-writerInfo">
-                    <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+                    <img
+                      src=""
+                      alt=""
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: solid 1px red;
+                      "
+                    />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
                 <div class="dashboard-content-post-right">
-                  <span class="dashboard-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1]
-                  }}.{{ post.generated_date[2] }} {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
+                  <span class="dashboard-content-post-created"
+                    >{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                      post.generated_date[2]
+                    }}
+                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span
+                  >
                   <div class="dashboard-content-post-btn">
                     <!-- link to 는 기능 확인을 위해 임시로 걸어놓은 것 수정해야됨 -->
                     <router-link :to="{ name: 'login' }" id="dashboard-btn">
@@ -61,18 +75,18 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
   name: "PostsList",
   components: {},
   computed: {
-    ...mapState('postModule', ['posts']),
+    ...mapState("postModule", ["posts"]),
   },
   methods: {
     movePage() {
       this.$router.push({ name: "PostCreate" });
     },
-    ...mapActions('postModule', ['getPosts']),
+    ...mapActions("postModule", ["getPosts"]),
     searchGroup(event) {
       // console.log(event.target.value);
 
@@ -93,7 +107,7 @@ export default {
   },
   created() {
     this.getPosts();
-  }
+  },
 };
 </script>
 

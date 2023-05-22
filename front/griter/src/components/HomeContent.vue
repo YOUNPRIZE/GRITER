@@ -218,7 +218,7 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          <router-link :to="`users/${loginUser.nickname}`">
+          <router-link :to="{name: 'userInfo', params: {user_id: loginUser.user_id}}">
             <box-icon type="solid" name="plus-square"></box-icon>
           </router-link>
         </div>

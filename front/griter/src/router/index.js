@@ -68,7 +68,7 @@ const routes = [
         component: UsersFollows,
       },
       {
-        path: ":nickname",
+        path: ":user_id",
         name: 'userInfo',
         component: UsersInfo,
       },
