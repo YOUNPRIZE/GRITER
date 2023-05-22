@@ -1,4 +1,4 @@
-// import router from '@/router';
+import router from '@/router';
 import axios from 'axios';
 
 const REST_API = `http://localhost:9999/api`;
@@ -47,7 +47,31 @@ const postModule = {
           console.log(JSON.stringify(res.data));
           commit('setPost', res.data);
         })
-    }
+    },
+    getPostsByUserId({ commit }, user_id) {
+      const API_URL = `${REST_API}/posts/by=${user_id}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          console.log(JSON.stringify(res.data));
+          commit('setPosts', res.data);
+        })
+    },
+    createPost(post) {
+      const API_URL = `${REST_API}/posts/`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: post
+      })
+        .then((res) => {
+          console.log(res);
+          alert("게시물이 등록되었습니다.");
+          router.push({ name: 'PostList' });
+        })
+    },
   },
 };
 

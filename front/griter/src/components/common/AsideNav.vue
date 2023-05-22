@@ -12,7 +12,7 @@
           <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
-            <router-link :to="`users/${loginUser.nickname}`">
+            <router-link :to="`users/${loginUser.user_id}`">
               <div class="nav_link">
                 <img src="" class="profile-img" alt="" />
                 <div class="login-info">
@@ -80,25 +80,13 @@ export default {
     ...mapState("nightmodeModule", { currentMode: "nightmode" }),
     ...mapState("userModule", ["loginUser"]),
   },
-  mounted() {
-    window.onload = function () {
-      console.log(this.$router);
-    };
-    console.log(this.currentMode);
-    if (this.currentMode) {
-      document.getElementById("nightmode").checked = true;
-    }
-    console.log(window);
-  },
   methods: {
     ...mapActions("nightmodeModule", ["callModeSet"]),
-    ...mapActions("userModule", ["getUser"]),
+    ...mapActions("userModule", ["getLoginUser"]),
     nightmode() {
       return this.currentMode;
     },
     changeMode() {
-      // this.$store.dispatch("callModeSet");
-      // mapActions('nightmode', ['callModeSet']);
       this.callModeSet();
       console.log("변경 후: " + this.nightmode());
       document.documentElement.setAttribute("nightmode", this.nightmode());
@@ -109,9 +97,25 @@ export default {
     },
     logout() {
       sessionStorage.removeItem("access-token");
+      localStorage.removeItem("loginUser");
       this.$router.push({ name: "login" });
     },
   },
+  mounted() {
+    // window.onload = function () {
+    //   console.log(this.$router);
+    // };
+    // console.log(this.currentMode);
+    // console.log(window);
+    if (this.currentMode) {
+      document.getElementById("nightmode").checked = true;
+    }
+  },
+  created(){
+    const user_id = localStorage.getItem('loginUser');
+    this.getLoginUser(user_id);
+  }
+  
 };
 </script>
 
