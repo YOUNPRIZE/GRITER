@@ -39,33 +39,47 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: "createPost",
   data() {
     return {
       post_id: 0,
-      user_id: "",
       title: "",
       content: "",
-      generated_date: "",
-      modified_date: "",
-      view_cnt: 0,
-      like_cnt: 0,
+      // generated_date: "",
+      // modified_date: "",
+      // view_cnt: 0,
+      // like_cnt: 0,
       category: "",
       img: [],
     };
   },
+  computed:{
+    ...mapState('userModule', ["loginUser"]),
+  },
   methods: {
     createPost() {
-      // const post = {
-        // post_id = this.post_id;
-        
-      // }
+      const user_id = localStorage("loginUser");
+      const post = {
+        post_id: this.post_id,
+        user_id: user_id,
+        title: this.title,
+        content: this.content,
+      }
+      this.createPost(post);
     },
     moveList() {
       this.$router.push("/posts");
     },
+    ...mapActions('userModule', ["getLoginUser"]),
+    ...mapActions('postModule', ["createPost"]),
   },
+  created(){
+    const user_id = localStorage.getItem("loginUser");
+    this.getLoginUser(user_id);
+  }
 };
 </script>
 <style scoped>
