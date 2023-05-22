@@ -139,6 +139,10 @@ export default {
   width: 100%;
 }
 
+.detail-key{
+  color: var(--font-color-3);
+}
+
 #postdetail-header-logo {
   font-size: x-large;
   margin-left: 1rem;
@@ -272,6 +276,9 @@ export default {
 }
 .form-control::placeholder{
   color: var(--font-color-2);
+}
+.form-control:focus{
+  background-color: var(--first-color);
 }
 
 #button-addon2{

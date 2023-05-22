@@ -137,6 +137,9 @@ input {
   height: 90%;
   margin-top: 1rem;
 }
+.form-control:focus{
+  background-color: var(--first-color);
+}
 #title{
   margin-bottom: 0;
 }
