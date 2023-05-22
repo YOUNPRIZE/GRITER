@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 		User user = userDao.selectByNickname(nickname);
 		System.out.println(user);
 		if (user.getPassword().equals(password)) {
-			String authToken = jwtUtil.createToken(nickname);
+			String authToken = jwtUtil.createToken(user);
 			user.setAuthToken(authToken);
 			return user;
 		} else {

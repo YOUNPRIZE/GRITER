@@ -1,9 +1,5 @@
 import router from '@/router';
 import axios from 'axios';
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
 
 const REST_API = `http://localhost:9999/api`;
 
@@ -17,12 +13,11 @@ const user = {
   },
   mutations: {
     USER_LOGIN: (state, payload) => { state.loginUser = payload },
-    USER_INFO: (state, payload) => { state.loginUser = payload },
+    GET_USER: (state, payload) => { state.loginUser = payload },
   },
   actions: {
     userLogin: ({ commit }, loginUser) => {
       const API_URL = `${REST_API}/users/jwt`;
-      localStorage.setItem("local", JSON.stringify(loginUser));
       axios({
         url: API_URL,
         method: "POST",
@@ -31,28 +26,30 @@ const user = {
         .then((res) => {
           console.log(res);
           sessionStorage.setItem("access-token", res.data["access-token"]);
+          localStorage.setItem("loginUser", loginUser.nickname);
           commit("USER_LOGIN", loginUser);
+          console.log(loginUser);
+          console.log("asdfasfdasfdasfdasfdafsdsfdsfdasfdaasfdafsdasfdsfad")
           router.push({ name: "home" });
         })
         .catch((err) => {
           console.log(err);
           alert("로그인 실패");
-          router.push({ name: "login" }).catch(()=>{});
+          router.push({ name: "login" }).catch(() => { });
           console.log(router);
         });
     },
-    getLoginUserInfo: ({ commit }, nickname) => {
+    getUser: ({ commit }, nickname) => {
       const API_URL = `${REST_API}/users/${nickname}`;
       axios({
         url: API_URL,
         method: "GET",
       })
         .then((res) => {
-          commit("USER_INFO", res.date);
-        }).catch((err) => {
-          console.log(err);
-        });
-    },
+          console.log("res: " + res);
+          commit("GET_USER");
+        })
+    }
   },
 };
 
