@@ -16,20 +16,19 @@ export default {
   data() {
     return {
       useNav: true,
-      // nightmode: '',
     };
   },
   components: {
     AsideNav,
   },
   computed: {
-    ...mapState(["nightmode"]),
+    ...mapState('nightmodeModule', ["nightmode"]),
   },
   methods: {
-    ...mapMutations(["setMode"]),
+    ...mapMutations('nightmodeModule', ["setMode"]),
   },
   beforeMount() {
-    console.log("nightmode: " + this.$store.state.nightmode);
+    console.log("nightmode: " + this.nightmode);
   },
   mounted() {
     console.log(this.$router.currentRoute.name);
@@ -92,11 +91,11 @@ export default {
     const loginUser = sessionStorage.getItem("access-token");
     console.log(this.$router.currentRoute);
     if (this.$router.currentRoute.name !== 'login' && !loginUser) {
-      alert("로그인을 해주세요");
-      this.$router.push({ name: "login" });
+      // alert("로그인을 해주세요");
+      // this.$router.push({ name: "login" });
     }
     console.log(document.querySelector("body"));
-    if (this.$store.state.nightmode) {
+    if (this.nightmode) {
       document.documentElement.setAttribute("nightmode", true);
     }
   },
@@ -109,6 +108,7 @@ export default {
   --box-bg-color: white;
   --font-color: #2c3e50;
   --font-color-2: black;
+  --font-color-3: #2388f5;
   --input-bg-color: white;
 }
 [nightmode="true"] {
@@ -116,6 +116,7 @@ export default {
   --box-bg-color: #565656;
   --font-color: #7fbefd;
   --font-color-2: white;
+  --font-color-3: #7fbefd;
   --input-bg-color: rgb(135, 135, 135);
 }
 

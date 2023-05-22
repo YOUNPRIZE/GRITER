@@ -6,14 +6,14 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input type="text" class="form-control" id="nickname" v-model="user.nickname" required/>
+          <input type="text" class="form-control" id="nickname" v-model="user.nickname" required />
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
-          <input type="password" class="form-control" id="password" v-model="user.password" required/>
+          <input type="password" class="form-control" id="password" v-model="user.password" required />
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
-          <router-link :to="{name : 'register'}">
+          <router-link :to="{ name: 'register' }">
             <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
         </div>
@@ -23,29 +23,37 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "UsersLogin",
   data() {
     return {
-      user : {
-        nickname : "",
-        password : "",
-      }
-    }
+      user: {
+        nickname: "",
+        password: "",
+      },
+    };
+  },
+  created() {
+    if (self.name != "reload") {
+      self.name = "reload";
+      self.location.reload(true);
+    } else self.name = "";
+  },
+  computed: {
   },
   methods: {
-    login(){
-      this.$store.dispatch('userLogin', this.user);
-      const loginUser = this.$store.state.loginUser;
-      console.log(loginUser);
-      if(loginUser){
-        this.$router.push({name:'home'})
-      } else{
-        alert('아이디 혹은 패스워드가 틀립니다.');
-        this.$router.go(0);
-      }
-    }
-  }
+    ...mapActions("userModule", {
+      doLogin: 'userLogin',
+    }),
+    ...mapGetters("userModule", {
+      getLoginUser: 'getLoginUser'
+    }),
+    login() {
+      console.log(this.user);
+      this.doLogin(this.user);
+    },
+  },
 };
 </script>
 
@@ -121,14 +129,16 @@ button {
   box-shadow: 0 0 5px rgb(141, 141, 141);
   background-color: #2388f5;
 }
-#login-btn:hover{
+
+#login-btn:hover {
   background-color: #1b6fca;
 }
 
-#signUp-btn{
+#signUp-btn {
   border: solid 1px #2388f5;
 }
-#signUp-btn:hover{
+
+#signUp-btn:hover {
   background-color: #2388f5;
 }
 </style>

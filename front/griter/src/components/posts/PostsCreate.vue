@@ -3,7 +3,7 @@
     <div class="postcreate">
       <div class="postcreate-header">
         <i class="bx bx-arrow-back" id="back-btn" @click="moveList"></i>
-        <span id="classcreate-header-logo">New Post</span>
+        <span id="postcreate-header-logo">New Post</span>
       </div>
       <div class="line"></div>
       <div class="postcreate-content">
@@ -108,7 +108,7 @@ export default {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
-#classcreate-header-logo {
+#postcreate-header-logo {
   font-size: x-large;
   margin-left: 1rem;
 }

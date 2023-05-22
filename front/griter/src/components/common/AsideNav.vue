@@ -46,22 +46,16 @@
             </router-link>
           </div>
           <hr style="margin-left: 1rem" />
-          <a href="#" class="nav_link">
+          <div class="nav_link" id="logout-btn" @click="logout">
             <i class="bx bx-log-out nav_icon"></i>
-            <span class="nav_name">SignOut</span>
-          </a>
+            <span class="nav_name">LogOut</span>
+          </div>
         </div>
         <div class="nav_link" id="dark-mode">
           <i class="bx bxs-moon nav_icon"></i>
           <span>DarkMode</span>
           <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="nightmode"
-              @click="changeMode"
-            />
+            <input class="form-check-input" type="checkbox" role="switch" id="nightmode" @click="changeMode" />
           </div>
         </div>
       </nav>
@@ -70,6 +64,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: "AsideNav",
   data() {
@@ -77,24 +73,38 @@ export default {
       nickname: "catbirdseat",
     };
   },
+  computed: {
+    ...mapState('nightmodeModule', { currentMode: 'nightmode' }),
+  },
   mounted() {
     window.onload = function () {
       console.log(this.$router);
     };
-    if (this.$store.state.nightmode) {
+    console.log(this.currentMode);
+    if (this.currentMode) {
       document.getElementById("nightmode").checked = true;
     }
     console.log(window);
   },
   methods: {
+    ...mapActions('nightmodeModule', ['callModeSet']),
+    nightmode() {
+      return this.currentMode;
+    },
     changeMode() {
-      this.$store.dispatch("callModeSet");
-      document.querySelector(".l-navbar").classList.toggle("nightmode");
-      document.documentElement.setAttribute("nightmode", this.$store.state.nightmode);
+      // this.$store.dispatch("callModeSet");
+      // mapActions('nightmode', ['callModeSet']);
+      this.callModeSet();
+      console.log("변경 후: " + this.nightmode());
+      document.documentElement.setAttribute("nightmode", this.nightmode());
       console.log(document.documentElement);
       const btn = document.getElementById("nightmode");
       console.log(btn.checked);
       setTimeout(() => this.$router.go(0), 500);
+    },
+    logout() {
+      sessionStorage.removeItem("access-token");
+      this.$router.push({ name: "login" });
     },
   },
 };
@@ -104,6 +114,7 @@ export default {
 #dark-mode {
   display: flex;
 }
+
 .nav_logo {
   color: #2388f5;
   font-size: x-large;
@@ -130,7 +141,7 @@ html {
   font-weight: lighter;
 }
 
-.login-info > span:first-child {
+.login-info>span:first-child {
   font-weight: bolder;
 }
 
@@ -144,6 +155,7 @@ html {
   --normal-font-size: 1rem;
   --z-fixed: 100;
 }
+
 *,
 ::before,
 ::after {
@@ -226,6 +238,10 @@ a {
   width: 2px;
   height: 32px;
   background-color: var(--white-color);
+}
+
+#logout-btn:hover {
+  cursor: pointer;
 }
 
 .height-100 {
