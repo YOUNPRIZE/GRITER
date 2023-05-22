@@ -50,7 +50,9 @@ public class UserRestController {
 	public ResponseEntity<Map<String, Object>> login(User user) throws UnsupportedEncodingException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
+		System.out.println("JWT: " + user);
 		User loginUser = us.signIn(user.getNickname(), user.getPassword());
+		System.out.println("JWT");
 		try {
 			if (loginUser != null) {
 				result.put("access-token", jwtUtil.createToken(loginUser));
