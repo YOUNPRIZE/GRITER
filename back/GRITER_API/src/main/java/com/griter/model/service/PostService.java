@@ -10,6 +10,9 @@ public interface PostService {
 	
 	// 모든 게시글
 	List<Post> selectAll();
+
+	// 특정 게시글(게시글 id로 조회)
+	List<Post> selectByPostId(int post_id);
 	
 	// 카테고리별 게시글
 	List<Post> selectCategory(String category);

@@ -14,19 +14,19 @@
           <span class="detail-key">Content</span>
         </div>
         <div class="postdetail-main-value">
-          <span>{{ title }}제목</span>
+          <span>{{ post.title }}</span>
           <div class="postdetail-main-value-writer">
             <img src="" alt="" />
-            <span>{{ writer }}글쓴이</span>
+            <!-- <span>{{ post.writer }}</span> -->
           </div>
-          <span>{{ category }}카테고리</span>
+          <span>{{ post.category }}</span>
         </div>
         <div class="postdetail-main-generateddate">
-          <span>{{ generated_date }}생성일자</span>
+          <span>{{ post.generated_date }}</span>
         </div>
       </div>
       <div class="postdetail-content">
-        <span>내용 들어갈 자리</span>
+        <span>{{ post.content }}</span>
         <!-- <textarea>{{ content }}</textarea> -->
       </div>
       <div class="line" style="margin-top: 1rem;"></div>
@@ -45,19 +45,22 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["post"]),
+    ...mapState('postModule', ["post"]),
   },
   created() {
     console.log(this.$route.params);
-    this.$store.dispatch("getPost", this.$route.params.postId);
+    const post_id = this.$route.params.post_id;
+    console.log(post_id);
+    this.getPost(post_id);
   },
   methods: {
     moveList() {
       this.$router.go(-1);
     },
+    ...mapActions('postModule', ['getPost']),
   },
 };
 </script>

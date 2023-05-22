@@ -20,6 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON p.user_id = u.user_id
 	</select>
 	
+	<select id="selectByPostId" parameterType="int" resultType="map">
+		SELECT * FROM posts as p
+		JOIN comments as c
+		ON p.post_id = p.post_id
+		WHERE p.post_id = #{post_id}
+	</select>	
+	
 	<select id="selectCategory" parameterType="String" resultType="Post">
 		SELECT * FROM posts
 		WHERE category = #{category}

@@ -50,6 +50,17 @@ public class PostRestController {
 		}
 	}
 	
+	@GetMapping("/{post_id}")
+	@ApiOperation(value = "게시물id로 게시물 조회", response = Post.class)
+	public ResponseEntity<?> selectByPostId(@PathVariable int post_id){
+		try {
+			List<Post> post = ps.selectByPostId(post_id);
+			return new ResponseEntity<List<Post>>(post, HttpStatus.OK);
+		} catch(Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	@GetMapping("/category/{category}")
 	@ApiOperation(value = "카테고리별 게시물 조회", response = Post.class)
 	public ResponseEntity<?> selectCategory(@PathVariable String category) {

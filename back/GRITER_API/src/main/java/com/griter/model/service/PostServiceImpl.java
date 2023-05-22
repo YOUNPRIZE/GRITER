@@ -25,6 +25,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<Post> selectByPostId(int post_id) {
+		return postDao.selectByPostId(post_id);
+	}
+	
+	@Override
 	public List<Post> selectCategory(String category) {
 		return postDao.selectCategory(category);
 	}
@@ -43,6 +48,5 @@ public class PostServiceImpl implements PostService {
 	public int delete(int post_id) {
 		return postDao.delete(post_id);
 	}
-	
 
 }
