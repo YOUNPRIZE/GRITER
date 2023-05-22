@@ -50,7 +50,7 @@ export default {
   computed: {
     ...mapState("postModule", ["post"]),
     ...mapState("commentModule", ["comments"]),
-    ...mapState("userModule", ["user"]),
+    ...mapState("userModule", ["loginUser"]),
   },
   methods: {
     moveList() {
@@ -58,7 +58,7 @@ export default {
     },
     ...mapActions("postModule", ["getPost"]),
     ...mapActions("commentModule", ["getComments"]),
-    ...mapActions("userModule", ["getUsers"]),
+    ...mapActions("userModule", ["getLoginUser"]),
   },
   created() {
     console.log(this.$route.params);
