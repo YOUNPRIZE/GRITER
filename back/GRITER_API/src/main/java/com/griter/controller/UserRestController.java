@@ -56,6 +56,7 @@ public class UserRestController {
 		try {
 			if (loginUser != null) {
 				result.put("access-token", jwtUtil.createToken(loginUser));
+				result.put("loginUser", loginUser.getUser_id());
 				result.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} else {
@@ -69,11 +70,11 @@ public class UserRestController {
 		return new ResponseEntity<Map<String,Object>>(result, status);
 	}
 	
-	@GetMapping("/{nickname}")
-	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 반환한다.", response = User.class)
-	public ResponseEntity<?> select(@PathVariable String nickname) {
+	@GetMapping("/{user_id}")
+	@ApiOperation(value = "{user_id}에 해당하는 사용자 정보를 반환한다.", response = User.class)
+	public ResponseEntity<?> select(@PathVariable int user_id) {
 		try {
-			User user = us.selectByNickname(nickname);
+			User user = us.selectById(user_id);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

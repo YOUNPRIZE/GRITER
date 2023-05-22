@@ -23,14 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON p.user_id = u.user_id
 	</select>
 
-	<select id="selectByPostId" parameterType="int" resultType="map">
-		SELECT p.content pContent, c.content cContent, p.title, p.post_id,
-		p.user_id pUser, c.user_id cUser, p.generated_date pGen,
-		p.modified_date pMod, c.generated_date cGen, c.modified_date cMod,
-		p.view_cnt, p.like_cnt, p.category, c.parent_id FROM posts as p
-		JOIN comments as c
-		ON p.post_id = c.post_id
-		WHERE p.post_id = #{post_id};
+	<select id="selectByPostId" parameterType="int" resultType="Post">
+		SELECT * FROM posts
+		WHERE post_id = #{post_id}
 	</select>
 
 	<select id="selectCategory" parameterType="String"

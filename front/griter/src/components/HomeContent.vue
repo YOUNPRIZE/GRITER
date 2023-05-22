@@ -197,11 +197,11 @@
                   src
                   alt
                   style="
-                                        width: 30px;
-                                        height: 30px;
-                                        border-radius: 100%;
-                                        border: solid 1px red;
-                                      "
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
                 />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
@@ -218,7 +218,6 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          {{ loginUser.nickname }}
           <router-link :to="`users/${loginUser.nickname}`">
             <box-icon type="solid" name="plus-square"></box-icon>
           </router-link>
@@ -250,7 +249,16 @@
           </a>
         </div>
         <div class="calendar-content">
-          <v-calendar is-expanded />
+          <b-calendar
+            block
+            :hide-header="hideHeader"
+            @context="onContext"
+            locale="en-US"
+            selected-variant="success"
+            today-variant="info"
+            nav-button-variant="secondary"
+          ></b-calendar>
+          <v-calendar />
         </div>
       </div>
     </div>
@@ -274,12 +282,12 @@ export default {
     // console.log(user);
   },
   methods: {
-    ...mapActions("userModule", ["getUser"]),
-    moveToUserDetail() {
-      alert(this.loginUser.nickname);
-      // const nickname = this.loginUser.nickname;
-      this.$router.push({ name: "userInfo", params: "catbirdseat" });
-    },
+    ...mapActions("userModule", ["getLoginUser"]),
+    // moveToUserDetail() {
+    //   alert(this.loginUser.nickname);
+    //   // const nickname = this.loginUser.nickname;
+    //   this.$router.push({ name: "userInfo", params: "catbirdseat" });
+    // },
     onContext(ctx) {
       this.context = ctx;
       ctx.activeYMD = "2023-05-19";
@@ -290,9 +298,9 @@ export default {
     }
   },
   created() {
-    const nickname = localStorage.getItem("loginUser");
+    const user_id = localStorage.getItem("loginUser");
     // dispatch 역할
-    this.getUser(nickname);
+    this.getLoginUser(user_id);
     // 로그인하고 1회만 새로고침
     console.log(self.name);
     if (self.name != "reload") {

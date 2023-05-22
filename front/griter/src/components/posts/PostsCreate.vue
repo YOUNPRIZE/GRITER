@@ -57,31 +57,10 @@ export default {
   },
   methods: {
     createPost() {
-      // 로컬 스토리지 말고 서버에 저장해야됨
-      const postsList = localStorage.getItem("postsList");
-      let newPosts = {
-        posts: [],
-      };
-      if (postsList) {
-        newPosts = JSON.parse(postsList);
+      const post = {
+        post_id = this.post_id;
+        
       }
-
-      newPosts.posts.push({
-        post_id: 0,
-        user_id: this.user_id,
-        title: this.title,
-        content: this.content,
-        generated_date: this.generated_date,
-        modified_date: this.modified_date,
-        view_cnt: this.view_cnt,
-        like_cnt: this.like_cnt,
-        category: this.category,
-        img: this.img,
-      });
-
-      localStorage.setItem("postsList", JSON.stringify(newPosts));
-      alert("등록 완료");
-      this.$router.push("/posts");
     },
     moveList() {
       this.$router.push("/posts");
