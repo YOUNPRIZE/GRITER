@@ -250,7 +250,8 @@
           </a>
         </div>
         <div class="calendar-content">
-          <v-calendar is-expanded />
+          <!-- <v-calendar is-dark is-expanded :attributes="attributes"/> -->
+          <v-calendar is-expanded :attributes="attributes"/>
         </div>
       </div>
     </div>
@@ -263,8 +264,18 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      hideHeader: true,
-      context: null
+      attributes: [
+        {
+          dot: true,
+          dates: [
+            new Date(2023, 4, 1),
+            new Date(2023, 4, 5),
+            new Date(2023, 4, 10),
+            new Date(2023, 4, 15),
+            new Date(2023, 4, 17),
+          ],
+        },
+      ],
     };
   },
   computed: {
@@ -280,14 +291,6 @@ export default {
       // const nickname = this.loginUser.nickname;
       this.$router.push({ name: "userInfo", params: "catbirdseat" });
     },
-    onContext(ctx) {
-      this.context = ctx;
-      ctx.activeYMD = "2023-05-19";
-      ctx.activeFormatted = "Friday, May 19, 2023";
-      console.log(ctx.activeYMD);
-      console.log(ctx.activeFormatted);
-      console.log(ctx);
-    }
   },
   created() {
     const nickname = localStorage.getItem("loginUser");
