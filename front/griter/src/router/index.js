@@ -11,7 +11,9 @@ import UsersLogin from '@/components/users/UsersLogin.vue'
 import UsersRegister from '@/components/users/UsersRegister.vue'
 import UsersInfo from '@/components/users/UsersInfo.vue'
 import UsersFollows from '@/components/users/UsersFollows.vue'
-import CalDetail from '@/components/cals/CalDetail.vue'
+import CalView from '../views/CalView.vue'
+import CalList from '@/components/cals/CalList.vue'
+// import CalDetail from '@/components/cals/CalDetail.vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
@@ -29,8 +31,25 @@ const routes = [
   },
   {
     path: '/cal',
-    name: 'calendar',
-    component: CalDetail,
+    component: CalView,
+    children: [
+      {
+        path: "",
+        name: 'calendar',
+        component: CalList,
+      },
+      // 루틴이냐? 식단이냐?
+      {
+        path: "/routine",
+        name: 'routine',
+        // component: RoutineDetail,
+      },
+      {
+        path: "/diet",
+        name: 'diet',
+        // component: DietDetail,
+      },
+    ]
   },
   {
     path: '/posts',
