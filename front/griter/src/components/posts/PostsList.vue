@@ -19,19 +19,22 @@
         </div>
         <div class="dashboard-content">
           <div v-for="(post, index) in posts" :key="index" class="group-item">
-            <router-link :to="{ name: 'PostsDetail', params: post.post_id }">
+            <router-link :to="`${post.post_id}`">
               <div class="dashboard-content-post">
                 <div class="dashboard-content-post-left">
                   <div class="dashboard-content-post-title">
                     <span>{{ post.title }}</span>
                   </div>
+                  <div class="dashboard-content-post-content">
+                    {{ post.content }}
+                  </div>
                   <div class="dashboard-content-post-writerInfo">
                     <img src="" alt="" style="
-                          width: 30px;
-                          height: 30px;
-                          border-radius: 100%;
-                          border: solid 1px red;
-                        " />
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
@@ -107,7 +110,8 @@ export default {
 * {
   /* border:solid 1px; */
 }
-.group-item{
+
+.group-item {
   display: flex;
   flex-direction: column;
   /* border: solid 1px; */
@@ -162,7 +166,7 @@ export default {
   /* border: solid 1px; */
   display: flex;
   flex-direction: column;
-  min-width: 30rem;
+  min-width: 50rem;
   border-radius: 0.1rem;
   width: stretch;
   height: stretch;
@@ -191,6 +195,7 @@ export default {
 }
 
 .dashboard-content-post {
+  /* border: solid 1px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -199,24 +204,39 @@ export default {
   padding: 1rem;
   box-shadow: 0 0 5px rgb(185, 185, 185);
   border-radius: 2px;
-  height: 8rem;
+  height: 10rem;
 }
 
 .dashboard-content-post-title {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   align-items: flex-start;
+  font-weight: bold;
 }
 
 .dashboard-content-post-left {
-  /* border: solid; */
+  /* border: solid 1px red; */
   display: flex;
+  width: 85%;
+  align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
 }
 
+.dashboard-content-post-content {
+  /* border: solid 1px pink; */
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-align: left;
+}
+
 .dashboard-content-post-writerInfo {
   display: flex;
+  margin-top: 1rem;
 }
 
 .dashboard-content-post-writer {
