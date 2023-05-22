@@ -5,13 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "ImageDto : 이미지 경로 정보", description = "이미지 경로의 정보를 나타낸다.")
 public class Image {
-	@ApiModelProperty(value = "이미지 고유번호")
+	@ApiModelProperty(value = "이미지 고유번호", example="0")
 	private int image_id;
 	
 	@ApiModelProperty(value = "이미지 경로")
 	private String img_path;
 	
-	@ApiModelProperty(value = "게시글 ID")
+	@ApiModelProperty(value = "게시글 ID", example="0")
 	private int post_id;
 	
 	public Image() {}

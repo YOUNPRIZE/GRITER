@@ -62,13 +62,12 @@ export default {
     createPost() {
       const user_id = localStorage("loginUser");
       console.log(user_id);
-      const post = {
+      this.createPost({
         user_id: user_id,
         title: this.title,
         content: this.content,
         category: this.category,
-      }
-      this.createPost(post);
+      });
     },
     moveList() {
       this.$router.push("/posts");
