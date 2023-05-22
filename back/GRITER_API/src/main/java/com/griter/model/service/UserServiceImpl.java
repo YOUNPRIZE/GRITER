@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User signIn(String nickname, String password) throws UnsupportedEncodingException {
 		User user = userDao.selectByNickname(nickname);
-		System.out.println(user);
+		System.out.println("userasdf: " + user);
 		if (user.getPassword().equals(password)) {
 			String authToken = jwtUtil.createToken(user);
 			user.setAuthToken(authToken);
