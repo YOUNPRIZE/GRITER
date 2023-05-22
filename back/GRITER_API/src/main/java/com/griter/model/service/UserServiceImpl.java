@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JwtUtil jwtUtil;
-	
+
 	@Autowired
 	private UserDao userDao;
 
@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectByNickname(String nickname) {
-		return userDao.selectByNickname(nickname);
+	public User selectById(int user_id) {
+		return userDao.selectById(user_id);
 	}
 
 	@Override
@@ -46,9 +46,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User signIn(String nickname, String password) throws UnsupportedEncodingException {
-		User user = userDao.selectByNickname(nickname);
+		User user = null;
+		List<User> all = userDao.selectAll();
+		for (User u : all) {
+			if (u.getNickname().equals(nickname) && u.getPassword().equals(password)) {
+				user = u;
+				break;
+			}
+		}
 		System.out.println("userasdf: " + user);
-		if (user.getPassword().equals(password)) {
+		if (user != null) {
 			String authToken = jwtUtil.createToken(user);
 			user.setAuthToken(authToken);
 			return user;
@@ -56,5 +63,5 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException("아이디 또는 비밀번호가 올바르지 않습니다.");
 		}
 	}
-	
+
 }

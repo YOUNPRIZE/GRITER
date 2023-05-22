@@ -17,7 +17,7 @@
           <span>{{ post.title }}</span>
           <div class="postdetail-main-value-writer">
             <img src="" alt="" />
-            <!-- <span>{{ post.writer }}</span> -->
+            <span>{{ post.writer }}</span>
           </div>
           <span>{{ post.category }}</span>
         </div>
@@ -29,7 +29,7 @@
         <span>{{ post.content }}</span>
         <!-- <textarea>{{ content }}</textarea> -->
       </div>
-      <div class="line" style="margin-top: 1rem;"></div>
+      <div class="line" style="margin-top: 1rem"></div>
       <div class="postdetail-comments">
         <span class="detail-key">Comments</span>
         <div class="postdetail-comments-content"></div>
@@ -48,19 +48,25 @@
 import { mapActions, mapState } from "vuex";
 export default {
   computed: {
-    ...mapState('postModule', ["post"]),
+    ...mapState("postModule", ["post"]),
+    ...mapState("commentModule", ["comments"]),
+    ...mapState("userModule", ["user"]),
+  },
+  methods: {
+    moveList() {
+      this.$router.go(-1);
+    },
+    ...mapActions("postModule", ["getPost"]),
+    ...mapActions("commentModule", ["getComments"]),
+    ...mapActions("userModule", ["getUsers"]),
   },
   created() {
     console.log(this.$route.params);
     const post_id = this.$route.params.post_id;
     console.log(post_id);
     this.getPost(post_id);
-  },
-  methods: {
-    moveList() {
-      this.$router.go(-1);
-    },
-    ...mapActions('postModule', ['getPost']),
+    this.getComments(post_id);
+    this.getUser(this.post.user_id);
   },
 };
 </script>
@@ -69,7 +75,7 @@ export default {
 * {
   /* border: solid; */
 }
-.line{
+.line {
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -116,7 +122,7 @@ export default {
   align-items: flex-start;
   color: var(--font-color-3);
 }
-.postdetail-main-aside>span{
+.postdetail-main-aside > span {
   margin-bottom: 1rem;
 }
 .postdetail-main-value {
@@ -126,20 +132,20 @@ export default {
   width: 80%;
   align-items: flex-start;
 }
-.postdetail-main-value>span{
+.postdetail-main-value > span {
   margin-bottom: 1rem;
 }
-.postdetail-main-value-writer{
+.postdetail-main-value-writer {
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
 }
-.postdetail-main-generateddate{
+.postdetail-main-generateddate {
   display: flex;
   flex-direction: row-reverse;
   /* border: solid 1px yellow; */
   width: 10%;
-  color: grey
+  color: grey;
 }
 .postdetail-content {
   border: solid 1px grey;
@@ -154,7 +160,7 @@ export default {
   align-items: flex-start;
 }
 
-.postdetail-comments-content{
+.postdetail-comments-content {
   border: solid 1px grey;
   display: flex;
   flex-direction: column;

@@ -12,7 +12,7 @@ public interface UserDao {
 	List<User> selectAll();
 	
 	// 아이디로 검색
-	User selectByNickname(String nickname);
+	User selectById(int user_id);
 	
 	// 사용자 수정
 	int update(User user);

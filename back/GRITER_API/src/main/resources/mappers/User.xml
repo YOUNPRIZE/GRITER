@@ -13,9 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM users
 	</select>
 	
-	<select id="selectByNickname" parameterType="String" resultType="User">
+	<select id="selectById" parameterType="int" resultType="User">
 		SELECT * FROM users
-		WHERE nickname = #{nickname}
+		WHERE user_id = #{user_id}
 	</select>
 	
 	<update id="update" parameterType="User">

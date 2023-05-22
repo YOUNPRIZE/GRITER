@@ -25,7 +25,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> selectByPostId(int post_id) {
+	public Post selectByPostId(int post_id) {
 		return postDao.selectByPostId(post_id);
 	}
 	

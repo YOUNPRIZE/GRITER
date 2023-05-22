@@ -107,10 +107,6 @@ export default {
 </style>
 
 <style scoped>
-* {
-  /* border:solid 1px; */
-}
-
 .group-item {
   display: flex;
   flex-direction: column;
