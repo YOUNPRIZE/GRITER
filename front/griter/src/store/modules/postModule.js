@@ -44,6 +44,7 @@ const postModule = {
         method: "GET",
       })
         .then((res) => {
+          // alert(post_id);
           console.log(JSON.stringify(res.data));
           commit('setPost', res.data);
         })
@@ -59,12 +60,12 @@ const postModule = {
           commit('setPosts', res.data);
         })
     },
-    createPost(post) {
+    createPost(payload) {
       const API_URL = `${REST_API}/posts/`;
       axios({
         url: API_URL,
         method: "POST",
-        params: post
+        params: payload
       })
         .then((res) => {
           console.log(res);

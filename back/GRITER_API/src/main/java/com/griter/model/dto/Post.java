@@ -7,10 +7,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "PostDto : 게시글 정보", description = "게시글의 정보를 나타낸다.")
 public class Post {
-	@ApiModelProperty(value = "게시글 고유번호")
+	@ApiModelProperty(value = "게시글 고유번호", example="0")
 	private int post_id;
 	
-	@ApiModelProperty(value = "게시자 아이디")
+	@ApiModelProperty(value = "게시자 아이디", example="0")
 	private int user_id;
 	
 	@ApiModelProperty(value = "제목")
@@ -25,10 +25,10 @@ public class Post {
 	@ApiModelProperty(value = "수정일")
 	private Date modified_date;
 	
-	@ApiModelProperty(value = "조회수")
+	@ApiModelProperty(value = "조회수", example="0")
 	private int view_cnt;
 	
-	@ApiModelProperty(value = "좋아요수")
+	@ApiModelProperty(value = "좋아요수", example="0")
 	private int like_cnt;
 	
 	@ApiModelProperty(value = "분류")

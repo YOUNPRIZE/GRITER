@@ -9,10 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "RoutineDto : 운동 루틴 정보", description = "운동 루틴 정보를 나타낸다.")
 public class Routine {
-	@ApiModelProperty(value = "운동 루틴 고유번호")
+	@ApiModelProperty(value = "운동 루틴 고유번호", example="0")
 	private int routine_id;
 	
-	@ApiModelProperty(value = "사용자 ID")
+	@ApiModelProperty(value = "사용자 ID", example="0")
 	private int user_id;
 	
 	@ApiModelProperty(value = "운동의 종류")
@@ -25,16 +25,16 @@ public class Routine {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	
-	@ApiModelProperty(value = "운동 시간")
+	@ApiModelProperty(value = "운동 시간", example="0")
 	private int time;
 	
-	@ApiModelProperty(value = "세트 수")
+	@ApiModelProperty(value = "세트 수", example="0")
 	private int sets;
 	
-	@ApiModelProperty(value = "횟수")
+	@ApiModelProperty(value = "횟수", example="0")
 	private int reps;
 	
-	@ApiModelProperty(value = "운동 중량")
+	@ApiModelProperty(value = "운동 중량", example="0")
 	private int weight;
 	
 	public Routine() {}

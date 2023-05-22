@@ -361,12 +361,10 @@ main {
   padding-bottom: 2rem;
 }
 
-.dashboard-content::-webkit-scrollbar,
 .dashboard-content::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-.dashboard-content::-webkit-scrollbar-thumb,
 .dashboard-content::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
   border-radius: 10px;

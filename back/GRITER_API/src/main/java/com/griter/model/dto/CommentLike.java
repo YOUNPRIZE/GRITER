@@ -5,13 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "CommentLikeDto : 댓글 좋아요 정보", description = "댓글 좋아요의 정보를 나타낸다.")
 public class CommentLike {
-	@ApiModelProperty(value = "댓글 좋아요 고유번호")
+	@ApiModelProperty(value = "댓글 좋아요 고유번호", example="0")
 	private int comment_like_id;
 	
-	@ApiModelProperty(value = "사용자 ID")
+	@ApiModelProperty(value = "사용자 ID", example="0")
 	private int user_id;
 	
-	@ApiModelProperty(value = "댓글 ID")
+	@ApiModelProperty(value = "댓글 ID", example="0")
 	private int comment_id;
 	
 	public CommentLike() {}
