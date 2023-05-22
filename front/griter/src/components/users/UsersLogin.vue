@@ -6,13 +6,25 @@
         <div class="login-form-input">
           <div class="label">ID</div>
           <!-- <input type="text" class="id" required/> -->
-          <input type="text" class="form-control" id="nickname" v-model="user.nickname" required />
+          <input
+            type="text"
+            class="form-control"
+            id="nickname"
+            v-model="user.nickname"
+            required
+          />
           <div class="label">Password</div>
           <!-- <input type="password" class="password" required/> -->
-          <input type="password" class="form-control" id="password" v-model="user.password" required />
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            v-model="user.password"
+            required
+          />
         </div>
         <div class="buttons">
-          <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
+          <div @click="login" class="btn btn-primary" id="login-btn">Login</div>
           <router-link :to="{ name: 'register' }">
             <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
@@ -23,9 +35,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+// import router from "@/router";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "UsersLogin",
+  // name: "UsersLogin",
   data() {
     return {
       user: {
@@ -41,13 +54,11 @@ export default {
     } else self.name = "";
   },
   computed: {
+    ...mapState("userModule", ["loginUser"]),
   },
   methods: {
     ...mapActions("userModule", {
-      doLogin: 'userLogin',
-    }),
-    ...mapGetters("userModule", {
-      getLoginUser: 'getLoginUser'
+      doLogin: "userLogin",
     }),
     login() {
       console.log(this.user);
@@ -119,7 +130,8 @@ input {
   align-items: center;
 }
 
-button {
+button,
+#login-btn {
   width: 10rem;
   height: 2.5rem;
   margin-bottom: 2rem;
