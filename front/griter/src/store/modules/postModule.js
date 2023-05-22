@@ -69,7 +69,7 @@ const postModule = {
         .then((res) => {
           console.log(res);
           alert("게시물이 등록되었습니다.");
-          router.push({ name: 'PostList' });
+          router.push({ name: 'PostsList' }).catch(() => { });
         })
     },
   },
