@@ -13,7 +13,7 @@
         <div class="userinfo-content-info">
           <div class="userinfo-content-info-item">
             <span>Name</span>
-            <span>{{ this.loginUser.name }}</span>
+            <span>{{ loginUser.name }}</span>
           </div>
           <div class="userinfo-content-info-item">
             <span>ID</span>
@@ -25,7 +25,8 @@
           </div>
           <div class="userinfo-content-info-item">
             <span>Gender</span>
-            <span>{{ loginUser.gender }}</span>
+            <span v-if="loginUser.gender == 'M'">Male</span>
+            <span v-else>Female</span>
           </div>
         </div>
       </div>
@@ -45,7 +46,7 @@
       <div class="line"></div>
       <div class="myPost-content">
         <!-- link 좌표 바꿔야 됨 상세보기로, params도 받아와야 함-->
-        <router-link :to="{ name: 'PostsDetail', params: { post_id } }">
+        <router-link :to="`users/${post.post_id}`">
           <div class="myPost-content-post">
             <div class="myPost-content-post-left">
               <div class="myPost-content-post-title">
@@ -53,11 +54,11 @@
               </div>
               <div class="myPost-content-post-writerInfo">
                 <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                " />
                 <span class="myPost-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -177,7 +178,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "UserInfo",
@@ -185,13 +186,13 @@ export default {
     ...mapState('userModule', ["loginUser"]),
   },
   created() {
+    const nickname = localStorage.getItem("loginUser");
+    this.getUser(nickname);
     console.log("userinfo : " + this.loginUser);
   },
-  data() {
-    return {
-      postId: "asdf",
-    };
-  },
+  methods:{
+    ...mapActions('userModule', ["getUser"]),
+  }
 };
 </script>
 

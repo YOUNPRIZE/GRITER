@@ -22,7 +22,7 @@
           <span>{{ post.category }}</span>
         </div>
         <div class="postdetail-main-generateddate">
-          <span>{{ post.generated_date }}</span>
+          <span>{{ post.pGen }}</span>
         </div>
       </div>
       <div class="postdetail-content">
