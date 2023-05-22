@@ -110,9 +110,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* border: solid; */
-}
 .line {
   margin: 0.5rem 0 1rem 0;
 }
@@ -209,6 +206,7 @@ export default {
   padding: 0.5rem;
   height: auto;
   /* border: solid 1px red; */
+  color: var(--font-color-2);
 }
 .postdetail-comments {
   display: flex;
@@ -237,18 +235,17 @@ export default {
   padding: 0.5rem;
 }
 
-.comment > div {
-  /* border: solid 1px red; */
-}
 #comment-writer {
   width: 15%;
 }
 #comment-content {
   width: 60%;
   display: flex;
+  color: var(--font-color-2);
 }
 #comment-date {
   width: 25%;
+  color: var(--font-color-2);
 }
 
 .postdetail::-webkit-scrollbar,
@@ -268,4 +265,21 @@ export default {
   width: 90%;
   margin-top: 1rem;
 }
+
+.form-control{
+  background-color: var(--box-bg-color);
+  color: var(--font-color-2);
+}
+.form-control::placeholder{
+  color: var(--font-color-2);
+}
+
+#button-addon2{
+  border: solid 1px var(--font-color-3);
+  color: var(--font-color-3);
+}
+#button-addon2:hover{
+  background-color: var(--first-color);
+}
 </style>
+
