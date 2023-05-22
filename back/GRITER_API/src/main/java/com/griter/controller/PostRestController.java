@@ -54,8 +54,8 @@ public class PostRestController {
 	@ApiOperation(value = "게시물id로 게시물 조회", response = Post.class)
 	public ResponseEntity<?> selectByPostId(@PathVariable int post_id){
 		try {
-			Post post = ps.selectByPostId(post_id);
-			return new ResponseEntity<Post>(post, HttpStatus.OK);
+			List<Post> post = ps.selectByPostId(post_id);
+			return new ResponseEntity<List<Post>>(post, HttpStatus.OK);
 		} catch(Exception e) {
 			return exceptionHandling(e);
 		}

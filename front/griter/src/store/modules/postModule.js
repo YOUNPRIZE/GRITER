@@ -71,6 +71,9 @@ const postModule = {
           alert("게시물이 등록되었습니다.");
           router.push({ name: 'PostsList' }).catch(() => { });
         })
+        .catch((err) => {
+          console.log(err);
+        })
     },
   },
 };

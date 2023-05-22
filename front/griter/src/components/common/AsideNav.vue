@@ -12,7 +12,8 @@
           <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
-            <router-link :to="`users/${loginUser.user_id}`">
+            <!-- <router-link :to="`users/${loginUser.user_id}`"> -->
+            <router-link :to="{name: 'userInfo', params: {user_id: loginUser.user_id}}">
               <div class="nav_link">
                 <img src="" class="profile-img" alt="" />
                 <div class="login-info">

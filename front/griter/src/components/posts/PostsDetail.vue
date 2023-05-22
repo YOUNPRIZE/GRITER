@@ -17,7 +17,7 @@
           <span>{{ post.title }}</span>
           <div class="postdetail-main-value-writer">
             <img src="" alt="" />
-            <span>{{ post.writer }}</span>
+            <span>{{ post.nickname }}</span>
           </div>
           <span>{{ post.category }}</span>
         </div>
@@ -59,14 +59,15 @@ export default {
     ...mapActions("postModule", ["getPost"]),
     ...mapActions("commentModule", ["getComments"]),
     ...mapActions("userModule", ["getLoginUser"]),
+    // ...mapActions('userModule', ["getUser"]),
   },
   created() {
     console.log(this.$route.params);
     const post_id = this.$route.params.post_id;
     console.log(post_id);
     this.getPost(post_id);
-    this.getComments(post_id);
-    this.getUser(this.post.user_id);
+    // this.getComments(post_id);
+    // this.getLoginUser(this.post.user_id);
   },
 };
 </script>
