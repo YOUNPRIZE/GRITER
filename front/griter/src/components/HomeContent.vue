@@ -18,12 +18,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -39,12 +43,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -60,12 +68,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -81,12 +93,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                                         width: 30px;
                                         height: 30px;
                                         border-radius: 100%;
                                         border: solid 1px red;
-                                      " />
+                                      "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -102,12 +118,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -123,12 +143,16 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -136,19 +160,24 @@
               <span class="dashboard-content-post-created">December, 23, 2022</span>
             </div>
           </div>
-        </router-link><router-link to="/">
+        </router-link>
+        <router-link to="/">
           <div class="dashboard-content-post">
             <div class="dashboard-content-post-left">
               <div class="dashboard-content-post-title">
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                   width: 30px;
                   height: 30px;
                   border-radius: 100%;
                   border: solid 1px red;
-                " />
+                "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -156,19 +185,24 @@
               <span class="dashboard-content-post-created">December, 23, 2022</span>
             </div>
           </div>
-        </router-link><router-link to="/">
+        </router-link>
+        <router-link to="/">
           <div class="dashboard-content-post">
             <div class="dashboard-content-post-left">
               <div class="dashboard-content-post-title">
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img src="" alt="" style="
+                <img
+                  src
+                  alt
+                  style="
                                         width: 30px;
                                         height: 30px;
                                         border-radius: 100%;
                                         border: solid 1px red;
-                                      " />
+                                      "
+                />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -191,7 +225,7 @@
         </div>
         <div class="line"></div>
         <div class="userInfo-content">
-          <img src="" id="profile-image" alt="" />
+          <img src id="profile-image" alt />
           <div class="userInfo-info">
             <!-- 아이디 -->
             <h5>{{ loginUser.nickname }}</h5>
@@ -215,7 +249,18 @@
             <box-icon type="solid" name="plus-square"></box-icon>
           </a>
         </div>
-        <div class="calendar-content"></div>
+        <div class="calendar-content">
+          <!-- <b-calendar
+            block
+            :hide-header="hideHeader"
+            @context="onContext"
+            locale="en-US"
+            selected-variant="success"
+            today-variant="info"
+            nav-button-variant="secondary"
+          ></b-calendar>-->
+          <v-calendar />
+        </div>
       </div>
     </div>
   </main>
@@ -225,22 +270,36 @@
 // import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      hideHeader: true,
+      context: null
+    };
+  },
   computed: {
-    ...mapState("userModule", ['loginUser']),
+    ...mapState("userModule", ["loginUser"])
   },
   mounted() {
     // console.log(user);
   },
   methods: {
-    ...mapActions("userModule", ['getUser']),
+    ...mapActions("userModule", ["getUser"]),
     moveToUserDetail() {
       alert(this.loginUser.nickname);
       // const nickname = this.loginUser.nickname;
-      this.$router.push({ name: 'userInfo', params: 'catbirdseat' });
+      this.$router.push({ name: "userInfo", params: "catbirdseat" });
     },
+    onContext(ctx) {
+      this.context = ctx;
+      ctx.activeYMD = "2023-05-19";
+      ctx.activeFormatted = "Friday, May 19, 2023";
+      console.log(ctx.activeYMD);
+      console.log(ctx.activeFormatted);
+      console.log(ctx);
+    }
   },
   created() {
-    const nickname = localStorage.getItem('loginUser');
+    const nickname = localStorage.getItem("loginUser");
     // dispatch 역할
     this.getUser(nickname);
     // 로그인하고 1회만 새로고침
@@ -250,7 +309,7 @@ export default {
       self.location.reload(true);
     } else self.name = "";
     // console.log(this.loginUser);
-  },
+  }
 };
 </script>
 
@@ -324,6 +383,7 @@ main {
 
 .userInfo {
   margin-bottom: 2rem;
+  height: 21rem;
 }
 
 #dashboard-title,
