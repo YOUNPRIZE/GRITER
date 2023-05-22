@@ -53,7 +53,7 @@ public class UserRestController {
 		User loginUser = us.signIn(user.getNickname(), user.getPassword());
 		try {
 			if (loginUser != null) {
-				result.put("access-token", jwtUtil.createToken(user.getNickname()));
+				result.put("access-token", jwtUtil.createToken(loginUser));
 				result.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} else {
@@ -65,6 +65,17 @@ public class UserRestController {
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}		
 		return new ResponseEntity<Map<String,Object>>(result, status);
+	}
+	
+	@GetMapping("/{nickname}")
+	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 반환한다.", response = User.class)
+	public ResponseEntity<?> select(@PathVariable String nickname) {
+		try {
+			User user = us.selectByNickname(nickname);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
 	}
 	
 	@PostMapping("/")
@@ -101,16 +112,6 @@ public class UserRestController {
 		}
 	}
 
-	@GetMapping("/{nickname}")
-	@ApiOperation(value = "{nickname}에 해당하는 사용자 정보를 반환한다.", response = User.class)
-	public ResponseEntity<?> select(@PathVariable String nickname) {
-		try {
-			User user = us.selectByNickname(nickname);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-		} catch (Exception e) {
-			return exceptionHandling(e);
-		}
-	}
 
 	@PutMapping("/")
 	@ApiOperation(value = "사용자 정보를 수정한다.", response = User.class)
