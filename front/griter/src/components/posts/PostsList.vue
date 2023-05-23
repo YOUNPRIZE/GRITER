@@ -6,13 +6,7 @@
         <form action="" class="search-form">
           <div class="input-group mb-3">
             <span class="input-group-text"><box-icon name="search"></box-icon></span>
-            <input
-              class="form-control"
-              id="search"
-              type="text"
-              placeholder="Search"
-              @input="searchGroup($event)"
-            />
+            <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup($event)" />
           </div>
         </form>
       </div>
@@ -35,34 +29,30 @@
                     {{ post.content }}
                   </div>
                   <div class="dashboard-content-post-writerInfo">
-                    <img
-                      src=""
-                      alt=""
-                      style="
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 100%;
-                        border: solid 1px red;
-                      "
-                    />
+                    <img src="" alt="" style="
+                          width: 30px;
+                          height: 30px;
+                          border-radius: 100%;
+                          border: solid 1px red;
+                        " />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
                 <div class="dashboard-content-post-right">
-                  <span class="dashboard-content-post-created"
-                    >{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-                      post.generated_date[2]
-                    }}
-                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span
-                  >
-                  <div class="dashboard-content-post-btn">
-                    <!-- link to 는 기능 확인을 위해 임시로 걸어놓은 것 수정해야됨 -->
-                    <router-link :to="{ name: 'login' }" id="dashboard-btn">
+                  <span class="dashboard-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1]
+                  }}.{{
+  post.generated_date[2]
+}}
+                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
+                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
+                    <button :value=post.post_id @click="editPost($event)">
                       <i class="bx bx-pencil"></i>
-                    </router-link>
-                    <router-link :to="{ name: 'follows' }" id="dashboard-btn">
+                    </button>
+                    <button :value=post.post_id @click="showDeleteModal(post.post_id)">
                       <i class="bx bx-trash"></i>
-                    </router-link>
+                    </button>
+                  </div>
+                  <div v-else>
                   </div>
                 </div>
               </div>
@@ -71,27 +61,43 @@
         </div>
       </div>
     </div>
+    <!-- 모달 -->
+    <div v-if="isDeleteModalOpen" class="modal">
+      <div class="modal-content">
+        <h3>삭제 확인</h3>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div class="modal-content-buttons">
+          <button v-on:click="deletePost" class="btn btn-danger">예</button>
+          <button v-on:click="closeDeleteModal" class="btn btn-primary">취소</button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
+import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
   name: "PostsList",
-  components: {},
+  data() {
+    return {
+      isDeleteModalOpen: false,
+      deletePostId: "",
+    };
+  },
   computed: {
     ...mapState("postModule", ["posts"]),
+    ...mapState('userModule', ["loginUser"]),
   },
   methods: {
+    ...mapActions("postModule", ["getPosts", "delete"]),
+    ...mapActions('userModule', ["getLoginUser"]),
     movePage() {
       this.$router.push({ name: "PostCreate" });
     },
-    ...mapActions("postModule", ["getPosts"]),
     searchGroup(event) {
-      // console.log(event.target.value);
-
       const len = this.posts.length;
-
       for (let i = 0; i < len; i++) {
         if (
           this.posts[i].title.includes(event.target.value) === false &&
@@ -104,9 +110,31 @@ export default {
         }
       }
     },
+    // editPost(event) {
+    //   // const post_id = event.target.value;
+
+    // },
+    showDeleteModal(deletePostId) {
+      event.preventDefault()
+      console.log(deletePostId);
+      this.isDeleteModalOpen = true;
+      this.deletePostId = deletePostId;
+    },
+    closeDeleteModal() {
+      this.isDeleteModalOpen = false;
+      this.deletePostId = "";
+    },
+    deletePost() {
+      console.log(this.deletePostId);
+      this.delete(this.deletePostId);
+      this.closeDeleteModal();
+      router.go(0);
+    }
   },
   created() {
     this.getPosts();
+    const userId = localStorage.getItem("loginUser");
+    this.getLoginUser(userId);
   },
 };
 </script>
@@ -267,5 +295,40 @@ export default {
 
 .dashboard-content-post-created {
   color: grey;
+}
+
+.dashboard-content-post-btn>button {
+  border: none;
+  background-color: transparent;
+}
+
+/* 모달 스타일링 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 150vh; */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  /* border: solid 2px green; */
+  background-color: white;
+  padding: 20px;
+  border-radius: 0.3rem;
+  width: 30%;
+  min-width: 20rem;
+  margin-bottom: 30%;
+}
+
+.modal-content-buttons>button {
+  border: solid 1px;
+  border-radius: 0.5rem;
+  margin: 0 1rem 0 1rem ;
+  width: 5rem;
 }
 </style>
