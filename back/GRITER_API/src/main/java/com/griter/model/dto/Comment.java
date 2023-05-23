@@ -2,24 +2,27 @@ package com.griter.model.dto;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "CommentDto : 댓글 정보", description = "댓글의 정보를 나타낸다.")
+@Component
 public class Comment {
-	@ApiModelProperty(value = "댓글 고유번호")
+	@ApiModelProperty(value = "댓글 고유번호", example="0")
 	private int comment_id;
 	
 	@ApiModelProperty(value = "내용")
 	private String content;
 	
-	@ApiModelProperty(value = "상위 댓글번호")
+	@ApiModelProperty(value = "상위 댓글번호", example="0")
 	private int parent_id;
 	
-	@ApiModelProperty(value = "댓글 작성자")
+	@ApiModelProperty(value = "댓글 작성자", example="0")
 	private int user_id;
 	
-	@ApiModelProperty(value = "게시글 번호")
+	@ApiModelProperty(value = "게시글 번호", example="0")
 	private int post_id;
 	
 	@ApiModelProperty(value = "생성일")

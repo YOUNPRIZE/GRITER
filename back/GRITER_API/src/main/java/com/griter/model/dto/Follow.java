@@ -5,13 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "FollowDto : 팔로우 정보", description = "팔로우 정보를 나타낸다.")
 public class Follow {
-	@ApiModelProperty(value = "팔로우 고유번호")
+	@ApiModelProperty(value = "팔로우 고유번호", example="0")
 	private int follow_id;
 	
-	@ApiModelProperty(value = "user")
+	@ApiModelProperty(value = "user", example="0")
 	private int user_id;
 	
-	@ApiModelProperty(value = "following")
+	@ApiModelProperty(value = "following", example="0")
 	private int following_id;
 	
 	public Follow() {}

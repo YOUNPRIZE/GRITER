@@ -97,11 +97,11 @@
                   src
                   alt
                   style="
-                                        width: 30px;
-                                        height: 30px;
-                                        border-radius: 100%;
-                                        border: solid 1px red;
-                                      "
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
                 />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
@@ -285,13 +285,7 @@ export default {
     // console.log(user);
   },
   methods: {
-    ...mapActions("userModule", ["getUser"]),
-    ...mapActions("routineModule", ["getUserRoutines"]),
-    moveToUserDetail() {
-      alert(this.loginUser.nickname);
-      // const nickname = this.loginUser.nickname;
-      this.$router.push({ name: "userInfo", params: "catbirdseat" });
-    }
+    ...mapActions("userModule", ["getLoginUser"]),
   },
   created() {
     console.log("asdfasdfadsf");
@@ -368,12 +362,10 @@ main {
   padding-bottom: 2rem;
 }
 
-.dashboard-content::-webkit-scrollbar,
 .dashboard-content::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-.dashboard-content::-webkit-scrollbar-thumb,
 .dashboard-content::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
   border-radius: 10px;

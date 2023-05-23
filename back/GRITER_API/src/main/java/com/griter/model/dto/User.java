@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "UserDto : 사용자 정보", description = "사용자의 정보를 나타낸다.")
 public class User {
-	@ApiModelProperty(value = "아이디")
+	@ApiModelProperty(value = "아이디", example="0")
 	private int user_id;
 
 	@ApiModelProperty(value = "비밀번호")

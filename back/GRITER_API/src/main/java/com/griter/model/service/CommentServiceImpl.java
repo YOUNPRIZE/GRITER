@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.griter.model.dao.CommentDao;
 import com.griter.model.dto.Comment;
@@ -15,6 +16,7 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	@Override
+	@Transactional
 	public int create(Comment comment) {
 		return commentDao.create(comment);
 	}

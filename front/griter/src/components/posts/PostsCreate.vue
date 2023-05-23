@@ -62,13 +62,15 @@ export default {
     createPost() {
       const user_id = localStorage("loginUser");
       console.log(user_id);
-      const post = {
+      console.log(this.title)
+      console.log(this.content);
+      console.log(this.category);
+      this.createPost({
         user_id: user_id,
         title: this.title,
         content: this.content,
         category: this.category,
-      }
-      this.createPost(post);
+      });
     },
     moveList() {
       this.$router.push("/posts");
@@ -137,6 +139,9 @@ input {
   width: 100%;
   height: 90%;
   margin-top: 1rem;
+}
+.form-control:focus{
+  background-color: var(--first-color);
 }
 #title{
   margin-bottom: 0;

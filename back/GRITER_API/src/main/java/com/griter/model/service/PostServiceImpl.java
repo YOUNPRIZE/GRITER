@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.griter.model.dao.PostDao;
 import com.griter.model.dto.Post;
@@ -15,6 +16,7 @@ public class PostServiceImpl implements PostService {
 	private PostDao postDao;
 
 	@Override
+	@Transactional
 	public int create(Post post) {
 		return postDao.create(post);
 	}

@@ -9,10 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "DietDto : 식단 정보", description = "식단 정보를 나타낸다.")
 public class Diet {
-	@ApiModelProperty(value = "식단 고유번호")
+	@ApiModelProperty(value = "식단 고유번호", example="0")
 	private int diet_id;
 	
-	@ApiModelProperty(value = "사용자 ID")
+	@ApiModelProperty(value = "사용자 ID", example="0")
 	private int user_id;
 	
 	@ApiModelProperty(value = "날짜")
@@ -25,10 +25,10 @@ public class Diet {
 	@ApiModelProperty(value = "식사 종류")
 	private String kind;
 	
-	@ApiModelProperty(value = "섭취한 음식의 무게")
+	@ApiModelProperty(value = "섭취한 음식의 무게", example="0")
 	private int gram;
 	
-	@ApiModelProperty(value = "섭취한 음식의 칼로리")
+	@ApiModelProperty(value = "섭취한 음식의 칼로리", example="0")
 	private int calories;
 	
 	public Diet() {}

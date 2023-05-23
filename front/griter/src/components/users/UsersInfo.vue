@@ -9,11 +9,7 @@
       </div>
       <div class="line"></div>
       <div class="userinfo-content">
-        <img
-          src=""
-          alt=""
-          style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
-        />
+        <img src="" alt="" style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%" />
         <div class="userinfo-content-info">
           <div class="userinfo-content-info-item">
             <span>Name</span>
@@ -58,21 +54,24 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img
-                    src=""
-                    alt=""
-                    style="
+                  <img src="" alt="" style="
                       width: 30px;
                       height: 30px;
                       border-radius: 100%;
                       border: solid 1px red;
-                    "
-                  />
-                  <span class="myPost-content-post-writer">{{ loginUser.nickname }}</span>
+                    " />
+                  <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
               <div class="myPost-content-post-right">
-                <span class="myPost-content-post-created">{{post.generated_date}}</span>
+                <span v-if="JSON.stringify(post.generated_date) === JSON.stringify(post.modified_date)"
+                  class="myPost-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                    post.generated_date[2] }}
+                  {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{ post.generated_date[5] }}</span>
+                <span v-if="JSON.stringify(post.generated_date) !== JSON.stringify(post.modified_date)"
+                  class="myPost-content-post-created">{{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
+                    post.modified_date[2] }}
+                  {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{ post.modified_date[5] }}(수정됨)</span>
                 <div class="myPost-content-post-btn">
                   <!-- link to 는 기능 확인을 위해 임시로 걸어놓은 것 수정해야됨 -->
                   <router-link :to="{ name: 'login' }" id="myPost-btn">
@@ -139,7 +138,7 @@ main {
 }
 
 .userinfo-header,
-.myPost > span:nth-child(1) {
+.myPost>span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -184,14 +183,14 @@ main {
   flex-direction: row;
 }
 
-.userinfo-content-info-item > span:nth-child(1) {
+.userinfo-content-info-item>span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
 
-.userinfo-content-info-item > span:nth-child(2) {
+.userinfo-content-info-item>span:nth-child(2) {
   /* border: solid 1px green; */
   margin-left: 2rem;
   width: 100%;
@@ -207,7 +206,7 @@ main {
   height: 100%;
 }
 
-.introduce > span:nth-child(1) {
+.introduce>span:nth-child(1) {
   font-size: large;
   font-weight: bold;
 }
@@ -278,6 +277,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .myPost-content-post-right {
