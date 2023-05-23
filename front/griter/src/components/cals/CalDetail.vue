@@ -11,7 +11,7 @@
         label-for="routine-type"
       >
         <!-- <b-form-input id="input-2" v-model="form.name" placeholder="Enter name" required></b-form-input> -->
-        <b-form-input id="routine-type" v-model="routine.type" placeholder="ex) 유산소, 하체" required></b-form-input>
+        <b-form-input type="text" id="routine-type" v-model="routine.type" placeholder="ex) 유산소, 하체" required></b-form-input>
       </b-form-group>
       <b-form-group
         style="font-weight: bold;"
@@ -20,6 +20,7 @@
         label-for="routine-workout"
       >
         <b-form-input
+          type="text"
           id="routine-workout"
           v-model="routine.exercise"
           placeholder="ex) 런닝, 스쿼트"
@@ -27,16 +28,16 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="time" label="운동 시간" label-for="routine-time">
-        <b-form-input id="routine-time" v-model="routine.time" placeholder="ex) 60 (분)"></b-form-input>
+        <b-form-input type="number" id="routine-time" v-model="routine.time" placeholder="ex) 60 (분)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="sets" label="세트 수" label-for="routine-sets">
-        <b-form-input id="routine-sets" v-model="routine.sets" placeholder="ex) 5 (세트)"></b-form-input>
+        <b-form-input type="number" id="routine-sets" v-model="routine.sets" placeholder="ex) 5 (세트)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="reps" label="횟수" label-for="routine-reps">
-        <b-form-input id="routine-reps" v-model="routine.reps" placeholder="ex) 5 (회)"></b-form-input>
+        <b-form-input type="number" id="routine-reps" v-model="routine.reps" placeholder="ex) 5 (회)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="weight" label="무게" label-for="routine-weight">
-        <b-form-input id="routine-weight" v-model="routine.weight" placeholder="ex) 100 (KG)"></b-form-input>
+        <b-form-input type="number" id="routine-weight" v-model="routine.weight" placeholder="ex) 100 (KG)"></b-form-input>
       </b-form-group>
 
       <div class="buttons">
@@ -90,6 +91,7 @@ main {
   margin: 2rem;
   padding: 2rem;
   background-color: var(--box-bg-color);
+  overflow: auto;
 }
 
 .form-control {
