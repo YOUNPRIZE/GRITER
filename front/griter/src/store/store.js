@@ -24,7 +24,7 @@ export default new Vuex.Store({
   },
   plugins: [
     createPersistedState({
-      paths: ["nightmodeModule"],
+      paths: ["nightmodeModule", "routineModule"],
     }),
   ],
 });

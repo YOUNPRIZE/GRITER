@@ -18,16 +18,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -43,16 +39,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -68,16 +60,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -93,16 +81,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -118,16 +102,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -143,16 +123,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -168,16 +144,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -193,16 +165,12 @@
                 <span>제목 젬고 제목</span>
               </div>
               <div class="dashboard-content-post-writerInfo">
-                <img
-                  src
-                  alt
-                  style="
-                  width: 30px;
-                  height: 30px;
-                  border-radius: 100%;
-                  border: solid 1px red;
-                "
-                />
+                <img src alt style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
             </div>
@@ -218,7 +186,7 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          <router-link :to="{name: 'userInfo', params: {user_id: loginUser.user_id}}">
+          <router-link :to="{ name: 'userInfo', params: { user_id: loginUser.user_id } }">
             <box-icon type="solid" name="plus-square"></box-icon>
           </router-link>
         </div>
@@ -254,10 +222,6 @@
         </div>
       </div>
     </div>
-    <!-- <div style="display:none" v-for="item in routines" :key="item">{{ item }}</div> -->
-    <!-- <div v-for="item in routines" :key="item">{{ this.attributes[0]['dates'].push(item.date) }}</div> -->
-    <!-- <div v-for="item in routines" :key="item">{{ item.date  }}</div> -->
-    <!-- <div v-for="item in routines" :key="item">{{ addItemToAttributes(new Date(item.date + 9 * 60 * 60 * 1000).toUTCString()) }}</div> -->
   </main>
 </template>
 
@@ -271,12 +235,12 @@ export default {
         {
           dot: true,
           dates: [
-            new Date(2023, 4, 1),
-            new Date(2023, 4, 5),
-            new Date(2023, 4, 10),
-            new Date(2023, 4, 15),
-            new Date(2023, 4, 17),
-            new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString()
+            // new Date(2023, 4, 1),
+            // new Date(2023, 4, 5),
+            // new Date(2023, 4, 10),
+            // new Date(2023, 4, 15),
+            // new Date(2023, 4, 17),
+            // new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString()
           ]
         }
       ]
@@ -304,25 +268,16 @@ export default {
     // 로그인하고 1회만 새로고침
     // console.log(self.name);
     if (self.name != "reload") {
-      console.log(JSON.stringify(this.routines));
       self.name = "reload";
       self.location.reload(true);
     } else self.name = "";
 
     this.getUserRoutines(user_id);
 
-    // const routinesDates = this.routines.map(routine => routine.date);
-    const routinesDates = this.routines.map(function(element) {
-      console.log(element["date"]);
-      return new Date(element.date + 9 * 60 * 60 * 1000).toUTCString();
-    });
-    console.log(routinesDates);
-    // this.attributes[0].dates = routinesDates;
-    // console.log(this.routines.toJSON())
-    // console.log(this.routines.length())
-    // const asdfasdf = JSON.stringify(this.routines);
-    // console.log(asdfasdf);
-    console.log(new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString());
+    const len = this.routines.length;
+    for (let i = 0; i < len; i++) {
+      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000));
+    }
   }
 };
 </script>
