@@ -116,6 +116,7 @@ export default {
   --font-color: #2c3e50;
   --font-color-2: black;
   --font-color-3: #2388f5;
+  --font-color-btn-1: #565656;
   --input-bg-color: white;
 }
 [nightmode="true"] {
@@ -124,6 +125,7 @@ export default {
   --font-color: #7fbefd;
   --font-color-2: white;
   --font-color-3: #7fbefd;
+  --font-color-btn-1: #b5b5b5;
   --input-bg-color: rgb(135, 135, 135);
 }
 
