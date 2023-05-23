@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.griter.model.dao.PostLikeDao;
 import com.griter.model.dto.PostLike;
@@ -15,6 +16,7 @@ public class PostLikeServiceImpl implements PostLikeService {
 	private PostLikeDao postLikeDao;
 
 	@Override
+	@Transactional
 	public int create(PostLike postlike) {
 		return postLikeDao.create(postlike);
 	}

@@ -9,22 +9,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		category) VALUES (0, #{user_id}, #{title}, #{content}, #{genreated_date}, 
 		#{modified_date}, #{view_cnt}, #{like_cnt}, #{category}) </insert> -->
 	<insert id="create" parameterType="Post">
-		INSERT INTO posts (post_id,
-		user_id, title, content, category)
-		VALUES (0, #{user_id}, #{title},
-		#{content}, #{category})
+		INSERT INTO posts (user_id, title, content, category)
+		VALUES (#{user_id}, #{title}, #{content}, #{category})
 	</insert>
 
 
 	<select id="selectAll" resultType="map">
-		SELECT * FROM posts
+		SELECT p.*, u.nickname FROM
+		posts p
+		JOIN users u
+		ON u.user_id = p.user_id
 	</select>
 
 	<select id="selectByPostId" parameterType="int" resultType="map">
 		SELECT p.*, u.nickname FROM posts p
 		JOIN users u
-		ON p.user_id = u.user_id 
-		WHERE post_id = #{post_id}
+		ON p.user_id =
+		u.user_id
+		WHERE p.post_id = #{post_id}
 	</select>
 
 	<select id="selectCategory" parameterType="String"
@@ -33,10 +35,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE category = #{category}
 	</select>
 
-	<select id="selectByUserId" parameterType="int"
-		resultType="Post">
-		SELECT * FROM posts
-		WHERE user_id = #{user_id}
+	<select id="selectByUserId" parameterType="int" resultType="map">
+		SELECT p.*, u.nickname FROM posts p
+		JOIN users u
+		on p.user_id
+		= u.user_id
+		WHERE p.user_id = #{user_id}
 	</select>
 
 	<update id="update" parameterType="Post">
@@ -49,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<delete id="delete" parameterType="int">
 		DELETE FROM posts
-		WHERE post_id = #{post_id}
+		WHERE post_id
+		= #{post_id}
 	</delete>
 </mapper>

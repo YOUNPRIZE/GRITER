@@ -45,7 +45,7 @@ const postModule = {
       })
         .then((res) => {
           // alert(post_id);
-          console.log(JSON.stringify(res.data));
+          // console.log(JSON.stringify(res.data));
           commit('setPost', res.data);
         })
     },
@@ -56,21 +56,25 @@ const postModule = {
         method: "GET",
       })
         .then((res) => {
-          console.log(JSON.stringify(res.data));
+          // console.log(JSON.stringify(res.data));
           commit('setPosts', res.data);
         })
     },
-    createPost(payload) {
+    createPost({ commit }, payload) {
+      commit;
       const API_URL = `${REST_API}/posts/`;
-      axios({
-        url: API_URL,
-        method: "POST",
-        params: payload
+      axios(API_URL, null, {
+        params: {
+          user_id: payload.user_id,
+          title: payload.title,
+          content: payload.content,
+          category: payload.category,
+        },
       })
         .then((res) => {
           console.log(res);
           alert("게시물이 등록되었습니다.");
-          router.push({ name: 'PostsList' }).catch(() => { });
+          // router.push({ name: 'PostsList' }).catch(() => { });
         })
         .catch((err) => {
           console.log(err);

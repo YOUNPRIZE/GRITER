@@ -97,11 +97,11 @@
                   src
                   alt
                   style="
-                                        width: 30px;
-                                        height: 30px;
-                                        border-radius: 100%;
-                                        border: solid 1px red;
-                                      "
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 100%;
+                  border: solid 1px red;
+                "
                 />
                 <span class="dashboard-content-post-writer">catbirdseat</span>
               </div>
@@ -284,12 +284,7 @@ export default {
     // console.log(user);
   },
   methods: {
-    ...mapActions("userModule", ["getUser"]),
-    moveToUserDetail() {
-      alert(this.loginUser.nickname);
-      // const nickname = this.loginUser.nickname;
-      this.$router.push({ name: "userInfo", params: "catbirdseat" });
-    },
+    ...mapActions("userModule", ["getLoginUser"]),
   },
   created() {
     const user_id = localStorage.getItem("loginUser");

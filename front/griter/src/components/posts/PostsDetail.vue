@@ -23,12 +23,10 @@
             <span>{{ post[0].category }}</span>
           </div>
           <div class="postdetail-main-generateddate">
-            <span
-              >{{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
-                post[0].generated_date[2]
-              }}
-              {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}</span
-            >
+            <span>{{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
+              post[0].generated_date[2]
+            }}
+              {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}</span>
           </div>
         </div>
         <div class="postdetail-content">
@@ -41,22 +39,14 @@
       <div class="postdetail-comments">
         <span class="detail-key">Comments</span>
         <div class="postdetail-comments-content">
-          <div
-            v-for="(comment, index) in comments"
-            :key="index"
-            class="group-item"
-            id="all-comments"
-          >
+          <div v-for="(comment, index) in comments" :key="index" class="group-item" id="all-comments">
             <div class="comment">
               <div id="comment-writer">{{ comment.nickname }}</div>
               <div id="comment-content">{{ comment.content }}</div>
-              <div
-                v-if="
-                  JSON.stringify(comment.generated_date) ===
-                  JSON.stringify(comment.modified_date)
-                "
-                id="comment-date"
-              >
+              <div v-if="
+                JSON.stringify(comment.generated_date) ===
+                JSON.stringify(comment.modified_date)
+              " id="comment-date">
                 {{ comment.generated_date }}
               </div>
               <div v-else id="comment-date">{{ comment.modified_date }}(수정됨)</div>
@@ -65,18 +55,13 @@
         </div>
       </div>
       <div class="entercomment">
-        <form action="" class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter comment here"
-            aria-label="Recipient's username"
-            aria-describedby="button-addon2"
-          />
-          <button type="submit" class="btn btn-outline-primary" id="button-addon2">
+        <fieldset class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Enter comment here" aria-describedby="button-addon2"
+            v-model="commentContent" name="content" id="content" required />
+          <button type="submit" class="btn btn-outline-primary" id="button-addon2" @click="writeComment">
             Write
           </button>
-        </form>
+        </fieldset>
       </div>
     </div>
   </main>
@@ -85,26 +70,44 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
+  data() {
+    return {
+      commentContent: "",
+    }
+  },
   computed: {
     ...mapState("postModule", ["post"]),
-    ...mapState("commentModule", ["comments"]),
+    ...mapState("commentModule", ["comments", "comment"]),
     ...mapState("userModule", ["loginUser"]),
   },
   methods: {
-    moveList() {
-      this.$router.go(-1);
-    },
     ...mapActions("postModule", ["getPost"]),
-    ...mapActions("commentModule", ["getComments"]),
+    ...mapActions("commentModule", ["getComments", "getComment", "createComment"]),
     ...mapActions("userModule", ["getLoginUser"]),
+    moveList() {
+      this.$router.push({name: 'PostsList'})
+    },
+    writeComment() {
+      // alert(this.content);
+      // alert(this.loginUser.user_id);
+      // alert(this.post[0].post_id);
+      const newComment={
+        content: this.commentContent,
+        parent_id: 0,
+        user_id: this.loginUser.user_id,
+        post_id: this.post[0].post_id,
+      }
+      this.getComment(newComment);
+      console.log(this.comment);
+      this.createComment(this.comment);
+    },
   },
   created() {
-    console.log(this.$route.params);
+    // console.log(this.$route.params);
     const post_id = this.$route.params.post_id;
-    console.log(post_id);
+    // console.log(post_id);
     this.getPost(post_id);
     this.getComments(post_id);
-    // this.getLoginUser(this.post.user_id);
   },
 };
 </script>
@@ -128,6 +131,7 @@ export default {
   overflow: auto;
   /* border: solid 1px red; */
 }
+
 .postdetail-header {
   display: flex;
   flex-direction: row;
@@ -139,7 +143,7 @@ export default {
   width: 100%;
 }
 
-.detail-key{
+.detail-key {
   color: var(--font-color-3);
 }
 
@@ -147,14 +151,16 @@ export default {
   font-size: x-large;
   margin-left: 1rem;
 }
+
 #back-btn {
   font-size: x-large;
 }
+
 #back-btn:hover {
   cursor: pointer;
 }
 
-.postdetail-mainbox{
+.postdetail-mainbox {
   width: 100%;
 }
 
@@ -165,6 +171,7 @@ export default {
   color: var(--font-color-2);
   width: 100%;
 }
+
 .postdetail-main-aside {
   /* border: solid 1px green; */
   display: flex;
@@ -172,9 +179,11 @@ export default {
   align-items: flex-start;
   color: var(--font-color-3);
 }
-.postdetail-main-aside > span {
+
+.postdetail-main-aside>span {
   margin-bottom: 1rem;
 }
+
 .postdetail-main-value {
   /* border: solid 1px red; */
   display: flex;
@@ -183,14 +192,17 @@ export default {
   align-items: flex-start;
   margin-left: 2rem;
 }
-.postdetail-main-value > span {
+
+.postdetail-main-value>span {
   margin-bottom: 1rem;
 }
+
 .postdetail-main-value-writer {
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
 }
+
 .postdetail-main-generateddate {
   display: flex;
   flex-direction: row-reverse;
@@ -198,6 +210,7 @@ export default {
   width: 30%;
   color: grey;
 }
+
 .postdetail-content {
   border: solid 1px grey;
   border-radius: 0.2rem;
@@ -205,6 +218,7 @@ export default {
   text-align: left;
   width: 100%;
 }
+
 .content-box {
   display: flex;
   padding: 0.5rem;
@@ -212,6 +226,7 @@ export default {
   /* border: solid 1px red; */
   color: var(--font-color-2);
 }
+
 .postdetail-comments {
   display: flex;
   flex-direction: column;
@@ -227,8 +242,10 @@ export default {
   overflow: auto;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: auto; 
+  padding-bottom: 1.5rem;
 }
+
 .comment {
   /* border: solid 1px green; */
   display: flex;
@@ -242,11 +259,13 @@ export default {
 #comment-writer {
   width: 15%;
 }
+
 #comment-content {
   width: 60%;
   display: flex;
   color: var(--font-color-2);
 }
+
 #comment-date {
   width: 25%;
   color: var(--font-color-2);
@@ -270,22 +289,25 @@ export default {
   margin-top: 1rem;
 }
 
-.form-control{
+.form-control {
   background-color: var(--box-bg-color);
   color: var(--font-color-2);
 }
-.form-control::placeholder{
+
+.form-control::placeholder {
   color: var(--font-color-2);
 }
-.form-control:focus{
+
+.form-control:focus {
   background-color: var(--first-color);
 }
 
-#button-addon2{
+#button-addon2 {
   border: solid 1px var(--font-color-3);
   color: var(--font-color-3);
 }
-#button-addon2:hover{
+
+#button-addon2:hover {
   background-color: var(--first-color);
 }
 </style>
