@@ -1,4 +1,4 @@
-// import router from '@/router';
+import router from '@/router';
 import axios from "axios";
 
 const REST_API = `http://localhost:9999/api`;
