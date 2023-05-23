@@ -18,35 +18,31 @@ const userModule = {
   mutations: {
     USER_LOGIN: (state, payload) => { state.loginUser = payload },
     GET_USER: (state, payload) => {
-      // console.log(payload);
       state.user = payload;
-      // console.log(state.loginUser);
     },
-    GET_LOGINUSER: (state, payload) =>{
+    GET_LOGINUSER: (state, payload) => {
       state.loginUser = payload;
     }
   },
   actions: {
     userLogin: ({ commit }, loginUser) => {
       const API_URL = `${REST_API}/users/jwt`;
-      axios({
-        url: API_URL,
-        method: "POST",
-        params: loginUser,
+      axios.post(API_URL, null, {
+        params: {
+          nickname: loginUser.nickname,
+          password: loginUser.password,
+        }
       })
         .then((res) => {
-          // console.log(res.data);
           sessionStorage.setItem("access-token", res.data["access-token"]);
           localStorage.setItem("loginUser", res.data["loginUser"]);
           commit("USER_LOGIN", loginUser);
-          // console.log(loginUser);
-          router.push({ name: "home" });
+          router.push({ name: "home" }).catch(() => { });
         })
         .catch((err) => {
           console.log(err);
           alert("로그인 실패");
-          router.push({ name: "login" }).catch(() => { });
-          // console.log(router);
+          commit("USER_LOGIN", 'fail');
         });
     },
     getUser: ({ commit }, user_id) => {
@@ -56,8 +52,6 @@ const userModule = {
         method: "GET",
       })
         .then((res) => {
-          // console.log("res: " + JSON.stringify(res.data));
-          // console.log("res: " + JSON.stringify(res.data));
           commit("GET_USER", res.data);
         })
     },
@@ -68,8 +62,6 @@ const userModule = {
         method: "GET",
       })
         .then((res) => {
-          // console.log("res: " + JSON.stringify(res.data));
-          // console.log("res: " + JSON.stringify(res.data));
           commit("GET_LOGINUSER", res.data);
         })
     },

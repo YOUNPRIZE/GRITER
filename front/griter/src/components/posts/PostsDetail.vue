@@ -57,7 +57,7 @@
       <div class="entercomment">
         <fieldset class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Enter comment here" aria-describedby="button-addon2"
-            v-model="commentContent" name="content" id="content" required />
+            v-model="commentContent" name="content" id="content" required @keydown.enter="writeComment"/>
           <button type="submit" class="btn btn-outline-primary" id="button-addon2" @click="writeComment">
             Write
           </button>

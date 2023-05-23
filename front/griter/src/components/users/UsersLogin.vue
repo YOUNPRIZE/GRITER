@@ -11,6 +11,7 @@
             class="form-control"
             id="nickname"
             v-model="user.nickname"
+            @keydown.enter="login"
             required
           />
           <div class="label">Password</div>
@@ -20,11 +21,12 @@
             class="form-control"
             id="password"
             v-model="user.password"
+            @keydown.enter="login"
             required
           />
         </div>
         <div class="buttons">
-          <div @click="login" class="btn btn-primary" id="login-btn">Login</div>
+          <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
           <router-link :to="{ name: 'register' }">
             <button class="btn btn-outline-primary" id="signUp-btn">Sign up</button>
           </router-link>
@@ -35,10 +37,9 @@
 </template>
 
 <script>
-// import router from "@/router";
+import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
-  // name: "UsersLogin",
   data() {
     return {
       user: {
@@ -47,10 +48,11 @@ export default {
       },
     };
   },
-  created() {
+  mounted() {
+    // 최초 1회에 한해 새로고침 => 그래야 옆에 aside 안뜸
     if (self.name != "reload") {
       self.name = "reload";
-      self.location.reload(true);
+      this.$router.go(0);
     } else self.name = "";
   },
   computed: {
@@ -63,6 +65,13 @@ export default {
     login() {
       console.log(this.user);
       this.doLogin(this.user);
+      if(this.loginUser === 'fail'){
+        alert("로그인 실패");
+        // alert 먼저 띄우고 새로고침 하기위함
+        setTimeout(()=>{
+          router.go(0);
+        }, 0);
+      }
     },
   },
 };

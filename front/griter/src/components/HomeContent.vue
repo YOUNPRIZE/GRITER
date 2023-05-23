@@ -11,174 +11,43 @@
       <div class="line"></div>
       <div class="dashboard-content">
         <!-- 대시보드 미리보기 항목들 -->
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
+        <div v-for="(post, index) in posts" :key="index" class="group-item">
+            <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
+              <div class="dashboard-content-post">
+                <div class="dashboard-content-post-left">
+                  <div class="dashboard-content-post-title">
+                    <span>{{ post.title }}</span>
+                  </div>
+                  <div class="dashboard-content-post-writerInfo">
+                    <img src="" alt="" style="
+                          width: 30px;
+                          height: 30px;
+                          border-radius: 100%;
+                          border: solid 1px red;
+                        " />
+                    <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
+                  </div>
+                </div>
+                <div class="dashboard-content-post-right">
+                  <span class="dashboard-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1]
+                  }}.{{
+  post.generated_date[2]
+}}
+                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
+                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
+                    <button :value=post.post_id @click="editPost($event)">
+                      <i class="bx bx-pencil"></i>
+                    </button>
+                    <button :value=post.post_id @click="showDeleteModal(post.post_id)">
+                      <i class="bx bx-trash"></i>
+                    </button>
+                  </div>
+                  <div v-else>
+                  </div>
+                </div>
               </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
+            </router-link>
           </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
-        <router-link to="/">
-          <div class="dashboard-content-post">
-            <div class="dashboard-content-post-left">
-              <div class="dashboard-content-post-title">
-                <span>제목 젬고 제목</span>
-              </div>
-              <div class="dashboard-content-post-writerInfo">
-                <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " />
-                <span class="dashboard-content-post-writer">catbirdseat</span>
-              </div>
-            </div>
-            <div class="dashboard-content-post-right">
-              <span class="dashboard-content-post-created">December, 23, 2022</span>
-            </div>
-          </div>
-        </router-link>
       </div>
     </div>
     <!-- user & calendar-->
@@ -221,13 +90,23 @@
           <v-calendar is-expanded :attributes="attributes" />
         </div>
       </div>
-      {{routines}}
+    </div>
+    <!-- 모달 -->
+    <div v-if="isDeleteModalOpen" class="modal">
+      <div class="modal-content">
+        <h3>삭제 확인</h3>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div class="modal-content-buttons">
+          <button v-on:click="deletePost" class="btn btn-danger">예</button>
+          <button v-on:click="closeDeleteModal" class="btn btn-primary">취소</button>
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-// import router from "@/router";
+import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
@@ -236,49 +115,67 @@ export default {
         {
           dot: true,
           dates: [
-            // new Date(2023, 4, 1),
-            // new Date(2023, 4, 5),
-            // new Date(2023, 4, 10),
-            // new Date(2023, 4, 15),
-            // new Date(2023, 4, 17),
-            // new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString()
           ]
         }
-      ]
+      ],
+      isDeleteModalOpen: false,
+      deletePostId: "",
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
-    ...mapState("routineModule", ["routines"])
+    ...mapState("routineModule", ["routines"]),
+    ...mapState("postModule", ["posts"]),
   },
   mounted() {
     const asdfasdf = JSON.stringify(this.routines);
     console.log(asdfasdf);
-  },
-  methods: {
-    ...mapActions("userModule", ["getLoginUser"]),
-    ...mapActions("routineModule", ["getUserRoutines"]),
-    addItemToAttributes(date) {
-      this.attributes[0]["dates"].push(date);
-    }
-  },
-  created() {
     const user_id = localStorage.getItem("loginUser");
     // dispatch 역할
     this.getLoginUser(user_id);
-    // 로그인하고 1회만 새로고침
-    // console.log(self.name);
-    if (self.name != "reload") {
-      self.name = "reload";
-      self.location.reload(true);
-    } else self.name = "";
-
     this.getUserRoutines(user_id);
 
     const len = this.routines.length;
     for (let i = 0; i < len; i++) {
       this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000));
     }
+  },
+  methods: {
+    ...mapActions("postModule", ["getPosts", "delete"]),
+    ...mapActions("userModule", ["getLoginUser"]),
+    ...mapActions("routineModule", ["getUserRoutines"]),
+    addItemToAttributes(date) {
+      this.attributes[0]["dates"].push(date);
+    },
+    // editPost(event) {
+    //   // const post_id = event.target.value;
+
+    // },
+    showDeleteModal(deletePostId) {
+      event.preventDefault()
+      console.log(deletePostId);
+      this.isDeleteModalOpen = true;
+      this.deletePostId = deletePostId;
+    },
+    closeDeleteModal() {
+      this.isDeleteModalOpen = false;
+      this.deletePostId = "";
+    },
+    deletePost() {
+      console.log(this.deletePostId);
+      this.delete(this.deletePostId);
+      this.closeDeleteModal();
+      router.go(0);
+    }
+  },
+  created() {
+    // 로그인하고 1회만 새로고침
+    // console.log(self.name);
+    if (self.name != "reload") {
+      self.name = "reload";
+      self.location.reload(true);
+    } else self.name = "";
+    this.getPosts();
   }
 };
 </script>
@@ -413,14 +310,52 @@ hr {
   padding: 1rem;
   box-shadow: 0 0 5px rgb(185, 185, 185);
   border-radius: 2px;
-  height: 10rem;
+  height: 7rem;
 }
 
 .dashboard-content-post-title {
-  margin-bottom: 2rem;
+  display: flex;
+  margin-bottom: 0.5rem;
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.dashboard-content-post-left {
+  /* border: solid 1px red; */
+  display: flex;
+  width: 85%;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard-content-post-writerInfo {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.dashboard-content-post-writer {
+  margin-left: 1rem;
+}
+
+.dashboard-content-post-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#dashboard-btn {
+  margin: 0 0.5rem 0 0.5rem;
+  color: grey;
 }
 
 .dashboard-content-post-created {
-  color: var(--font-color-3);
+  color: grey;
+}
+
+.dashboard-content-post-btn>button {
+  border: none;
+  background-color: transparent;
 }
 </style>
