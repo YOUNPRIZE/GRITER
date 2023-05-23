@@ -31,6 +31,7 @@ public class RoutineRestController {
 	@PostMapping("/")
 	@ApiOperation(value = "운동 루틴 등록", response = Routine.class)
 	public ResponseEntity<?> createRoutine(Routine routine) {
+		System.out.println(routine);
 		try {
 			int create = rs.create(routine);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);

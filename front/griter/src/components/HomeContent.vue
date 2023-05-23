@@ -252,8 +252,8 @@ export default {
     ...mapState("routineModule", ["routines"])
   },
   mounted() {
-    const asdfasdf = JSON.stringify(this.routines);
-    console.log(asdfasdf);
+    const tempRoutines = JSON.stringify(this.routines);
+    console.log(tempRoutines);
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
@@ -277,7 +277,7 @@ export default {
 
     const len = this.routines.length;
     for (let i = 0; i < len; i++) {
-      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000));
+      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString());
     }
   }
 };
