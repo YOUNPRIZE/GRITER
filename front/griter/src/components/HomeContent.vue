@@ -253,6 +253,7 @@
           <v-calendar is-expanded :attributes="attributes" />
         </div>
       </div>
+      {{routines}}
     </div>
     <!-- <div style="display:none" v-for="item in routines" :key="item">{{ item }}</div> -->
     <!-- <div v-for="item in routines" :key="item">{{ this.attributes[0]['dates'].push(item.date) }}</div> -->
