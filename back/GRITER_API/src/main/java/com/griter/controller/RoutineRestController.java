@@ -50,7 +50,7 @@ public class RoutineRestController {
 		}
 	}
 	
-	@GetMapping("/{user_id}")
+	@GetMapping("/users/{user_id}")
 	@ApiOperation(value = "특정 사용자의 운동 루틴 조회", response = Routine.class)
 	public ResponseEntity<?> selectRoutineByUser(@PathVariable int user_id) {
 		try {
