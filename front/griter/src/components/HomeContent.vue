@@ -244,13 +244,13 @@
       <div class="calendar">
         <div id="calendar-title">
           <h5>Calendar</h5>
-          <a href="#">
+          <router-link :to="{ name: 'calendar' }">
             <box-icon type="solid" name="plus-square"></box-icon>
-          </a>
+          </router-link>
         </div>
         <div class="calendar-content">
           <!-- <v-calendar is-dark is-expanded :attributes="attributes"/> -->
-          <v-calendar is-expanded :attributes="attributes"/>
+          <v-calendar is-expanded :attributes="attributes" />
         </div>
       </div>
     </div>
@@ -271,10 +271,10 @@ export default {
             new Date(2023, 4, 5),
             new Date(2023, 4, 10),
             new Date(2023, 4, 15),
-            new Date(2023, 4, 17),
-          ],
-        },
-      ],
+            new Date(2023, 4, 17)
+          ]
+        }
+      ]
     };
   },
   computed: {

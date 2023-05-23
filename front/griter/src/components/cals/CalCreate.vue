@@ -36,8 +36,7 @@
       </b-form-group>
 
       <div class="buttons">
-        <b-button class="update" variant="primary">수정</b-button>
-        <b-button class="delete" variant="danger">삭제</b-button>
+        <b-button class="register" variant="primary">등록</b-button>
         <router-link :to="{ name: 'calendar' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>

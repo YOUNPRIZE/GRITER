@@ -1,104 +1,110 @@
-import Vue from 'vue'
-import Vuex from 'vuex';
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import PostsView from '@/views/PostsView.vue'
-import PostsList from '@/components/posts/PostsList.vue'
-import PostsDetail from '@/components/posts/PostsDetail.vue'
-import PostsCreate from '@/components/posts/PostsCreate.vue'
-import UserView from '@/views/UserView.vue'
-import UsersLogin from '@/components/users/UsersLogin.vue'
-import UsersRegister from '@/components/users/UsersRegister.vue'
-import UsersInfo from '@/components/users/UsersInfo.vue'
-import UsersFollows from '@/components/users/UsersFollows.vue'
-import CalView from '../views/CalView.vue'
-import CalList from '@/components/cals/CalList.vue'
-// import CalDetail from '@/components/cals/CalDetail.vue'
+import Vue from "vue";
+import Vuex from "vuex";
+import VueRouter from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import PostsView from "@/views/PostsView.vue";
+import PostsList from "@/components/posts/PostsList.vue";
+import PostsDetail from "@/components/posts/PostsDetail.vue";
+import PostsCreate from "@/components/posts/PostsCreate.vue";
+import UserView from "@/views/UserView.vue";
+import UsersLogin from "@/components/users/UsersLogin.vue";
+import UsersRegister from "@/components/users/UsersRegister.vue";
+import UsersInfo from "@/components/users/UsersInfo.vue";
+import UsersFollows from "@/components/users/UsersFollows.vue";
+import CalView from "../views/CalView.vue";
+import CalList from "@/components/cals/CalList.vue";
+import CalDetail from "@/components/cals/CalDetail.vue";
+import CalCreate from "@/components/cals/CalCreate.vue";
 
-Vue.use(VueRouter)
-Vue.use(Vuex)
+Vue.use(VueRouter);
+Vue.use(Vuex);
 
 const routes = [
   {
     path: "/",
-    name: 'login',
+    name: "login",
     component: UsersLogin,
   },
   {
-    path: '/home',
-    name: 'home',
+    path: "/home",
+    name: "home",
     component: HomeView,
   },
   {
-    path: '/cal',
+    path: "/cal",
     component: CalView,
     children: [
       {
         path: "",
-        name: 'calendar',
+        name: "calendar",
         component: CalList,
       },
       // 루틴이냐? 식단이냐?
       {
         path: "/routine",
-        name: 'routine',
-        // component: RoutineDetail,
+        name: "RoutinesDetail",
+        component: CalDetail,
+      },
+      {
+        path: "/createRoutine",
+        name: "RoutinesCreate",
+        component: CalCreate,
       },
       {
         path: "/diet",
-        name: 'diet',
+        name: "diet",
         // component: DietDetail,
       },
-    ]
+    ],
   },
   {
-    path: '/posts',
+    path: "/posts",
     component: PostsView,
     children: [
       {
         path: "",
-        name: 'PostsList',
+        name: "PostsList",
         component: PostsList,
       },
       {
         path: ":post_id",
-        name: 'PostsDetail',
+        name: "PostsDetail",
         component: PostsDetail,
       },
       {
         path: "createPost",
-        name: 'PostCreate',
+        name: "PostCreate",
         component: PostsCreate,
       },
-    ]
+    ],
   },
   {
-    path: '/users',
+    path: "/users",
     component: UserView,
     children: [
       {
         path: "register",
-        name: 'register',
+        name: "register",
         component: UsersRegister,
       },
       {
         path: "follows",
-        name: 'follows',
+        name: "follows",
         component: UsersFollows,
       },
       {
         path: ":user_id",
-        name: 'userInfo',
+        name: "userInfo",
         component: UsersInfo,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
