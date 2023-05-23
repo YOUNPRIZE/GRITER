@@ -91,9 +91,6 @@ export default {
       this.callModeSet();
       console.log("변경 후: " + this.nightmode());
       document.documentElement.setAttribute("nightmode", this.nightmode());
-      console.log(document.documentElement);
-      const btn = document.getElementById("nightmode");
-      console.log(btn.checked);
       setTimeout(() => this.$router.go(0), 500);
     },
     logout() {
@@ -103,11 +100,6 @@ export default {
     },
   },
   mounted() {
-    // window.onload = function () {
-    //   console.log(this.$router);
-    // };
-    // console.log(this.currentMode);
-    // console.log(window);
     if (this.currentMode) {
       document.getElementById("nightmode").checked = true;
     }

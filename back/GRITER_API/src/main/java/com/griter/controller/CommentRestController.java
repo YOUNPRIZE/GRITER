@@ -28,8 +28,10 @@ public class CommentRestController {
 	private CommentService cs;
 
 	@PostMapping("/")
-	@ApiOperation(value = "댓글 등록", response = Comment.class)
+	@ApiOperation(value = "댓글 등록")
 	public ResponseEntity<?> create(Comment comment) {
+		System.out.println("test");
+		System.out.println(comment);
 		try {
 			int create = cs.create(comment);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);

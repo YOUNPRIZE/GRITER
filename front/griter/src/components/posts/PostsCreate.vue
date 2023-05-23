@@ -62,6 +62,9 @@ export default {
     createPost() {
       const user_id = localStorage("loginUser");
       console.log(user_id);
+      console.log(this.title)
+      console.log(this.content);
+      console.log(this.category);
       this.createPost({
         user_id: user_id,
         title: this.title,
