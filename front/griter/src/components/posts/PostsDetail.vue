@@ -2,8 +2,22 @@
   <main>
     <div class="postdetail">
       <div class="postdetail-header">
-        <i class="bx bx-arrow-back" id="back-btn" @click="moveList"></i>
-        <span id="postdetail-header-logo">Post</span>
+        <div>
+          <i class="bx bx-arrow-back" id="back-btn" @click="moveList"></i>
+          <span id="postdetail-header-logo">Post</span>
+        </div>
+        <div
+          v-if="post[0].user_id === loginUser.user_id"
+          class="dashboard-content-post-btn"
+        >
+          <button @click="goEditPost(post[0].post_id)">
+            <i class="bx bx-pencil"></i>
+          </button>
+          <button @click="showDeleteModal(post[0].post_id)">
+            <i class="bx bx-trash"></i>
+          </button>
+        </div>
+        <div v-else></div>
       </div>
       <div class="postdetail-mainbox">
         <div class="line"></div>
@@ -23,10 +37,22 @@
             <span>{{ post[0].category }}</span>
           </div>
           <div class="postdetail-main-generateddate">
-            <span>{{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
-              post[0].generated_date[2]
-            }}
-              {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}</span>
+            <span
+              v-if="
+                JSON.stringify(post[0].generated_date) ===
+                JSON.stringify(post[0].modified_date)
+              "
+              >{{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
+                post[0].generated_date[2]
+              }}
+              {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}</span
+            >
+            <span v-else
+              >{{ post[0].modified_date[0] }}.{{ post[0].modified_date[1] }}.{{
+                post[0].modified_date[2]
+              }}
+              {{ post[0].modified_date[3] }}:{{ post[0].modified_date[4] }}(수정됨)</span
+            >
           </div>
         </div>
         <div class="postdetail-content">
@@ -39,14 +65,22 @@
       <div class="postdetail-comments">
         <span class="detail-key">Comments</span>
         <div class="postdetail-comments-content">
-          <div v-for="(comment, index) in comments" :key="index" class="group-item" id="all-comments">
+          <div
+            v-for="(comment, index) in comments"
+            :key="index"
+            class="group-item"
+            id="all-comments"
+          >
             <div class="comment">
               <div id="comment-writer">{{ comment.nickname }}</div>
               <div id="comment-content">{{ comment.content }}</div>
-              <div v-if="
-                JSON.stringify(comment.generated_date) ===
-                JSON.stringify(comment.modified_date)
-              " id="comment-date">
+              <div
+                v-if="
+                  JSON.stringify(comment.generated_date) ===
+                  JSON.stringify(comment.modified_date)
+                "
+                id="comment-date"
+              >
                 {{ comment.generated_date }}
               </div>
               <div v-else id="comment-date">{{ comment.modified_date }}(수정됨)</div>
@@ -56,24 +90,52 @@
       </div>
       <div class="entercomment">
         <fieldset class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Enter comment here" aria-describedby="button-addon2"
-            v-model="commentContent" name="content" id="content" required />
-          <button type="submit" class="btn btn-outline-primary" id="button-addon2" @click="writeComment">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter comment here"
+            aria-describedby="button-addon2"
+            v-model="commentContent"
+            name="content"
+            id="content"
+            required
+            @keydown.enter="writeComment"
+          />
+          <button
+            type="submit"
+            class="btn btn-outline-primary"
+            id="button-addon2"
+            @click="writeComment"
+          >
             Write
           </button>
         </fieldset>
+      </div>
+    </div>
+    <!-- 모달 -->
+    <div v-if="isDeleteModalOpen" class="modal">
+      <div class="modal-content">
+        <h3>삭제 확인</h3>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div class="modal-content-buttons">
+          <button v-on:click="deletePost" class="btn btn-danger">예</button>
+          <button v-on:click="closeDeleteModal" class="btn btn-primary">취소</button>
+        </div>
       </div>
     </div>
   </main>
 </template>
 
 <script>
+import router from "@/router";
 import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
+      isDeleteModalOpen: false,
+      deletePostId: "",
       commentContent: "",
-    }
+    };
   },
   computed: {
     ...mapState("postModule", ["post"]),
@@ -81,26 +143,48 @@ export default {
     ...mapState("userModule", ["loginUser"]),
   },
   methods: {
-    ...mapActions("postModule", ["getPost"]),
+    ...mapActions("postModule", ["getPost", "delete"]),
     ...mapActions("commentModule", ["getComments", "getComment", "createComment"]),
     ...mapActions("userModule", ["getLoginUser"]),
     moveList() {
-      this.$router.push({name: 'PostsList'})
+      this.$router.push({ name: "PostsList" });
     },
     writeComment() {
       // alert(this.content);
       // alert(this.loginUser.user_id);
       // alert(this.post[0].post_id);
-      const newComment={
+      const newComment = {
         content: this.commentContent,
         parent_id: 0,
         user_id: this.loginUser.user_id,
         post_id: this.post[0].post_id,
-      }
+      };
       this.getComment(newComment);
       console.log(this.comment);
       this.createComment(this.comment);
     },
+    goEditPost(editPostId) {
+      event.preventDefault()
+      router.push({name: 'PostModify', params: {post_id: editPostId}});
+    },
+    showDeleteModal(deletePostId) {
+      event.preventDefault()
+      console.log(deletePostId);
+      this.isDeleteModalOpen = true;
+      this.deletePostId = deletePostId;
+    },
+    closeDeleteModal() {
+      this.isDeleteModalOpen = false;
+      this.deletePostId = "";
+    },
+    deletePost() {
+      console.log(this.deletePostId);
+      this.delete(this.deletePostId);
+      this.closeDeleteModal();
+      setTimeout(() => {
+        router.go(0);
+      }, "10")
+    }
   },
   created() {
     // console.log(this.$route.params);
@@ -108,6 +192,8 @@ export default {
     // console.log(post_id);
     this.getPost(post_id);
     this.getComments(post_id);
+    const userId = localStorage.getItem("loginUser");
+    this.getLoginUser(userId);
   },
 };
 </script>
@@ -135,12 +221,13 @@ export default {
 .postdetail-header {
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-start; */
+  justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   color: var(--font-color-2);
   width: 100%;
+  /* border: solid red; */
 }
 
 .detail-key {
@@ -180,7 +267,7 @@ export default {
   color: var(--font-color-3);
 }
 
-.postdetail-main-aside>span {
+.postdetail-main-aside > span {
   margin-bottom: 1rem;
 }
 
@@ -193,7 +280,7 @@ export default {
   margin-left: 2rem;
 }
 
-.postdetail-main-value>span {
+.postdetail-main-value > span {
   margin-bottom: 1rem;
 }
 
@@ -242,7 +329,7 @@ export default {
   overflow: auto;
   width: 100%;
   height: 100%;
-  overflow: auto; 
+  overflow: auto;
   padding-bottom: 1.5rem;
 }
 
@@ -310,5 +397,11 @@ export default {
 #button-addon2:hover {
   background-color: var(--first-color);
 }
-</style>
 
+.dashboard-content-post-btn > button {
+  border: none ;
+  background-color: transparent;
+  font-size: x-large;
+  color: var(--font-color-btn-1);
+}
+</style>

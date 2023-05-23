@@ -30,11 +30,11 @@
                   </div>
                   <div class="dashboard-content-post-writerInfo">
                     <img src="" alt="" style="
-                          width: 30px;
-                          height: 30px;
-                          border-radius: 100%;
-                          border: solid 1px red;
-                        " />
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
@@ -45,10 +45,10 @@
 }}
                     {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
                   <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
-                    <button :value=post.post_id @click="editPost($event)">
+                    <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
-                    <button :value=post.post_id @click="showDeleteModal(post.post_id)">
+                    <button @click="showDeleteModal(post.post_id)">
                       <i class="bx bx-trash"></i>
                     </button>
                   </div>
@@ -110,10 +110,10 @@ export default {
         }
       }
     },
-    // editPost(event) {
-    //   // const post_id = event.target.value;
-
-    // },
+    goEditPost(editPostId) {
+      event.preventDefault()
+      router.push({name: 'PostModify', params: {post_id: editPostId}});
+    },
     showDeleteModal(deletePostId) {
       event.preventDefault()
       console.log(deletePostId);
@@ -300,35 +300,7 @@ export default {
 .dashboard-content-post-btn>button {
   border: none;
   background-color: transparent;
+  color: var(--font-color-btn-1);
 }
 
-/* 모달 스타일링 */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  /* height: 150vh; */
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  /* border: solid 2px green; */
-  background-color: white;
-  padding: 20px;
-  border-radius: 0.3rem;
-  width: 30%;
-  min-width: 20rem;
-  margin-bottom: 30%;
-}
-
-.modal-content-buttons>button {
-  border: solid 1px;
-  border-radius: 0.5rem;
-  margin: 0 1rem 0 1rem ;
-  width: 5rem;
-}
 </style>

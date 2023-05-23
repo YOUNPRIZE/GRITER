@@ -29,6 +29,13 @@ export default {
   },
   beforeMount() {
     console.log("nightmode: " + this.nightmode);
+    if (
+      this.$router.currentRoute.name == "login" ||
+      this.$router.currentRoute.name == "register"
+    ) {
+      this.useNav = false;
+      return;
+    }
   },
   mounted() {
     console.log(this.$router.currentRoute.name);
@@ -109,6 +116,7 @@ export default {
   --font-color: #2c3e50;
   --font-color-2: black;
   --font-color-3: #2388f5;
+  --font-color-btn-1: #565656;
   --input-bg-color: white;
 }
 [nightmode="true"] {
@@ -117,6 +125,7 @@ export default {
   --font-color: #7fbefd;
   --font-color-2: white;
   --font-color-3: #7fbefd;
+  --font-color-btn-1: #b5b5b5;
   --input-bg-color: rgb(135, 135, 135);
 }
 
@@ -145,5 +154,35 @@ nav {
 nav a {
   font-weight: bold;
   color: #2c3e50;
+}
+
+/* 모달 스타일링 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 150vh; */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  /* border: solid 2px green; */
+  background-color: white;
+  padding: 20px;
+  border-radius: 0.3rem;
+  width: 30%;
+  min-width: 20rem;
+  margin-bottom: 30%;
+}
+
+.modal-content-buttons>button {
+  border: solid 1px;
+  border-radius: 0.5rem;
+  margin: 0 1rem 0 1rem ;
+  width: 5rem;
 }
 </style>

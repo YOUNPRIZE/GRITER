@@ -5,20 +5,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.FollowDao">
 
 	<insert id="createFollow" parameterType="Follow">
-		INSERT INTO follows (follow_id, user_id, followed_id)
-		VALUES (0, #{user_id}, #{followed_id})
+		INSERT INTO follows
+		(user_id, following_id)
+		VALUES (#{user_id},
+		#{following_id})
 	</insert>
-	
-	<select id="selectByUserId" parameterType="int" resultType="Follow">
-		SELECT * FROM follows 
-		WHERE user_id = #{user_id}
+
+	<select id="selectByUserId" parameterType="int" resultType="map">
+		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM follows f
+		JOIN users u
+		ON f.following_id = u.user_id
+		WHERE f.user_id = #{user_id}
 	</select>
-	
-	<select id="selectByFollowingId" parameterType="int" resultType="Follow">
-		SELECT * FROM follows
-		WHERE following_id = #{following_id}
+
+	<select id="selectByFollowingId" parameterType="int"
+		resultType="map">
+		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM
+		follows f
+		JOIN users u
+		ON f.user_id = u.user_id
+		WHERE f.following_id = #{following_id}
 	</select>
-	
+
 	<delete id="deleteFollow" parameterType="Follow">
 		DELETE FROM follows
 		WHERE user_id = #{user_id} AND following_id = #{following_id}

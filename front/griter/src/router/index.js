@@ -6,6 +6,7 @@ import PostsView from "@/views/PostsView.vue";
 import PostsList from "@/components/posts/PostsList.vue";
 import PostsDetail from "@/components/posts/PostsDetail.vue";
 import PostsCreate from "@/components/posts/PostsCreate.vue";
+// import PostsModify from "@/components/posts/PostsModify.vue";
 import UserView from "@/views/UserView.vue";
 import UsersLogin from "@/components/users/UsersLogin.vue";
 import UsersRegister from "@/components/users/UsersRegister.vue";
@@ -17,6 +18,7 @@ import CalDetail from "@/components/cals/CalDetail.vue";
 import CalCreate from "@/components/cals/CalCreate.vue";
 import CalDietDetail from "@/components/cals/CalDietDetail.vue";
 import CalDietCreate from "@/components/cals/CalDietCreate.vue";
+
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -74,7 +76,7 @@ const routes = [
         component: PostsList,
       },
       {
-        path: ":post_id",
+        path: "detail/:post_id",
         name: "PostsDetail",
         component: PostsDetail,
       },
@@ -83,6 +85,11 @@ const routes = [
         name: "PostCreate",
         component: PostsCreate,
       },
+      {
+        path: "modifyPost/:post_id",
+        name: "PostModify",
+        component: PostsCreate,
+      }
     ],
   },
   {

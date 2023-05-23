@@ -67,14 +67,12 @@ const postModule = {
           content: payload.content,
           category: payload.category,
         },
-      })
-        .then(() => {
-          alert("게시물이 등록되었습니다.");
-          router.push({ name: 'PostsList' }).catch(() => { });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }).then(() => {
+        alert("게시물이 등록되었습니다.");
+        router.push({ name: 'PostsList' }).catch(() => { });
+      }).catch((err) => {
+        console.log(err);
+      });
     },
     delete({ commit }, post_id) {
       commit;
@@ -83,13 +81,30 @@ const postModule = {
         params: {
           post_id: post_id,
         }
+      }).then(() => {
+        alert("게시물이 삭제되었습니다.");
+        router.push({ name: 'PostsList' }).catch(() => { });
       })
-        .then(() => {
-          alert("게시물이 삭제되었습니다.");
-          router.push({ name: 'PostsList' }).catch(() => { });
-        })
+    },
+    updatePost({ commit }, payload) {
+      commit;
+      const API_URL = `${REST_API}/posts/`;
+      axios.put(API_URL, null, {
+        params: {
+          post_id: payload.post_id,
+          user_id: payload.user_id,
+          title: payload.title,
+          content: payload.content,
+          category: payload.category,
+        }
+      }).then((res) => {
+        console.log(res);
+        alert("게시물이 수정되었습니다.");
+        router.push({ name: 'PostsDetail', params: { post_id: payload.post_id } });
+      })
     }
   },
+
 };
 
 export default postModule;

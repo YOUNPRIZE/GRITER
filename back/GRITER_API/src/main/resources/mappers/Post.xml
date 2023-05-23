@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		posts p
 		JOIN users u
 		ON u.user_id = p.user_id
+		ORDER BY p.generated_date desc
 	</select>
 
 	<select id="selectByPostId" parameterType="int" resultType="map">
@@ -33,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="Post">
 		SELECT * FROM posts
 		WHERE category = #{category}
+		ORDER BY p.generated_date desc
 	</select>
 
 	<select id="selectByUserId" parameterType="int" resultType="map">
@@ -41,12 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on p.user_id
 		= u.user_id
 		WHERE p.user_id = #{user_id}
+		ORDER BY p.generated_date desc
 	</select>
 
 	<update id="update" parameterType="Post">
 		UPDATE posts
 		SET title =
-		#{title}, content = #{content}, modified_date = CURRENT_TIMESTAMP,
+		#{title}, content = #{content}, modified_date = (CURRENT_TIMESTAMP),
 		category = #{category}
 		WHERE post_id = #{post_id}
 	</update>
