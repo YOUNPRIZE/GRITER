@@ -63,7 +63,7 @@ const postModule = {
     createPost({ commit }, payload) {
       commit;
       const API_URL = `${REST_API}/posts/`;
-      axios(API_URL, null, {
+      axios.post(API_URL, null, {
         params: {
           user_id: payload.user_id,
           title: payload.title,
@@ -71,15 +71,27 @@ const postModule = {
           category: payload.category,
         },
       })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           alert("게시물이 등록되었습니다.");
-          // router.push({ name: 'PostsList' }).catch(() => { });
+          router.push({ name: 'PostsList' }).catch(() => { });
         })
         .catch((err) => {
           console.log(err);
         })
     },
+    delete({ commit }, post_id) {
+      commit;
+      const API_URL = `${REST_API}/posts/${post_id}`
+      axios.delete(API_URL, null, {
+        params: {
+          post_id: post_id,
+        }
+      })
+        .then(() => {
+          alert("게시물이 삭제되었습니다.");
+          router.push({ name: 'PostsList' }).catch(() => { });
+        })
+    }
   },
 };
 
