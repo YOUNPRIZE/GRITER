@@ -254,6 +254,10 @@
         </div>
       </div>
     </div>
+    <!-- <div style="display:none" v-for="item in routines" :key="item">{{ item }}</div> -->
+    <!-- <div v-for="item in routines" :key="item">{{ this.attributes[0]['dates'].push(item.date) }}</div> -->
+    <!-- <div v-for="item in routines" :key="item">{{ item.date  }}</div> -->
+    <!-- <div v-for="item in routines" :key="item">{{ addItemToAttributes(new Date(item.date + 9 * 60 * 60 * 1000).toUTCString()) }}</div> -->
   </main>
 </template>
 
@@ -271,7 +275,8 @@ export default {
             new Date(2023, 4, 5),
             new Date(2023, 4, 10),
             new Date(2023, 4, 15),
-            new Date(2023, 4, 17)
+            new Date(2023, 4, 17),
+            new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString()
           ]
         }
       ]
@@ -282,33 +287,42 @@ export default {
     ...mapState("routineModule", ["routines"])
   },
   mounted() {
-    // console.log(user);
+    const asdfasdf = JSON.stringify(this.routines);
+    console.log(asdfasdf);
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
+    ...mapActions("routineModule", ["getUserRoutines"]),
+    addItemToAttributes(date) {
+      this.attributes[0]["dates"].push(date);
+    }
   },
   created() {
-    console.log("asdfasdfadsf");
-    console.log("xxxxxxx");
-
     const user_id = localStorage.getItem("loginUser");
-    
     // dispatch 역할
     this.getLoginUser(user_id);
     // 로그인하고 1회만 새로고침
-    console.log(self.name);
+    // console.log(self.name);
     if (self.name != "reload") {
+      console.log(JSON.stringify(this.routines));
       self.name = "reload";
       self.location.reload(true);
     } else self.name = "";
-    // console.log(this.loginUser);
-    // for (let i = 0; i < this.routines.length;)
 
-    const getroutines = user_id => {
-      this.getUserRoutines(user_id);
-    };
+    this.getUserRoutines(user_id);
 
-    getroutines(user_id);
+    // const routinesDates = this.routines.map(routine => routine.date);
+    const routinesDates = this.routines.map(function(element) {
+      console.log(element["date"]);
+      return new Date(element.date + 9 * 60 * 60 * 1000).toUTCString();
+    });
+    console.log(routinesDates);
+    // this.attributes[0].dates = routinesDates;
+    // console.log(this.routines.toJSON())
+    // console.log(this.routines.length())
+    // const asdfasdf = JSON.stringify(this.routines);
+    // console.log(asdfasdf);
+    console.log(new Date(1684681200000 + 9 * 60 * 60 * 1000).toUTCString());
   }
 };
 </script>
