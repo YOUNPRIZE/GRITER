@@ -35,7 +35,7 @@
 }}
                     {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
                   <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
-                    <button :value=post.post_id @click="editPost($event)">
+                    <button :value=post.post_id @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
                     <button :value=post.post_id @click="showDeleteModal(post.post_id)">
@@ -147,10 +147,10 @@ export default {
     addItemToAttributes(date) {
       this.attributes[0]["dates"].push(date);
     },
-    // editPost(event) {
-    //   // const post_id = event.target.value;
-
-    // },
+    goEditPost(editPostId) {
+      event.preventDefault()
+      router.push({name: 'PostModify', params: {post_id: editPostId}});
+    },
     showDeleteModal(deletePostId) {
       event.preventDefault()
       console.log(deletePostId);

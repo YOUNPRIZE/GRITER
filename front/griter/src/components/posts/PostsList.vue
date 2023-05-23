@@ -30,11 +30,11 @@
                   </div>
                   <div class="dashboard-content-post-writerInfo">
                     <img src="" alt="" style="
-                          width: 30px;
-                          height: 30px;
-                          border-radius: 100%;
-                          border: solid 1px red;
-                        " />
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
@@ -45,10 +45,10 @@
 }}
                     {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
                   <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
-                    <button :value=post.post_id @click="editPost($event)">
+                    <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
-                    <button :value=post.post_id @click="showDeleteModal(post.post_id)">
+                    <button @click="showDeleteModal(post.post_id)">
                       <i class="bx bx-trash"></i>
                     </button>
                   </div>
@@ -110,10 +110,10 @@ export default {
         }
       }
     },
-    // editPost(event) {
-    //   // const post_id = event.target.value;
-
-    // },
+    goEditPost(editPostId) {
+      event.preventDefault()
+      router.push({name: 'PostModify', params: {post_id: editPostId}});
+    },
     showDeleteModal(deletePostId) {
       event.preventDefault()
       console.log(deletePostId);
