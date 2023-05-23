@@ -49,6 +49,17 @@ public class RoutineRestController {
 			return exceptionHandling(e);
 		}
 	}
+	
+	@GetMapping("/{user_id}")
+	@ApiOperation(value = "특정 사용자의 운동 루틴 조회", response = Routine.class)
+	public ResponseEntity<?> selectRoutineByUser(@PathVariable int user_id) {
+		try {
+			List<Routine> select = rs.selectByUser(user_id);
+			return new ResponseEntity<List<Routine>>(select, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 
 	@GetMapping("/{date}")
 	@ApiOperation(value = "해당 날짜의 운동 루틴 조회", response = Routine.class)

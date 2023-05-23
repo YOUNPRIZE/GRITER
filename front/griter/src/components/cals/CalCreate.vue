@@ -2,17 +2,16 @@
   <main>
     <div class="routines">
       <label class="label-date" style="font-weight: bold;" for="date">운동 날짜</label>
-      <b-form-datepicker id="date" v-model="date" class="mb-2"></b-form-datepicker>
+      <b-form-datepicker id="date" v-model="routine.date" class="mb-2"></b-form-datepicker>
 
       <b-form-group
         style="font-weight: bold; margin-top: 1.5rem;"
-        class
         id="type"
         label="운동 부위 및 타입"
         label-for="routine-type"
       >
         <!-- <b-form-input id="input-2" v-model="form.name" placeholder="Enter name" required></b-form-input> -->
-        <b-form-input id="routine-type" placeholder="ex) 유산소, 하체" required></b-form-input>
+        <b-form-input id="routine-type" v-model="routine.type" placeholder="ex) 유산소, 하체" required></b-form-input>
       </b-form-group>
       <b-form-group
         style="font-weight: bold;"
@@ -20,19 +19,19 @@
         label="운동 종류"
         label-for="routine-workout"
       >
-        <b-form-input id="routine-workout" placeholder="ex) 런닝, 스쿼트" required></b-form-input>
+        <b-form-input id="routine-workout" v-model="routine.exercise" placeholder="ex) 런닝, 스쿼트" required></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="time" label="운동 시간" label-for="routine-time">
-        <b-form-input id="routine-time" placeholder="ex) 60 (분)"></b-form-input>
+        <b-form-input id="routine-time" v-model="routine.time" placeholder="ex) 60 (분)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="sets" label="세트 수" label-for="routine-sets">
-        <b-form-input id="routine-sets" placeholder="ex) 5 (세트)"></b-form-input>
+        <b-form-input id="routine-sets" v-model="routine.sets" placeholder="ex) 5 (세트)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="reps" label="횟수" label-for="routine-reps">
-        <b-form-input id="routine-reps" placeholder="ex) 5 (회)"></b-form-input>
+        <b-form-input id="routine-reps" v-model="routine.reps" placeholder="ex) 5 (회)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="weight" label="무게" label-for="routine-weight">
-        <b-form-input id="routine-weight" placeholder="ex) 100 (KG)"></b-form-input>
+        <b-form-input id="routine-weight" v-model="routine.weight" placeholder="ex) 100 (KG)"></b-form-input>
       </b-form-group>
 
       <div class="buttons">
@@ -49,7 +48,15 @@
 export default {
   data() {
     return {
-      date: new Date()
+      routine: {
+        date: new Date(),
+        type: "",
+        exercise: "",
+        time: "",
+        sets: "",
+        reps: "",
+        weight: ""
+      }
     };
   }
 };

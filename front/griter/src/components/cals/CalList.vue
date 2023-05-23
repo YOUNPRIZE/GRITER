@@ -27,6 +27,9 @@
       <router-link :to="{ name: 'RoutinesCreate' }">
         <button>Create</button>
       </router-link>
+      <router-link :to="{ name: 'DietDetail' }">
+        <button>DietDetail</button>
+      </router-link>
     </div>
   </main>
 </template>

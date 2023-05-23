@@ -15,6 +15,7 @@ import CalView from "../views/CalView.vue";
 import CalList from "@/components/cals/CalList.vue";
 import CalDetail from "@/components/cals/CalDetail.vue";
 import CalCreate from "@/components/cals/CalCreate.vue";
+import CalDietDetail from "@/components/cals/CalDietDetail.vue";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -52,8 +53,8 @@ const routes = [
       },
       {
         path: "/diet",
-        name: "diet",
-        // component: DietDetail,
+        name: "DietDetail",
+        component: CalDietDetail,
       },
     ],
   },
