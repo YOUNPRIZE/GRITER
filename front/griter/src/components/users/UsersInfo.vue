@@ -9,7 +9,11 @@
       </div>
       <div class="line"></div>
       <div class="userinfo-content">
-        <img src="" alt="" style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%" />
+        <img
+          src=""
+          alt=""
+          style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
+        />
         <div class="userinfo-content-info">
           <div class="userinfo-content-info-item">
             <span>Name</span>
@@ -47,39 +51,66 @@
       <div class="myPost-content">
         <div v-for="(post, index) in posts" :key="index" class="group-item">
           <!-- link 좌표 바꿔야 됨 상세보기로, params도 받아와야 함-->
-          <router-link to="/">
+          <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
             <div class="myPost-content-post">
               <div class="myPost-content-post-left">
                 <div class="myPost-content-post-title">
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img src="" alt="" style="
+                  <img
+                    src=""
+                    alt=""
+                    style="
                       width: 30px;
                       height: 30px;
                       border-radius: 100%;
                       border: solid 1px red;
-                    " />
+                    "
+                  />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
               <div class="myPost-content-post-right">
-                <span v-if="JSON.stringify(post.generated_date) === JSON.stringify(post.modified_date)"
-                  class="myPost-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-                    post.generated_date[2] }}
-                  {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{ post.generated_date[5] }}</span>
-                <span v-if="JSON.stringify(post.generated_date) !== JSON.stringify(post.modified_date)"
-                  class="myPost-content-post-created">{{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
-                    post.modified_date[2] }}
-                  {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{ post.modified_date[5] }}(수정됨)</span>
+                <span
+                  v-if="
+                    JSON.stringify(post.generated_date) ===
+                    JSON.stringify(post.modified_date)
+                  "
+                  class="myPost-content-post-created"
+                  >{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                    post.generated_date[2]
+                  }}
+                  {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{
+                    post.generated_date[5]
+                  }}</span
+                >
+                <span
+                  v-if="
+                    JSON.stringify(post.generated_date) !==
+                    JSON.stringify(post.modified_date)
+                  "
+                  class="myPost-content-post-created"
+                  >{{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
+                    post.modified_date[2]
+                  }}
+                  {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{
+                    post.modified_date[5]
+                  }}(수정됨)</span
+                >
                 <div class="myPost-content-post-btn">
-                  <!-- link to 는 기능 확인을 위해 임시로 걸어놓은 것 수정해야됨 -->
-                  <router-link :to="{ name: 'login' }" id="myPost-btn">
-                    <i class="bx bx-pencil"></i>
-                  </router-link>
-                  <router-link :to="{ name: 'follows' }" id="myPost-btn">
-                    <i class="bx bx-trash"></i>
-                  </router-link>
+                  <div
+                    v-if="post.user_id === loginUser.user_id"
+                    class="dashboard-content-post-btn"
+                  >
+                    <button @click="goEditPost(post.post_id)">
+                      <i class="bx bx-pencil"></i>
+                    </button>
+                    <button @click="showDeleteModal(post.post_id)">
+                      <i class="bx bx-trash"></i>
+                    </button>
+                  </div>
+                  <div v-else></div>
                 </div>
               </div>
             </div>
@@ -87,14 +118,32 @@
         </div>
       </div>
     </div>
+    <!-- 모달 -->
+    <div v-if="isDeleteModalOpen" class="modal">
+      <div class="modal-content">
+        <h3>삭제 확인</h3>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div class="modal-content-buttons">
+          <button v-on:click="deletePost" class="btn btn-danger">예</button>
+          <button v-on:click="closeDeleteModal" class="btn btn-primary">취소</button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
+import router from "@/router";
 import { mapState, mapActions } from "vuex";
 
 export default {
   name: "UserInfo",
+  data() {
+    return {
+      isDeleteModalOpen: false,
+      deletePostId: "",
+    };
+  },
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("postModule", ["posts"]),
@@ -102,6 +151,26 @@ export default {
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("postModule", ["getPostsByUserId"]),
+    goEditPost(editPostId) {
+      event.preventDefault();
+      router.push({ name: "PostModify", params: { post_id: editPostId } });
+    },
+    showDeleteModal(deletePostId) {
+      event.preventDefault();
+      console.log(deletePostId);
+      this.isDeleteModalOpen = true;
+      this.deletePostId = deletePostId;
+    },
+    closeDeleteModal() {
+      this.isDeleteModalOpen = false;
+      this.deletePostId = "";
+    },
+    deletePost() {
+      console.log(this.deletePostId);
+      this.delete(this.deletePostId);
+      this.closeDeleteModal();
+      router.go(0);
+    },
   },
   created() {
     const user_id = localStorage.getItem("loginUser");
@@ -138,7 +207,7 @@ main {
 }
 
 .userinfo-header,
-.myPost>span:nth-child(1) {
+.myPost > span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -183,14 +252,14 @@ main {
   flex-direction: row;
 }
 
-.userinfo-content-info-item>span:nth-child(1) {
+.userinfo-content-info-item > span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
 
-.userinfo-content-info-item>span:nth-child(2) {
+.userinfo-content-info-item > span:nth-child(2) {
   /* border: solid 1px green; */
   margin-left: 2rem;
   width: 100%;
@@ -206,7 +275,7 @@ main {
   height: 100%;
 }
 
-.introduce>span:nth-child(1) {
+.introduce > span:nth-child(1) {
   font-size: large;
   font-weight: bold;
 }
@@ -296,9 +365,9 @@ main {
   color: grey;
 }
 
-/* @media (prefers-color-scheme: dark){
-  .userinfo{
-    background-color: black;
-  }
-} */
+.dashboard-content-post-btn > button {
+  border: none;
+  background-color: transparent;
+  color: var(--font-color-btn-1);
+}
 </style>

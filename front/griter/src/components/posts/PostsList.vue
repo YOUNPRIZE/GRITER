@@ -300,6 +300,7 @@ export default {
 .dashboard-content-post-btn>button {
   border: none;
   background-color: transparent;
+  color: var(--font-color-btn-1);
 }
 
 </style>
