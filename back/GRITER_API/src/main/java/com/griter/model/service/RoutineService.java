@@ -10,6 +10,9 @@ public interface RoutineService {
 
 	// 모든 운동 루틴 조회
 	List<Routine> selectAll();
+	
+	// 특정 사용자의 운동 루틴 조회
+	List<Routine> selectByUser(int user_id);
 
 	// 해당 날짜의 운동 루틴 조회
 	List<Routine> selectByDate(int date);

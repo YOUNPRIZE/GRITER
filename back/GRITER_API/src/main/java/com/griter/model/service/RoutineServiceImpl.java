@@ -23,7 +23,12 @@ public class RoutineServiceImpl implements RoutineService {
 	public List<Routine> selectAll() {
 		return routineDao.selectAll();
 	}
-
+	
+	@Override
+	public List<Routine> selectByUser(int user_id) {
+		return routineDao.selectByUser(user_id);
+	}
+	
 	@Override
 	public List<Routine> selectByDate(int date) {
 		return routineDao.selectByDate(date);
@@ -38,5 +43,4 @@ public class RoutineServiceImpl implements RoutineService {
 	public int delete(int routine_id) {
 		return routineDao.delete(routine_id);
 	}
-
 }

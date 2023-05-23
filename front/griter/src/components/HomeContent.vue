@@ -278,7 +278,8 @@ export default {
     };
   },
   computed: {
-    ...mapState("userModule", ["loginUser"])
+    ...mapState("userModule", ["loginUser"]),
+    ...mapState("routineModule", ["routines"])
   },
   mounted() {
     // console.log(user);
@@ -287,7 +288,11 @@ export default {
     ...mapActions("userModule", ["getLoginUser"]),
   },
   created() {
+    console.log("asdfasdfadsf");
+    console.log("xxxxxxx");
+
     const user_id = localStorage.getItem("loginUser");
+    
     // dispatch 역할
     this.getLoginUser(user_id);
     // 로그인하고 1회만 새로고침
@@ -297,6 +302,13 @@ export default {
       self.location.reload(true);
     } else self.name = "";
     // console.log(this.loginUser);
+    // for (let i = 0; i < this.routines.length;)
+
+    const getroutines = user_id => {
+      this.getUserRoutines(user_id);
+    };
+
+    getroutines(user_id);
   }
 };
 </script>

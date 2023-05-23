@@ -1,5 +1,5 @@
-import router from '@/router';
-import axios from 'axios';
+// import router from '@/router';
+import axios from "axios";
 
 const REST_API = `http://localhost:9999/api`;
 
@@ -15,7 +15,7 @@ const postModule = {
     },
     post(state) {
       return state.post;
-    }
+    },
   },
   mutations: {
     setPosts(state, payload) {
@@ -31,34 +31,31 @@ const postModule = {
       axios({
         url: API_URL,
         method: "GET",
-      })
-        .then((res) => {
-          // console.log(JSON.stringify(res.data));
-          commit('setPosts', res.data);
-        })
+      }).then((res) => {
+        // console.log(JSON.stringify(res.data));
+        commit("setPosts", res.data);
+      });
     },
     getPost({ commit }, post_id) {
       const API_URL = `${REST_API}/posts/${post_id}`;
       axios({
         url: API_URL,
         method: "GET",
-      })
-        .then((res) => {
-          // alert(post_id);
-          // console.log(JSON.stringify(res.data));
-          commit('setPost', res.data);
-        })
+      }).then((res) => {
+        // alert(post_id);
+        // console.log(JSON.stringify(res.data));
+        commit("setPost", res.data);
+      });
     },
     getPostsByUserId({ commit }, user_id) {
       const API_URL = `${REST_API}/posts/by=${user_id}`;
       axios({
         url: API_URL,
         method: "GET",
-      })
-        .then((res) => {
-          // console.log(JSON.stringify(res.data));
-          commit('setPosts', res.data);
-        })
+      }).then((res) => {
+        // console.log(JSON.stringify(res.data));
+        commit("setPosts", res.data);
+      });
     },
     createPost({ commit }, payload) {
       commit;
@@ -78,7 +75,7 @@ const postModule = {
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     },
   },
 };
