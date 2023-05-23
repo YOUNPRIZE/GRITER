@@ -1,4 +1,5 @@
 // import router from "@/router";
+import router from "@/router";
 import axios from "axios";
 
 const REST_API = `http://localhost:9999/api`;
@@ -38,6 +39,31 @@ const routineModule = {
         commit("GET_ROUTINES", res.data);
       });
     },
+    createRoutines({commit}, routine) {
+      commit;
+      const API_URL = `${REST_API}/routines/`;
+      console.log(routine)
+      axios.post(API_URL, null, {
+        params: {
+          user_id : routine.user_id,
+          exercise : routine.exercise,
+          type : routine.type,
+          date : routine.date,
+          time : routine.time,
+          sets : routine.sets,
+          reps : routine.reps,
+          weight : routine.weight,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert("운동 루틴이 등록되었습니다.");
+        router.push({ name : 'calendar'});
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   },
 };
 

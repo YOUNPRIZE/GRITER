@@ -32,8 +32,7 @@
       <!-- 이미지 사용하면 주석 해제하기. -->
 
       <div class="buttons">
-        <b-button class="update" variant="primary">수정</b-button>
-        <b-button class="delete" variant="danger">삭제</b-button>
+        <b-button class="register" variant="primary">등록</b-button>
         <router-link :to="{ name: 'calendar' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>
@@ -81,6 +80,7 @@ main {
   margin: 2rem;
   padding: 2rem;
   background-color: var(--box-bg-color);
+  overflow: auto;
 }
 
 .form-control {

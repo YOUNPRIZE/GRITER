@@ -10,8 +10,7 @@
         label="운동 부위 및 타입"
         label-for="routine-type"
       >
-        <!-- <b-form-input id="input-2" v-model="form.name" placeholder="Enter name" required></b-form-input> -->
-        <b-form-input id="routine-type" v-model="routine.type" placeholder="ex) 유산소, 하체" required></b-form-input>
+        <b-form-input type="text" id="routine-type" v-model="routine.type" placeholder="ex) 유산소, 하체" required></b-form-input>
       </b-form-group>
       <b-form-group
         style="font-weight: bold;"
@@ -19,23 +18,23 @@
         label="운동 종류"
         label-for="routine-workout"
       >
-        <b-form-input id="routine-workout" v-model="routine.exercise" placeholder="ex) 런닝, 스쿼트" required></b-form-input>
+        <b-form-input type="text" id="routine-workout" v-model="routine.exercise" placeholder="ex) 런닝, 스쿼트" required></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="time" label="운동 시간" label-for="routine-time">
-        <b-form-input id="routine-time" v-model="routine.time" placeholder="ex) 60 (분)"></b-form-input>
+        <b-form-input type="number" id="routine-time" v-model="routine.time" placeholder="ex) 60 (분)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="sets" label="세트 수" label-for="routine-sets">
-        <b-form-input id="routine-sets" v-model="routine.sets" placeholder="ex) 5 (세트)"></b-form-input>
+        <b-form-input type="number" id="routine-sets" v-model="routine.sets" placeholder="ex) 5 (세트)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="reps" label="횟수" label-for="routine-reps">
-        <b-form-input id="routine-reps" v-model="routine.reps" placeholder="ex) 5 (회)"></b-form-input>
+        <b-form-input type="number" id="routine-reps" v-model="routine.reps" placeholder="ex) 5 (회)"></b-form-input>
       </b-form-group>
       <b-form-group style="font-weight: bold;" id="weight" label="무게" label-for="routine-weight">
-        <b-form-input id="routine-weight" v-model="routine.weight" placeholder="ex) 100 (KG)"></b-form-input>
+        <b-form-input type="number" id="routine-weight" v-model="routine.weight" placeholder="ex) 100 (KG)"></b-form-input>
       </b-form-group>
 
       <div class="buttons">
-        <b-button class="register" variant="primary">등록</b-button>
+        <b-button @click="create" class="register" variant="primary">등록</b-button>
         <router-link :to="{ name: 'calendar' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>
@@ -45,7 +44,10 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
+  name: "createRoutine",
   data() {
     return {
       routine: {
@@ -55,10 +57,26 @@ export default {
         time: "",
         sets: "",
         reps: "",
-        weight: ""
+        weight: "",
+        user_id: "",
       }
     };
-  }
+  },
+  computed: {
+    ...mapState('userModule', ["loginUser"]),
+  },
+  methods: {
+    ...mapActions('routineModule', ["createRoutines"]),
+    create() {
+      const user_id = localStorage.getItem("loginUser");
+      this.routine.user_id = user_id;
+      if (user_id.length > 0 && this.routine.type.length > 0 && this.routine.exercise.length > 0) {
+        this.createRoutines(this.routine);
+      } else {
+        alert("필수항목을 모두 입력해주세요!");
+      }
+    }
+  }, 
 };
 </script>
 
@@ -84,6 +102,7 @@ main {
   margin: 2rem;
   padding: 2rem;
   background-color: var(--box-bg-color);
+  overflow: auto;
 }
 
 .form-control {

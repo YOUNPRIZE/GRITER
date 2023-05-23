@@ -1,35 +1,31 @@
 <template>
   <main>
-    <div class="dashboard-container">
-      <v-calendar
-        is-expanded
-        class="custom-calendar max-w-full"
-        :masks="masks"
-        :attributes="attributes"
-        disable-page-swipe
-      >
+    <div class="calendar-container">
+      <div id="calendar-title">
+        <h3>Calendar</h3>
+
+        <router-link :to="{ name: 'RoutinesDetail' }">
+          <button>Detail</button>
+        </router-link>
+        <router-link :to="{ name: 'DietsCreate' }">
+          <button>DietCreate</button>
+        </router-link>
+        <router-link :to="{ name: 'RoutinesCreate' }">
+          <box-icon type="solid" name="plus-square"></box-icon>
+        </router-link>
+      </div>
+      <v-calendar is-expanded class="custom-calendar max-w-full" :masks="masks" :attributes="attributes"
+        disable-page-swipe>
         <template v-slot:day-content="{ day, attributes }">
           <div class="flex flex-col h-full z-10 overflow-hidden">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
             <div class="flex-grow overflow-y-auto overflow-x-auto">
-              <p
-                v-for="attr in attributes"
-                :key="attr.key"
-                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-              >{{ attr.customData.title }}</p>
+              <p v-for="attr in attributes" :key="attr.key" class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1">{{
+                attr.customData.title }}</p>
             </div>
           </div>
         </template>
       </v-calendar>
-      <router-link :to="{ name: 'RoutinesDetail' }">
-        <button>Detail</button>
-      </router-link>
-      <router-link :to="{ name: 'RoutinesCreate' }">
-        <button>Create</button>
-      </router-link>
-      <router-link :to="{ name: 'DietDetail' }">
-        <button>DietDetail</button>
-      </router-link>
     </div>
   </main>
 </template>
@@ -68,28 +64,35 @@ export default {
 </script>
 
 <style scoped>
-.dashboard-container {
+.calendar-container {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 1rem rgb(190, 190, 190);
   background-color: var(--box-bg-color);
   padding: 1.5rem;
   width: 90vw;
+  overflow: auto;
   height: 84vh;
 }
-.vc-container
-  :nth-child(2)
-  :nth-child(1)
-  :nth-child(1)
-  :nth-child(2)
-  :nth-child(1) {
+
+#calendar-title {
+  /* border: solid green; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  padding-bottom: 1rem;
+}
+
+.vc-container :nth-child(2) :nth-child(1) :nth-child(1) :nth-child(2) :nth-child(1) {
   height: 5rem;
 }
 </style>
 
 
 
-<style lang="postcss" scoped>
+<style scoped lang="postcss">
 ::-webkit-scrollbar {
   width: 0px;
 }
