@@ -137,7 +137,7 @@ export default {
 
     const len = this.routines.length;
     for (let i = 0; i < len; i++) {
-      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000));
+      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString());
     }
   },
   methods: {
