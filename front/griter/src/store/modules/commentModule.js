@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const REST_API = `http://localhost:9999/api`;
 
-const postModule = {
+const commentModule = {
   namespaced: true,
   state: {
     comments: [],
@@ -66,4 +66,4 @@ const postModule = {
   },
 };
 
-export default postModule;
+export default commentModule;

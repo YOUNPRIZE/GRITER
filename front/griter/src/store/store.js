@@ -7,6 +7,7 @@ import userModule from "./modules/userModule.js";
 import postModule from "./modules/postModule.js";
 import commentModule from "./modules/commentModule.js";
 import routineModule from "./modules/routineModule.js";
+import followModule from "./modules/followModule.js";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     postModule: postModule,
     commentModule: commentModule,
     routineModule: routineModule,
+    followModule: followModule,
   },
   plugins: [
     createPersistedState({

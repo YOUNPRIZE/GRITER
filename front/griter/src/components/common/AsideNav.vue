@@ -96,6 +96,7 @@ export default {
     logout() {
       sessionStorage.removeItem("access-token");
       localStorage.removeItem("loginUser");
+      localStorage.removeItem("vuex");
       this.$router.push({ name: "login" });
     },
   },
