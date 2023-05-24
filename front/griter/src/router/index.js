@@ -45,7 +45,7 @@ const routes = [
       },
       // 루틴이냐? 식단이냐?
       {
-        path: "/routine",
+        path: "/routine/:routine_id",
         name: "RoutinesDetail",
         component: CalDetail,
       },

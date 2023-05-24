@@ -23,6 +23,11 @@ public class RoutineServiceImpl implements RoutineService {
 	public List<Routine> selectAll() {
 		return routineDao.selectAll();
 	}
+
+	@Override
+	public Routine select(int routine_id) {
+		return routineDao.select(routine_id);
+	}
 	
 	@Override
 	public List<Routine> selectByUser(int user_id) {
