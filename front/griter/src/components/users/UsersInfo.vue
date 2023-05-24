@@ -5,7 +5,7 @@
         <div class="userinfo-head">
           <div class="userinfo-header">
             <span>User Information</span>
-            <router-link v-if="loginUser.user_id === user.user_id || myPage" to="/">
+            <router-link v-if="loginUser.user_id === user.user_id || myPage" :to="{ name: 'updateUser' }">
               <i class="bx bxs-edit" id="edit-btn"></i>
             </router-link>
             <div v-else id="follow-btn">
@@ -22,16 +22,12 @@
           <div class="line"></div>
         </div>
         <div class="userinfo-content">
-          <img
-            src
-            alt
-            style="
-              height: 15rem;
-              width: 15rem;
-              border: solid 1px red;
-              border-radius: 100%;
-            "
-          />
+          <img src alt style="
+                height: 15rem;
+                width: 15rem;
+                border: solid 1px red;
+                border-radius: 100%;
+              " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -67,35 +63,12 @@
           <div class="follows-header">
             <div class="userinfo-follow-header">
               <div class="userinfo-follow-header-select">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="select-followers"
-                  autocomplete="off"
-                  @click="toggleFollow"
-                  checked
-                />
-                <label
-                  id="follow-select-btn"
-                  class="btn btn-outline-primary"
-                  for="select-followers"
-                  >Followers</label
-                >
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="select-following"
-                  autocomplete="off"
-                  @click="toggleFollow"
-                />
-                <label
-                  id="follow-select-btn"
-                  class="btn btn-outline-primary"
-                  for="select-following"
-                  >Following</label
-                >
+                <input type="radio" class="btn-check" name="options" id="select-followers" autocomplete="off"
+                  @click="toggleFollow" checked />
+                <label id="follow-select-btn" class="btn btn-outline-primary" for="select-followers">Followers</label>
+                <input type="radio" class="btn-check" name="options" id="select-following" autocomplete="off"
+                  @click="toggleFollow" />
+                <label id="follow-select-btn" class="btn btn-outline-primary" for="select-following">Following</label>
               </div>
             </div>
             <span class="followers-logo">Followers</span>
@@ -104,13 +77,7 @@
                 <span class="input-group-text">
                   <box-icon name="search"></box-icon>
                 </span>
-                <input
-                  class="form-control"
-                  id="search"
-                  type="text"
-                  placeholder="Search"
-                  @input="searchGroup1($event)"
-                />
+                <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup1($event)" />
               </div>
             </form>
           </div>
@@ -123,12 +90,7 @@
           </div>
           <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
           <div class="follow-content">
-            <div
-              v-for="(follower, index) in followers"
-              :key="index"
-              class="group-item-1"
-              id="followers-content"
-            >
+            <div v-for="(follower, index) in followers" :key="index" class="group-item-1" id="followers-content">
               <div @click="movePage(follower.user_id)">
                 <div id="followers-content-userInfo">
                   <div class="followers-content-userInfo">
@@ -147,35 +109,12 @@
           <div class="follows-header">
             <div class="userinfo-follow-header">
               <div class="userinfo-follow-header-select">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="select-followers"
-                  autocomplete="off"
-                  @click="toggleFollow"
-                  checked
-                />
-                <label
-                  id="follow-select-btn"
-                  class="btn btn-outline-primary"
-                  for="select-followers"
-                  >Followers</label
-                >
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="select-following"
-                  autocomplete="off"
-                  @click="toggleFollow"
-                />
-                <label
-                  id="follow-select-btn"
-                  class="btn btn-outline-primary"
-                  for="select-following"
-                  >Following</label
-                >
+                <input type="radio" class="btn-check" name="options" id="select-followers" autocomplete="off"
+                  @click="toggleFollow" checked />
+                <label id="follow-select-btn" class="btn btn-outline-primary" for="select-followers">Followers</label>
+                <input type="radio" class="btn-check" name="options" id="select-following" autocomplete="off"
+                  @click="toggleFollow" />
+                <label id="follow-select-btn" class="btn btn-outline-primary" for="select-following">Following</label>
               </div>
             </div>
             <span class="following-logo">Following</span>
@@ -184,13 +123,7 @@
                 <span class="input-group-text">
                   <box-icon name="search"></box-icon>
                 </span>
-                <input
-                  class="form-control"
-                  id="search"
-                  type="text"
-                  placeholder="Search"
-                  @input="searchGroup2($event)"
-                />
+                <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup2($event)" />
               </div>
             </form>
           </div>
@@ -203,12 +136,7 @@
           </div>
           <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
           <div class="follow-content">
-            <div
-              v-for="(follow, index) in following"
-              :key="index"
-              class="group-item-2"
-              id="following-content"
-            >
+            <div v-for="(follow, index) in following" :key="index" class="group-item-2" id="following-content">
               <div @click="movePage(follow.following_id)">
                 <div id="following-content-userInfo">
                   <div class="following-content-userInfo">
@@ -238,27 +166,20 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img
-                    src
-                    alt
-                    style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    "
-                  />
+                  <img src alt style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: solid 1px red;
+                      " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
               <div class="myPost-content-post-right">
-                <span
-                  v-if="
-                    JSON.stringify(post.generated_date) ===
-                    JSON.stringify(post.modified_date)
-                  "
-                  class="myPost-content-post-created"
-                >
+                <span v-if="
+                  JSON.stringify(post.generated_date) ===
+                  JSON.stringify(post.modified_date)
+                " class="myPost-content-post-created">
                   {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
                     post.generated_date[2]
                   }}
@@ -266,13 +187,10 @@
                     post.generated_date[5]
                   }}
                 </span>
-                <span
-                  v-if="
-                    JSON.stringify(post.generated_date) !==
-                    JSON.stringify(post.modified_date)
-                  "
-                  class="myPost-content-post-created"
-                >
+                <span v-if="
+                  JSON.stringify(post.generated_date) !==
+                  JSON.stringify(post.modified_date)
+                " class="myPost-content-post-created">
                   {{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
                     post.modified_date[2]
                   }}
@@ -281,10 +199,7 @@
                   }}(수정됨)
                 </span>
                 <div class="myPost-content-post-btn">
-                  <div
-                    v-if="post.user_id === loginUser.user_id"
-                    class="dashboard-content-post-btn"
-                  >
+                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
                     <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
@@ -508,7 +423,7 @@ main {
 }
 
 .userinfo-header,
-.myPost > span:nth-child(1) {
+.myPost>span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -559,14 +474,14 @@ main {
   flex-direction: row;
 }
 
-.userinfo-content-info-item > span:nth-child(1) {
+.userinfo-content-info-item>span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
 
-.userinfo-content-info-item > div {
+.userinfo-content-info-item>div {
   /* border: solid 1px green; */
   padding-left: 2.5rem;
   width: 100%;
@@ -644,7 +559,7 @@ main {
   color: grey;
 }
 
-.dashboard-content-post-btn > button {
+.dashboard-content-post-btn>button {
   border: none;
   background-color: transparent;
   color: var(--font-color-btn-1);
@@ -720,37 +635,37 @@ main {
   justify-content: space-around;
 }
 
-.followers-head > span,
-.following-head > span {
+.followers-head>span,
+.following-head>span {
   /* border: solid 1px red; */
   font-weight: bold;
 }
 
-.followers-head > span:nth-child(1),
-.following-head > span:nth-child(1),
-.followers-content-userInfo > img,
-.following-content-userInfo > img {
+.followers-head>span:nth-child(1),
+.following-head>span:nth-child(1),
+.followers-content-userInfo>img,
+.following-content-userInfo>img {
   width: 10%;
 }
 
-.followers-head > span:nth-child(2),
-.following-head > span:nth-child(2),
-.followers-content-userInfo > span:nth-child(2),
-.following-content-userInfo > span:nth-child(2) {
+.followers-head>span:nth-child(2),
+.following-head>span:nth-child(2),
+.followers-content-userInfo>span:nth-child(2),
+.following-content-userInfo>span:nth-child(2) {
   width: 23%;
 }
 
-.followers-head > span:nth-child(3),
-.following-head > span:nth-child(3),
-.followers-content-userInfo > span:nth-child(3),
-.following-content-userInfo > span:nth-child(3) {
+.followers-head>span:nth-child(3),
+.following-head>span:nth-child(3),
+.followers-content-userInfo>span:nth-child(3),
+.following-content-userInfo>span:nth-child(3) {
   width: 23%;
 }
 
-.followers-head > span:nth-child(4),
-.following-head > span:nth-child(4),
-.followers-content-userInfo > span:nth-child(4),
-.following-content-userInfo > span:nth-child(4) {
+.followers-head>span:nth-child(4),
+.following-head>span:nth-child(4),
+.followers-content-userInfo>span:nth-child(4),
+.following-content-userInfo>span:nth-child(4) {
   width: 44%;
 }
 
@@ -767,8 +682,8 @@ main {
   height: 3rem;
 }
 
-.followers-content-userInfo > *,
-.following-content-userInfo > * {
+.followers-content-userInfo>*,
+.following-content-userInfo>* {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -779,11 +694,13 @@ main {
   /* width: 100%; */
   display: flex;
 }
+
 #follow-select-btn {
   height: 2rem;
   font-size: small;
   margin-right: 1rem;
 }
+
 .myPost-content-post-writer {
   margin-left: 1rem;
 }

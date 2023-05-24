@@ -7,6 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="create" parameterType="PostLike">
 		INSERT INTO post_likes (post_like_id, user_id, post_id)
 		VALUES (0, #{user_id}, #{post_id})
+		<!-- 
+		UPDATE posts
+		SET like_cnt = like_cnt + 1
+		WHERE post_id = #{post_id};
+		 -->
 	</insert>
 	
 	<select id="selectByUser" parameterType="int" resultType="PostLike">
@@ -22,6 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="PostLike">
 		DELETE FROM post_likes
 		WHERE user_id = #{user_id} AND post_id = #{post_id}
+		<!-- 
+		UPDATE posts
+		SET like_cnt = like_cnt - 1
+		WHERE post_id = #{post_id};
+		 -->
 	</delete>
 
 </mapper>
