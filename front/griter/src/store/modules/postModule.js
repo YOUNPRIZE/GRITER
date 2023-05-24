@@ -8,6 +8,7 @@ const postModule = {
   state: {
     posts: [],
     post: {},
+    postLiked: [],
   },
   getters: {
     posts(state) {
@@ -15,6 +16,9 @@ const postModule = {
     },
     post(state) {
       return state.post;
+    },
+    postLiked(state) {
+      return state.postLiked;
     },
   },
   mutations: {
@@ -24,6 +28,9 @@ const postModule = {
     setPost(state, payload) {
       state.post = payload;
     },
+    setPostLiked(state, payload) {
+      state.postLiked = payload;
+    }
   },
   actions: {
     getPosts({ commit }) {
@@ -86,6 +93,17 @@ const postModule = {
         router.push({ name: 'PostsList' }).catch(() => { });
       })
     },
+    addViewCnt({commit}, payload) {
+      commit
+      const API_URL = `${REST_API}/posts/cnt`;
+      axios.put(API_URL, null, {
+        params: {
+          post_id: payload
+        }
+      }).then((res) => {
+        res;
+      })
+    },
     updatePost({ commit }, payload) {
       commit;
       const API_URL = `${REST_API}/posts/`;
@@ -102,6 +120,47 @@ const postModule = {
         alert("게시물이 수정되었습니다.");
         router.push({ name: 'PostsDetail', params: { post_id: payload.post_id } });
       })
+    },
+    // 밑은 postLikes
+    createPostLike({commit}, payload) {
+      commit;
+      const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}`;
+      console.log(API_URL)
+      axios.post(API_URL, null, {
+        params: {
+          user_id: payload.user_id,
+          post_id: payload.post_id,
+        },
+      }).then(() => {
+        
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    deletePostLike({commit}, payload) {
+      commit;
+      console.log(payload)
+      const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}`;
+      axios.delete(API_URL, null, {
+        params: {
+          user_id: payload.user_id,
+          post_id: payload.post_id,
+        },
+      }).then(() => {
+        
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    getPostLikeByUser({commit}, payload) {
+      commit;
+      const API_URL = `http://localhost:9999/api/posts/likes/user/${payload}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("setPostLiked", res.data);
+      }); 
     }
   },
 

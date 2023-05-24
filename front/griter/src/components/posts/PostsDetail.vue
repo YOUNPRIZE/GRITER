@@ -9,6 +9,10 @@
           </div>
           <div>
             <div v-if="post[0].user_id === loginUser.user_id" class="dashboard-content-post-btn">
+              <!--true일 때는 좋아요 상태이므로 버튼을 누르면 좋아요 해제-->
+              <button v-if="isLiked == true" @click="unliked()"><i class='bx bxs-star'></i></button>
+              <!--false일 때는 좋아요가 아닌 상태이므로 버튼 누르면 좋아요-->
+              <button v-else @click="liked()"><i class="bx bx-star"></i></button>
               <button @click="goEditPost(post[0].post_id)">
                 <i class="bx bx-pencil"></i>
               </button>
@@ -16,7 +20,12 @@
                 <i class="bx bx-trash"></i>
               </button>
             </div>
-            <div v-else></div>
+            <div v-else class="dashboard-content-post-btn">
+              <!--true일 때는 좋아요 상태이므로 버튼을 누르면 좋아요 해제-->
+              <button v-if="isLiked == true" @click="unliked()"><i class='bx bxs-star'></i></button>
+              <!--false일 때는 좋아요가 아닌 상태이므로 버튼 누르면 좋아요-->
+              <button v-else @click="liked()"><i class="bx bx-star"></i></button>
+            </div>
           </div>
         </div>
         <div class="line"></div>
@@ -27,6 +36,7 @@
             <div class="postdetail-main-aside">
               <span class="detail-key">Title</span>
               <span class="detail-key">Writer</span>
+              <span class="detail-key">Views</span>
               <span class="detail-key">Category</span>
               <span class="detail-key">Content</span>
             </div>
@@ -36,6 +46,7 @@
                 <img src="" alt="" />
                 <span>{{ post[0].nickname }}</span>
               </div>
+              <span>{{ post[0].view_cnt }}</span>
               <span>{{ post[0].category }}</span>
             </div>
             <div class="postdetail-main-generateddate">
@@ -162,19 +173,34 @@ export default {
       deleteCommentId: "",
       editingCommentId: "",
       commentContent: "",
+      isLiked: false,
     };
   },
   computed: {
-    ...mapState("postModule", ["post"]),
+    ...mapState("postModule", ["post", "postLiked"]),
     ...mapState("commentModule", ["comments", "comment"]),
     ...mapState("userModule", ["loginUser"]),
   },
   methods: {
-    ...mapActions("postModule", ["getPost", "delete"]),
+    ...mapActions("postModule", ["getPost", "delete", "addViewCnt", "deletePostLike" ,"createPostLike" ,"getPostLikeByUser"]),
     ...mapActions("commentModule", ["getComments", "getComment", "createComment", "commentDelete", "update"]),
     ...mapActions("userModule", ["getLoginUser"]),
     moveList() {
       this.$router.push({ name: "PostsList" });
+    },
+    liked() {
+      const param = {
+        user_id : this.loginUser.user_id,
+        post_id : this.post[0].post_id,
+      }
+      this.createPostLike(param);
+    },
+    unliked() {
+      const param = {
+        user_id : this.loginUser.user_id,
+        post_id : this.post[0].post_id,
+      }
+      this.deletePostLike(param);
     },
     writeComment() {
       const newComment = {
@@ -246,13 +272,20 @@ export default {
     }
   },
   created() {
-    // console.log(this.$route.params);
     const post_id = this.$route.params.post_id;
-    // console.log(post_id);
     this.getPost(post_id);
     this.getComments(post_id);
     const userId = localStorage.getItem("loginUser");
     this.getLoginUser(userId);
+    this.addViewCnt(post_id);
+    this.getPostLikeByUser(userId);
+    let len = this.postLiked.length;
+    for (let i = 0; i < len; i++) {
+      if (this.postLiked[i].post_id === post_id) {
+        this.isLiked = true;
+        break;
+      }
+    }
   },
 };
 </script>

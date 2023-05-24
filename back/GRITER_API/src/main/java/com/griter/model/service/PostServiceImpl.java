@@ -47,8 +47,12 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public int addViewCnt(int post_id) {
+		return postDao.addViewCnt(post_id);
+	}
+	
+	@Override
 	public int delete(int post_id) {
 		return postDao.delete(post_id);
 	}
-
 }

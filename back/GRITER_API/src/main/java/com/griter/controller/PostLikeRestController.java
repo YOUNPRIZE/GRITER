@@ -38,9 +38,9 @@ public class PostLikeRestController {
 		}
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/user/{user_id}")
 	@ApiOperation(value = "사용자가 좋아요를 누른 게시물 정보를 조회", response = PostLike.class)
-	public ResponseEntity<?> selectByUser(int user_id) {
+	public ResponseEntity<?> selectByUser(@PathVariable int user_id) {
 		try {
 			List<PostLike> list = pls.selectByUser(user_id);
 			return new ResponseEntity<List<PostLike>>(list, HttpStatus.OK);
@@ -63,6 +63,7 @@ public class PostLikeRestController {
 	@DeleteMapping("/{post_id}")
 	@ApiOperation(value = "게시물에 대한 좋아요 정보를 삭제", response = PostLike.class)
 	public ResponseEntity<?> delete(PostLike postlike) {
+		System.out.println(postlike);
 		try {
 			int delete = pls.delete(postlike);
 			return new ResponseEntity<Integer>(delete, HttpStatus.OK);
