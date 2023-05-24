@@ -30,6 +30,15 @@ public class FollowRestController {
 	@ApiOperation(value = "팔로우 신청", response = Follow.class)
 	public ResponseEntity<?> createFollow(Follow follow) {
 		try {
+			List<Follow> list = fs.selectByFollowingId(follow.getFollowing_id());
+			System.out.println(follow);
+			System.out.println(list);
+			for(int i = 0; i<list.size(); i++) {
+				if(list.get(i).getUser_id() == follow.getUser_id()) {
+					System.out.println("이미 팔로우 중");
+					return new ResponseEntity<Integer>(0, HttpStatus.OK);
+				}
+			}
 			int create = fs.createFollow(follow);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);
 		} catch (Exception e) {
@@ -50,9 +59,9 @@ public class FollowRestController {
 
 	@GetMapping("/following/{following_id}")
 	@ApiOperation(value = "현재 사용자가 팔로우하는 사용자들을 조회", response = Follow.class)
-	public ResponseEntity<?> selectByFollowingId(@PathVariable int following_id) {
+	public ResponseEntity<?> selectByFollowingIdwithNickname(@PathVariable int following_id) {
 		try {
-			List<Follow> select = fs.selectByFollowingId(following_id);
+			List<Follow> select = fs.selectByFollowingIdwithNickname(following_id);
 			return new ResponseEntity<List<Follow>>(select, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

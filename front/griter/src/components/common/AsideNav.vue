@@ -12,16 +12,13 @@
           <hr style="margin-left: 1rem" />
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
-            <!-- <router-link :to="`users/${loginUser.user_id}`"> -->
-            <router-link :to="{name: 'userInfo', params: {user_id: loginUser.user_id}}">
-              <div class="nav_link">
-                <img src="" class="profile-img" alt="" />
-                <div class="login-info">
-                  <span>Catbirdseat</span><br />
-                  <span>catbirdseat@naver.com</span>
-                </div>
+            <div class="nav_link" @click="goMyPage">
+              <img src="" class="profile-img" alt="" />
+              <div class="login-info">
+                <span>Catbirdseat</span><br />
+                <span>catbirdseat@naver.com</span>
               </div>
-            </router-link>
+            </div>
             <hr style="margin-left: 1rem" />
             <router-link :to="{ name: 'home' }">
               <div class="nav_link">
@@ -73,6 +70,7 @@
 </template>
 
 <script>
+import router from "@/router";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -97,7 +95,13 @@ export default {
       sessionStorage.removeItem("access-token");
       localStorage.removeItem("loginUser");
       localStorage.removeItem("vuex");
-      this.$router.push({ name: "login" });
+      router.push({ name: "login" });
+    },
+    goMyPage() {
+      if (router.currentRoute.name !== "myPage") {
+        router.push({ name: "myPage" });
+        setTimeout(() => this.$router.go(0), "0");
+      }
     },
   },
   mounted() {
@@ -105,11 +109,10 @@ export default {
       document.getElementById("nightmode").checked = true;
     }
   },
-  created(){
-    const user_id = localStorage.getItem('loginUser');
+  created() {
+    const user_id = localStorage.getItem("loginUser");
     this.getLoginUser(user_id);
-  }
-  
+  },
 };
 </script>
 
@@ -220,6 +223,7 @@ a {
 
 .nav_link:hover {
   color: var(--white-color);
+  cursor: pointer;
 }
 
 .nav_icon {

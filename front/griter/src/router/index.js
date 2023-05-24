@@ -101,6 +101,11 @@ const routes = [
         component: UsersRegister,
       },
       {
+        path: "myPage",
+        name: "myPage",
+        component: UsersInfo,
+      },
+      {
         path: ":user_id",
         name: "userInfo",
         component: UsersInfo,

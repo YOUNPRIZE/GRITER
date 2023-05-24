@@ -5,9 +5,19 @@
         <div class="userinfo-head">
           <div class="userinfo-header">
             <span>User Information</span>
-            <router-link to="/">
+            <router-link v-if="loginUser.user_id === user.user_id || myPage" to="/">
               <i class="bx bxs-edit" id="edit-btn"></i>
             </router-link>
+            <div v-else id="follow-btn">
+              <div v-if="alreadyFriend" @click="newFollow">
+                <i class="bx bxs-bell-plus" id="edit-btn"></i>
+                <span style="font-size: medium">Follow</span>
+              </div>
+              <div v-else @click="undoFollow">
+                <i class="bx bx-cut" id="edit-btn"></i>
+                <span style="font-size: medium">Unfollow</span>
+              </div>
+            </div>
           </div>
           <div class="line"></div>
         </div>
@@ -15,55 +25,79 @@
           <img
             src
             alt
-            style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
+            style="
+              height: 15rem;
+              width: 15rem;
+              border: solid 1px red;
+              border-radius: 100%;
+            "
           />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
-              <span>{{ loginUser.name }}</span>
+              <span v-if="!myPage">{{ user.name }}</span>
+              <span v-else>{{ loginUser.name }}</span>
             </div>
             <div class="userinfo-content-info-item">
               <span>ID</span>
-              <span>{{ loginUser.nickname }}</span>
+              <span v-if="!myPage">{{ user.nickname }}</span>
+              <span v-else>{{ loginUser.nickname }}</span>
             </div>
             <div class="userinfo-content-info-item">
               <span>Email</span>
-              <span>{{ loginUser.email }}</span>
+              <span v-if="!myPage">{{ user.email }}</span>
+              <span v-else>{{ loginUser.email }}</span>
             </div>
             <div class="userinfo-content-info-item">
               <span>Gender</span>
-              <span v-if="loginUser.gender == 'M'">Male</span>
-              <span v-else>Female</span>
+              <div v-if="!myPage">
+                <span v-if="user.gender == 'M'">Male</span>
+                <span v-else>Female</span>
+              </div>
+              <div v-else>
+                <span v-if="loginUser.gender == 'M'">Male</span>
+                <span v-else>Female</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="userinfo-follow">
-        <div class="userinfo-follow-header">
-          <div class="userinfo-follow-header-select">
-            <input
-              type="radio"
-              class="btn-check"
-              name="options"
-              id="select-followers"
-              autocomplete="off"
-              @click="toggleFollow"
-              checked
-            />
-            <label class="btn btn-outline-primary" for="select-followers">Followers</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="options"
-              id="select-follwing"
-              autocomplete="off"
-              @click="toggleFollow"
-            />
-            <label class="btn btn-outline-primary" for="select-follwing">Following</label>
-          </div>
-        </div>
         <div v-if="showFollowers === true" class="followers">
           <div class="follows-header">
+            <div class="userinfo-follow-header">
+              <div class="userinfo-follow-header-select">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="select-followers"
+                  autocomplete="off"
+                  @click="toggleFollow"
+                  checked
+                />
+                <label
+                  id="follow-select-btn"
+                  class="btn btn-outline-primary"
+                  for="select-followers"
+                  >Followers</label
+                >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="select-following"
+                  autocomplete="off"
+                  @click="toggleFollow"
+                />
+                <label
+                  id="follow-select-btn"
+                  class="btn btn-outline-primary"
+                  for="select-following"
+                  >Following</label
+                >
+              </div>
+            </div>
             <span class="followers-logo">Followers</span>
             <form action class="search-form">
               <div class="input-group mb-3">
@@ -88,25 +122,62 @@
             <span>Email</span>
           </div>
           <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
-          <div
-            v-for="(follower, index) in followers"
-            :key="index"
-            class="group-item-1"
-            id="followers-content"
-          >
-            <div id="followers-content-userInfo">
-              <div class="followers-content-userInfo">
-                <img src alt />
-                <span>{{ follower.name }}</span>
-                <span>{{ follower.nickname }}</span>
-                <span>{{ follower.email }}</span>
+          <div class="follow-content">
+            <div
+              v-for="(follower, index) in followers"
+              :key="index"
+              class="group-item-1"
+              id="followers-content"
+            >
+              <div @click="movePage(follower.user_id)">
+                <div id="followers-content-userInfo">
+                  <div class="followers-content-userInfo">
+                    <img src alt />
+                    <span>{{ follower.name }}</span>
+                    <span>{{ follower.nickname }}</span>
+                    <span>{{ follower.email }}</span>
+                  </div>
+                  <hr style="margin: 0; margin-top: 0.5rem" />
+                </div>
               </div>
-              <hr style="margin: 0; margin-top: 0.5rem" />
             </div>
           </div>
         </div>
-        <div v-else class="following">
+        <div v-else-if="showFollowing === true" class="following">
           <div class="follows-header">
+            <div class="userinfo-follow-header">
+              <div class="userinfo-follow-header-select">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="select-followers"
+                  autocomplete="off"
+                  @click="toggleFollow"
+                  checked
+                />
+                <label
+                  id="follow-select-btn"
+                  class="btn btn-outline-primary"
+                  for="select-followers"
+                  >Followers</label
+                >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="select-following"
+                  autocomplete="off"
+                  @click="toggleFollow"
+                />
+                <label
+                  id="follow-select-btn"
+                  class="btn btn-outline-primary"
+                  for="select-following"
+                  >Following</label
+                >
+              </div>
+            </div>
             <span class="following-logo">Following</span>
             <form action class="search-form">
               <div class="input-group mb-3">
@@ -130,22 +201,24 @@
             <span>ID</span>
             <span>Email</span>
           </div>
-          <div class="line" style="height: 0.2rem; margin-bottom: 0;"></div>
-          <div class="following-content">
+          <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
+          <div class="follow-content">
             <div
               v-for="(follow, index) in following"
               :key="index"
               class="group-item-2"
               id="following-content"
             >
-              <div id="following-content-userInfo">
-                <div class="following-content-userInfo">
-                  <img src alt />
-                  <span>{{ follow.name }}</span>
-                  <span>{{ follow.nickname }}</span>
-                  <span>{{ follow.email }}</span>
+              <div @click="movePage(follow.following_id)">
+                <div id="following-content-userInfo">
+                  <div class="following-content-userInfo">
+                    <img src alt />
+                    <span>{{ follow.name }}</span>
+                    <span>{{ follow.nickname }}</span>
+                    <span>{{ follow.email }}</span>
+                  </div>
+                  <hr style="margin: 0; margin-top: 0.5rem" />
                 </div>
-                <hr style="margin: 0; margin-top: 0.5rem" />
               </div>
             </div>
           </div>
@@ -153,7 +226,7 @@
       </div>
     </div>
     <div class="myPost">
-      <span>My Post</span>
+      <span>Posts</span>
       <div class="line"></div>
       <div class="myPost-content">
         <div v-for="(post, index) in posts" :key="index" class="group-item">
@@ -181,34 +254,37 @@
               <div class="myPost-content-post-right">
                 <span
                   v-if="
-                  JSON.stringify(post.generated_date) ===
-                  JSON.stringify(post.modified_date)
-                "
+                    JSON.stringify(post.generated_date) ===
+                    JSON.stringify(post.modified_date)
+                  "
                   class="myPost-content-post-created"
                 >
                   {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-                  post.generated_date[2]
+                    post.generated_date[2]
                   }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{
-                  post.generated_date[5]
+                    post.generated_date[5]
                   }}
                 </span>
                 <span
                   v-if="
-                  JSON.stringify(post.generated_date) !==
-                  JSON.stringify(post.modified_date)
-                "
+                    JSON.stringify(post.generated_date) !==
+                    JSON.stringify(post.modified_date)
+                  "
                   class="myPost-content-post-created"
                 >
                   {{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
-                  post.modified_date[2]
+                    post.modified_date[2]
                   }}
                   {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{
-                  post.modified_date[5]
+                    post.modified_date[5]
                   }}(수정됨)
                 </span>
                 <div class="myPost-content-post-btn">
-                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
+                  <div
+                    v-if="post.user_id === loginUser.user_id"
+                    class="dashboard-content-post-btn"
+                  >
                     <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
@@ -248,17 +324,26 @@ export default {
     return {
       isDeleteModalOpen: false,
       deletePostId: "",
-      showFollowers: true
+      showFollowers: true,
+      showFollowing: false,
+      myPage: true,
+      alreadyFriend: false,
     };
   },
   computed: {
-    ...mapState("userModule", ["loginUser"]),
+    ...mapState("userModule", ["loginUser", "user"]),
     ...mapState("postModule", ["posts"]),
-    ...mapState("followModule", ["followers", "following"])
+    ...mapState("followModule", ["followers", "following"]),
   },
   methods: {
-    ...mapActions("userModule", ["getLoginUser"]),
-    ...mapActions("postModule", ["getPostsByUserId"]),
+    ...mapActions("userModule", ["getLoginUser", "getUser"]),
+    ...mapActions("postModule", ["getPostsByUserId", "delete"]),
+    ...mapActions("followModule", [
+      "callFollowers",
+      "callFollowing",
+      "create",
+      "unFollow",
+    ]),
     goEditPost(editPostId) {
       event.preventDefault();
       router.push({ name: "PostModify", params: { post_id: editPostId } });
@@ -279,7 +364,6 @@ export default {
       this.closeDeleteModal();
       router.go(0);
     },
-    ...mapActions("followModule", ["callFollowers", "callFollowing"]),
     searchGroup1(event) {
       const len = this.followers.length;
       for (let i = 0; i < len; i++) {
@@ -309,16 +393,70 @@ export default {
       }
     },
     toggleFollow() {
-      this.showFollowers = !this.showFollowers;
-    }
+      const show = document.querySelectorAll(".btn-check");
+      // const checked = "";
+      for (let i = 0; i < show.length; i++) {
+        if (show[i].checked) {
+          console.log(show[i].id);
+          if (show[i].id === "select-following") {
+            this.showFollowing = true;
+            this.showFollowers = false;
+          } else if (show[i].id === "select-followers") {
+            this.showFollowing = false;
+            this.showFollowers = true;
+          }
+          break;
+        }
+      }
+    },
+    movePage(user_id) {
+      console.log(user_id);
+      router.push({ name: "userInfo", params: { user_id: user_id } });
+      setTimeout(() => {
+        router.go(0);
+      }, "100");
+    },
+    newFollow() {
+      const target_id = router.currentRoute.params.user_id;
+      this.create({
+        user_id: this.loginUser.user_id,
+        following_id: target_id,
+      });
+    },
+    undoFollow() {
+      const target_id = router.currentRoute.params.user_id;
+      this.unFollow({
+        user_id: this.loginUser.user_id,
+        following_id: target_id,
+      });
+    },
   },
   created() {
-    const user_id = localStorage.getItem("loginUser");
-    this.getLoginUser(user_id);
-    this.getPostsByUserId(user_id);
-    this.callFollowers(user_id);
-    this.callFollowing(user_id);
-  }
+    const user_id = router.currentRoute.params.user_id;
+    const loginUser_id = localStorage.getItem("loginUser");
+    console.log(user_id);
+    console.log(loginUser_id);
+    console.log(router.currentRoute.name);
+    if (router.currentRoute.name == "myPage") {
+      this.getLoginUser(loginUser_id);
+      this.getPostsByUserId(loginUser_id);
+      this.callFollowers(loginUser_id);
+      this.callFollowing(loginUser_id);
+    } else {
+      this.getLoginUser(loginUser_id);
+      this.getUser(user_id);
+      this.getPostsByUserId(user_id);
+      this.callFollowers(user_id);
+      this.callFollowing(user_id);
+      this.myPage = false;
+      for (let i = 0; i < this.followers.length; i++) {
+        if (this.followers[i].user_id === loginUser_id) {
+          this.alreadyFriend = true;
+          break;
+        }
+      }
+    }
+  },
 };
 </script>
 
@@ -428,9 +566,9 @@ main {
   text-align: left;
 }
 
-.userinfo-content-info-item > span:nth-child(2) {
+.userinfo-content-info-item > div {
   /* border: solid 1px green; */
-  margin-left: 2rem;
+  padding-left: 2.5rem;
   width: 100%;
   text-align: left;
 }
@@ -517,11 +655,10 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  /* height: calc(100% - 5rem); */
+  height: calc(100% - 25.3rem);
   box-shadow: 0 0 1rem rgb(190, 190, 190);
   border-radius: 0.2rem;
   width: 100%;
-  height: stretch;
   min-width: 20rem;
   margin-top: 2rem;
   padding: 2rem;
@@ -531,8 +668,11 @@ main {
 
 .followers,
 .following {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  /* border: solid 1px green; */
 }
 
 .follows-header {
@@ -549,20 +689,21 @@ main {
   font-weight: 500;
 }
 
-#followers-content,
-#following-content {
+.follow-content {
+  /* border: solid 1px blue; */
   display: flex;
   flex-direction: column;
+  height: stretch;
   overflow: auto;
 }
 
-#followers-content::-webkit-scrollbar,
-#following-content::-webkit-scrollbar {
+.follow-content::-webkit-scrollbar,
+.follow-content::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-#followers-content::-webkit-scrollbar-thumb,
-#following-content::-webkit-scrollbar-thumb {
+.follow-content::-webkit-scrollbar-thumb,
+.follow-content::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
   border-radius: 10px;
   background-clip: padding-box;
@@ -631,5 +772,23 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.userinfo-follow-header-select {
+  /* border: solid 1px red; */
+  /* width: 100%; */
+  display: flex;
+}
+#follow-select-btn {
+  height: 2rem;
+  font-size: small;
+  margin-right: 1rem;
+}
+.myPost-content-post-writer {
+  margin-left: 1rem;
+}
+
+#follow-btn {
+  display: flex;
 }
 </style>

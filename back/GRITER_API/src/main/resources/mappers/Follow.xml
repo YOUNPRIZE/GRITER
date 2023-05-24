@@ -14,17 +14,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectByUserId" parameterType="int" resultType="map">
 		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM follows f
 		JOIN users u
-		ON f.following_id = u.user_id
-		WHERE f.user_id = #{user_id}
+		ON f.user_id = u.user_id
+		WHERE f.following_id = #{user_id}
 	</select>
 
-	<select id="selectByFollowingId" parameterType="int"
+	<select id="selectByFollowingIdwithNickname" parameterType="int"
 		resultType="map">
 		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM
 		follows f
 		JOIN users u
-		ON f.user_id = u.user_id
-		WHERE f.following_id = #{following_id}
+		ON f.following_id = u.user_id
+		WHERE f.user_id = #{following_id}
+	</select>
+	
+	<select id="selectByFollowingId" parameterType="int"
+		resultType="Follow">
+		SELECT * FROM follows
+		WHERE follows.following_id = #{user_id}
 	</select>
 
 	<delete id="deleteFollow" parameterType="Follow">
