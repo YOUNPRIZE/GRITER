@@ -32,7 +32,7 @@
                   <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
-              <div class="dashboard-content-post-right">
+              <div class="dashboard-content-post-right"> 
                 <span class="dashboard-content-post-created">
                   {{ post.generated_date[0] }}.{{ post.generated_date[1]
                   }}.{{

@@ -6,12 +6,10 @@ import PostsView from "@/views/PostsView.vue";
 import PostsList from "@/components/posts/PostsList.vue";
 import PostsDetail from "@/components/posts/PostsDetail.vue";
 import PostsCreate from "@/components/posts/PostsCreate.vue";
-// import PostsModify from "@/components/posts/PostsModify.vue";
 import UserView from "@/views/UserView.vue";
 import UsersLogin from "@/components/users/UsersLogin.vue";
 import UsersRegister from "@/components/users/UsersRegister.vue";
 import UsersInfo from "@/components/users/UsersInfo.vue";
-import UsersSearch from "@/components/users/UsersSearch.vue";
 import UsersModify from "@/components/users/UsersModify.vue";
 import CalView from "../views/CalView.vue";
 import CalList from "@/components/cals/CalList.vue";
@@ -100,11 +98,6 @@ const routes = [
         path: "register",
         name: "register",
         component: UsersRegister,
-      },
-      {
-        path: "follows",
-        name: "follows",
-        component: UsersSearch,
       },
       {
         path: ":user_id",

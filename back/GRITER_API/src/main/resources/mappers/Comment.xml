@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN users u
 		ON c.user_id = u.user_id
 		WHERE post_id = #{post_id}
+		ORDER BY c.modified_date desc
 	</select>
 	
 	<select id="selectByUser" parameterType="int" resultType="Comment">
