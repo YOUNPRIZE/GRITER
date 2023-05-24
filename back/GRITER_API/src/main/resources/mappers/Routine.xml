@@ -13,6 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM routines
 	</select>
 	
+	<select id="select" parameterType="int" resultType="Routine">
+		SELECT * FROM routines
+		WHERE routine_id = #{routine_id};
+	</select>
+	
 	<select id="selectByUser" parameterType="int" resultType="Routine">
 		SELECT * FROM routines
 		WHERE user_id = #{user_id};

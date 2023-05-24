@@ -51,6 +51,17 @@ public class RoutineRestController {
 		}
 	}
 	
+	@GetMapping("/{routine_id}")
+	@ApiOperation(value = "특정 운동 루틴 조회", response = Routine.class)
+	public ResponseEntity<?> select(@PathVariable int routine_id) {
+		try {
+			Routine select = rs.select(routine_id);
+			return new ResponseEntity<Routine>(select, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	@GetMapping("/users/{user_id}")
 	@ApiOperation(value = "특정 사용자의 운동 루틴 조회", response = Routine.class)
 	public ResponseEntity<?> selectRoutineByUser(@PathVariable int user_id) {
@@ -62,7 +73,7 @@ public class RoutineRestController {
 		}
 	}
 
-	@GetMapping("/{date}")
+	@GetMapping("/date/{date}")
 	@ApiOperation(value = "해당 날짜의 운동 루틴 조회", response = Routine.class)
 	public ResponseEntity<?> selectRoutineByDate(@PathVariable int date) {
 		try {
@@ -76,6 +87,7 @@ public class RoutineRestController {
 	@PutMapping("/")
 	@ApiOperation(value = "운동 루틴 수정", response = Routine.class)
 	public ResponseEntity<?> updateRoutine(Routine routine) {
+		System.out.println(routine);
 		try {
 			int update = rs.update(routine);
 			return new ResponseEntity<Integer>(update, HttpStatus.OK);

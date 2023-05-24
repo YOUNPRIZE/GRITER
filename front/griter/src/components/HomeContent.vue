@@ -87,7 +87,7 @@
         </div>
         <div class="calendar-content">
           <!-- <v-calendar is-dark is-expanded :attributes="attributes"/> -->
-          <v-calendar is-expanded :attributes="attributes" />
+          <v-calendar is-dark is-expanded :attributes="attributes" />
         </div>
       </div>
     </div>
