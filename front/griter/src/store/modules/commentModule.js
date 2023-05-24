@@ -52,16 +52,38 @@ const commentModule = {
           post_id: payload.post_id,
         }
       })
-        .then((res) => {
-          console.log(JSON.stringify(res.data));
+        .then(() => {
           router.go(0);
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(
-
-      )
+    },
+    update({ commit }, payload) {
+      commit;
+      const API_URL = `${REST_API}/posts/comments/`;
+      console.log(payload.content);
+      axios.put(API_URL, null, {
+        params: {
+          content: payload.content,
+          comment_id: payload.comment_id,
+        }
+      }).then((res) => {
+        alert("댓글 수정 완료");
+        console.log(res);
+        router.go(0);
+      })
+    }, 
+    commentDelete({ commit }, deleteCommentId){
+      commit;
+      const API_URL = `${REST_API}/posts/comments/${deleteCommentId}`;
+      axios.delete(API_URL, null, {
+        params:{
+          comment_id: deleteCommentId,
+        }
+      }).then(()=>{
+        alert("해당 댓글이 삭제되었습니다.");
+      })
     }
   },
 };

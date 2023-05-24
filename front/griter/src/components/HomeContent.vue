@@ -20,11 +20,11 @@
                   </div>
                   <div class="dashboard-content-post-writerInfo">
                     <img src="" alt="" style="
-                          width: 30px;
-                          height: 30px;
-                          border-radius: 100%;
-                          border: solid 1px red;
-                        " />
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 100%;
+                      border: solid 1px red;
+                    " />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
