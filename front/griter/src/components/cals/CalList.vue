@@ -7,12 +7,13 @@
           <button>DietCreate</button>
         </router-link>
         <router-link :to="{ name: 'RoutinesCreate' }">
-          <box-icon type="solid" name="plus-square" ></box-icon>
+          <box-icon type="solid" name="plus-square"></box-icon>
         </router-link>
       </div>
       <v-calendar
         is-expanded
-        class="custom-calendar max-w-full"
+        class="is-dark custom-calendar max-w-full"
+        id="cal"
         :masks="masks"
         :attributes="attributes"
         disable-page-swipe
@@ -56,7 +57,7 @@ export default {
   },
   mounted() {
     const tempRoutines = JSON.stringify(this.routines);
-    console.log(tempRoutines);
+    tempRoutines;
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
@@ -119,6 +120,30 @@ p.griter-workout {
   align-items: center;
   padding: 1rem;
   padding-bottom: 1rem;
+}
+/* Add the dark mode styles */
+.custom-calendar.is-dark .vc-container .vc-header {
+  background-color: #1a202c;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-weekday {
+  background-color: #2d3748;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day {
+  background-color: #2d3748;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day.weekday-1,
+.custom-calendar.is-dark .vc-container .vc-day.weekday-7 {
+  background-color: #4a5568;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day-dots {
+  /* Custom dark mode day dots styles... */
 }
 </style>
 

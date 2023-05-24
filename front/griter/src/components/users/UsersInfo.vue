@@ -12,7 +12,11 @@
           <div class="line"></div>
         </div>
         <div class="userinfo-content">
-          <img src="" alt="" style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%" />
+          <img
+            src
+            alt
+            style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
+          />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -37,21 +41,42 @@
       <div class="userinfo-follow">
         <div class="userinfo-follow-header">
           <div class="userinfo-follow-header-select">
-            <input type="radio" class="btn-check" name="options" id="select-followers" autocomplete="off"
-              @click="toggleFollow" checked>
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="select-followers"
+              autocomplete="off"
+              @click="toggleFollow"
+              checked
+            />
             <label class="btn btn-outline-primary" for="select-followers">Followers</label>
-            <input type="radio" class="btn-check" name="options" id="select-follwing" autocomplete="off"
-              @click="toggleFollow">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="select-follwing"
+              autocomplete="off"
+              @click="toggleFollow"
+            />
             <label class="btn btn-outline-primary" for="select-follwing">Following</label>
           </div>
         </div>
         <div v-if="showFollowers === true" class="followers">
           <div class="follows-header">
             <span class="followers-logo">Followers</span>
-            <form action="" class="search-form">
+            <form action class="search-form">
               <div class="input-group mb-3">
-                <span class="input-group-text"><box-icon name="search"></box-icon></span>
-                <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup1($event)" />
+                <span class="input-group-text">
+                  <box-icon name="search"></box-icon>
+                </span>
+                <input
+                  class="form-control"
+                  id="search"
+                  type="text"
+                  placeholder="Search"
+                  @input="searchGroup1($event)"
+                />
               </div>
             </form>
           </div>
@@ -63,10 +88,15 @@
             <span>Email</span>
           </div>
           <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
-          <div v-for="(follower, index) in followers" :key="index" class="group-item-1" id="followers-content">
+          <div
+            v-for="(follower, index) in followers"
+            :key="index"
+            class="group-item-1"
+            id="followers-content"
+          >
             <div id="followers-content-userInfo">
               <div class="followers-content-userInfo">
-                <img src="" alt="" />
+                <img src alt />
                 <span>{{ follower.name }}</span>
                 <span>{{ follower.nickname }}</span>
                 <span>{{ follower.email }}</span>
@@ -78,10 +108,18 @@
         <div v-else class="following">
           <div class="follows-header">
             <span class="following-logo">Following</span>
-            <form action="" class="search-form">
+            <form action class="search-form">
               <div class="input-group mb-3">
-                <span class="input-group-text"><box-icon name="search"></box-icon></span>
-                <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup2($event)" />
+                <span class="input-group-text">
+                  <box-icon name="search"></box-icon>
+                </span>
+                <input
+                  class="form-control"
+                  id="search"
+                  type="text"
+                  placeholder="Search"
+                  @input="searchGroup2($event)"
+                />
               </div>
             </form>
           </div>
@@ -94,10 +132,15 @@
           </div>
           <div class="line" style="height: 0.2rem; margin-bottom: 0;"></div>
           <div class="following-content">
-            <div v-for="(follow, index) in following" :key="index" class="group-item-2" id="following-content">
+            <div
+              v-for="(follow, index) in following"
+              :key="index"
+              class="group-item-2"
+              id="following-content"
+            >
               <div id="following-content-userInfo">
                 <div class="following-content-userInfo">
-                  <img src="" alt="" />
+                  <img src alt />
                   <span>{{ follow.name }}</span>
                   <span>{{ follow.nickname }}</span>
                   <span>{{ follow.email }}</span>
@@ -122,34 +165,48 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img src="" alt="" style="
+                  <img
+                    src
+                    alt
+                    style="
                       width: 30px;
                       height: 30px;
                       border-radius: 100%;
                       border: solid 1px red;
-                    " />
+                    "
+                  />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
               <div class="myPost-content-post-right">
-                <span v-if="
+                <span
+                  v-if="
                   JSON.stringify(post.generated_date) ===
                   JSON.stringify(post.modified_date)
-                " class="myPost-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-  post.generated_date[2]
-}}
+                "
+                  class="myPost-content-post-created"
+                >
+                  {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                  post.generated_date[2]
+                  }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{
-                    post.generated_date[5]
-                  }}</span>
-                <span v-if="
+                  post.generated_date[5]
+                  }}
+                </span>
+                <span
+                  v-if="
                   JSON.stringify(post.generated_date) !==
                   JSON.stringify(post.modified_date)
-                " class="myPost-content-post-created">{{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
-  post.modified_date[2]
-}}
+                "
+                  class="myPost-content-post-created"
+                >
+                  {{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
+                  post.modified_date[2]
+                  }}
                   {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{
-                    post.modified_date[5]
-                  }}(수정됨)</span>
+                  post.modified_date[5]
+                  }}(수정됨)
+                </span>
                 <div class="myPost-content-post-btn">
                   <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
                     <button @click="goEditPost(post.post_id)">
@@ -191,13 +248,13 @@ export default {
     return {
       isDeleteModalOpen: false,
       deletePostId: "",
-      showFollowers: true,
+      showFollowers: true
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("postModule", ["posts"]),
-    ...mapState("followModule", ["followers", "following"]),
+    ...mapState("followModule", ["followers", "following"])
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
@@ -261,7 +318,7 @@ export default {
     this.getPostsByUserId(user_id);
     this.callFollowers(user_id);
     this.callFollowing(user_id);
-  },
+  }
 };
 </script>
 
@@ -313,7 +370,7 @@ main {
 }
 
 .userinfo-header,
-.myPost>span:nth-child(1) {
+.myPost > span:nth-child(1) {
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -364,14 +421,14 @@ main {
   flex-direction: row;
 }
 
-.userinfo-content-info-item>span:nth-child(1) {
+.userinfo-content-info-item > span:nth-child(1) {
   /* border: solid 1px red; */
   font-weight: bold;
   width: 40%;
   text-align: left;
 }
 
-.userinfo-content-info-item>span:nth-child(2) {
+.userinfo-content-info-item > span:nth-child(2) {
   /* border: solid 1px green; */
   margin-left: 2rem;
   width: 100%;
@@ -449,7 +506,7 @@ main {
   color: grey;
 }
 
-.dashboard-content-post-btn>button {
+.dashboard-content-post-btn > button {
   border: none;
   background-color: transparent;
   color: var(--font-color-btn-1);
@@ -522,37 +579,37 @@ main {
   justify-content: space-around;
 }
 
-.followers-head>span,
-.following-head>span {
+.followers-head > span,
+.following-head > span {
   /* border: solid 1px red; */
   font-weight: bold;
 }
 
-.followers-head>span:nth-child(1),
-.following-head>span:nth-child(1),
-.followers-content-userInfo>img,
-.following-content-userInfo>img {
+.followers-head > span:nth-child(1),
+.following-head > span:nth-child(1),
+.followers-content-userInfo > img,
+.following-content-userInfo > img {
   width: 10%;
 }
 
-.followers-head>span:nth-child(2),
-.following-head>span:nth-child(2),
-.followers-content-userInfo>span:nth-child(2),
-.following-content-userInfo>span:nth-child(2) {
+.followers-head > span:nth-child(2),
+.following-head > span:nth-child(2),
+.followers-content-userInfo > span:nth-child(2),
+.following-content-userInfo > span:nth-child(2) {
   width: 23%;
 }
 
-.followers-head>span:nth-child(3),
-.following-head>span:nth-child(3),
-.followers-content-userInfo>span:nth-child(3),
-.following-content-userInfo>span:nth-child(3) {
+.followers-head > span:nth-child(3),
+.following-head > span:nth-child(3),
+.followers-content-userInfo > span:nth-child(3),
+.following-content-userInfo > span:nth-child(3) {
   width: 23%;
 }
 
-.followers-head>span:nth-child(4),
-.following-head>span:nth-child(4),
-.followers-content-userInfo>span:nth-child(4),
-.following-content-userInfo>span:nth-child(4) {
+.followers-head > span:nth-child(4),
+.following-head > span:nth-child(4),
+.followers-content-userInfo > span:nth-child(4),
+.following-content-userInfo > span:nth-child(4) {
   width: 44%;
 }
 
@@ -569,8 +626,8 @@ main {
   height: 3rem;
 }
 
-.followers-content-userInfo>*,
-.following-content-userInfo>* {
+.followers-content-userInfo > *,
+.following-content-userInfo > * {
   display: flex;
   flex-direction: column;
   justify-content: center;
