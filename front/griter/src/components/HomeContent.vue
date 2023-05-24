@@ -32,7 +32,7 @@
                   <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
-              <div class="dashboard-content-post-right"> 
+              <div class="dashboard-content-post-right">
                 <span class="dashboard-content-post-created">
                   {{ post.generated_date[0] }}.{{ post.generated_date[1]
                   }}.{{
@@ -91,8 +91,12 @@
           </router-link>
         </div>
         <div class="calendar-content">
-          <!-- <v-calendar is-dark is-expanded :attributes="attributes"/> -->
-          <v-calendar is-dark is-expanded :attributes="attributes" />
+          <v-calendar
+            @click:day="handleDayClick"
+            is-dark
+            is-expanded
+            :attributes="attributes"
+          />
         </div>
       </div>
     </div>
@@ -172,6 +176,13 @@ export default {
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       router.go(0);
+    },
+    handleDayClick(day) {
+      // 클릭된 날짜에 대한 처리를 여기에 작성하세요
+      console.log(day);
+      // 예시: 클릭된 날짜 정보를 콘솔에 출력합니다
+
+      // 원하는 동작을 수행하도록 메소드를 구현하세요
     }
   },
   created() {
