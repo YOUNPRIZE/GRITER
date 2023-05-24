@@ -7,7 +7,7 @@
           <button>DietCreate</button>
         </router-link>
         <router-link :to="{ name: 'RoutinesCreate' }">
-          <box-icon type="solid" name="plus-square" ></box-icon>
+          <box-icon type="solid" name="plus-square"></box-icon>
         </router-link>
       </div>
       <v-calendar
@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     const tempRoutines = JSON.stringify(this.routines);
-    console.log(tempRoutines);
+    tempRoutines;
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),

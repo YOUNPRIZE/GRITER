@@ -3,15 +3,15 @@
     <div class="userinfo">
       <div class="userinfo-header">
         <span>User Information</span>
-        <router-link to="/">
+        <router-link :to="{ name: 'updateUser', params: { user_id: loginUser.user_id }}">
           <i class="bx bxs-edit" id="edit-btn"></i>
         </router-link>
       </div>
       <div class="line"></div>
       <div class="userinfo-content">
         <img
-          src=""
-          alt=""
+          src
+          alt
           style="height: 15rem; width: 15rem; border: solid 1px red; border-radius: 100%"
         />
         <div class="userinfo-content-info">
@@ -59,8 +59,8 @@
                 </div>
                 <div class="myPost-content-post-writerInfo">
                   <img
-                    src=""
-                    alt=""
+                    src
+                    alt
                     style="
                       width: 30px;
                       height: 30px;
@@ -78,31 +78,30 @@
                     JSON.stringify(post.modified_date)
                   "
                   class="myPost-content-post-created"
-                  >{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-                    post.generated_date[2]
+                >
+                  {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                  post.generated_date[2]
                   }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}:{{
-                    post.generated_date[5]
-                  }}</span
-                >
+                  post.generated_date[5]
+                  }}
+                </span>
                 <span
                   v-if="
                     JSON.stringify(post.generated_date) !==
                     JSON.stringify(post.modified_date)
                   "
                   class="myPost-content-post-created"
-                  >{{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
-                    post.modified_date[2]
+                >
+                  {{ post.modified_date[0] }}.{{ post.modified_date[1] }}.{{
+                  post.modified_date[2]
                   }}
                   {{ post.modified_date[3] }}:{{ post.modified_date[4] }}:{{
-                    post.modified_date[5]
-                  }}(수정됨)</span
-                >
+                  post.modified_date[5]
+                  }}(수정됨)
+                </span>
                 <div class="myPost-content-post-btn">
-                  <div
-                    v-if="post.user_id === loginUser.user_id"
-                    class="dashboard-content-post-btn"
-                  >
+                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
                     <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
@@ -141,12 +140,12 @@ export default {
   data() {
     return {
       isDeleteModalOpen: false,
-      deletePostId: "",
+      deletePostId: ""
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
-    ...mapState("postModule", ["posts"]),
+    ...mapState("postModule", ["posts"])
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
@@ -170,13 +169,13 @@ export default {
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       router.go(0);
-    },
+    }
   },
   created() {
     const user_id = localStorage.getItem("loginUser");
     this.getLoginUser(user_id);
     this.getPostsByUserId(user_id);
-  },
+  }
 };
 </script>
 

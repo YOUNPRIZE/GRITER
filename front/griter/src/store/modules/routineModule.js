@@ -25,15 +25,17 @@ const routineModule = {
   actions: {
     deleteRoutine({ commit }, routine_id) {
       commit;
-      const API_URL = `${REST_API}/routines/${routine_id}`
-      axios.delete(API_URL, null, {
-        params: {
-          routine_id: routine_id,
-        }
-      }).then(() => {
-        alert("운동 루틴이 삭제되었습니다.");
-        router.push({ name: "calendar" });
-      })
+      const API_URL = `${REST_API}/routines/${routine_id}`;
+      axios
+        .delete(API_URL, null, {
+          params: {
+            routine_id: routine_id,
+          },
+        })
+        .then(() => {
+          alert("운동 루틴이 삭제되었습니다.");
+          router.push({ name: "calendar" });
+        });
     },
     updateRoutine: ({ commit }, routine) => {
       commit;
@@ -74,7 +76,6 @@ const routineModule = {
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        console.log(res.data);
         commit("GET_ROUTINES", res.data);
       });
     },

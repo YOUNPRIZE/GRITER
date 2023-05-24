@@ -11,14 +11,14 @@ import UserView from "@/views/UserView.vue";
 import UsersLogin from "@/components/users/UsersLogin.vue";
 import UsersRegister from "@/components/users/UsersRegister.vue";
 import UsersInfo from "@/components/users/UsersInfo.vue";
-import UsersFollows from "@/components/users/UsersFollows.vue";
+import UsersSearch from "@/components/users/UsersSearch.vue";
+import UsersModify from "@/components/users/UsersModify.vue";
 import CalView from "../views/CalView.vue";
 import CalList from "@/components/cals/CalList.vue";
 import CalDetail from "@/components/cals/CalDetail.vue";
 import CalCreate from "@/components/cals/CalCreate.vue";
 import CalDietDetail from "@/components/cals/CalDietDetail.vue";
 import CalDietCreate from "@/components/cals/CalDietCreate.vue";
-
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -89,7 +89,7 @@ const routes = [
         path: "modifyPost/:post_id",
         name: "PostModify",
         component: PostsCreate,
-      }
+      },
     ],
   },
   {
@@ -104,12 +104,17 @@ const routes = [
       {
         path: "follows",
         name: "follows",
-        component: UsersFollows,
+        component: UsersSearch,
       },
       {
         path: ":user_id",
         name: "userInfo",
         component: UsersInfo,
+      },
+      {
+        path: "update/:user_id",
+        name: "updateUser",
+        component: UsersModify,
       },
     ],
   },
