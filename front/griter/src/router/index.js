@@ -11,6 +11,7 @@ import UsersLogin from "@/components/users/UsersLogin.vue";
 import UsersRegister from "@/components/users/UsersRegister.vue";
 import UsersInfo from "@/components/users/UsersInfo.vue";
 import UsersModify from "@/components/users/UsersModify.vue";
+import UsersSearch from "@/components/users/UsersSearch.vue";
 import CalView from "../views/CalView.vue";
 import CalList from "@/components/cals/CalList.vue";
 import CalDetail from "@/components/cals/CalDetail.vue";
@@ -108,6 +109,11 @@ const routes = [
         path: "update/:user_id",
         name: "updateUser",
         component: UsersModify,
+      },
+      {
+        path: "search",
+        name: "searchUser",
+        component: UsersSearch,
       },
     ],
   },

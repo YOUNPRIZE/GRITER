@@ -41,7 +41,7 @@
                 <span class="nav_name">Calendar</span>
               </div>
             </router-link>
-            <router-link :to="{ name: 'follows' }">
+            <router-link :to="{ name: 'searchUser' }">
               <div class="nav_link">
                 <i class="bx bxs-contact nav_icon"></i>
                 <span class="nav_name">Relations</span>

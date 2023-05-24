@@ -51,7 +51,6 @@ export default {
   methods: {
     ...mapActions("userModule", ["getUsers"]),
     searchUsers(event) {
-      console.log(event);
       const len = this.users.length;
       for (let i = 0; i < len; i++) {
         if (
