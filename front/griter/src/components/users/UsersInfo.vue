@@ -337,6 +337,7 @@ export default {
         user_id: this.loginUser.user_id,
         following_id: target_id,
       });
+      this.updateData();
     },
     undoFollow() {
       const target_id = router.currentRoute.params.user_id;
@@ -344,24 +345,25 @@ export default {
         user_id: this.loginUser.user_id,
         following_id: target_id,
       });
+      this.updateData();
     },
     updateData() {
       const user_id = router.currentRoute.params.user_id;
       const loginUser_id = localStorage.getItem("loginUser");
-      setInterval(() => {
+      setTimeout(()=>{
+        clearInterval(interval);
+      }, "1000");
+      let interval = setInterval(() => {
         this.callFollowers(user_id);
         this.callFollowing(user_id);
+        this.alreadyFriend = false;
         for (let i = 0; i < this.followers.length; i++) {
-          console.log(this.followers[i].user_id);
-          console.log("로그인 한 사람: " + loginUser_id);
           if (this.followers[i].user_id == loginUser_id) {
-            console.log("이미 친구");
             this.alreadyFriend = true;
             break;
           }
         }
       }, "100");
-
     }
   },
   created() {
@@ -381,23 +383,6 @@ export default {
       this.getPostsByUserId(user_id);
       this.myPage = false;
     }
-    //   setTimeout(() => {
-    //     console.log("이 아래임");
-    //     for (let i = 0; i < this.followers.length; i++) {
-    //       console.log(this.followers[i].user_id);
-    //       console.log("로그인 한 사람: " + loginUser_id);
-    //       if (this.followers[i].user_id == loginUser_id) {
-    //         console.log("이미 친구");
-    //         this.alreadyFriend = true;
-    //         break;
-    //       }
-    //     }
-    //   }, "100")
-    // }
-    // setInterval(() => {
-    //   this.callFollowers(user_id);
-    //   this.callFollowing(user_id);
-    // }, "100");
   },
 };
 </script>
