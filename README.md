@@ -2,15 +2,15 @@
 
 ## **0️⃣ 프로젝트 개요**
 
-- 프로젝트명 : 그리터(GRITER)
+🎈 프로젝트명 : 그리터(GRITER)
 
-- 프로젝트 컨셉 : 커뮤니티 기능과 운동 및 식단 정보 기록을 통해 건강 관리를 도와주는 서비스
+📌 프로젝트 컨셉 : 커뮤니티 기능과 운동 및 식단 정보 기록을 통해 건강 관리를 도와주는 서비스
 
-- 개발 기간 : 23.05.18 ~ 23.05.25 (8일)
+🛠 개발 기간 : 23.05.18 ~ 23.05.25 (8일)
 
-- 팀원 : 박재민, 조윤상
+🧑🏻 팀원 : 박재민, 조윤상
 
-- 사용 기술스택
+💻 사용 기술스택
 
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
 
@@ -70,7 +70,7 @@
 
 ## **5️⃣ 컴포넌트 구조**
 
-* FrontEnd
+📱 FrontEnd
 ```javascript
 📄 .gitignore
 📄 babel.config.js
@@ -127,7 +127,7 @@
 	ㄴ📄 PostsView.vue
 	ㄴ📄 UserView.vue
 ```
-* BackEnd
+💾 BackEnd
 ```java
 📂 src/main/java
 	ㄴ📦 com.griter
@@ -216,8 +216,8 @@
 
 ## **8️⃣ 기타 (느낀 점 및 후기)**
 
-* 박재민
+😎 박재민
 
 
 
-* 조윤상
+😜 조윤상
