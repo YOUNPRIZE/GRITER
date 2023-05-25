@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByPostId" parameterType="int" resultType="map">
-		SELECT p.*, u.nickname FROM posts p
+		SELECT p.*, u.nickname, u.gender FROM posts p
 		JOIN users u
 		ON p.user_id =
 		u.user_id
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByUserId" parameterType="int" resultType="map">
-		SELECT p.*, u.nickname FROM posts p
+		SELECT p.*, u.nickname, u.gender FROM posts p
 		JOIN users u
 		on p.user_id
 		= u.user_id
