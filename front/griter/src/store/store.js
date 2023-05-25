@@ -9,6 +9,7 @@ import commentModule from "./modules/commentModule.js";
 import routineModule from "./modules/routineModule.js";
 import followModule from "./modules/followModule.js";
 import dietModule from "./modules/dietModule.js";
+import imageModule from "./modules/imageModule.js";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     routineModule: routineModule,
     followModule: followModule,
     dietModule: dietModule,
+    imageModule: imageModule,
   },
   plugins: [
     createPersistedState({

@@ -2,16 +2,16 @@
   <main>
     <div class="login-box">
       <div class="logo">GRITER</div>
-      <form action="" class="register-form">
+      <form action="" class="register-form" enctype="multipart/form-data">
         <div class="register-form-input">
           <div class="label">Name</div>
-          <input type="text" class="form-control" required />
+          <input type="text" class="form-control" v-model="name" required />
           <div class="label">ID</div>
-          <input type="text" class="form-control" required />
+          <input type="text" class="form-control" v-model="nickname" required />
           <div class="label">Password</div>
-          <input type="password" class="form-control" required />
+          <input type="password" class="form-control" v-model="password" required />
           <div class="label">Email</div>
-          <input type="email" class="form-control" required />
+          <input type="email" class="form-control" v-model="email" required />
           <div class="label">Gender</div>
           <div class="gender-radiobox">
             <input
@@ -19,23 +19,33 @@
               class="btn-check"
               name="options"
               id="option1"
+              value="male"
               autocomplete="off"
+              v-model="gender"
             />
-            <label class="btn btn-outline-primary" for="option1" id="gender-select">Male</label>
+            <label class="btn btn-outline-primary" for="option1" id="gender-select"
+              >Male</label
+            >
             <input
               type="radio"
               class="btn-check"
               name="options"
               id="option2"
+              value="female"
               autocomplete="off"
+              v-model="gender"
             />
-            <label class="btn btn-outline-primary" for="option2" id="gender-select">Female</label>
+            <label class="btn btn-outline-primary" for="option2" id="gender-select"
+              >Female</label
+            >
           </div>
           <div class="label">Profile Image</div>
-          <input type="text" class="profileImage" required />
+          <input type="file" class="profileImage" id="image" />
         </div>
         <div class="buttons">
-          <button class="btn btn-primary" id="submit-btn">Submit</button>
+          <button class="btn btn-primary" id="submit-btn" @click="register">
+            Submit
+          </button>
           <button class="btn btn-outline-primary" @click="goToLogin" id="GoToLogIn-btn">
             Go To Log In
           </button>
@@ -46,11 +56,55 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
-  name: "UsersLogin",
+  data() {
+    return {
+      name: "",
+      nickname: "",
+      password: "",
+      email: "",
+      gender: "",
+      image: "",
+      user_id: "",
+    };
+  },
+  computed: {
+    ...mapState("userModule", ["users"]),
+  },
   methods: {
+    ...mapActions("userModule", ["create", "getUsers"]),
+    ...mapActions("imageModule", ["upload"]),
     goToLogin() {
       this.$router.push({ name: "login" });
+    },
+    register() {
+      if (
+        this.name.length > 0 &&
+        this.nickname.length > 0 &&
+        this.password.length > 0 &&
+        this.email.length > 0 &&
+        this.gender.length > 0
+      ) {
+        this.create({
+          name: this.name,
+          nickname: this.nickname,
+          password: this.password,
+          email: this.email,
+          gender: this.gender,
+        });
+        const image = document.getElementById("image").files[0];
+        alert(image);
+        if (image) {
+          this.upload({
+            nickname: this.nickname,
+            data: image,
+          });
+        }
+      } else {
+        alert("필수값을 모두 입력해주세요.");
+      }
     },
   },
 };
@@ -138,7 +192,7 @@ button {
   height: 2.5rem;
   margin: 2rem;
 }
-#gender-select{
+#gender-select {
   color: var(--font-color-3);
   border: solid 1px var(--font-color-3);
 }
