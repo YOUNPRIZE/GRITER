@@ -172,6 +172,7 @@
       <span>Posts</span>
       <div class="line"></div>
       <div class="myPost-content">
+        {{ posts }}
         <div v-for="(post, index) in posts" :key="index" class="group-item">
           <!-- link 좌표 바꿔야 됨 상세보기로, params도 받아와야 함-->
           <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
@@ -182,11 +183,11 @@
                 </div>
                 <div class="myPost-content-post-writerInfo">
                   <img src alt style="
-                                            width: 30px;
-                                            height: 30px;
-                                            border-radius: 100%;
-                                            border: solid 1px red;
-                                          " />
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 100%;
+                    border: solid 1px red;
+                  " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
