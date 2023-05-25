@@ -266,6 +266,7 @@ export default {
       this.getComment(newComment);
       console.log(this.comment);
       this.createComment(this.comment);
+      this.updateData();
     },
     goEditPost(editPostId) {
       event.preventDefault();
@@ -273,25 +274,19 @@ export default {
     },
     openCommentEdit(editCommentId) {
       this.editingCommentId = editCommentId;
-      // document.querySelector()
     },
     closeCommentEdit() {
       this.editingCommentId = -1;
     },
     updateComment() {
-      const newContent = document.getElementById("comment-content-editing")
-        .value;
-      const newComment_id = document.getElementById(
-        "comment-comment_id-editing"
-      ).value;
-      // const newUser_id = document.getElementById('comment-user_id-editing').value;
-      // const newPost_id = document.getElementById('comment-post_id-editing').value;
+      const newContent = document.getElementById('comment-content-editing').value;
+      const newComment_id = document.getElementById('comment-comment_id-editing').value;
       this.update({
         content: newContent,
-        comment_id: newComment_id
-        // userId: newUser_id,
-        // post_id: newPost_id,
-      });
+        comment_id: newComment_id,
+      })
+      this.closeCommentEdit();
+      this.updateData();
     },
     showPostDeleteModal(deletePostId) {
       event.preventDefault();
@@ -323,11 +318,21 @@ export default {
       console.log(this.deletePostId);
       this.commentDelete(this.deleteCommentId);
       this.closeDeleteModal();
+      this.updateData();
+    },
+    updateData(){
+      const post_id = this.$route.params.post_id;
+      setTimeout(() => {
+        clearInterval(interval);
+      }, "500");
+      let interval = setInterval(() => {
+        console.log("데이터 갱신");
+        this.getComments(post_id);
+      }, "100");
     }
   },
   created() {
     const post_id = this.$route.params.post_id;
-
     const userId = localStorage.getItem("loginUser");
     this.getPostLikeByUser({ user_id: userId }).then(() => {
       let len = this.postLiked.length;

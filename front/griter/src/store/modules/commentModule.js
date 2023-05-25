@@ -1,4 +1,3 @@
-import router from '@/router';
 import axios from 'axios';
 
 const REST_API = `http://localhost:9999/api`;
@@ -71,7 +70,6 @@ const commentModule = {
       }).then((res) => {
         alert("댓글 수정 완료");
         console.log(res);
-        router.go(0);
       })
     }, 
     commentDelete({ commit }, deleteCommentId){
