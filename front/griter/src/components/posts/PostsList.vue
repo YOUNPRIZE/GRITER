@@ -6,7 +6,13 @@
         <form action="" class="search-form">
           <div class="input-group mb-3">
             <span class="input-group-text"><box-icon name="search"></box-icon></span>
-            <input class="form-control" id="search" type="text" placeholder="Search" @input="searchGroup($event)" />
+            <input
+              class="form-control"
+              id="search"
+              type="text"
+              placeholder="Search"
+              @input="searchGroup($event)"
+            />
           </div>
         </form>
       </div>
@@ -23,28 +29,50 @@
               <div class="dashboard-content-post">
                 <div class="dashboard-content-post-left">
                   <div class="dashboard-content-post-title">
-                    <span>{{ post.gender }}</span>
+                    <span>{{ post.title }}</span>
                   </div>
                   <div class="dashboard-content-post-content">
                     {{ post.content }}
                   </div>
                   <div class="dashboard-content-post-writerInfo">
-                    <img src="" alt="" style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    " />
+                    <img
+                      v-if="post.gender === 'M'"
+                      src="../../assets/man.png"
+                      class="dashboard-content-post-writerimg"
+                      alt=""
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: solid 1px black;
+                      "
+                    />
+                    <img
+                      v-else
+                      src="../../assets/woman.png"
+                      class="dashboard-content-post-writerimg"
+                      alt=""
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: solid 1px black;
+                      "
+                    />
                     <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                   </div>
                 </div>
                 <div class="dashboard-content-post-right">
-                  <span class="dashboard-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1]
-                  }}.{{
-  post.generated_date[2]
-}}
-                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
-                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
+                  <span class="dashboard-content-post-created"
+                    >{{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                      post.generated_date[2]
+                    }}
+                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span
+                  >
+                  <div
+                    v-if="post.user_id === loginUser.user_id"
+                    class="dashboard-content-post-btn"
+                  >
                     <button @click="goEditPost(post.post_id)">
                       <i class="bx bx-pencil"></i>
                     </button>
@@ -52,8 +80,7 @@
                       <i class="bx bx-trash"></i>
                     </button>
                   </div>
-                  <div v-else>
-                  </div>
+                  <div v-else></div>
                 </div>
               </div>
             </router-link>
@@ -88,11 +115,11 @@ export default {
   },
   computed: {
     ...mapState("postModule", ["posts"]),
-    ...mapState('userModule', ["loginUser"]),
+    ...mapState("userModule", ["loginUser"]),
   },
   methods: {
     ...mapActions("postModule", ["getPosts", "delete"]),
-    ...mapActions('userModule', ["getLoginUser"]),
+    ...mapActions("userModule", ["getLoginUser"]),
     movePage() {
       this.$router.push({ name: "PostCreate" });
     },
@@ -111,11 +138,11 @@ export default {
       }
     },
     goEditPost(editPostId) {
-      event.preventDefault()
-      router.push({name: 'PostModify', params: {post_id: editPostId}});
+      event.preventDefault();
+      router.push({ name: "PostModify", params: { post_id: editPostId } });
     },
     showDeleteModal(deletePostId) {
-      event.preventDefault()
+      event.preventDefault();
       this.isDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
@@ -128,14 +155,14 @@ export default {
       this.closeDeleteModal();
       this.updateData();
     },
-    updateData(){
+    updateData() {
       setTimeout(() => {
-        clearInterval(interval)
+        clearInterval(interval);
       }, "100");
       let interval = setInterval(() => {
         this.getPosts();
-      }, "10"); 
-    }
+      }, "10");
+    },
   },
   created() {
     this.getPosts();
@@ -304,10 +331,9 @@ export default {
   color: grey;
 }
 
-.dashboard-content-post-btn>button {
+.dashboard-content-post-btn > button {
   border: none;
   background-color: transparent;
   color: var(--font-color-btn-1);
 }
-
 </style>

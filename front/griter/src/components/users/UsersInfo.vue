@@ -26,11 +26,13 @@
                               height: 15rem;
                               width: 15rem;
                               border-radius: 100%;
+                              border: solid 2px black;
                             " />
           <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
                               height: 15rem;
                               width: 15rem;
                               border-radius: 100%;
+                              border: solid 2px black;
                             " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
@@ -103,12 +105,14 @@
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                     <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
                               height: 3rem;
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                     <span>{{ follower.name }}</span>
                     <span>{{ follower.nickname }}</span>
@@ -160,12 +164,14 @@
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                     <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
                               height: 3rem;
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                     <span>{{ follow.name }}</span>
                     <span>{{ follow.nickname }}</span>
@@ -192,23 +198,19 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <!-- <img src alt style="
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 100%;
-                    border: solid 1px red;
-                  " /> -->
                   <img v-if="post.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
                               height: 3rem;
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                   <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
                               height: 3rem;
                               width: 3rem;
                               border-radius: 100%;
                               margin-left: 0.5rem;
+                              border: solid 2px black;
                             " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>

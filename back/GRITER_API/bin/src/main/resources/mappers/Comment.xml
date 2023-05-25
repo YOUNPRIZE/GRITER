@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.CommentDao">
 
 	<!-- 댓글 등록 -->
-	<insert id="create" parameterType="Comment" keyProperty="id">
-		INSERT INTO comments (comment_id, content, parent_id, user_id, post_id)
-		VALUES (0, #{content}, #{parent_id}, #{user_id}, #{post_id})
+	<insert id="create" parameterType="Post">
+		INSERT INTO comments (content, parent_id, user_id, post_id)
+		VALUES (#{content}, #{parent_id}, #{user_id}, #{post_id})
 	</insert>
 	
 	<select id="selectAll" resultType="Comment">
@@ -16,9 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectByPost" parameterType="int" resultType="map">
 		SELECT c.*, u.nickname FROM comments c
-		JOIN comments c
+		JOIN users u
 		ON c.user_id = u.user_id
 		WHERE post_id = #{post_id}
+		ORDER BY c.modified_date desc
 	</select>
 	
 	<select id="selectByUser" parameterType="int" resultType="Comment">

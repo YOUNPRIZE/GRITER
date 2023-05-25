@@ -13,14 +13,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM diets
 	</select>
 	
+	<select id="select" parameterType="int" resultType="Diet">
+		SELECT * FROM diets
+		WHERE diet_id = #{diet_id};
+	</select>
+	
+	<select id="selectByUser" parameterType="int" resultType="Diet">
+		SELECT * FROM diets
+		WHERE user_id = #{user_id};
+	</select>
+	
 	<select id="selectByDate" parameterType="String" resultType="Diet">
 		SELECT * FROM diets
 		WHERE date = #{date}
 	</select>
 	
 	<update id="update" parameterType="Diet">
-		UPDATE diets
-		SET meal = #{meal}, kind = #{kind}, gram = #{gram}, calories = #{calories}
 		WHERE diet_id = #{diet_id}
 	</update>
 	

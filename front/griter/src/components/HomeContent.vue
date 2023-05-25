@@ -309,7 +309,7 @@ main {
 .profile-img {
   width: 10rem;
   height: 10rem;
-  border: solid black 1px;
+  border: solid black 2px;
   border-radius: 100%;
   margin-top: 1rem;
 }
@@ -317,7 +317,7 @@ main {
 .dashboard-content-post-writerimg {
   width: 2rem;
   height: 2rem;
-  /* border: solid 1px black; */
+  border: solid 1px black;
   border-radius: 50%;
 }
 

@@ -13,8 +13,8 @@
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
             <div class="nav_link" @click="goMyPage">
-              <img v-if="loginUser.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" />
-              <img v-else src="../../assets/woman.png" class="profile-img" alt="" />
+              <img v-if="loginUser.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="border: solid 2px black;"/>
+              <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="border: solid 2px black;"/>
               <div class="login-info">
                 <span>Catbirdseat</span><br />
                 <span>catbirdseat@naver.com</span>

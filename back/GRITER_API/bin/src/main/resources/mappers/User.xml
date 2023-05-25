@@ -5,17 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.griter.model.dao.UserDao">
 
 	<insert id="create" parameterType="User">
-		INSERT INTO users (user_id, password, email, gender, name, nickname, image)
-		VALUES(0, #{password}, #{email}, #{gender}, #{name}, #{nickname}, #{image})
+		INSERT INTO users (password, email, gender, name, nickname, image)
+		VALUES(#{password}, #{email}, #{gender}, #{name}, #{nickname}, #{image})
 	</insert>
 	
 	<select id="selectAll" resultType="User">
 		SELECT * FROM users
 	</select>
 	
-	<select id="selectByNickname" parameterType="String" resultType="User">
+	<select id="selectById" parameterType="int" resultType="User">
 		SELECT * FROM users
-		WHERE nickname = #{nickname}
+		WHERE user_id = #{user_id}
 	</select>
 	
 	<update id="update" parameterType="User">
