@@ -19,18 +19,9 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="dashboard-content-post-writerInfo">
-                  <img
-                    v-if="post.gender === 'M'"
-                    src="../assets/man.png"
-                    class="dashboard-content-post-writerimg"
-                    alt=""
-                  />
-                  <img
-                    v-else
-                    src="../assets/woman.png"
-                    class="dashboard-content-post-writerimg"
-                    alt=""
-                  />
+                  <img v-if="post.gender === 'M'" src="../assets/man.png" class="dashboard-content-post-writerimg"
+                    alt="" />
+                  <img v-else src="../assets/woman.png" class="dashboard-content-post-writerimg" alt="" />
                   <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
@@ -41,10 +32,7 @@
                   }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}
                 </span>
-                <div
-                  v-if="post.user_id === loginUser.user_id"
-                  class="dashboard-content-post-btn"
-                >
+                <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
                   <button :value="post.post_id" @click="goEditPost(post.post_id)">
                     <i class="bx bx-pencil"></i>
                   </button>
@@ -70,12 +58,7 @@
         </div>
         <div class="line"></div>
         <div class="userInfo-content">
-          <img
-            v-if="loginUser.gender === 'M'"
-            src="../assets/man.png"
-            class="profile-img"
-            alt=""
-          />
+          <img v-if="loginUser.gender === 'M'" src="../assets/man.png" class="profile-img" alt="" />
           <img v-else src="../assets/woman.png" class="profile-img" alt="" />
           <div class="userInfo-info">
             <!-- 아이디 -->
@@ -83,12 +66,12 @@
             <!-- 팔로잉 -->
             <div class="userInfo-info-following">
               <h6>Following</h6>
-              <h6>98</h6>
+              <h6>{{ following.length }}</h6>
             </div>
             <!-- 팔로워 -->
             <div class="userInfo-info-follower">
               <h6>Follower</h6>
-              <h6>86</h6>
+              <h6>{{ followers.length }}</h6>
             </div>
           </div>
         </div>
@@ -130,6 +113,10 @@ export default {
           dot: true,
           dates: [],
         },
+        {
+          dot: "red",
+          dates: [],
+        },
       ],
       isDeleteModalOpen: false,
       deletePostId: "",
@@ -138,27 +125,17 @@ export default {
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("routineModule", ["routines"]),
+    ...mapState("dietModule", ["diets"]),
     ...mapState("postModule", ["posts"]),
+    ...mapState("followModule", ["followers", "following"])
   },
-  mounted() {
-    const tempRtns = JSON.stringify(this.routines);
-    tempRtns;
-    const user_id = localStorage.getItem("loginUser");
-    // dispatch 역할
-    this.getLoginUser(user_id);
-    this.getUserRoutines(user_id);
-
-    const len = this.routines.length;
-    for (let i = 0; i < len; i++) {
-      this.attributes[0]["dates"].push(
-        new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
-      );
-    }
-  },
+  mounted() { },
   methods: {
     ...mapActions("postModule", ["getPosts", "delete"]),
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("routineModule", ["getUserRoutines"]),
+    ...mapActions("dietModule", ["getUserDiets"]),
+    ...mapActions("followModule", ["callFollowers", "callFollowing"]),
     addItemToAttributes(date) {
       this.attributes[0]["dates"].push(date);
     },
@@ -168,7 +145,6 @@ export default {
     },
     showDeleteModal(deletePostId) {
       event.preventDefault();
-      console.log(deletePostId);
       this.isDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
@@ -177,28 +153,90 @@ export default {
       this.deletePostId = "";
     },
     deletePost() {
-      console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
-      router.go(0);
+      this.updateData();
     },
-    handleDayClick(day) {
+    handleDayClick() {
       // 클릭된 날짜에 대한 처리를 여기에 작성하세요
-      console.log(day);
       // 예시: 클릭된 날짜 정보를 콘솔에 출력합니다
-
       // 원하는 동작을 수행하도록 메소드를 구현하세요
     },
+    moveUserInfo(user_id) {
+      event.preventDefault();
+      router.push({ name: "userInfo", params: { user_id: user_id } });
+    },
+    updateData() {
+      setTimeout(() => {
+        clearInterval(interval)
+      }, "100");
+      let interval = setInterval(() => {
+        this.getPosts();
+        const user_id = localStorage.getItem("loginUser");
+        this.callFollowers(user_id);
+        this.callFollowing(user_id);
+        this.getLoginUser(user_id)
+          .then(() => {
+            // 로그인한 사용자 정보 가져오기 완료
+            return this.getUserRoutines(user_id);
+          })
+          .then(() => {
+            const len = this.routines.length;
+            for (let i = 0; i < len; i++) {
+              this.attributes[0]["dates"].push(
+                new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
+              );
+            }
+            return this.getUserDiets(user_id);
+          })
+          .then(() => {
+            // 사용자 식단 정보 가져오기 완료
+            const len2 = this.diets.length;
+            for (let i = 0; i < len2; i++) {
+              this.attributes[1]["dates"].push(
+                new Date(this.diets[i].date + 9 * 60 * 60 * 1000).toUTCString()
+              );
+            }
+          });
+      }, "5");
+    }
   },
   created() {
+    setTimeout(() => {
+      this.updateData();
+      const user_id = localStorage.getItem("loginUser");
+      this.callFollowers(user_id);
+      this.callFollowing(user_id);
+      this.getLoginUser(user_id)
+        .then(() => {
+          // 로그인한 사용자 정보 가져오기 완료
+          this.getUserRoutines(user_id);
+        })
+        .then(() => {
+          const len = this.routines.length;
+          for (let i = 0; i < len; i++) {
+            this.attributes[0]["dates"].push(
+              new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
+            );
+          }
+          this.getUserDiets(user_id);
+        })
+        .then(() => {
+          // 사용자 식단 정보 가져오기 완료
+          const len2 = this.diets.length;
+          for (let i = 0; i < len2; i++) {
+            this.attributes[1]["dates"].push(
+              new Date(this.diets[i].date + 9 * 60 * 60 * 1000).toUTCString()
+            );
+          }
+        });
+    }, "10");
     // 로그인하고 1회만 새로고침
-    // console.log(self.name);
     if (self.name != "reload") {
       self.name = "reload";
       self.location.reload(true);
     } else self.name = "";
-    this.getPosts();
-  },
+  }
 };
 </script>
 
@@ -276,7 +314,7 @@ main {
   margin-top: 1rem;
 }
 
-.dashboard-content-post-writerimg{
+.dashboard-content-post-writerimg {
   width: 2rem;
   height: 2rem;
   /* border: solid 1px black; */
@@ -392,7 +430,7 @@ hr {
   color: grey;
 }
 
-.dashboard-content-post-btn > button {
+.dashboard-content-post-btn>button {
   border: none;
   background-color: transparent;
 }

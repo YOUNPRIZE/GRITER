@@ -23,15 +23,15 @@
         </div>
         <div class="userinfo-content">
           <img v-if="loginUser.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
-                            height: 15rem;
-                            width: 15rem;
-                            border-radius: 100%;
-                          " />
+                              height: 15rem;
+                              width: 15rem;
+                              border-radius: 100%;
+                            " />
           <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
-                            height: 15rem;
-                            width: 15rem;
-                            border-radius: 100%;
-                          " />
+                              height: 15rem;
+                              width: 15rem;
+                              border-radius: 100%;
+                            " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -99,17 +99,17 @@
                 <div id="followers-content-userInfo">
                   <div class="followers-content-userInfo">
                     <img v-if="follower.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
-                            height: 3rem;
-                            width: 3rem;
-                            border-radius: 100%;
-                            margin-left: 0.5rem;
-                          " />
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
                     <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
-                            height: 3rem;
-                            width: 3rem;
-                            border-radius: 100%;
-                            margin-left: 0.5rem;
-                          " />
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
                     <span>{{ follower.name }}</span>
                     <span>{{ follower.nickname }}</span>
                     <span>{{ follower.email }}</span>
@@ -155,7 +155,18 @@
               <div @click="movePage(follow.following_id)">
                 <div id="following-content-userInfo">
                   <div class="following-content-userInfo">
-                    <img src alt />
+                    <img v-if="follow.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
+                    <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
                     <span>{{ follow.name }}</span>
                     <span>{{ follow.nickname }}</span>
                     <span>{{ follow.email }}</span>
@@ -172,7 +183,6 @@
       <span>Posts</span>
       <div class="line"></div>
       <div class="myPost-content">
-        {{ posts }}
         <div v-for="(post, index) in posts" :key="index" class="group-item">
           <!-- link 좌표 바꿔야 됨 상세보기로, params도 받아와야 함-->
           <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
@@ -182,12 +192,24 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img src alt style="
+                  <!-- <img src alt style="
                     width: 30px;
                     height: 30px;
                     border-radius: 100%;
                     border: solid 1px red;
-                  " />
+                  " /> -->
+                  <img v-if="post.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
+                  <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
+                              height: 3rem;
+                              width: 3rem;
+                              border-radius: 100%;
+                              margin-left: 0.5rem;
+                            " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
