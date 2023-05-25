@@ -1,4 +1,4 @@
-CREATE DATABASE griter;
+CREATE DATABASE IF NOT EXISTS griter;
 USE griter;
 
 # USER TABLE
@@ -36,21 +36,21 @@ CREATE TABLE IF NOT EXISTS `posts` (
 		REFERENCES `users` (`user_id`)
     	ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 # INSERT POST DUMMY DATA
 INSERT INTO posts (post_id, user_id, title, content, generated_date, modified_date, view_cnt, like_cnt, category) 
-values (0, 1, "아침 운동 깜빡했다..", "내일은 꼭 간다!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+values (0, 1, "아침 운동 깜빡했다..", "내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!내일은 꼭 간다!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
 (0, 2, "배고파..", "10층 가야지!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
 (0, 3, "안녕하세요~", "1시 15분까지 꼭 오세요!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유");
+
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
     `image_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 image ID 값
-    `post_id` INT NOT NULL, # 게시물 ID
-    `img_path` VARCHAR(200) NOT NULL, # image 경로
-    CONSTRAINT `fk_image_post`
-		FOREIGN KEY (`post_id`)
-		REFERENCES `posts` (`post_id`)
+    `user_id` INT NOT NULL UNIQUE, # 사용자 ID
+    `data` BLOB,
+    CONSTRAINT `fk_image_user`
+		FOREIGN KEY (`user_id`)
+		REFERENCES `users` (`user_id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `routines` (
     `user_id` INT NOT NULL,
     `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목 ex) 달리기, 스쿼트
     `type` VARCHAR(100) NOT NULL, # ex) 유산소, 하체, 어깨, 이두 etc..
-    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
+    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
     `time` INT DEFAULT NULL, # 운동 시간 (선택적?)
     `sets` INT DEFAULT NULL, # 유산소 운동 했을 경우 sets, reps, weight 필요 없으므로 NULLABLE
     `reps` INT DEFAULT NULL,
@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `diets`;
 CREATE TABLE IF NOT EXISTS `diets` (
     `diet_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
     `user_id` INT NOT NULL,
-    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
+    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
     `meal` VARCHAR(20) NOT NULL, # 아침, 점심, 저녁, 간식 등
     `kind` VARCHAR(100) NOT NULL, # 무슨 종류? 계란, 고구마 등등 입력
     `gram` INT DEFAULT 0, # 섭취한 음식의 무게
@@ -199,3 +199,18 @@ CREATE TABLE IF NOT EXISTS `diets` (
 INSERT INTO diets (diet_id, user_id, date, meal, kind, gram, calories) 
 values (0, 1, DEFAULT, "점심", "닭가슴살", 100, 200),
 (0, 1, DEFAULT, "저녁", "족발", 200, 1000);
+
+SELECT p.content pContent, c.content cContent, p.title, p.post_id, p.user_id pUser, c.user_id cUser, p.generated_date pGen, p.modified_date pMod, c.generated_date cGen, c.modified_date cMod, p.view_cnt, p.like_cnt, p.category, c.parent_id FROM posts as p
+JOIN comments as c
+ON p.post_id = c.post_id
+WHERE p.post_id = 1;
+
+SELECT p.*, u.nickname FROM posts p
+JOIN users u
+ON p.user_id = u.user_id 
+WHERE post_id = 1;
+        
+SELECT c.*, u.nickname FROM comments c
+LEFT OUTER JOIN users u
+ON c.user_id = u.user_id
+WHERE post_id = 1;

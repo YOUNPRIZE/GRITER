@@ -1,5 +1,5 @@
-import router from "@/router";
-import axios from "axios";
+import router from '@/router';
+import axios from 'axios';
 // import httpCommon from "@/util/http-common";
 
 const REST_API = `http://localhost:9999/api`;
@@ -27,9 +27,6 @@ const userModule = {
     GET_USERS: (state, payload) => {
       state.users = payload;
     },
-    // UPDATE_USER: (state, payload) => {
-    //   state.loginUser = payload;
-    // }
   },
   actions: {
     updateUser: ({ commit }, user) => {
@@ -49,10 +46,10 @@ const userModule = {
         })
         .then((res) => {
           console.log(res);
-          alert("사용자의 정보가 수정되었습니다.");
+          alert('사용자의 정보가 수정되었습니다.');
           // commit("UPDATE_USER", loginUser);
           // router.push({ name: "calendar" });
-          router.push({ name: "home" }).catch(() => {});
+          router.push({ name: 'home' }).catch(() => {});
         });
     },
     userLogin: ({ commit }, loginUser) => {
@@ -65,14 +62,14 @@ const userModule = {
           },
         })
         .then((res) => {
-          sessionStorage.setItem("access-token", res.data["access-token"]);
-          localStorage.setItem("loginUser", res.data["loginUser"]);
-          commit("USER_LOGIN", loginUser);
-          router.push({ name: "home" });
+          sessionStorage.setItem('access-token', res.data['access-token']);
+          localStorage.setItem('loginUser', res.data['loginUser']);
+          commit('USER_LOGIN', loginUser);
+          router.push({ name: 'home' });
         })
         .catch((err) => {
           console.log(err);
-          alert("로그인 실패");
+          alert('로그인 실패');
           // router.go(0);
         });
     },
@@ -80,28 +77,50 @@ const userModule = {
       const API_URL = `${REST_API}/users/${user_id}`;
       axios({
         url: API_URL,
-        method: "GET",
+        method: 'GET',
       }).then((res) => {
-        commit("GET_USER", res.data);
+        commit('GET_USER', res.data);
       });
     },
     getUsers: ({ commit }) => {
       const API_URL = `${REST_API}/users/`;
       axios({
         url: API_URL,
-        method: "GET",
+        method: 'GET',
       }).then((res) => {
-        commit("GET_USERS", res.data);
+        commit('GET_USERS', res.data);
       });
     },
     getLoginUser: ({ commit }, user_id) => {
       const API_URL = `${REST_API}/users/${user_id}`;
       axios({
         url: API_URL,
-        method: "GET",
+        method: 'GET',
       }).then((res) => {
-        commit("GET_LOGINUSER", res.data);
+        commit('GET_LOGINUSER', res.data);
       });
+    },
+    create: ({ commit }, payload) => {
+      commit;
+      const API_URL = `${REST_API}/users/`;
+      axios
+        .post(API_URL, null, {
+          params: {
+            name: payload.name,
+            nickname: payload.nickname,
+            password: payload.password,
+            email: payload.email,
+            gender: payload.gender,
+          },
+        })
+        .then((res) => {
+          alert('성공');
+          console.log(res);
+        })
+        .catch((err) => {
+          alert('실패');
+          console.log(err);
+        });
     },
   },
 };
