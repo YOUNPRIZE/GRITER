@@ -18,7 +18,17 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO users (user_id, nickname, password, name, email, gender, regist_date, image) 
 values (0, "catbirdseat", "1234", "박재민", "catbirdseat@gmail.com", "M", DEFAULT, DEFAULT),
 (0, "younprize", "1234", "조윤상", "ysang10@gmail.com", "M", DEFAULT, DEFAULT),
-(0, "edujihye", "1234", "오지혜", "edujihye@gmail.com", "W", DEFAULT, DEFAULT);
+(0, "edujihye", "1234", "오지혜", "edujihye@gmail.com", "W", DEFAULT, DEFAULT),
+(0, "mmminjung0414", "1234", "김민정", "mmminjung0414@gmail.com", "W", DEFAULT, DEFAULT),
+(0, "alsxo82425", "1234", "김민태", "alsxo82425@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "boyoun1113", "1234", "김보연", "kkbbyy1113@gmail.com", "W", DEFAULT, DEFAULT),
+(0, "pkgun0727", "1234", "박동건", "pkgun0727@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "sce9842", "1234", "송채은", "sce9842@gmail.com", "W", DEFAULT, DEFAULT),
+(0, "yumsw6109", "1234", "염순원", "yumsw6109@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "sjyoon4755", "1234", "윤석준", "sjyoon4755@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "darkard37", "1234", "정민영", "darkard37@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "chj7785", "1234", "채현종", "chj7785@gmail.com", "M", DEFAULT, DEFAULT),
+(0, "tkdqls92", "1234", "한상빈", "tkdqls92@gmail.com", "M", DEFAULT, DEFAULT);
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -40,8 +50,20 @@ CREATE TABLE IF NOT EXISTS `posts` (
 # INSERT POST DUMMY DATA
 INSERT INTO posts (post_id, user_id, title, content, generated_date, modified_date, view_cnt, like_cnt, category) 
 values (0, 1, "아침 운동 깜빡했다..", "내일은 꼭 간다!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 1, "아빠 왔다!!!", "산책 갈 사람~?", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
 (0, 2, "배고파..", "10층 가야지!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
-(0, 3, "안녕하세요~", "1시 15분까지 꼭 오세요!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유");
+(0, 2, "운동 갈 사람??", "헬스장 갈 사람 구합니다.", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 3, "안녕하세요~", "1시 15분까지 꼭 오세요!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 4, "(아 늦었다 58분이네)", "59분 ㅠㅠㅠ", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 5, "뮝태야..", "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 6, "공부가주 먹자", "나 집 가야돼!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 7, "코노 갈 사람?", "나 혼자 10곡 부른다", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 8, "성민아", "주말에 어디가지??", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 9, "점심은??", "짜장면 개 땡기네", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 10, "마라톤 할 사람?", "풀코스 마라톤 대회 나가자!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 11, "알고리즘이 제일 쉬웠어요!", "C형 도전합니다.", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 12, "오빠랑 공부할래??", "오빠가 알려줄게.", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
+(0, 13, "지각할까봐", "급하게 왔는데 편의점 좀 다녀와도 될까요??", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유");
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
@@ -100,9 +122,27 @@ CREATE TABLE IF NOT EXISTS `follows` (
 # INSERT FOLLOW DUMMY DATA
 INSERT INTO follows (follow_id, user_id, following_id) 
 values (0, 1, 3),
+(0, 1, 4),
+(0, 1, 5),
+(0, 1, 6),
+(0, 1, 7),
+(0, 1, 8),
 (0, 2, 3),
+(0, 2, 1),
+(0, 2, 4),
+(0, 2, 5),
+(0, 2, 6),
+(0, 2, 7),
+(0, 2, 8),
 (0, 1, 2),
-(0, 2, 1);
+(0, 3, 1),
+(0, 3, 2),
+(0, 3, 4),
+(0, 3, 5),
+(0, 3, 6),
+(0, 3, 7),
+(0, 3, 8);
+
 
 DROP TABLE IF EXISTS `post_likes`;
 CREATE TABLE IF NOT EXISTS `post_likes`(
@@ -178,7 +218,11 @@ CREATE TABLE IF NOT EXISTS `routines` (
 # INSERT ROUTINE DUMMY DATA
 INSERT INTO routines (routine_id, user_id, exercise, type, date, time, sets, reps, weight) 
 values (0, 1, "달리기", "유산소", DEFAULT, 30, DEFAULT, DEFAULT, DEFAULT),
-(0, 1, "스쿼트", "하체", DEFAULT, 50, 5, 5, 100);
+(0, 1, "스쿼트", "하체", DEFAULT, 50, 5, 5, 100),
+(0, 2, "벤치프레스", "가슴", DEFAULT, 50, 5, 5, 100),
+(0, 2, "데드리프트", "전신", DEFAULT, 50, 5, 5, 100),
+(0, 3, "랫풀다운", "등", DEFAULT, 50, 5, 5, 100),
+(0, 3, "스텝밀", "유산소", DEFAULT, 50, DEFAULT, DEFAULT, DEFAULT);
 
 DROP TABLE IF EXISTS `diets`;
 CREATE TABLE IF NOT EXISTS `diets` (
@@ -198,4 +242,9 @@ CREATE TABLE IF NOT EXISTS `diets` (
 # INSERT DIET DUMMY DATA
 INSERT INTO diets (diet_id, user_id, date, meal, kind, gram, calories) 
 values (0, 1, DEFAULT, "점심", "닭가슴살", 100, 200),
-(0, 1, DEFAULT, "저녁", "족발", 200, 1000);
+(0, 1, DEFAULT, "저녁", "족발", 200, 1000),
+(0, 2, DEFAULT, "아침", "오트밀", 100, 80),
+(0, 2, DEFAULT, "저녁", "치킨", 300, 1203),
+(0, 3, DEFAULT, "아침", "과일", 100, 400),
+(0, 3, DEFAULT, "점심", "로제떡볶이", 400, 1245),
+(0, 3, DEFAULT, "저녁", "치킨", 300, 1102),

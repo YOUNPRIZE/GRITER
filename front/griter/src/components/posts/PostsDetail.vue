@@ -51,7 +51,7 @@
               <span>{{ post[0].title }}</span>
               <div class="postdetail-main-value-writer">
                 <img src alt />
-                <span>{{ post[0].nickname }}</span>
+                <span @click="movePage(post[0].user_id)">{{ post[0].nickname }}</span>
               </div>
               <span>{{ post[0].category }}</span>
             </div>
@@ -297,7 +297,13 @@ export default {
           }
         }
       }, "10");
-    }
+    },
+    movePage(user_id) {
+      router.push({ name: "userInfo", params: { user_id: user_id } });
+      setTimeout(() => {
+        router.go(0);
+      }, "100");
+    },
   },
   created() {
     const post_id = this.$route.params.post_id;

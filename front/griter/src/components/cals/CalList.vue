@@ -3,12 +3,14 @@
     <div class="calendar-container">
       <div id="calendar-title">
         <h3>Calendar</h3>
-        <div>
+        <div class="addButtons">
           <router-link :to="{ name: 'DietsCreate' }">
             <img src="../../assets/red35.png" />
+            <span>Add Diets</span>
           </router-link>
           <router-link :to="{ name: 'RoutinesCreate' }">
             <img src="../../assets/blue35.png" />
+            <span>Add Routines</span>
           </router-link>
         </div>
       </div>
@@ -175,6 +177,17 @@ export default {
 </script>
 
 <style scoped>
+
+.addButtons{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* color: black; */
+}
+.addButtons span {
+  color: black;
+  margin-left: 0.5rem;
+}
 .calendar-container {
   display: flex;
   flex-direction: column;
@@ -202,7 +215,9 @@ p.griter-diet {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-bottom: 1rem;
 }
 
