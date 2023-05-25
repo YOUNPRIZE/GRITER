@@ -4,7 +4,7 @@
 
 - 프로젝트명 : 그리터(GRITER)
 
-- 프로젝트 컨셉 :
+- 프로젝트 컨셉 : 커뮤니티 기능과 운동 및 식단 정보 기록을 통해 건강 관리를 도와주는 서비스
 
 - 개발 기간 : 23.05.18 ~ 23.05.25 (8일)
 
@@ -22,8 +22,8 @@
 
 | 이름   | 역할 | 설명           |
 | ------ | ---- | -------------- |
-| 박재민 | ?    | 모찌모찌기모찌 |
-| 조윤상 | ?    | ?              |
+| 박재민 | FE && BE    | Vue Component 설계 및 전반적인 프론트엔드 구현 + 백엔드 검토 |
+| 조윤상 | BE && FE  | SpringBoot REST API 설계 및 백엔드 구현 + 프론트엔드 검토 |
 
 ## **2️⃣ UI 디자인 및 프로토타입**
 
@@ -70,192 +70,66 @@
 
   ![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/bcf615f4-7c10-4fa4-8322-d9792b100b4e)
 
-- start
-
-  ```sql
-  CREATE DATABASE griter;
-  USE griter;
-  
-  DROP TABLE IF EXISTS posts;
-  DROP TABLE IF EXISTS users;
-  DROP TABLE IF EXISTS comments;
-  DROP TABLE IF EXISTS follows;
-  DROP TABLE IF EXISTS comment_likes;
-  DROP TABLE IF EXISTS images;
-  ```
-
-- users
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `users` (
-      `user_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `password` VARCHAR(100) NOT NULL,
-      `email` VARCHAR(100) NOT NULL,
-      `gender` VARCHAR(10) NOT NULL,
-      `name` VARCHAR(20) NOT NULL,
-      `nickname` VARCHAR(20) NOT NULL,
-      `regist_date` VARCHAR(20) NOT NULL,
-      `image` VARCHAR(100) # 프로필 사진이 1개이므로 외래키 필요 X
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- posts
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `posts` (
-      `post_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `user_id` INT NOT NULL,
-      `title` VARCHAR(50) NOT NULL,
-      `content` TEXT NOT NULL,
-      `generated_date` VARCHAR(20) NOT NULL,
-      `modified_date` VARCHAR(20) NOT NULL,
-      `view_cnt` INT NOT NULL,
-      `like_cnt` INT NOT NULL,
-      `category` VARCHAR(50) NOT NULL,
-      `image` VARCHAR(100),
-      CONSTRAINT `fk_post_user`
-      FOREIGN KEY (`user_id`)
-      REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-      CONSTRAINT `fk_post_image`
-      FOREIGN KEY (`image`)
-      REFERENCES `images` (`post_id`)
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- comments
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `comments` (
-      `comment_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `content` VARCHAR(200) NOT NULL,
-      `parent_id` INT, # 대댓글 기능
-      `user_id` INT NOT NULL,
-      `post_id` INT NOT NULL,
-      `generated_date` VARCHAR(20) NOT NULL,
-      `modified_date` VARCHAR(20) NOT NULL,
-      CONSTRAINT `fk_comment_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-      CONSTRAINT `fk_comment_post`
-      	FOREIGN KEY (`post_id`)
-      	REFERENCES `posts` (`post_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- follows
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `follows` (
-      `follow_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `user_id` INT NOT NULL, # 외래키 날 팔로우 하는 사람
-      `following_id` INT NOT NULL, # 외래키 내가 팔로우 하는 사람
-      CONSTRAINT `fk_follows_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-      CONSTRAINT `fk_follows_following`
-      	FOREIGN KEY (`following_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- post_likes
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `post_likes`(
-      `post_like_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `user_id` INT NOT NULL,
-      `post_id` INT NOT NULL,
-      CONSTRAINT `fk_postlikes_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES 	`users`(`user_id`)
-      	ON DELETE CASCADE
-      CONSTRAINT `fk_postlikes_post`
-      	FOREIGN KEY (`post_id`)
-      	REFERENCES `posts` (`post_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- comment_likes
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `comment_likes` (
-      `comment_like_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `user_id` INT NOT NULL,
-      `comment_id` INT NOT NULL,
-      CONSTRAINT `fk_commentlikes_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-      CONSTRAINT `fk_commentlikes_comment`
-      	FOREIGN KEY (`comment_id`)
-      	REFERENCES `comments` (`comment_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- images
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `images` (
-      `image_id` INT AUTO_INCREMENT PRIMARY KEY,
-      `img_path` VARCHAR(200) NOT NULL,
-      `post_id` INT NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- routines
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `routines` (
-      `routine_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
-      `user_id` INT NOT NULL,
-      `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목 ex) 달리기, 스쿼트
-      `type` VARCHAR(100) NOT NULL, # ex) 유산소, 하체, 어깨, 이두 etc..
-      `date` DATE NOT NULL, # 운동한 날짜
-      `time` INT, # 운동 시간 (선택적?)
-      `sets` INT, # 유산소 운동 했을 경우 sets, reps, weight 필요 없으므로 NULLABLE
-      `reps` INT,
-      `weight` INT,
-      CONSTRAINT `fk_routines_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-
-- diets
-
-  ```sql
-  CREATE TABLE IF NOT EXISTS `diets` (
-      `diet_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
-      `user_id` INT NOT NULL,
-      `date` DATE NOT NULL, # 날짜
-      `meal` VARCHAR(20) NOT NULL, # 아침, 점심, 저녁, 간식 등
-      `kind` VARCHAR(100) NOT NULL, # 무슨 종류? 계란, 고구마 등등 입력
-      `gram` INT NOT NULL, # 섭취한 음식의 무게
-  	`calories` INT, # 칼로리를 알 경우 입력되게??
-      CONSTRAINT `fk_diets_user`
-      	FOREIGN KEY (`user_id`)
-      	REFERENCES `users` (`user_id`)
-      	ON DELETE CASCADE
-  ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-  ```
-<br>
-
 ## **5️⃣ 컴포넌트 구조**
 
 * FrontEnd
-
-  
-
+```javascript
+📄 .gitignore
+📄 babel.config.js
+📄 jsconfig.json
+📄 package-lock.json
+📄 package.json
+📄 README.md
+📄 vue.config.js
+📂 node_modules
+📂 public
+    ㄴ📄 favicon.ico
+    ㄴ📄 index.html
+📂 src
+    ㄴ📄 App.vue
+    ㄴ📄 main.js
+    ㄴ📂 assets
+    ㄴ📂 components
+    	ㄴ📄 HomeContent.vue
+    	ㄴ📂 cals
+	    ㄴ📄 CalCreate.vue
+	    ㄴ📄 CalDetail.vue
+	    ㄴ📄 CalDietCreate.vue
+	    ㄴ📄 CalDietDetail.vue
+	    ㄴ📄 CalList.vue
+	ㄴ📂 common
+	    ㄴ📄 AsideNav.vue
+	ㄴ📂 posts
+	    ㄴ📄 PostsCreate.vue
+	    ㄴ📄 PostsDetail.vue
+	    ㄴ📄 PostsList.vue
+	ㄴ📂 users
+	    ㄴ📄 UsersInfo.vue
+	    ㄴ📄 UsersLogin.vue
+	    ㄴ📄 UsersModify.vue
+	    ㄴ📄 UsersRegister.vue
+	    ㄴ📄 UsersSearch.vue
+    ㄴ📂 router
+    	ㄴ📄 index.js
+    ㄴ📂 store
+        ㄴ📄 store.js
+	ㄴ📂 modules
+	    ㄴ📄 commentModule.js
+	    ㄴ📄 dietModule.js
+	    ㄴ📄 followModule.js
+	    ㄴ📄 nightmodeModule.js
+	    ㄴ📄 postModule.js
+	    ㄴ📄 routineModule.js
+	    ㄴ📄 userModule.js
+    ㄴ📂 util
+        ㄴ📄 http-common.js
+    ㄴ📂 views
+    	ㄴ📄 CalView.vue
+	ㄴ📄 HomeView.vue
+	ㄴ📄 PostsView.vue
+	ㄴ📄 UserView.vue
+```
 * BackEnd
-
 ```java
 📂 src/main/java
 	ㄴ📦 com.griter
@@ -265,31 +139,46 @@
 		ㄴ📄 SwaggerConfig.java
 		ㄴ📄 WebConfing.java
 	ㄴ📦 com.griter.controller
+		ㄴ📄 CommentLikeRestController.java		
+		ㄴ📄 CommentRestController.java			
+		ㄴ📄 DietRestController.java		
+		ㄴ📄 FollowRestController.java		
+		ㄴ📄 ImageRestController.java
+		ㄴ📄 PostLikeRestController.java		
 		ㄴ📄 PostRestController.java
-    		ㄴ📄 UserRestController.java
+    		ㄴ📄 RoutineRestController.java
+		ㄴ📄 UserRestController.java
 	ㄴ📦 com.griter.exception
 		ㄴ📄 PostNotFoundException.java
+	ㄴ📦 com.griter.interceptor
+		ㄴ📄 JwtInterceptor.java
 	ㄴ📦 com.griter.model.dao
 	    	ㄴ📄 CommentDao.java
 		ㄴ📄 CommentLikeDao.java
+		ㄴ📄 DietDao.java
 		ㄴ📄 FollowDao.java
 		ㄴ📄 ImageDao.java
 		ㄴ📄 PostDao.java
 		ㄴ📄 PostLikeDao.java
+		ㄴ📄 RoutineLikeDao.java
 		ㄴ📄 UserDao.java
     	ㄴ📦 com.griter.model.dto
    	   	ㄴ📄 Comment.java
 		ㄴ📄 CommentLike.java
+		ㄴ📄 Diet.java
 		ㄴ📄 Follow.java
 		ㄴ📄 Image.java
 		ㄴ📄 Post.java
 		ㄴ📄 PostLike.java
+		ㄴ📄 Routine.java
 		ㄴ📄 User.java
     	ㄴ📦 com.griter.model.service
 		ㄴ📄 CommentLikeService.java
 		ㄴ📄 CommentLikeServiceImpl.java
 		ㄴ📄 CommentService.java
 		ㄴ📄 CommentServiceImpl.java
+		ㄴ📄 DietService.java
+		ㄴ📄 DietServiceImpl.java
 		ㄴ📄 FollowService.java
 		ㄴ📄 FollowServiceImpl.java
 		ㄴ📄 ImageService.java
@@ -298,18 +187,23 @@
 		ㄴ📄 PostLikeServiceImpl.java
 		ㄴ📄 PostService.java
 		ㄴ📄 PostServiceImpl.java
+		ㄴ📄 RoutineService.java
+		ㄴ📄 RoutineServiceImpl.java
 		ㄴ📄 UserService.java
 		ㄴ📄 UserServiceImpl.java
 📂 src/main/resources
 	ㄴ📂 mappers
 		ㄴ📄 Comment.xml
 		ㄴ📄 CommentLike.xml
+		ㄴ📄 Diet.xml
 		ㄴ📄 Follow.xml
 		ㄴ📄 Image.xml
 		ㄴ📄 Post.xml
 		ㄴ📄 PostLike.xml
+		ㄴ📄 Routine.xml
 		ㄴ📄 User.xml
-		ㄴ📄 application.properties
+	ㄴ📄 application.properties
+	ㄴ📄 schema.sql
 📄 pom.xml
 ```
 <br>
