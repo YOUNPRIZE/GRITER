@@ -68,10 +68,14 @@ public class FollowRestController {
 		}
 	}
 
-	@DeleteMapping("/unfollow")
+	@DeleteMapping("/unfollow/{user_id}/{following_id}")
 	@ApiOperation(value = "팔로우 취소", response = Follow.class)
-	public ResponseEntity<?> deleteFollow(Follow follow) {
+	public ResponseEntity<?> deleteFollow(@PathVariable int user_id, @PathVariable int following_id) {
 		try {
+			Follow follow = new Follow();
+			follow.setUser_id(user_id);
+			follow.setFollowing_id(following_id);
+			System.out.println(follow);
 			int delete = fs.deleteFollow(follow);
 			return new ResponseEntity<Integer>(delete, HttpStatus.OK);
 		} catch (Exception e) {

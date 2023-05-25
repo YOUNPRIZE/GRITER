@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="useNav">
-      <aside-nav />
-    </div>
+    <aside-nav v-if="useNav"/>
     <router-view />
   </div>
 </template>
@@ -29,13 +27,6 @@ export default {
   },
   beforeMount() {
     console.log("nightmode: " + this.nightmode);
-    if (
-      this.$router.currentRoute.name == "login" ||
-      this.$router.currentRoute.name == "register"
-    ) {
-      this.useNav = false;
-      return;
-    }
   },
   mounted() {
     console.log(this.$router.currentRoute.name);
@@ -44,7 +35,8 @@ export default {
       this.$router.currentRoute.name == "login" ||
       this.$router.currentRoute.name == "register"
     ) {
-      this.useNav = false;
+      // const shown = document.getElementById('body-pd').style.display;
+        this.useNav = false;
       return;
     }
     console.log(this.useNav);
@@ -119,6 +111,7 @@ export default {
   --font-color-btn-1: #565656;
   --input-bg-color: white;
 }
+
 [nightmode="true"] {
   --first-color: #7c7c7c;
   --box-bg-color: #565656;
@@ -182,7 +175,7 @@ nav a {
 .modal-content-buttons>button {
   border: solid 1px;
   border-radius: 0.5rem;
-  margin: 0 1rem 0 1rem ;
+  margin: 0 1rem 0 1rem;
   width: 5rem;
 }
 </style>

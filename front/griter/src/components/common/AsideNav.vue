@@ -96,6 +96,9 @@ export default {
       localStorage.removeItem("loginUser");
       localStorage.removeItem("vuex");
       router.push({ name: "login" });
+      setTimeout(() => {
+        router.go(0)
+      }, "0");
     },
     goMyPage() {
       if (router.currentRoute.name !== "myPage") {
@@ -110,6 +113,11 @@ export default {
     }
   },
   created() {
+    const routerName = router.currentRoute.name;
+    if(routerName === 'login'){
+      // document.getElementById('body-pd').style.display = 'none';
+      console.log(document.getElementById("nightmode"));
+    }
     const user_id = localStorage.getItem("loginUser");
     this.getLoginUser(user_id);
   },

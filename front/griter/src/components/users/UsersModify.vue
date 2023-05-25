@@ -42,7 +42,7 @@
 
       <div class="buttons">
         <b-button @click="updateUsr" class="update" variant="primary">수정</b-button>
-        <router-link :to="{ name: 'userInfo' }">
+        <router-link :to="{ name: 'myPage' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>
       </div>

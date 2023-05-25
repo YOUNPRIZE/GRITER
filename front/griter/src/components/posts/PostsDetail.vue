@@ -230,21 +230,8 @@ export default {
     ...mapState("userModule", ["loginUser"])
   },
   methods: {
-    ...mapActions("postModule", [
-      "getPost",
-      "delete",
-      "addViewCnt",
-      "deletePostLike",
-      "createPostLike",
-      "getPostLikeByUser"
-    ]),
-    ...mapActions("commentModule", [
-      "getComments",
-      "getComment",
-      "createComment",
-      "commentDelete",
-      "update"
-    ]),
+    ...mapActions("postModule", ["getPost", "delete", "addViewCnt", "deletePostLike", "createPostLike", "getPostLikeByUser"]),
+    ...mapActions("commentModule", ["getComments", "getComment", "createComment", "commentDelete", "update"]),
     ...mapActions("userModule", ["getLoginUser"]),
     moveList() {
       this.$router.push({ name: "PostsList" });
@@ -336,9 +323,6 @@ export default {
       console.log(this.deletePostId);
       this.commentDelete(this.deleteCommentId);
       this.closeDeleteModal();
-      setTimeout(() => {
-        router.go(0);
-      }, "10");
     }
   },
   created() {
@@ -539,6 +523,7 @@ export default {
 #comment-writer {
   width: 15%;
 }
+
 #comment-content {
   width: 55%;
   display: flex;
@@ -547,6 +532,7 @@ export default {
   color: var(--font-color-2);
   /* border: solid 1px red; */
 }
+
 #comment-buttons {
   display: flex;
   width: 10%;
@@ -563,6 +549,7 @@ export default {
   align-items: center;
   /* border: solid 1px green; */
 }
+
 fieldset {
   /* border: solid 1px brown; */
   width: stretch;

@@ -163,6 +163,7 @@ export default {
   padding: 1.5rem;
   width: 90vw;
   height: 84vh;
+  min-width: fit-content;
 }
 
 .dashboard-container-content {

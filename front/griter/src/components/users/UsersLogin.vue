@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
@@ -46,12 +45,13 @@ export default {
       }
     };
   },
-  mounted() {
-    // 최초 1회에 한해 새로고침 => 그래야 옆에 aside 안뜸
-    if (self.name != "reload") {
-      self.name = "reload";
-      this.$router.go(0);
-    } else self.name = "";
+  created() {
+    // if (self.name != "reload") {
+    //   self.name = "reload";
+    //   this.$router.go(0);
+    // } else self.name = "";
+    sessionStorage.removeItem("access-token");
+    localStorage.removeItem("loginUser");
   },
   computed: {
     ...mapState("userModule", ["loginUser"])
@@ -59,16 +59,10 @@ export default {
   methods: {
     ...mapActions("userModule", ["userLogin"]),
     login() {
-      // alert(this.user.nickname);
-      this.userLogin(this.user);
-      if (this.loginUser === "fail") {
-        alert("로그인 실패");
-        // alert 먼저 띄우고 새로고침 하기위함
-        setTimeout(() => {
-          router.go(0);
-        }, "100");
+      if (this.user.nickname.length > 0 && this.user.nickname.length > 0) {
+        this.userLogin(this.user);
       } else {
-        router.push({ name: "home" });
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
       }
     }
   }
