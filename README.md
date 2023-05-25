@@ -66,9 +66,7 @@
 - [API 명세서](https://circular-ear-098.notion.site/63605c790ee94654a969fbd19b5dc299?v=a80ec7fc2ccf42888ef39c8d1050ee3e)
 
 ## **4️⃣ 데이터베이스 모델링 (ERD)**
-- ERD
-
-  ![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/bcf615f4-7c10-4fa4-8322-d9792b100b4e)
+  ![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/fc264cf0-f9d8-48a7-b3b3-594bf9dad94e)
 
 ## **5️⃣ 컴포넌트 구조**
 
