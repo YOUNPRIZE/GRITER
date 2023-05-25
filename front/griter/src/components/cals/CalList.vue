@@ -3,12 +3,14 @@
     <div class="calendar-container">
       <div id="calendar-title">
         <h3>Calendar</h3>
-        <router-link :to="{ name: 'DietsCreate' }">
-          <button>DietCreate</button>
-        </router-link>
-        <router-link :to="{ name: 'RoutinesCreate' }">
-          <box-icon type="solid" name="plus-square"></box-icon>
-        </router-link>
+        <div>
+          <router-link :to="{ name: 'DietsCreate' }">
+            <img src="../../assets/red35.png" />
+          </router-link>
+          <router-link :to="{ name: 'RoutinesCreate' }">
+            <img src="../../assets/blue35.png" />
+          </router-link>
+        </div>
       </div>
       <v-calendar
         is-expanded
@@ -22,13 +24,27 @@
           <div class="flex flex-col h-full z-10 overflow-hidden">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
             <div class="flex-grow overflow-y-auto overflow-x-auto">
-              <p
+              <!-- <p
                 @click="movetoRoutineDetail(attr.customData.id)"
                 v-for="attr in attributes"
                 :key="attr.key"
                 class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
                 :class="attr.customData.class"
-              >{{ attr.customData.title }}</p>
+              >{{ attr.customData.title }}</p>-->
+              <template v-for="attr in attributes">
+                <p
+                  @click="movetoRoutineDetail(attr.customData.id)"
+                  :key="attr.key"
+                  v-if="attr.customData.class === 'griter-workout'"
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-workout"
+                >{{ attr.customData.title }}</p>
+                <p
+                  @click="movetoDietDetail(attr.customData.id)"
+                  :key="attr.key"
+                  v-if="attr.customData.class === 'griter-diet'"
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-diet"
+                >{{ attr.customData.title }}</p>
+              </template>
             </div>
           </div>
         </template>
@@ -53,44 +69,69 @@ export default {
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
-    ...mapState("routineModule", ["routines"])
+    ...mapState("routineModule", ["routines"]),
+    ...mapState("dietModule", ["diets"])
   },
   mounted() {
     const tempRoutines = JSON.stringify(this.routines);
     tempRoutines;
+    const tempDiets = JSON.stringify(this.diets);
+    tempDiets;
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("routineModule", ["getUserRoutines"]),
+    ...mapActions("dietModule", ["getUserDiets"]),
     movetoRoutineDetail(params) {
       router.push({ name: "RoutinesDetail", params: { routine_id: params } });
+    },
+    movetoDietDetail(params) {
+      router.push({ name: "DietsDetail", params: { diet_id: params } });
     }
   },
   created() {
     const user_id = localStorage.getItem("loginUser");
-    // dispatch 역할
-    this.getLoginUser(user_id);
-    // 로그인하고 1회만 새로고침
-    // console.log(self.name);
-    if (self.name != "reload") {
-      self.name = "reload";
-      self.location.reload(true);
-    } else self.name = "";
-
-    this.getUserRoutines(user_id);
-
-    const len = this.routines.length;
-    for (let i = 1; i <= len; i++) {
-      this.attributes.push({
-        key: i,
-        customData: {
-          title: this.routines[i - 1].exercise,
-          class: "griter-workout",
-          id: this.routines[i - 1].routine_id
-        },
-        dates: new Date(this.routines[i - 1].date)
+    this.getLoginUser(user_id)
+      .then(() => {
+        // 로그인한 사용자 정보 가져오기 완료
+        return this.getUserRoutines(user_id);
+      })
+      .then(() => {
+        // 사용자 루틴 정보 가져오기 완료
+        const len = this.routines.length;
+        for (let i = 1; i <= len; i++) {
+          this.attributes.push({
+            key: i,
+            customData: {
+              title: this.routines[i - 1].exercise,
+              class: "griter-workout",
+              id: this.routines[i - 1].routine_id
+            },
+            dates: new Date(this.routines[i - 1].date)
+          });
+        }
+        return this.getUserDiets(user_id);
+      })
+      .then(() => {
+        // 사용자 식단 정보 가져오기 완료
+        const len2 = this.diets.length;
+        for (
+          let i = this.routines.length + 1;
+          i <= this.routines.length + len2;
+          i++
+        ) {
+          this.attributes.push({
+            key: i,
+            customData: {
+              title: this.diets[i - this.routines.length - 1].kind,
+              class: "griter-diet",
+              id: this.diets[i - this.routines.length - 1].diet_id
+            },
+            dates: new Date(this.diets[i - this.routines.length - 1].date)
+          });
+        }
+        console.log(this.attributes);
       });
-    }
   }
 };
 </script>
@@ -109,6 +150,11 @@ export default {
 
 p.griter-workout {
   background-color: #2388f5;
+  color: white;
+}
+
+p.griter-diet {
+  background-color: #fa5252;
   color: white;
 }
 

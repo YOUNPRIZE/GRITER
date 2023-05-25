@@ -2,7 +2,7 @@
   <main>
     <div class="diets">
       <label class="label-date" style="font-weight: bold;" for="date">날짜</label>
-      <b-form-datepicker id="date" v-model="diet.date" class="mb-2"></b-form-datepicker>
+      <b-form-datepicker id="date" v-model="specificDiet.date" class="mb-2"></b-form-datepicker>
 
       <b-form-group
         style="font-weight: bold; margin-top: 1.5rem;"
@@ -31,8 +31,8 @@
       <!-- <b-form-file v-model="file" class="mt-3" plain></b-form-file> -->
       <!-- 이미지 사용하면 주석 해제하기. -->
       <div class="buttons">
-        <b-button class="update" variant="primary">수정</b-button>
-        <b-button class="delete" variant="danger">삭제</b-button>
+        <b-button @click="updateDt()" class="update" variant="primary">수정</b-button>
+        <b-button @click="deleteDt()" class="delete" variant="danger">삭제</b-button>
         <router-link :to="{ name: 'calendar' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>
@@ -42,18 +42,55 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       // file: null, // 이미지 사용하면 주석 해제 하기.
-      diet: {
-        date: null,
-        meal: "",
-        kind: "",
-        gram: "",
-        calories: ""
-      }
+      // diet: {
+      //   date: null,
+      //   meal: "",
+      //   kind: "",
+      //   gram: "",
+      //   calories: ""
+      // }
     };
+  },
+  computed: {
+    ...mapState("dietModule", ["diet"]),
+    specificDiet() {
+      return {
+        date: new Date(this.diet.date),
+        meal: this.diet.meal,
+        kind: this.diet.kind,
+
+        gram: Number(this.diet.gram),
+        calories: Number(this.diet.calories),
+
+        user_id: this.diet.user_id,
+        diet_id: Number(
+          window.location.href.substring(
+            window.location.href.lastIndexOf("/") + 1
+          )
+        )
+      };
+    }
+  },
+  methods: {
+    ...mapActions("dietModule", ["getDiet", "updateDiet", "deleteDiet"]),
+    updateDt() {
+      this.updateDiet(this.specificDiet);
+    },
+    deleteDt() {
+      this.deleteDiet(this.specificDiet.diet_id);
+    }
+  },
+  created() {
+    const diet_id = window.location.href.substring(
+      window.location.href.lastIndexOf("/") + 1
+    );
+    this.getDiet(diet_id);
+    console.log(this.diet)
   }
 };
 </script>

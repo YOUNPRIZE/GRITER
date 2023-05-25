@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,12 +61,13 @@ public class PostLikeRestController {
 		}
 	}
 
-	@DeleteMapping("/{post_id}")
+	@DeleteMapping("/post/{post_id}/user/{user_id}")
 	@ApiOperation(value = "게시물에 대한 좋아요 정보를 삭제", response = PostLike.class)
-	public ResponseEntity<?> delete(PostLike postlike) {
-		System.out.println(postlike);
-		try {
-			int delete = pls.delete(postlike);
+	public ResponseEntity<?> delete(@PathVariable int post_id, @PathVariable int user_id) {
+		System.out.println(post_id);
+		System.out.println(user_id);
+		try {	
+			int delete = pls.delete(post_id, user_id);
 			return new ResponseEntity<Integer>(delete, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

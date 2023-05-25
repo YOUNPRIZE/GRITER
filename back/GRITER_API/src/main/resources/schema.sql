@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `routines` (
     `user_id` INT NOT NULL,
     `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목 ex) 달리기, 스쿼트
     `type` VARCHAR(100) NOT NULL, # ex) 유산소, 하체, 어깨, 이두 etc..
-    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
+    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
     `time` INT DEFAULT NULL, # 운동 시간 (선택적?)
     `sets` INT DEFAULT NULL, # 유산소 운동 했을 경우 sets, reps, weight 필요 없으므로 NULLABLE
     `reps` INT DEFAULT NULL,
@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `diets`;
 CREATE TABLE IF NOT EXISTS `diets` (
     `diet_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
     `user_id` INT NOT NULL,
-    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
+    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
     `meal` VARCHAR(20) NOT NULL, # 아침, 점심, 저녁, 간식 등
     `kind` VARCHAR(100) NOT NULL, # 무슨 종류? 계란, 고구마 등등 입력
     `gram` INT DEFAULT 0, # 섭취한 음식의 무게
