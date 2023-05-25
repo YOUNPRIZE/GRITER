@@ -23,7 +23,7 @@
               <div class="dashboard-content-post">
                 <div class="dashboard-content-post-left">
                   <div class="dashboard-content-post-title">
-                    <span>{{ post.title }}</span>
+                    <span>{{ post.gender }}</span>
                   </div>
                   <div class="dashboard-content-post-content">
                     {{ post.content }}
