@@ -348,10 +348,12 @@ hr {
 }
 
 .dashboard-content-post-title {
-  display: flex;
+  display: flex-box;
   margin-bottom: 0.5rem;
   align-items: flex-start;
   font-weight: bold;
+  /* border: solid 1px green; */
+  overflow: hidden;
 }
 
 .dashboard-content-post-left {
@@ -386,6 +388,8 @@ hr {
 
 .dashboard-content-post-created {
   color: grey;
+  /* border: solid 1px red; */
+  min-width: 8rem;
 }
 
 .dashboard-content-post-btn > button {

@@ -23,11 +23,11 @@
         </div>
         <div class="userinfo-content">
           <img src alt style="
-                    height: 15rem;
-                    width: 15rem;
-                    border: solid 1px red;
-                    border-radius: 100%;
-                  " />
+                  height: 15rem;
+                  width: 15rem;
+                  border: solid 1px red;
+                  border-radius: 100%;
+                " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -167,11 +167,11 @@
                 </div>
                 <div class="myPost-content-post-writerInfo">
                   <img src alt style="
-                            width: 30px;
-                            height: 30px;
-                            border-radius: 100%;
-                            border: solid 1px red;
-                          " />
+                                  width: 30px;
+                                  height: 30px;
+                                  border-radius: 100%;
+                                  border: solid 1px red;
+                                " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
@@ -345,6 +345,24 @@ export default {
         following_id: target_id,
       });
     },
+    updateData() {
+      const user_id = router.currentRoute.params.user_id;
+      const loginUser_id = localStorage.getItem("loginUser");
+      setInterval(() => {
+        this.callFollowers(user_id);
+        this.callFollowing(user_id);
+        for (let i = 0; i < this.followers.length; i++) {
+          console.log(this.followers[i].user_id);
+          console.log("로그인 한 사람: " + loginUser_id);
+          if (this.followers[i].user_id == loginUser_id) {
+            console.log("이미 친구");
+            this.alreadyFriend = true;
+            break;
+          }
+        }
+      }, "100");
+
+    }
   },
   created() {
     const user_id = router.currentRoute.params.user_id;
@@ -361,22 +379,25 @@ export default {
       this.getLoginUser(loginUser_id);
       this.getUser(user_id);
       this.getPostsByUserId(user_id);
-      this.callFollowers(user_id);
-      this.callFollowing(user_id);
       this.myPage = false;
-      setTimeout(() => {
-        console.log("이 아래임");
-        for (let i = 0; i < this.followers.length; i++) {
-          console.log(this.followers[i].user_id);
-          console.log("로그인 한 사람: " + loginUser_id);
-          if (this.followers[i].user_id == loginUser_id) {
-            console.log("이미 친구");
-            this.alreadyFriend = true;
-            break;
-          }
-        }
-      }, "100")
     }
+    //   setTimeout(() => {
+    //     console.log("이 아래임");
+    //     for (let i = 0; i < this.followers.length; i++) {
+    //       console.log(this.followers[i].user_id);
+    //       console.log("로그인 한 사람: " + loginUser_id);
+    //       if (this.followers[i].user_id == loginUser_id) {
+    //         console.log("이미 친구");
+    //         this.alreadyFriend = true;
+    //         break;
+    //       }
+    //     }
+    //   }, "100")
+    // }
+    // setInterval(() => {
+    //   this.callFollowers(user_id);
+    //   this.callFollowing(user_id);
+    // }, "100");
   },
 };
 </script>
@@ -712,6 +733,18 @@ main {
 }
 
 #follow-btn {
+  border: solid 1px;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+#follow-btn>div {
   display: flex;
+  /* border: 1px solid red; */
+}
+
+#follow-btn:hover {
+  cursor: pointer;
+  background-color: rgb(190, 190, 190);
 }
 </style>

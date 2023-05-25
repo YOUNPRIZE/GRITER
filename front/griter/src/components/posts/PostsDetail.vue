@@ -182,7 +182,7 @@ export default {
     ...mapState("userModule", ["loginUser"]),
   },
   methods: {
-    ...mapActions("postModule", ["getPost", "delete", "addViewCnt", "deletePostLike" ,"createPostLike" ,"getPostLikeByUser"]),
+    ...mapActions("postModule", ["getPost", "delete", "addViewCnt", "deletePostLike", "createPostLike", "getPostLikeByUser"]),
     ...mapActions("commentModule", ["getComments", "getComment", "createComment", "commentDelete", "update"]),
     ...mapActions("userModule", ["getLoginUser"]),
     moveList() {
@@ -190,15 +190,15 @@ export default {
     },
     liked() {
       const param = {
-        user_id : this.loginUser.user_id,
-        post_id : this.post[0].post_id,
+        user_id: this.loginUser.user_id,
+        post_id: this.post[0].post_id,
       }
       this.createPostLike(param);
     },
     unliked() {
       const param = {
-        user_id : this.loginUser.user_id,
-        post_id : this.post[0].post_id,
+        user_id: this.loginUser.user_id,
+        post_id: this.post[0].post_id,
       }
       this.deletePostLike(param);
     },
@@ -266,9 +266,6 @@ export default {
       console.log(this.deletePostId);
       this.commentDelete(this.deleteCommentId);
       this.closeDeleteModal();
-      setTimeout(() => {
-        router.go(0);
-      }, "10")
     }
   },
   created() {
@@ -286,6 +283,9 @@ export default {
         break;
       }
     }
+    setInterval(() => {
+      this.getComments(post_id);
+    }, 100);
   },
 };
 </script>
@@ -461,6 +461,7 @@ export default {
 #comment-writer {
   width: 15%;
 }
+
 #comment-content {
   width: 55%;
   display: flex;
@@ -469,6 +470,7 @@ export default {
   color: var(--font-color-2);
   /* border: solid 1px red; */
 }
+
 #comment-buttons {
   display: flex;
   width: 10%;
@@ -485,6 +487,7 @@ export default {
   align-items: center;
   /* border: solid 1px green; */
 }
+
 fieldset {
   /* border: solid 1px brown; */
   width: stretch;
@@ -551,5 +554,4 @@ fieldset {
 .comment-edit-buttons>button {
   border: none;
   background-color: transparent;
-}
-</style>
+}</style>

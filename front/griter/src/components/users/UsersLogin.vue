@@ -47,7 +47,11 @@ export default {
     ...mapActions("userModule", ["userLogin"]),
     login() {
       console.log(this.user);
-      this.userLogin(this.user);
+      if (this.user.nickname.length > 0 && this.user.nickname.length > 0) {
+        this.userLogin(this.user);
+      } else{
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
+      }
     },
   },
 };
