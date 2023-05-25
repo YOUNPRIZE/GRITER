@@ -54,7 +54,7 @@ const routes = [
         component: CalCreate,
       },
       {
-        path: "/diet",
+        path: "/diet/:diet_id",
         name: "DietsDetail",
         component: CalDietDetail,
       },

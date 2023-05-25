@@ -2,13 +2,26 @@
   <main>
     <div class="login-box">
       <div class="logo">GRITER</div>
-      <form action="" class="login-form">
+      <form action class="login-form">
         <div class="login-form-input">
           <div class="label">ID</div>
-          <input type="text" class="form-control" id="nickname" v-model="user.nickname" @keydown.enter="login" required />
+          <input
+            type="text"
+            class="form-control"
+            id="nickname"
+            v-model="user.nickname"
+            @keydown.enter="login"
+            required
+          />
           <div class="label">Password</div>
-          <input type="password" class="form-control" id="password" v-model="user.password" @keydown.enter="login"
-            required />
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            v-model="user.password"
+            @keydown.enter="login"
+            required
+          />
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
@@ -28,8 +41,8 @@ export default {
     return {
       user: {
         nickname: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   created() {
@@ -41,19 +54,18 @@ export default {
     localStorage.removeItem("loginUser");
   },
   computed: {
-    ...mapState("userModule", ["loginUser"]),
+    ...mapState("userModule", ["loginUser"])
   },
   methods: {
     ...mapActions("userModule", ["userLogin"]),
     login() {
-      console.log(this.user);
       if (this.user.nickname.length > 0 && this.user.nickname.length > 0) {
         this.userLogin(this.user);
-      } else{
+      } else {
         alert("아이디와 비밀번호를 모두 입력해주세요.");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,4 +1,4 @@
-import router from '@/router';
+import router from "@/router";
 import axios from "axios";
 
 const REST_API = `http://localhost:9999/api`;
@@ -30,7 +30,7 @@ const postModule = {
     },
     setPostLiked(state, payload) {
       state.postLiked = payload;
-    }
+    },
   },
   actions: {
     getPosts({ commit }) {
@@ -67,103 +67,114 @@ const postModule = {
     createPost({ commit }, payload) {
       commit;
       const API_URL = `${REST_API}/posts/`;
-      axios.post(API_URL, null, {
-        params: {
-          user_id: payload.user_id,
-          title: payload.title,
-          content: payload.content,
-          category: payload.category,
-        },
-      }).then(() => {
-        alert("게시물이 등록되었습니다.");
-        router.push({ name: 'PostsList' }).catch(() => { });
-      }).catch((err) => {
-        console.log(err);
-      });
+      axios
+        .post(API_URL, null, {
+          params: {
+            user_id: payload.user_id,
+            title: payload.title,
+            content: payload.content,
+            category: payload.category,
+          },
+        })
+        .then(() => {
+          alert("게시물이 등록되었습니다.");
+          router.push({ name: "PostsList" }).catch(() => {});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     delete({ commit }, post_id) {
       commit;
-      const API_URL = `${REST_API}/posts/${post_id}`
-      axios.delete(API_URL, null, {
-        params: {
-          post_id: post_id,
-        }
-      }).then(() => {
-        alert("게시물이 삭제되었습니다.");
-        router.push({ name: 'PostsList' }).catch(() => { });
-      })
+      const API_URL = `${REST_API}/posts/${post_id}`;
+      axios
+        .delete(API_URL, null, {
+          params: {
+            post_id: post_id,
+          },
+        })
+        .then(() => {
+          alert("게시물이 삭제되었습니다.");
+          router.push({ name: "PostsList" }).catch(() => {});
+        });
     },
-    addViewCnt({commit}, payload) {
-      commit
+    addViewCnt({ commit }, payload) {
+      commit;
       const API_URL = `${REST_API}/posts/cnt`;
-      axios.put(API_URL, null, {
-        params: {
-          post_id: payload
-        }
-      }).then((res) => {
-        res;
-      })
+      axios
+        .put(API_URL, null, {
+          params: {
+            post_id: payload,
+          },
+        })
+        .then((res) => {
+          res;
+        });
     },
     updatePost({ commit }, payload) {
       commit;
       const API_URL = `${REST_API}/posts/`;
-      axios.put(API_URL, null, {
-        params: {
-          post_id: payload.post_id,
-          user_id: payload.user_id,
-          title: payload.title,
-          content: payload.content,
-          category: payload.category,
-        }
-      }).then((res) => {
-        console.log(res);
-        alert("게시물이 수정되었습니다.");
-        router.push({ name: 'PostsDetail', params: { post_id: payload.post_id } });
-      })
+      axios
+        .put(API_URL, null, {
+          params: {
+            post_id: payload.post_id,
+            user_id: payload.user_id,
+            title: payload.title,
+            content: payload.content,
+            category: payload.category,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          alert("게시물이 수정되었습니다.");
+          router.push({
+            name: "PostsDetail",
+            params: { post_id: payload.post_id },
+          });
+        });
     },
     // 밑은 postLikes
-    createPostLike({commit}, payload) {
+    createPostLike({ commit }, payload) {
       commit;
       const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}`;
-      console.log(API_URL)
-      axios.post(API_URL, null, {
-        params: {
-          user_id: payload.user_id,
-          post_id: payload.post_id,
-        },
-      }).then(() => {
-        
-      }).catch((err) => {
-        console.log(err);
-      });
+      console.log(API_URL);
+      axios
+        .post(API_URL, null, {
+          params: {
+            user_id: payload.user_id,
+            post_id: payload.post_id,
+          },
+        })
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    deletePostLike({commit}, payload) {
+    deletePostLike({ commit }, payload) {
       commit;
-      console.log(payload)
-      const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}`;
-      axios.delete(API_URL, null, {
-        params: {
-          user_id: payload.user_id,
-          post_id: payload.post_id,
-        },
-      }).then(() => {
-        
-      }).catch((err) => {
-        console.log(err);
-      });
+      const API_URL = `http://localhost:9999/api/posts/likes/post/${payload.post_id}/user/${payload.user_id}`;
+      axios
+        .delete(API_URL, null, {
+          params: {
+            user_id: payload.user_id,
+            post_id: payload.post_id,
+          },
+        })
+        .then(() => {})
+        .catch(() => {
+        });
     },
-    getPostLikeByUser({commit}, payload) {
+    getPostLikeByUser({ commit }, payload) {
       commit;
-      const API_URL = `http://localhost:9999/api/posts/likes/user/${payload}`;
+      const API_URL = `http://localhost:9999/api/posts/likes/user/${payload.user_id}`;
       axios({
         url: API_URL,
         method: "GET",
       }).then((res) => {
         commit("setPostLiked", res.data);
-      }); 
-    }
+      });
+    },
   },
-
 };
 
 export default postModule;

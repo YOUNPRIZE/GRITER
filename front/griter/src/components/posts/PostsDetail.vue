@@ -10,9 +10,13 @@
           <div>
             <div v-if="post[0].user_id === loginUser.user_id" class="dashboard-content-post-btn">
               <!--true일 때는 좋아요 상태이므로 버튼을 누르면 좋아요 해제-->
-              <button v-if="isLiked == true" @click="unliked()"><i class='bx bxs-star'></i></button>
+              <button v-if="isLiked" @click="unliked()">
+                <i class="bx bxs-star"></i>
+              </button>
               <!--false일 때는 좋아요가 아닌 상태이므로 버튼 누르면 좋아요-->
-              <button v-else @click="liked()"><i class="bx bx-star"></i></button>
+              <button v-else @click="liked()">
+                <i class="bx bx-star"></i>
+              </button>
               <button @click="goEditPost(post[0].post_id)">
                 <i class="bx bx-pencil"></i>
               </button>
@@ -22,9 +26,13 @@
             </div>
             <div v-else class="dashboard-content-post-btn">
               <!--true일 때는 좋아요 상태이므로 버튼을 누르면 좋아요 해제-->
-              <button v-if="isLiked == true" @click="unliked()"><i class='bx bxs-star'></i></button>
+              <button v-if="isLiked == true" @click="unliked()">
+                <i class="bx bxs-star"></i>
+              </button>
               <!--false일 때는 좋아요가 아닌 상태이므로 버튼 누르면 좋아요-->
-              <button v-else @click="liked()"><i class="bx bx-star"></i></button>
+              <button v-else @click="liked()">
+                <i class="bx bx-star"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -36,31 +44,39 @@
             <div class="postdetail-main-aside">
               <span class="detail-key">Title</span>
               <span class="detail-key">Writer</span>
-              <span class="detail-key">Views</span>
               <span class="detail-key">Category</span>
               <span class="detail-key">Content</span>
             </div>
             <div class="postdetail-main-value">
               <span>{{ post[0].title }}</span>
               <div class="postdetail-main-value-writer">
-                <img src="" alt="" />
+                <img src alt />
                 <span>{{ post[0].nickname }}</span>
               </div>
-              <span>{{ post[0].view_cnt }}</span>
               <span>{{ post[0].category }}</span>
             </div>
             <div class="postdetail-main-generateddate">
-              <span v-if="
+              <span
+                v-if="
                 JSON.stringify(post[0].generated_date) ===
                 JSON.stringify(post[0].modified_date)
-              ">{{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
-  post[0].generated_date[2]
-}}
-                {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}</span>
-              <span v-else>{{ post[0].modified_date[0] }}.{{ post[0].modified_date[1] }}.{{
+              "
+              >
+                {{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
+                post[0].generated_date[2]
+                }}
+                {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}
+              </span>
+              <span v-else>
+                {{ post[0].modified_date[0] }}.{{ post[0].modified_date[1] }}.{{
                 post[0].modified_date[2]
-              }}
-                {{ post[0].modified_date[3] }}:{{ post[0].modified_date[4] }}(수정됨)</span>
+                }}
+                {{ post[0].modified_date[3] }}:{{ post[0].modified_date[4] }}(수정됨)
+              </span>
+              <div>
+                <i class="bx bx-show"></i>
+                <span>{{ post[0].view_cnt }}</span>
+              </div>
             </div>
           </div>
           <div class="postdetail-content">
@@ -73,7 +89,12 @@
         <div class="postdetail-comments">
           <span class="detail-key">Comments</span>
           <div class="postdetail-comments-content">
-            <div v-for="(comment, index) in comments" :key="index" class="group-item" id="all-comments">
+            <div
+              v-for="(comment, index) in comments"
+              :key="index"
+              class="group-item"
+              id="all-comments"
+            >
               <div class="comment">
                 <div id="comment-writer">{{ comment.nickname }}</div>
                 <div v-if="editingCommentId !== comment.comment_id" id="comment-content">
@@ -91,11 +112,20 @@
                 <div v-else-if="editingCommentId === comment.comment_id" id="comment-content">
                   <fieldset>
                     <div class="comment-content-editing">
-                      <input type="text" class="form-control" id="comment-content-editing" :value="comment.content"
-                        @keydown.enter="updateComment">
-                      <input type="hidden" id="comment-comment_id-editing" :value="comment.comment_id">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="comment-content-editing"
+                        :value="comment.content"
+                        @keydown.enter="updateComment"
+                      />
+                      <input
+                        type="hidden"
+                        id="comment-comment_id-editing"
+                        :value="comment.comment_id"
+                      />
                       <!-- <input type="hidden" id="comment-user_id-editing" :value="comment.user_id">
-                      <input type="hidden" id="comment-post_id-editing" :value="comment.post_id"> -->
+                      <input type="hidden" id="comment-post_id-editing" :value="comment.post_id">-->
                       <div class="comment-edit-buttons">
                         <button @click="updateComment">
                           <i class="bx bx-check"></i>
@@ -108,17 +138,23 @@
                   </fieldset>
                 </div>
                 <div id="comment-date">
-                  <span v-if="
+                  <span
+                    v-if="
                     JSON.stringify(comment.generated_date) ===
                     JSON.stringify(comment.modified_date)
-                  ">{{ comment.generated_date[0] }}.{{ comment.generated_date[1] }}.{{
-  post[0].generated_date[2]
-}}
-                    {{ comment.generated_date[3] }}:{{ comment.generated_date[4] }}</span>
-                  <span v-else>{{ comment.modified_date[0] }}.{{ comment.modified_date[1] }}.{{
+                  "
+                  >
+                    {{ comment.generated_date[0] }}.{{ comment.generated_date[1] }}.{{
+                    post[0].generated_date[2]
+                    }}
+                    {{ comment.generated_date[3] }}:{{ comment.generated_date[4] }}
+                  </span>
+                  <span v-else>
+                    {{ comment.modified_date[0] }}.{{ comment.modified_date[1] }}.{{
                     comment.modified_date[2]
-                  }}
-                    {{ comment.modified_date[3] }}:{{ comment.modified_date[4] }}(수정됨)</span>
+                    }}
+                    {{ comment.modified_date[3] }}:{{ comment.modified_date[4] }}(수정됨)
+                  </span>
                 </div>
               </div>
             </div>
@@ -128,11 +164,23 @@
       <div class="entercomment">
         <div class="line"></div>
         <fieldset class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Enter comment here" aria-describedby="button-addon2"
-            v-model="commentContent" name="content" id="content" required @keydown.enter="writeComment" />
-          <button type="submit" class="btn btn-outline-primary" id="button-addon2" @click="writeComment">
-            Write
-          </button>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter comment here"
+            aria-describedby="button-addon2"
+            v-model="commentContent"
+            name="content"
+            id="content"
+            required
+            @keydown.enter="writeComment"
+          />
+          <button
+            type="submit"
+            class="btn btn-outline-primary"
+            id="button-addon2"
+            @click="writeComment"
+          >Write</button>
         </fieldset>
       </div>
     </div>
@@ -173,13 +221,13 @@ export default {
       deleteCommentId: "",
       editingCommentId: "",
       commentContent: "",
-      isLiked: false,
+      isLiked: false
     };
   },
   computed: {
     ...mapState("postModule", ["post", "postLiked"]),
     ...mapState("commentModule", ["comments", "comment"]),
-    ...mapState("userModule", ["loginUser"]),
+    ...mapState("userModule", ["loginUser"])
   },
   methods: {
     ...mapActions("postModule", ["getPost", "delete", "addViewCnt", "deletePostLike", "createPostLike", "getPostLikeByUser"]),
@@ -191,31 +239,37 @@ export default {
     liked() {
       const param = {
         user_id: this.loginUser.user_id,
-        post_id: this.post[0].post_id,
-      }
-      this.createPostLike(param);
+        post_id: this.post[0].post_id
+      };
+      this.createPostLike(param).then(() => {
+        this.isLiked = true;
+        localStorage.setItem("isLiked", true);
+      });
     },
     unliked() {
       const param = {
         user_id: this.loginUser.user_id,
-        post_id: this.post[0].post_id,
-      }
-      this.deletePostLike(param);
+        post_id: this.post[0].post_id
+      };
+      this.deletePostLike(param).then(() => {
+        this.isLiked = false;
+        localStorage.setItem("isLiked", false);
+      });
     },
     writeComment() {
       const newComment = {
         content: this.commentContent,
         parent_id: 0,
         user_id: this.loginUser.user_id,
-        post_id: this.post[0].post_id,
+        post_id: this.post[0].post_id
       };
       this.getComment(newComment);
       console.log(this.comment);
       this.createComment(this.comment);
     },
     goEditPost(editPostId) {
-      event.preventDefault()
-      router.push({ name: 'PostModify', params: { post_id: editPostId } });
+      event.preventDefault();
+      router.push({ name: "PostModify", params: { post_id: editPostId } });
     },
     openCommentEdit(editCommentId) {
       this.editingCommentId = editCommentId;
@@ -225,25 +279,28 @@ export default {
       this.editingCommentId = -1;
     },
     updateComment() {
-      const newContent = document.getElementById('comment-content-editing').value;
-      const newComment_id = document.getElementById('comment-comment_id-editing').value;
+      const newContent = document.getElementById("comment-content-editing")
+        .value;
+      const newComment_id = document.getElementById(
+        "comment-comment_id-editing"
+      ).value;
       // const newUser_id = document.getElementById('comment-user_id-editing').value;
       // const newPost_id = document.getElementById('comment-post_id-editing').value;
       this.update({
         content: newContent,
-        comment_id: newComment_id,
+        comment_id: newComment_id
         // userId: newUser_id,
         // post_id: newPost_id,
-      })
+      });
     },
     showPostDeleteModal(deletePostId) {
-      event.preventDefault()
+      event.preventDefault();
       console.log(deletePostId);
       this.isPostDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
     showCommentDeleteModal(deleteCommentId) {
-      event.preventDefault()
+      event.preventDefault();
       console.log(deleteCommentId);
       this.isCommentDeleteModalOpen = true;
       this.deleteCommentId = deleteCommentId;
@@ -260,7 +317,7 @@ export default {
       this.closeDeleteModal();
       setTimeout(() => {
         router.go(0);
-      }, "10")
+      }, "10");
     },
     deleteComment() {
       console.log(this.deletePostId);
@@ -270,23 +327,23 @@ export default {
   },
   created() {
     const post_id = this.$route.params.post_id;
-    this.getPost(post_id);
-    this.getComments(post_id);
+
     const userId = localStorage.getItem("loginUser");
-    this.getLoginUser(userId);
-    this.addViewCnt(post_id);
-    this.getPostLikeByUser(userId);
-    let len = this.postLiked.length;
-    for (let i = 0; i < len; i++) {
-      if (this.postLiked[i].post_id === post_id) {
-        this.isLiked = true;
-        break;
+    this.getPostLikeByUser({ user_id: userId }).then(() => {
+      let len = this.postLiked.length;
+      console.log(this.postLiked);
+      for (let i = 0; i < len; i++) {
+        if (this.postLiked[i].post_id === post_id) {
+          this.isLiked = true;
+          break;
+        }
       }
-    }
-    setInterval(() => {
+      this.getPost(post_id);
       this.getComments(post_id);
-    }, 100);
-  },
+      this.getLoginUser(userId);
+      this.addViewCnt(post_id);
+    });
+  }
 };
 </script>
 
@@ -382,7 +439,7 @@ export default {
   color: var(--font-color-3);
 }
 
-.postdetail-main-aside>span {
+.postdetail-main-aside > span {
   margin-bottom: 1rem;
 }
 
@@ -395,7 +452,7 @@ export default {
   margin-left: 2rem;
 }
 
-.postdetail-main-value>span {
+.postdetail-main-value > span {
   margin-bottom: 1rem;
 }
 
@@ -406,9 +463,14 @@ export default {
 }
 
 .postdetail-main-generateddate {
-  display: flex;
+  /* display: flex;
   flex-direction: row-reverse;
-  /* border: solid 1px yellow; */
+  width: 30%;
+  color: grey; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 30%;
   color: grey;
 }
@@ -493,7 +555,6 @@ fieldset {
   width: stretch;
 }
 
-
 .postdetail-except-header::-webkit-scrollbar,
 .postdetail-comments-content::-webkit-scrollbar {
   width: 0.5rem;
@@ -538,7 +599,7 @@ fieldset {
   display: flex;
 }
 
-.dashboard-content-post-btn>button {
+.dashboard-content-post-btn > button {
   border: none;
   background-color: transparent;
   font-size: x-large;
@@ -550,8 +611,9 @@ fieldset {
   margin-left: 2rem;
 }
 
-#comment-buttons>button,
-.comment-edit-buttons>button {
+#comment-buttons > button,
+.comment-edit-buttons > button {
   border: none;
   background-color: transparent;
-}</style>
+}
+</style>
