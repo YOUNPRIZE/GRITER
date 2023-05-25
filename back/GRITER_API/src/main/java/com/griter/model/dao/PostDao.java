@@ -23,6 +23,9 @@ public interface PostDao {
 	// 게시글 수정
 	int update(Post post);
 	
+	// 조회수 증가
+	int addViewCnt(int post_id);
+	
 	// 게시글 삭제
 	int delete(int post_id);
 }

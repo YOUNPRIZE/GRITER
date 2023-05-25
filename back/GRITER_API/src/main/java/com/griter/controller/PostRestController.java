@@ -97,6 +97,17 @@ public class PostRestController {
 		}
 	}
 	
+	@PutMapping("/cnt")
+	@ApiOperation(value = "게시물 수정", response = Post.class)
+	public ResponseEntity<?> addViewCnt(int post_id) {
+		try {
+			int update = ps.addViewCnt(post_id);
+			return new ResponseEntity<Integer>(update, HttpStatus.OK);
+		} catch (Exception e){
+			return exceptionHandling(e);
+		}
+	}
+	
 	@DeleteMapping("/{post_id}")
 	@ApiOperation(value = "게시물 삭제", response = Post.class)
 	public ResponseEntity<?> delete(@PathVariable int post_id) {

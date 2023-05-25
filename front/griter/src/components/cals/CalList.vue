@@ -3,10 +3,6 @@
     <div class="calendar-container">
       <div id="calendar-title">
         <h3>Calendar</h3>
-
-        <router-link :to="{ name: 'RoutinesDetail' }">
-          <button>Detail</button>
-        </router-link>
         <router-link :to="{ name: 'DietsCreate' }">
           <button>DietCreate</button>
         </router-link>
@@ -14,16 +10,25 @@
           <box-icon type="solid" name="plus-square"></box-icon>
         </router-link>
       </div>
-      <v-calendar is-expanded class="custom-calendar max-w-full" :masks="masks" :attributes="attributes"
-        disable-page-swipe>
+      <v-calendar
+        is-expanded
+        class="is-dark custom-calendar max-w-full"
+        id="cal"
+        :masks="masks"
+        :attributes="attributes"
+        disable-page-swipe
+      >
         <template v-slot:day-content="{ day, attributes }">
           <div class="flex flex-col h-full z-10 overflow-hidden">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
             <div class="flex-grow overflow-y-auto overflow-x-auto">
-              <p v-for="attr in attributes" :key="attr.key"
-                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1">{{
-                  attr.title }}
-              </p>
+              <p
+                @click="movetoRoutineDetail(attr.customData.id)"
+                v-for="attr in attributes"
+                :key="attr.key"
+                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
+                :class="attr.customData.class"
+              >{{ attr.customData.title }}</p>
             </div>
           </div>
         </template>
@@ -36,32 +41,14 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import router from "@/router";
 export default {
   data() {
-    // const month = new Date().getMonth();
-    // const year = new Date().getFullYear();
     return {
       masks: {
         weekdays: "WWW"
       },
-      attributes: [
-        // {
-        //   key: 1,
-        //   customData: {
-        //     title: "점심약속",
-        //     class: "bg-red-600 text-black"
-        //   },
-        //   dates: new Date(year, month, 1)
-        // },
-        // {
-        //   key: 2,
-        //   customData: {
-        //     title: "약속",
-        //     class: "bg-red-600 text-black"
-        //   },
-        //   dates: new Date(year, month, 15)
-        // }
-      ]
+      attributes: []
     };
   },
   computed: {
@@ -70,17 +57,17 @@ export default {
   },
   mounted() {
     const tempRoutines = JSON.stringify(this.routines);
-    console.log(tempRoutines);
+    tempRoutines;
   },
   methods: {
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("routineModule", ["getUserRoutines"]),
-    addItemToAttributes(date) {
-      this.attributes[0]["dates"].push(date);
+    movetoRoutineDetail(params) {
+      router.push({ name: "RoutinesDetail", params: { routine_id: params } });
     }
   },
   created() {
-const user_id = localStorage.getItem("loginUser");
+    const user_id = localStorage.getItem("loginUser");
     // dispatch 역할
     this.getLoginUser(user_id);
     // 로그인하고 1회만 새로고침
@@ -93,12 +80,19 @@ const user_id = localStorage.getItem("loginUser");
     this.getUserRoutines(user_id);
 
     const len = this.routines.length;
-    for (let i = 0; i < len; i++) {
-      // this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString());
-      this.attributes.push({"key" : i, "title" : this.routines[i].exercise , "dates" : new Date(this.routines[i].date + 9 * 60 * 60 * 1000)});
+    for (let i = 1; i <= len; i++) {
+      this.attributes.push({
+        key: i,
+        customData: {
+          title: this.routines[i - 1].exercise,
+          class: "griter-workout",
+          id: this.routines[i - 1].routine_id
+        },
+        dates: new Date(this.routines[i - 1].date)
+      });
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped>
@@ -113,6 +107,11 @@ const user_id = localStorage.getItem("loginUser");
   height: 84vh;
 }
 
+p.griter-workout {
+  background-color: #2388f5;
+  color: white;
+}
+
 #calendar-title {
   /* border: solid green; */
   display: flex;
@@ -121,6 +120,30 @@ const user_id = localStorage.getItem("loginUser");
   align-items: center;
   padding: 1rem;
   padding-bottom: 1rem;
+}
+/* Add the dark mode styles */
+.custom-calendar.is-dark .vc-container .vc-header {
+  background-color: #1a202c;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-weekday {
+  background-color: #2d3748;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day {
+  background-color: #2d3748;
+  color: white;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day.weekday-1,
+.custom-calendar.is-dark .vc-container .vc-day.weekday-7 {
+  background-color: #4a5568;
+}
+
+.custom-calendar.is-dark .vc-container .vc-day-dots {
+  /* Custom dark mode day dots styles... */
 }
 </style>
 
@@ -182,4 +205,5 @@ const user_id = localStorage.getItem("loginUser");
 
 .custom-calendar.vc-container .vc-day-dots {
   margin-bottom: 5px;
-}</style>
+}
+</style>

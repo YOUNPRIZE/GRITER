@@ -12,42 +12,52 @@
       <div class="dashboard-content">
         <!-- 대시보드 미리보기 항목들 -->
         <div v-for="(post, index) in posts" :key="index" class="group-item">
-            <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
-              <div class="dashboard-content-post">
-                <div class="dashboard-content-post-left">
-                  <div class="dashboard-content-post-title">
-                    <span>{{ post.title }}</span>
-                  </div>
-                  <div class="dashboard-content-post-writerInfo">
-                    <img src="" alt="" style="
+          <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
+            <div class="dashboard-content-post">
+              <div class="dashboard-content-post-left">
+                <div class="dashboard-content-post-title">
+                  <span>{{ post.title }}</span>
+                </div>
+                <div
+                  class="dashboard-content-post-writerInfo"
+                  @click="moveUserInfo(post.user_id)"
+                >
+                  <img
+                    src
+                    alt
+                    style="
                       width: 30px;
                       height: 30px;
                       border-radius: 100%;
                       border: solid 1px red;
-                    " />
-                    <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
-                  </div>
-                </div>
-                <div class="dashboard-content-post-right">
-                  <span class="dashboard-content-post-created">{{ post.generated_date[0] }}.{{ post.generated_date[1]
-                  }}.{{
-  post.generated_date[2]
-}}
-                    {{ post.generated_date[3] }}:{{ post.generated_date[4] }}</span>
-                  <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
-                    <button :value=post.post_id @click="goEditPost(post.post_id)">
-                      <i class="bx bx-pencil"></i>
-                    </button>
-                    <button :value=post.post_id @click="showDeleteModal(post.post_id)">
-                      <i class="bx bx-trash"></i>
-                    </button>
-                  </div>
-                  <div v-else>
-                  </div>
+                    "
+                  />
+                  <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
-            </router-link>
-          </div>
+              <div class="dashboard-content-post-right">
+                <span class="dashboard-content-post-created">
+                  {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                    post.generated_date[2]
+                  }}
+                  {{ post.generated_date[3] }}:{{ post.generated_date[4] }}
+                </span>
+                <div
+                  v-if="post.user_id === loginUser.user_id"
+                  class="dashboard-content-post-btn"
+                >
+                  <button :value="post.post_id" @click="goEditPost(post.post_id)">
+                    <i class="bx bx-pencil"></i>
+                  </button>
+                  <button :value="post.post_id" @click="showDeleteModal(post.post_id)">
+                    <i class="bx bx-trash"></i>
+                  </button>
+                </div>
+                <div v-else></div>
+              </div>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
     <!-- user & calendar-->
@@ -55,7 +65,7 @@
       <div class="userInfo">
         <div id="userInfo-title">
           <h5>User</h5>
-          <router-link :to="{ name: 'userInfo', params: { user_id: loginUser.user_id } }">
+          <router-link :to="{ name: 'myPage' }">
             <box-icon type="solid" name="plus-square"></box-icon>
           </router-link>
         </div>
@@ -68,12 +78,12 @@
             <!-- 팔로잉 -->
             <div class="userInfo-info-following">
               <h6>Following</h6>
-              <h6>98</h6>
+              <h6>{{ following.length }}</h6>
             </div>
             <!-- 팔로워 -->
             <div class="userInfo-info-follower">
-              <h6>Follower</h6>
-              <h6>86</h6>
+              <h6>Followers</h6>
+              <h6>{{ followers.length }}</h6>
             </div>
           </div>
         </div>
@@ -86,8 +96,12 @@
           </router-link>
         </div>
         <div class="calendar-content">
-          <!-- <v-calendar is-dark is-expanded :attributes="attributes"/> -->
-          <v-calendar is-expanded :attributes="attributes" />
+          <v-calendar
+            @click:day="handleDayClick"
+            is-dark
+            is-expanded
+            :attributes="attributes"
+          />
         </div>
       </div>
     </div>
@@ -114,9 +128,8 @@ export default {
       attributes: [
         {
           dot: true,
-          dates: [
-          ]
-        }
+          dates: [],
+        },
       ],
       isDeleteModalOpen: false,
       deletePostId: "",
@@ -126,10 +139,11 @@ export default {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("routineModule", ["routines"]),
     ...mapState("postModule", ["posts"]),
+    ...mapState("followModule", ["followers", "following"]),
   },
   mounted() {
-    const asdfasdf = JSON.stringify(this.routines);
-    console.log(asdfasdf);
+    const tempRtns = JSON.stringify(this.routines);
+    tempRtns;
     const user_id = localStorage.getItem("loginUser");
     // dispatch 역할
     this.getLoginUser(user_id);
@@ -137,22 +151,25 @@ export default {
 
     const len = this.routines.length;
     for (let i = 0; i < len; i++) {
-      this.attributes[0]["dates"].push(new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString());
+      this.attributes[0]["dates"].push(
+        new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
+      );
     }
   },
   methods: {
     ...mapActions("postModule", ["getPosts", "delete"]),
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("routineModule", ["getUserRoutines"]),
+    ...mapActions("followModule", ["callFollowers", "callFollowing"]),
     addItemToAttributes(date) {
       this.attributes[0]["dates"].push(date);
     },
     goEditPost(editPostId) {
-      event.preventDefault()
-      router.push({name: 'PostModify', params: {post_id: editPostId}});
+      event.preventDefault();
+      router.push({ name: "PostModify", params: { post_id: editPostId } });
     },
     showDeleteModal(deletePostId) {
-      event.preventDefault()
+      event.preventDefault();
       console.log(deletePostId);
       this.isDeleteModalOpen = true;
       this.deletePostId = deletePostId;
@@ -166,7 +183,19 @@ export default {
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       router.go(0);
-    }
+    },
+    handleDayClick(day) {
+      // 클릭된 날짜에 대한 처리를 여기에 작성하세요
+      console.log(day);
+      // 예시: 클릭된 날짜 정보를 콘솔에 출력합니다
+
+      // 원하는 동작을 수행하도록 메소드를 구현하세요
+    },
+    moveUserInfo(user_id) {
+      event.preventDefault();
+      console.log(user_id);
+      router.push({ name: "userInfo", params: { user_id: user_id } });
+    },
   },
   created() {
     // 로그인하고 1회만 새로고침
@@ -176,7 +205,12 @@ export default {
       self.location.reload(true);
     } else self.name = "";
     this.getPosts();
-  }
+    const user_id = localStorage.getItem("loginUser");
+    console.log(user_id);
+    this.callFollowers(user_id);
+    this.callFollowing(user_id);
+    console.log(this.following);
+  },
 };
 </script>
 
@@ -354,7 +388,7 @@ hr {
   color: grey;
 }
 
-.dashboard-content-post-btn>button {
+.dashboard-content-post-btn > button {
   border: none;
   background-color: transparent;
 }

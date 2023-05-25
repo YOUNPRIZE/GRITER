@@ -11,6 +11,9 @@ public interface RoutineDao {
 	// 모든 운동 루틴 조회
 	List<Routine> selectAll();
 	
+	// 특정 운동 루틴 조회
+	Routine select(int routine_id);
+	
 	// 특정 사용자의 운동 루틴 조회
 	List<Routine> selectByUser(int user_id);
 	

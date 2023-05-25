@@ -23,6 +23,11 @@ public class FollowServiceImpl implements FollowService {
 	public List<Follow> selectByUserId(int user_id) {
 		return followDao.selectByUserId(user_id);
 	}
+	
+	@Override
+	public List<Follow> selectByFollowingIdwithNickname(int user_id) {
+		return followDao.selectByFollowingIdwithNickname(user_id);
+	}
 
 	@Override
 	public List<Follow> selectByFollowingId(int following_id) {
@@ -33,5 +38,6 @@ public class FollowServiceImpl implements FollowService {
 	public int deleteFollow(Follow follow) {
 		return followDao.deleteFollow(follow);
 	}
+	
 
 }
