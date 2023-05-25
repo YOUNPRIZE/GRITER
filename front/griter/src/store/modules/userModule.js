@@ -68,11 +68,12 @@ const userModule = {
           sessionStorage.setItem("access-token", res.data["access-token"]);
           localStorage.setItem("loginUser", res.data["loginUser"]);
           commit("USER_LOGIN", loginUser);
+          router.push({ name: "home" });
         })
         .catch((err) => {
           console.log(err);
           alert("로그인 실패");
-          commit("GET_LOGINUSER", "fail");
+          // router.go(0);
         });
     },
     getUser: ({ commit }, user_id) => {
