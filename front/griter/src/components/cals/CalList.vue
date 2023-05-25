@@ -196,11 +196,31 @@ export default {
 * {
   /* border: solid 1px green; */
 }
+#cal {
+  /* border: solid 1px red; */
+  display: flex;
+  height: 50rem !important;
+}
+#cal div {
+  /* border: solid 1px !important; */
+  display: flex;
+  flex-direction: column;
+  height: calc(100%-20rem);
+  /* overflow: auto !important; */
+}
+/* .is-dark custom-calendar max-w-full{
+  border: solid 2px black;
+  background-color: red;
+} */
 .flex-grow.overflow-y-auto.overflow-x-auto {
   display: flex;
   flex-direction: column;
-  height: 15rem;
-  border: solid 1px green;
+  height: 10rem;
+  /* border: solid 1px green; */
+  overflow: auto;
+}
+.calendar-container {
+  /* border: solid 0px blue; */
 }
 .addButtons {
   display: flex;
