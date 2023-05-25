@@ -1,5 +1,6 @@
 import router from "@/router";
 import axios from "axios";
+// import httpCommon from "@/util/http-common";
 
 const REST_API = `http://localhost:9999/api`;
 
@@ -83,7 +84,7 @@ const userModule = {
         commit("GET_USER", res.data);
       });
     },
-    getUsers: ({commit}) => {
+    getUsers: ({ commit }) => {
       const API_URL = `${REST_API}/users/`;
       axios({
         url: API_URL,
