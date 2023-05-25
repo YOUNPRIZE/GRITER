@@ -13,11 +13,14 @@
         </form>
       </div>
       <div class="line"></div>
-      <div class="followers-head">
-        <span>Img</span>
-        <span>Name</span>
-        <span>ID</span>
-        <span>Email</span>
+      <div>
+        <div class="followers-head">
+          <span>Img</span>
+          <span>Name</span>
+          <span>ID</span>
+          <span>Email</span>
+        </div>
+        <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
       </div>
       <div class="line" style="height: 0.2rem; margin-bottom: 0"></div>
       <div v-for="(user, index) in users" :key="index" class="group-item-1" id="followers-content">
@@ -29,7 +32,6 @@
             <span>{{ user.nickname }}</span>
             <span>{{ user.email }}</span>
           </div>
-          <hr style="margin: 0; margin-top: 0.5rem" />
         </div>
       </div>
     </div>
@@ -41,7 +43,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapState("userModule", ["users"])
+    ...mapState("userModule", ["users"]),
   },
   methods: {
     ...mapActions("userModule", ["getUsers"]),
@@ -58,17 +60,18 @@ export default {
           document.querySelectorAll(".group-item-1")[i].style.display = "flex";
         }
       }
-    }
+    },
   },
   created() {
     this.getUsers();
-  }
+  },
 };
 </script>
 <style scoped>
 main {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   /* border: solid green; */
 }
 
@@ -81,11 +84,18 @@ main {
   flex-direction: column;
   box-shadow: 0 0 1rem rgb(190, 190, 190);
   border-radius: 0.2rem;
-  width: 50%;
   min-width: 40rem;
+  width: 70%;
   margin: 2rem;
   padding: 2rem;
   background-color: var(--box-bg-color);
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 7rem);
+  overflow: auto;
 }
 
 .follows-header {
@@ -104,14 +114,12 @@ main {
 #followers-content {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /* border: solid 1px green; */
 }
-
-#followers-content::-webkit-scrollbar {
+.users::-webkit-scrollbar {
   width: 0.5rem;
 }
-
-#followers-content::-webkit-scrollbar-thumb {
+.users::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
   border-radius: 10px;
   background-clip: padding-box;

@@ -1,5 +1,7 @@
 package com.griter.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -8,19 +10,19 @@ public class Image {
 	@ApiModelProperty(value = "이미지 고유번호", example="0")
 	private int image_id;
 	
-	@ApiModelProperty(value = "이미지 경로")
-	private String img_path;
+	@ApiModelProperty(value="사용자 ID", example="0")
+	private int user_id;
 	
-	@ApiModelProperty(value = "게시글 ID", example="0")
-	private int post_id;
+	@ApiModelProperty(value = "이미지 데이터")
+	private MultipartFile data;
 	
 	public Image() {}
 
-	public Image(int image_id, String img_path, int post_id) {
+	public Image(int image_id, int user_id, MultipartFile data) {
 		super();
 		this.image_id = image_id;
-		this.img_path = img_path;
-		this.post_id = post_id;
+		this.user_id = user_id;
+		this.data = data;
 	}
 
 	public int getImage_id() {
@@ -31,24 +33,27 @@ public class Image {
 		this.image_id = image_id;
 	}
 
-	public String getImg_path() {
-		return img_path;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setImg_path(String img_path) {
-		this.img_path = img_path;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
-	public int getPost_id() {
-		return post_id;
+	public MultipartFile getData() {
+		return data;
 	}
 
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setData(MultipartFile data) {
+		this.data = data;
 	}
 
 	@Override
 	public String toString() {
-		return "Image [image_id=" + image_id + ", img_path=" + img_path + ", post_id=" + post_id + "]";
+		return "Image [image_id=" + image_id + ", user_id=" + user_id + ", data=" + data + "]";
 	}
+
+	
+	
 }

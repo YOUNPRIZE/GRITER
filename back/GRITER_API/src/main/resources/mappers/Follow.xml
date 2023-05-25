@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="selectByUserId" parameterType="int" resultType="map">
-		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM follows f
+		SELECT f.*, u.nickname, u.user_id, u.email, u.name, u.gender FROM follows f
 		JOIN users u
 		ON f.user_id = u.user_id
 		WHERE f.following_id = #{user_id}
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectByFollowingIdwithNickname" parameterType="int"
 		resultType="map">
-		SELECT f.*, u.nickname, u.user_id, u.email, u.name FROM
+		SELECT f.*, u.nickname, u.user_id, u.email, u.name, u.gender FROM
 		follows f
 		JOIN users u
 		ON f.following_id = u.user_id
