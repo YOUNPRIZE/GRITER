@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.griter.model.dto.Diet;
+import com.griter.model.dto.Diet;
 import com.griter.model.service.DietService;
 
 import io.swagger.annotations.ApiOperation;
@@ -48,8 +49,30 @@ public class DietRestController {
 			return exceptionHandling(e);
 		}
 	}
-
-	@GetMapping("/{date}")
+	
+	@GetMapping("/{diet_id}")
+	@ApiOperation(value = "특정 식단 조회", response = Diet.class)
+	public ResponseEntity<?> select(@PathVariable int diet_id) {
+		try {
+			Diet select = ds.select(diet_id);
+			return new ResponseEntity<Diet>(select, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@GetMapping("/users/{user_id}")
+	@ApiOperation(value = "특정 사용자의 식단 조회", response = Diet.class)
+	public ResponseEntity<?> selectRoutineByUser(@PathVariable int user_id) {
+		try {
+			List<Diet> select = ds.selectByUser(user_id);
+			return new ResponseEntity<List<Diet>>(select, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@GetMapping("/date/{date}")
 	@ApiOperation(value = "해당 날짜의 식단 조회", response = Diet.class)
 	public ResponseEntity<?> selectDietByDate(@PathVariable int date) {
 		try {

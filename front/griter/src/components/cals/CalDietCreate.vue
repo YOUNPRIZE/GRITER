@@ -32,7 +32,7 @@
       <!-- 이미지 사용하면 주석 해제하기. -->
 
       <div class="buttons">
-        <b-button class="register" variant="primary">등록</b-button>
+        <b-button @click="create" class="register" variant="primary">등록</b-button>
         <router-link :to="{ name: 'calendar' }">
           <b-button class="cancle" variant="secondary">취소</b-button>
         </router-link>
@@ -42,7 +42,10 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
+  name: "createDiet",
   data() {
     return {
       diet: {
@@ -54,6 +57,25 @@ export default {
       }
       // file: null, // 이미지 사용하면 주석 해제 하기.
     };
+  },
+  computed: {
+    ...mapState("userModule", ["loginUser"])
+  },
+  methods: {
+    ...mapActions("dietModule", ["createDiets"]),
+    create() {
+      const user_id = localStorage.getItem("loginUser");
+      this.diet.user_id = user_id;
+      if (
+        user_id.length > 0 &&
+        this.diet.meal.length > 0 &&
+        this.diet.kind.length > 0
+      ) {
+        this.createDiets(this.diet);
+      } else {
+        alert("필수항목을 모두 입력해주세요!");
+      }
+    }
   }
 };
 </script>

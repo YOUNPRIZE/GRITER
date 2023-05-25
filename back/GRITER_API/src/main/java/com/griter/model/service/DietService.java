@@ -11,6 +11,12 @@ public interface DietService {
 	// 모든 식단 조회
 	List<Diet> selectAll();
 
+	// 특정 식단 조회
+	Diet select(int diet_id);
+		
+	// 특정 사용자의 식단 조회
+	List<Diet> selectByUser(int user_id);
+	
 	// 해당 날짜의 식단 조회
 	List<Diet> selectByDate(int date);
 

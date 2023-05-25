@@ -25,6 +25,16 @@ public class DietServiceImpl implements DietService {
 	}
 
 	@Override
+	public Diet select(int diet_id) {
+		return dietDao.select(diet_id);
+	}
+
+	@Override
+	public List<Diet> selectByUser(int user_id) {
+		return dietDao.selectByUser(user_id);
+	}
+	
+	@Override
 	public List<Diet> selectByDate(int date) {
 		return dietDao.selectByDate(date);
 	}
@@ -38,5 +48,4 @@ public class DietServiceImpl implements DietService {
 	public int delete(int diet_id) {
 		return dietDao.delete(diet_id);
 	}
-
 }

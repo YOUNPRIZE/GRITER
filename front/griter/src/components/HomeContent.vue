@@ -18,10 +18,7 @@
                 <div class="dashboard-content-post-title">
                   <span>{{ post.title }}</span>
                 </div>
-                <div
-                  class="dashboard-content-post-writerInfo"
-                  @click="moveUserInfo(post.user_id)"
-                >
+                <div class="dashboard-content-post-writerInfo" @click="moveUserInfo(post.user_id)">
                   <img
                     src
                     alt
@@ -38,14 +35,11 @@
               <div class="dashboard-content-post-right">
                 <span class="dashboard-content-post-created">
                   {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
-                    post.generated_date[2]
+                  post.generated_date[2]
                   }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}
                 </span>
-                <div
-                  v-if="post.user_id === loginUser.user_id"
-                  class="dashboard-content-post-btn"
-                >
+                <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
                   <button :value="post.post_id" @click="goEditPost(post.post_id)">
                     <i class="bx bx-pencil"></i>
                   </button>
@@ -96,12 +90,7 @@
           </router-link>
         </div>
         <div class="calendar-content">
-          <v-calendar
-            @click:day="handleDayClick"
-            is-dark
-            is-expanded
-            :attributes="attributes"
-          />
+          <v-calendar @click:day="handleDayClick" is-dark is-expanded :attributes="attributes" />
         </div>
       </div>
     </div>
@@ -128,38 +117,30 @@ export default {
       attributes: [
         {
           dot: true,
-          dates: [],
+          dates: []
         },
+        {
+          dot: "red",
+          dates: []
+        }
       ],
       isDeleteModalOpen: false,
-      deletePostId: "",
+      deletePostId: ""
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("routineModule", ["routines"]),
+    ...mapState("dietModule", ["diets"]),
     ...mapState("postModule", ["posts"]),
-    ...mapState("followModule", ["followers", "following"]),
+    ...mapState("followModule", ["followers", "following"])
   },
-  mounted() {
-    const tempRtns = JSON.stringify(this.routines);
-    tempRtns;
-    const user_id = localStorage.getItem("loginUser");
-    // dispatch 역할
-    this.getLoginUser(user_id);
-    this.getUserRoutines(user_id);
-
-    const len = this.routines.length;
-    for (let i = 0; i < len; i++) {
-      this.attributes[0]["dates"].push(
-        new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
-      );
-    }
-  },
+  mounted() {},
   methods: {
     ...mapActions("postModule", ["getPosts", "delete"]),
     ...mapActions("userModule", ["getLoginUser"]),
     ...mapActions("routineModule", ["getUserRoutines"]),
+    ...mapActions("dietModule", ["getUserDiets"]),
     ...mapActions("followModule", ["callFollowers", "callFollowing"]),
     addItemToAttributes(date) {
       this.attributes[0]["dates"].push(date);
@@ -195,7 +176,7 @@ export default {
       event.preventDefault();
       console.log(user_id);
       router.push({ name: "userInfo", params: { user_id: user_id } });
-    },
+    }
   },
   created() {
     // 로그인하고 1회만 새로고침
@@ -204,13 +185,40 @@ export default {
       self.name = "reload";
       self.location.reload(true);
     } else self.name = "";
+
     this.getPosts();
     const user_id = localStorage.getItem("loginUser");
-    console.log(user_id);
     this.callFollowers(user_id);
     this.callFollowing(user_id);
-    console.log(this.following);
-  },
+    this.getLoginUser(user_id)
+      .then(() => {
+        // 로그인한 사용자 정보 가져오기 완료
+        return this.getUserRoutines(user_id);
+      })
+      .then(() => {
+        const len = this.routines.length;
+        for (let i = 0; i < len; i++) {
+          this.attributes[0]["dates"].push(
+            new Date(this.routines[i].date + 9 * 60 * 60 * 1000).toUTCString()
+          );
+        }
+        console.log(user_id);
+        console.log("safdfsdafsdafdsa");
+        return this.getUserDiets(user_id);
+      })
+      .then(() => {
+        console.log("ASdfasdfasdf");
+        // 사용자 식단 정보 가져오기 완료
+        const len2 = this.diets.length;
+        console.log(len2);
+        for (let i = 0; i < len2; i++) {
+          this.attributes[1]["dates"].push(
+            new Date(this.diets[i].date + 9 * 60 * 60 * 1000).toUTCString()
+          );
+        }
+      });
+    console.log(this.attributes);
+  }
 };
 </script>
 
