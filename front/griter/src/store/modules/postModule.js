@@ -95,7 +95,6 @@ const postModule = {
         })
         .then(() => {
           alert("게시물이 삭제되었습니다.");
-          router.push({ name: "PostsList" }).catch(() => {});
         });
     },
     addViewCnt({ commit }, payload) {
@@ -152,7 +151,7 @@ const postModule = {
     },
     deletePostLike({ commit }, payload) {
       commit;
-      const API_URL = `http://localhost:9999/api/posts/likes/post/${payload.post_id}/user/${payload.user_id}`;
+      const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}/${payload.user_id}`;
       axios
         .delete(API_URL, null, {
           params: {

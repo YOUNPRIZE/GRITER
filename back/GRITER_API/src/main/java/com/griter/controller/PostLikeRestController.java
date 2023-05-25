@@ -31,6 +31,7 @@ public class PostLikeRestController {
 	@PostMapping("/{post_id}")
 	@ApiOperation(value = "게시물에 대한 좋아요 정보를 등록", response = PostLike.class)
 	public ResponseEntity<?> create(PostLike postlike) {
+		System.out.println(postlike);
 		try {
 			int create = pls.create(postlike);
 			return new ResponseEntity<Integer>(create, HttpStatus.OK);
@@ -61,7 +62,7 @@ public class PostLikeRestController {
 		}
 	}
 
-	@DeleteMapping("/post/{post_id}/user/{user_id}")
+	@DeleteMapping("/{post_id}/{user_id}")
 	@ApiOperation(value = "게시물에 대한 좋아요 정보를 삭제", response = PostLike.class)
 	public ResponseEntity<?> delete(@PathVariable int post_id, @PathVariable int user_id) {
 		System.out.println(post_id);

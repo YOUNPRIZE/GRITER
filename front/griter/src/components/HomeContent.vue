@@ -163,7 +163,7 @@ export default {
       console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
-      router.go(0);
+      this.updateData();
     },
     handleDayClick(day) {
       // 클릭된 날짜에 대한 처리를 여기에 작성하세요
@@ -176,6 +176,14 @@ export default {
       event.preventDefault();
       console.log(user_id);
       router.push({ name: "userInfo", params: { user_id: user_id } });
+    },
+    updateData(){
+      setTimeout(() => {
+        clearInterval(interval)
+      }, "100");
+      let interval = setInterval(() => {
+        this.getPosts();
+      }, "10");
     }
   },
   created() {

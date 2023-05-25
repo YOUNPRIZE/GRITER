@@ -128,7 +128,16 @@ export default {
       console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
-      router.go(0);
+      this.updateData();
+    },
+    updateData(){
+      setTimeout(() => {
+        clearInterval(interval)
+      }, "100");
+      let interval = setInterval(() => {
+        console.log("데이터 갱신");
+        this.getPosts();
+      }, "10"); 
     }
   },
   created() {
