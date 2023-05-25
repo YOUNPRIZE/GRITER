@@ -98,10 +98,6 @@ export default {
   methods: {
     create() {
       const user_id = localStorage.getItem("loginUser");
-      console.log(user_id);
-      console.log(this.title);
-      console.log(this.content);
-      console.log(this.category);
       if (user_id.length > 0 && this.title.length > 0 && this.content.length > 0) {
         this.createPost({
           user_id: user_id,
@@ -120,11 +116,6 @@ export default {
     ...mapActions("postModule", ["createPost", "getPost", "updatePost"]),
     update() {
       const user_id = localStorage.getItem("loginUser");
-      console.log(user_id);
-      console.log(this.post[0].post_id);
-      console.log(this.post[0].title);
-      console.log(this.post[0].content);
-      console.log(this.post[0].category);
       if (
         user_id.length > 0 &&
         this.post[0].title.length > 0 &&
@@ -147,8 +138,6 @@ export default {
     const user_id = localStorage.getItem("loginUser");
     this.getLoginUser(user_id);
     this.routerName = this.$router.currentRoute.name;
-    // console.log(this.$router.currentRoute.params.post_id);
-    // console.log(this.routerName);
     if (this.routerName === "PostModify") {
       const post_id = this.$router.currentRoute.params.post_id;
       this.getPost(post_id);

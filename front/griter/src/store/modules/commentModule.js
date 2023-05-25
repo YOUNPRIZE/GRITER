@@ -29,20 +29,16 @@ const commentModule = {
         method: "GET",
       })
         .then((res) => {
-          // console.log(JSON.stringify(res.data));
           commit('setComments', res.data);
         })
     },
     getComment({ commit }, comment) {
-      console.log(comment);
       commit('setComment', comment);
     },
     //////////////////////////////////////////////////
     createComment({ commit }, payload) {
       commit;
       const API_URL = `${REST_API}/posts/comments/`;
-      console.log(API_URL);
-      console.log(JSON.stringify(payload));
       axios.post(API_URL, null, {
         params: {
           content: payload.content,

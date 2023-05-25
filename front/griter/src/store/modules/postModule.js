@@ -39,7 +39,6 @@ const postModule = {
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        // console.log(JSON.stringify(res.data));
         commit("setPosts", res.data);
       });
     },
@@ -49,8 +48,6 @@ const postModule = {
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        // alert(post_id);
-        // console.log(JSON.stringify(res.data));
         commit("setPost", res.data);
       });
     },
@@ -60,7 +57,6 @@ const postModule = {
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        // console.log(JSON.stringify(res.data));
         commit("setPosts", res.data);
       });
     },
@@ -136,7 +132,6 @@ const postModule = {
     createPostLike({ commit }, payload) {
       commit;
       const API_URL = `http://localhost:9999/api/posts/likes/${payload.post_id}`;
-      console.log(API_URL);
       axios
         .post(API_URL, null, {
           params: {

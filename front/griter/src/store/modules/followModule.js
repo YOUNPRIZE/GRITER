@@ -30,9 +30,6 @@ const followModule = {
             following_id: relation.following_id,
           },
         })
-        .then((res) => {
-          console.log(res.data);
-        });
     },
     unFollow: ({ commit }, relation) => {
       commit;

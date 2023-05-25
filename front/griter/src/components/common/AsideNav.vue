@@ -83,11 +83,10 @@ export default {
     ...mapActions("nightmodeModule", ["callModeSet"]),
     ...mapActions("userModule", ["getLoginUser"]),
     nightmode() {
-      return this.currentMode;
+      this.currentMode;
     },
     changeMode() {
       this.callModeSet();
-      console.log("변경 후: " + this.nightmode());
       document.documentElement.setAttribute("nightmode", this.nightmode());
       setTimeout(() => this.$router.go(0), 500);
     },
@@ -113,11 +112,10 @@ export default {
     }
   },
   created() {
-    const routerName = router.currentRoute.name;
-    if(routerName === 'login'){
-      // document.getElementById('body-pd').style.display = 'none';
-      console.log(document.getElementById("nightmode"));
-    }
+    // const routerName = router.currentRoute.name;
+    // if(routerName === 'login'){
+    //   // document.getElementById('body-pd').style.display = 'none';
+    // }
     const user_id = localStorage.getItem("loginUser");
     this.getLoginUser(user_id);
   },

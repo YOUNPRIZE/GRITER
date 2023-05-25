@@ -76,7 +76,6 @@ export default {
   methods: {
     ...mapActions("userModule", ["updateUser"]),
     updateUsr() {
-      console.log("Asdfasdf");
       if (
         this.specificUser.passwordConfirmation === "" ||
         this.specificUser.password !== this.specificUser.passwordConfirmation

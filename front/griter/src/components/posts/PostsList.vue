@@ -116,7 +116,6 @@ export default {
     },
     showDeleteModal(deletePostId) {
       event.preventDefault()
-      console.log(deletePostId);
       this.isDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
@@ -125,7 +124,6 @@ export default {
       this.deletePostId = "";
     },
     deletePost() {
-      console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       this.updateData();
@@ -135,7 +133,6 @@ export default {
         clearInterval(interval)
       }, "100");
       let interval = setInterval(() => {
-        console.log("데이터 갱신");
         this.getPosts();
       }, "10"); 
     }

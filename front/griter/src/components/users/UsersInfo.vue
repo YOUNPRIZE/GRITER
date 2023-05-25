@@ -265,7 +265,6 @@ export default {
     },
     showDeleteModal(deletePostId) {
       event.preventDefault();
-      console.log(deletePostId);
       this.isDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
@@ -274,7 +273,6 @@ export default {
       this.deletePostId = "";
     },
     deletePost() {
-      console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       router.go(0);
@@ -312,7 +310,6 @@ export default {
       // const checked = "";
       for (let i = 0; i < show.length; i++) {
         if (show[i].checked) {
-          console.log(show[i].id);
           if (show[i].id === "select-following") {
             this.showFollowing = true;
             this.showFollowers = false;
@@ -325,7 +322,6 @@ export default {
       }
     },
     movePage(user_id) {
-      console.log(user_id);
       router.push({ name: "userInfo", params: { user_id: user_id } });
       setTimeout(() => {
         router.go(0);
@@ -381,9 +377,6 @@ export default {
   created() {
     const user_id = router.currentRoute.params.user_id;
     const loginUser_id = localStorage.getItem("loginUser");
-    console.log(user_id);
-    console.log(loginUser_id);
-    console.log(router.currentRoute.name);
     if (router.currentRoute.name == "myPage") {
       this.updateData2();
     } else {

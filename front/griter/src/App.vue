@@ -26,20 +26,15 @@ export default {
     ...mapMutations('nightmodeModule', ["setMode"]),
   },
   beforeMount() {
-    console.log("nightmode: " + this.nightmode);
   },
   mounted() {
-    console.log(this.$router.currentRoute.name);
-    console.log(this.$store);
     if (
       this.$router.currentRoute.name == "login" ||
       this.$router.currentRoute.name == "register"
     ) {
-      // const shown = document.getElementById('body-pd').style.display;
         this.useNav = false;
       return;
     }
-    console.log(this.useNav);
     const showNavbar = (navId, bodyId) => {
       const nav = document.getElementById(navId),
         bodypd = document.getElementById(bodyId);
@@ -47,8 +42,6 @@ export default {
       // Validate that all variables exist
       if (nav && bodypd) {
         bodypd.addEventListener("click", (e) => {
-          console.log(e.target.className);
-          console.log(this.$router.currentRoute.name);
           if (e.target.id === "nav-bar" || e.target.id === "nav") {
             // show navbar
             nav.classList.toggle("show");
@@ -87,13 +80,11 @@ export default {
     hideNavbar("nav-bar", "body-pd");
   },
   created() {
-    const loginUser = sessionStorage.getItem("access-token");
-    console.log(this.$router.currentRoute);
-    if (this.$router.currentRoute.name !== 'login' && !loginUser) {
+    // const loginUser = sessionStorage.getItem("access-token");
+    // if (this.$router.currentRoute.name !== 'login' && !loginUser) {
       // alert("로그인을 해주세요");
       // this.$router.push({ name: "login" });
-    }
-    console.log(document.querySelector("body"));
+    // }
     if (this.nightmode) {
       document.documentElement.setAttribute("nightmode", true);
     }
