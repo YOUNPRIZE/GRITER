@@ -52,6 +52,7 @@ const followModule = {
           },
         })
         .then((res) => {
+          console.log(res.data)
           commit('setFollowers', res.data);
         });
     },
@@ -63,6 +64,7 @@ const followModule = {
           },
         })
         .then((res) => {
+          console.log(res.data)
           commit('setFollowing', res.data);
         });
     },

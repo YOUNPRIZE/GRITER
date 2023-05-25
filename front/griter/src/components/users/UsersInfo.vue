@@ -25,16 +25,16 @@
           <div class="line"></div>
         </div>
         <div class="userinfo-content">
-          <img
-            :src="'../../../../../back/GRITER_API/src/main/resources/upload/'+loginUser.image"
-            alt=""
-            style="
-              height: 15rem;
-              width: 15rem;
-              border: solid 1px red;
-              border-radius: 100%;
-            "
-          />
+          <img v-if="loginUser.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="
+                        height: 15rem;
+                        width: 15rem;
+                        border-radius: 100%;
+                      " />
+          <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="
+                        height: 15rem;
+                        width: 15rem;
+                        border-radius: 100%;
+                      " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -135,8 +135,11 @@
               <div @click="movePage(follower.user_id)">
                 <div id="followers-content-userInfo">
                   <div class="followers-content-userInfo">
-                    <img src alt />
-                    <span>{{ follower.name }}</span>
+                    <img v-if="follower.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" />
+              <img v-else src="../../assets/woman.png" class="profile-img" alt="" />
+              {{ follower.gender }}
+              {{ asdfasdfasdfasdf }}
+                    <span>{{ follower.gender }}</span>
                     <span>{{ follower.nickname }}</span>
                     <span>{{ follower.email }}</span>
                   </div>
@@ -241,16 +244,12 @@
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="myPost-content-post-writerInfo">
-                  <img
-                    src
-                    alt
-                    style="
-                      width: 30px;
-                      height: 30px;
-                      border-radius: 100%;
-                      border: solid 1px red;
-                    "
-                  />
+                  <img src alt style="
+                                        width: 30px;
+                                        height: 30px;
+                                        border-radius: 100%;
+                                        border: solid 1px red;
+                                      " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>

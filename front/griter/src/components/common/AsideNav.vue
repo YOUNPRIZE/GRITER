@@ -13,7 +13,8 @@
           <!-- 프로필 이미지 및 개인 이메일 정보 들어갈 칸-->
           <div class="nav_list">
             <div class="nav_link" @click="goMyPage">
-              <img src="" class="profile-img" alt="" />
+              <img v-if="loginUser.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" />
+              <img v-else src="../../assets/woman.png" class="profile-img" alt="" />
               <div class="login-info">
                 <span>Catbirdseat</span><br />
                 <span>catbirdseat@naver.com</span>
@@ -55,13 +56,7 @@
           <i class="bx bxs-moon nav_icon"></i>
           <span>DarkMode</span>
           <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="nightmode"
-              @click="changeMode"
-            />
+            <input class="form-check-input" type="checkbox" role="switch" id="nightmode" @click="changeMode" />
           </div>
         </div>
       </nav>
@@ -142,7 +137,7 @@ html {
 .profile-img {
   width: 3rem;
   height: 3rem;
-  border: solid red 1px;
+  /* border: solid red 1px; */
   border-radius: 100%;
   margin-left: -0.8rem;
 }
@@ -153,7 +148,7 @@ html {
   font-weight: lighter;
 }
 
-.login-info > span:first-child {
+.login-info>span:first-child {
   font-weight: bolder;
 }
 
