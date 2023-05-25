@@ -28,7 +28,7 @@
 ## **2️⃣ UI 디자인 및 프로토타입**
 
 * 로그인
- 
+
 ![LogIn](https://github.com/YOUNPRIZE/GRITER/assets/76830587/4965eccb-1000-4557-b880-fd4738cebd6a)
 
 * 회원가입
@@ -36,7 +36,7 @@
 ![Sign Up](https://github.com/YOUNPRIZE/GRITER/assets/76830587/63ed5591-2209-40ce-96f1-ea77f5b20a58)
 
 * 홈페이지
- 
+
 ![Home](https://github.com/YOUNPRIZE/GRITER/assets/76830587/a17b99fb-dcb4-4ef1-8e9d-458d41540ebb)
 
 * 게시판
@@ -44,15 +44,15 @@
 ![DashBoard](https://github.com/YOUNPRIZE/GRITER/assets/76830587/d9b4fb22-2817-493b-a7a6-2d8b9b23cd1d)
 
 * 글 등록
- 
+
 ![Post](https://github.com/YOUNPRIZE/GRITER/assets/76830587/6d6748fa-d49d-4756-92eb-582e5e5cf686)
 
 * 글 상세
- 
+
 ![Detail](https://github.com/YOUNPRIZE/GRITER/assets/76830587/361bfe15-3e1a-498e-9326-80b82264e91e)
 
 * 마이 페이지
- 
+
 ![MyPage](https://github.com/YOUNPRIZE/GRITER/assets/76830587/33ae3e32-8bbd-4bc2-bf39-1bf2dc163ea1)
 
 * 달력
@@ -217,6 +217,13 @@
 ## **8️⃣ 기타 (느낀 점 및 후기)**
 
 😎 박재민
+
+- 저번 CRUD 때 백엔드를 맡았어서 이번엔 프론트를 맡아서 했다.
+
+- 하지만 vue에 대한 이해도가 너무 적은 상태로 시작했다.
+- 계란으로 바위치기하는 듯 해서 머리가 깨질듯 했지만 프로젝트가 끝나니 스스로 꽤 많이 성장한걸 느낄 수 있었다.
+- 역시 인생은 실전이다.
+- 프로젝트 기간동안 같이 잠도 못자고 열심히 해준 윤상이형한테 고맙다.
 
 
 
