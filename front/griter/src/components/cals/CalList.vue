@@ -14,8 +14,14 @@
           </router-link>
         </div>
       </div>
-      <v-calendar is-expanded class="is-dark custom-calendar max-w-full" id="cal" :masks="masks" :attributes="attributes"
-        disable-page-swipe>
+      <v-calendar
+        is-expanded
+        class="is-dark custom-calendar max-w-full"
+        id="cal"
+        :masks="masks"
+        :attributes="attributes"
+        disable-page-swipe
+      >
         <template v-slot:day-content="{ day, attributes }">
           <div class="flex flex-col h-full z-10 overflow-hidden">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
@@ -28,12 +34,22 @@
                 :class="attr.customData.class"
               >{{ attr.customData.title }}</p>-->
               <template v-for="attr in attributes">
-                <p @click="movetoRoutineDetail(attr.customData.id)" :key="attr.key"
+                <p
+                  @click="movetoRoutineDetail(attr.customData.id)"
+                  :key="attr.key"
                   v-if="attr.customData.class === 'griter-workout'"
-                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-workout">{{ attr.customData.title }}</p>
-                <p @click="movetoDietDetail(attr.customData.id)" :key="attr.key"
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-workout"
+                >
+                  {{ attr.customData.title }}
+                </p>
+                <p
+                  @click="movetoDietDetail(attr.customData.id)"
+                  :key="attr.key"
                   v-if="attr.customData.class === 'griter-diet'"
-                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-diet">{{ attr.customData.title }}</p>
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-diet"
+                >
+                  {{ attr.customData.title }}
+                </p>
               </template>
             </div>
           </div>
@@ -52,15 +68,15 @@ export default {
   data() {
     return {
       masks: {
-        weekdays: "WWW"
+        weekdays: "WWW",
       },
-      attributes: []
+      attributes: [],
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("routineModule", ["routines"]),
-    ...mapState("dietModule", ["diets"])
+    ...mapState("dietModule", ["diets"]),
   },
   mounted() {
     const tempRoutines = JSON.stringify(this.routines);
@@ -100,9 +116,9 @@ export default {
                 customData: {
                   title: this.routines[i - 1].exercise,
                   class: "griter-workout",
-                  id: this.routines[i - 1].routine_id
+                  id: this.routines[i - 1].routine_id,
                 },
-                dates: new Date(this.routines[i - 1].date)
+                dates: new Date(this.routines[i - 1].date),
               });
             }
             this.getUserDiets(user_id);
@@ -120,14 +136,14 @@ export default {
                 customData: {
                   title: this.diets[i - this.routines.length - 1].kind,
                   class: "griter-diet",
-                  id: this.diets[i - this.routines.length - 1].diet_id
+                  id: this.diets[i - this.routines.length - 1].diet_id,
                 },
-                dates: new Date(this.diets[i - this.routines.length - 1].date)
+                dates: new Date(this.diets[i - this.routines.length - 1].date),
               });
             }
           });
       }, "5");
-    }
+    },
   },
   created() {
     this.updateData();
@@ -172,13 +188,21 @@ export default {
     //       });
     //     }
     //   });
-  }
+  },
 };
 </script>
 
 <style scoped>
-
-.addButtons{
+* {
+  /* border: solid 1px green; */
+}
+.flex-grow.overflow-y-auto.overflow-x-auto {
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  border: solid 1px green;
+}
+.addButtons {
   display: flex;
   flex-direction: column;
   text-align: left;
