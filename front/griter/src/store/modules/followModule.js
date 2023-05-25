@@ -1,4 +1,3 @@
-import router from '@/router';
 import axios from 'axios';
 
 const REST_API = `http://localhost:9999/api`;
@@ -33,7 +32,6 @@ const followModule = {
         })
         .then((res) => {
           console.log(res.data);
-          router.go(0);
         });
     },
     unFollow: ({ commit }, relation) => {
@@ -47,11 +45,9 @@ const followModule = {
         })
         .then((res) => {
           console.log(res);
-          router.go(0);
         });
     },
     callFollowers: ({ commit }, user_id) => {
-      console.log(user_id);
       axios
         .get(API_URL + `/followed/${user_id}`, null, {
           params: {
@@ -59,7 +55,6 @@ const followModule = {
           },
         })
         .then((res) => {
-          console.log(res.data);
           commit('setFollowers', res.data);
         });
     },
@@ -71,7 +66,6 @@ const followModule = {
           },
         })
         .then((res) => {
-          console.log(res.data);
           commit('setFollowing', res.data);
         });
     },
