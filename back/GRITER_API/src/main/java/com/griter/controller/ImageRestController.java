@@ -28,36 +28,37 @@ import io.swagger.annotations.ApiOperation;
 // Image
 @RestController
 @RequestMapping("/api/image")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImageRestController {
 	@Autowired
 	private ImageService is;
-	
+
 	@Autowired
 	private UserService us;
-	
+
 	@Autowired
 	ResourceLoader resLoader;
 
-	@PostMapping("/{nickname}/{data}")
+	@PostMapping("/upload/")
 	@ApiOperation(value = "이미지 등록", response = Image.class)
-	public ResponseEntity<?> create(@PathVariable String nickname, @PathVariable MultipartFile data) {
+	public ResponseEntity<?> create(String nickname, MultipartFile data) {
 		System.out.println(data);
 		try {
 			List<User> all = us.selectAll();
 			int user_id = -1;
-			for(User u : all) {
-				if(u.getNickname().contentEquals(nickname)) {
+			for (User u : all) {
+				if (u.getNickname().contentEquals(nickname)) {
 					user_id = u.getUser_id();
 				}
 			}
 			User user = us.selectById(user_id);
+//			Resource res = resLoader.getResource("resources/upload");
 			Resource res = resLoader.getResource("resources/upload");
-			user.setImage(user.getUser_id()+"_"+data.getOriginalFilename());
+			user.setImage(user.getUser_id() + "_" + data.getOriginalFilename());
 			user.setOrgImage(data.getOriginalFilename());
 			us.update(user);
-			data.transferTo(new File(res.getFile().getCanonicalPath()+"/"+user.getImage()));
-	        return ResponseEntity.ok("Image uploaded successfully!");
+			data.transferTo(new File(res.getFile().getCanonicalPath() + "/" + user.getImage()));
+			return ResponseEntity.ok("Image uploaded successfully!");
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}

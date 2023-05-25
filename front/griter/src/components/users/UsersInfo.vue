@@ -25,9 +25,10 @@
           <div class="line"></div>
         </div>
         <div class="userinfo-content">
+          {{ loginUser.image }}
           <img
-            src
-            alt
+            :src="'../../../../../back/GRITER_API/src/main/resources/upload/'+loginUser.image"
+            alt=""
             style="
               height: 15rem;
               width: 15rem;

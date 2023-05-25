@@ -40,7 +40,7 @@
             >
           </div>
           <div class="label">Profile Image</div>
-          <input type="file" class="profileImage" id="image" />
+          <input type="file" class="profileImage" @change="handleImageChange" />
         </div>
         <div class="buttons">
           <button class="btn btn-primary" id="submit-btn" @click="register">
@@ -76,6 +76,11 @@ export default {
   methods: {
     ...mapActions("userModule", ["create", "getUsers"]),
     ...mapActions("imageModule", ["upload"]),
+    handleImageChange() {
+      const file = event.target.files[0];
+      this.image = file;
+      console.log(file);
+    },
     goToLogin() {
       this.$router.push({ name: "login" });
     },
@@ -89,19 +94,15 @@ export default {
       ) {
         this.create({
           name: this.name,
-          nickname: this.nickname,
+          nickname: encodeURIComponent(this.nickname),
           password: this.password,
           email: this.email,
           gender: this.gender,
         });
-        const image = document.getElementById("image").files[0];
-        alert(image);
-        if (image) {
-          this.upload({
-            nickname: this.nickname,
-            data: image,
-          });
-        }
+        this.upload({
+          nickname: encodeURIComponent(this.nickname),
+          data: this.image,
+        });
       } else {
         alert("필수값을 모두 입력해주세요.");
       }
