@@ -13,34 +13,38 @@
         <!-- 대시보드 미리보기 항목들 -->
         <div v-for="(post, index) in posts" :key="index" class="group-item">
           <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
-            <div class="dashboard-content-post">  
+            <div class="dashboard-content-post">
               <div class="dashboard-content-post-left">
                 <div class="dashboard-content-post-title">
                   <span>{{ post.title }}</span>
                 </div>
                 <div class="dashboard-content-post-writerInfo">
                   <img
-                    src
-                    alt
-                    style="
-                          width: 30px;
-                          height: 30px;
-                          border-radius: 100%;
-                          border: solid 1px red;
-                        "
+                    v-if="post.gender === 'M'"
+                    src="../assets/man.png"
+                    class="dashboard-content-post-writerimg"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    src="../assets/woman.png"
+                    class="dashboard-content-post-writerimg"
+                    alt=""
                   />
                   <span class="dashboard-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
               <div class="dashboard-content-post-right">
                 <span class="dashboard-content-post-created">
-                  {{ post.generated_date[0] }}.{{ post.generated_date[1]
-                  }}.{{
-                  post.generated_date[2]
+                  {{ post.generated_date[0] }}.{{ post.generated_date[1] }}.{{
+                    post.generated_date[2]
                   }}
                   {{ post.generated_date[3] }}:{{ post.generated_date[4] }}
                 </span>
-                <div v-if="post.user_id === loginUser.user_id" class="dashboard-content-post-btn">
+                <div
+                  v-if="post.user_id === loginUser.user_id"
+                  class="dashboard-content-post-btn"
+                >
                   <button :value="post.post_id" @click="goEditPost(post.post_id)">
                     <i class="bx bx-pencil"></i>
                   </button>
@@ -66,8 +70,13 @@
         </div>
         <div class="line"></div>
         <div class="userInfo-content">
-          <img v-if="loginUser.gender === 'M'" src="../assets/man.png" class="profile-img" alt="" />
-              <img v-else src="../assets/woman.png" class="profile-img" alt="" />
+          <img
+            v-if="loginUser.gender === 'M'"
+            src="../assets/man.png"
+            class="profile-img"
+            alt=""
+          />
+          <img v-else src="../assets/woman.png" class="profile-img" alt="" />
           <div class="userInfo-info">
             <!-- 아이디 -->
             <h5>{{ loginUser.nickname }}</h5>
@@ -92,11 +101,7 @@
           </router-link>
         </div>
         <div class="calendar-content">
-          <v-calendar
-            @click:day="handleDayClick"
-            is-expanded
-            :attributes="attributes"
-          />
+          <v-calendar @click:day="handleDayClick" is-expanded :attributes="attributes" />
         </div>
       </div>
     </div>
@@ -123,17 +128,17 @@ export default {
       attributes: [
         {
           dot: true,
-          dates: []
-        }
+          dates: [],
+        },
       ],
       isDeleteModalOpen: false,
-      deletePostId: ""
+      deletePostId: "",
     };
   },
   computed: {
     ...mapState("userModule", ["loginUser"]),
     ...mapState("routineModule", ["routines"]),
-    ...mapState("postModule", ["posts"])
+    ...mapState("postModule", ["posts"]),
   },
   mounted() {
     const tempRtns = JSON.stringify(this.routines);
@@ -183,7 +188,7 @@ export default {
       // 예시: 클릭된 날짜 정보를 콘솔에 출력합니다
 
       // 원하는 동작을 수행하도록 메소드를 구현하세요
-    }
+    },
   },
   created() {
     // 로그인하고 1회만 새로고침
@@ -193,7 +198,7 @@ export default {
       self.location.reload(true);
     } else self.name = "";
     this.getPosts();
-  }
+  },
 };
 </script>
 
@@ -264,16 +269,24 @@ main {
 }
 
 .profile-img {
-  width: 5rem;
-  height: 5rem;
-  /* border: solid red 1px; */
+  width: 10rem;
+  height: 10rem;
+  border: solid black 1px;
   border-radius: 100%;
-  margin-left: -0.8rem;
+  margin-top: 1rem;
+}
+
+.dashboard-content-post-writerimg{
+  width: 2rem;
+  height: 2rem;
+  /* border: solid 1px black; */
+  border-radius: 50%;
 }
 
 .userInfo {
   margin-bottom: 2rem;
   height: 21rem;
+  /* border: solid 1px green; */
 }
 
 #dashboard-title,

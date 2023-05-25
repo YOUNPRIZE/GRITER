@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="selectAll" resultType="map">
-		SELECT p.*, u.nickname FROM
+		SELECT p.*, u.nickname, u.gender FROM
 		posts p
 		JOIN users u
 		ON u.user_id = p.user_id
