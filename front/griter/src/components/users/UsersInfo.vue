@@ -9,7 +9,7 @@
               <i class="bx bxs-edit" id="edit-btn"></i>
             </router-link>
             <div v-else id="follow-btn">
-              <div v-if="alreadyFriend" @click="newFollow">
+              <div v-if="!alreadyFriend" @click="newFollow">
                 <i class="bx bxs-bell-plus" id="edit-btn"></i>
                 <span style="font-size: medium">Follow</span>
               </div>
@@ -23,11 +23,11 @@
         </div>
         <div class="userinfo-content">
           <img src alt style="
-                height: 15rem;
-                width: 15rem;
-                border: solid 1px red;
-                border-radius: 100%;
-              " />
+                    height: 15rem;
+                    width: 15rem;
+                    border: solid 1px red;
+                    border-radius: 100%;
+                  " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -167,11 +167,11 @@
                 </div>
                 <div class="myPost-content-post-writerInfo">
                   <img src alt style="
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 100%;
-                        border: solid 1px red;
-                      " />
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 100%;
+                            border: solid 1px red;
+                          " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
@@ -364,12 +364,18 @@ export default {
       this.callFollowers(user_id);
       this.callFollowing(user_id);
       this.myPage = false;
-      for (let i = 0; i < this.followers.length; i++) {
-        if (this.followers[i].user_id === loginUser_id) {
-          this.alreadyFriend = true;
-          break;
+      setTimeout(() => {
+        console.log("이 아래임");
+        for (let i = 0; i < this.followers.length; i++) {
+          console.log(this.followers[i].user_id);
+          console.log("로그인 한 사람: " + loginUser_id);
+          if (this.followers[i].user_id == loginUser_id) {
+            console.log("이미 친구");
+            this.alreadyFriend = true;
+            break;
+          }
         }
-      }
+      }, "100")
     }
   },
 };

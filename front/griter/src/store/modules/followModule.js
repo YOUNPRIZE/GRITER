@@ -39,7 +39,7 @@ const followModule = {
     unFollow: ({ commit }, relation) => {
       commit;
       axios
-        .delete(API_URL + 'unfollow', null, {
+        .delete(API_URL + `unfollow/${relation.user_id}/${relation.following_id}`, null, {
           params: {
             user_id: relation.user_id,
             following_id: relation.following_id,
@@ -47,6 +47,7 @@ const followModule = {
         })
         .then((res) => {
           console.log(res);
+          router.go(0);
         });
     },
     callFollowers: ({ commit }, user_id) => {

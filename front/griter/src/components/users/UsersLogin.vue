@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import router from "@/router";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
@@ -33,14 +32,11 @@ export default {
       },
     };
   },
-  mounted() {
-    // 최초 1회에 한해 새로고침 => 그래야 옆에 aside 안뜸
-    if (self.name != "reload") {
-      self.name = "reload";
-      this.$router.go(0);
-    } else self.name = "";
-  },
-  created(){
+  created() {
+    // if (self.name != "reload") {
+    //   self.name = "reload";
+    //   this.$router.go(0);
+    // } else self.name = "";
     sessionStorage.removeItem("access-token");
     localStorage.removeItem("loginUser");
   },
@@ -49,20 +45,11 @@ export default {
   },
   methods: {
     ...mapActions("userModule", ["userLogin"]),
-  login() {
-    console.log(this.user);
-    // alert(this.user.nickname);
-    this.userLogin(this.user);
-    if (sessionStorage.getItem("access-token")) {
-      router.push({ name: "home" });
-    } else{
-      // alert 먼저 띄우고 새로고침 하기위함
-      setTimeout(() => {
-        router.go(0);
-      }, "100");
-    }
+    login() {
+      console.log(this.user);
+      this.userLogin(this.user);
+    },
   },
-},
 };
 </script>
 

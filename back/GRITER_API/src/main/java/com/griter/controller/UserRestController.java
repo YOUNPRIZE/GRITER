@@ -53,19 +53,14 @@ public class UserRestController {
 		System.out.println("JWT: " + user);
 		User loginUser = us.signIn(user.getNickname(), user.getPassword());
 		System.out.println("JWT");
-		try {
-			if (loginUser != null) {
-				result.put("access-token", jwtUtil.createToken(loginUser));
-				result.put("loginUser", loginUser.getUser_id());
-				result.put("message", SUCCESS);
-				status = HttpStatus.ACCEPTED;
-			} else {
-				result.put("message", FAIL);
-				status = HttpStatus.NO_CONTENT;
-			}
-		} catch (UnsupportedEncodingException e) {
+		if (loginUser != null) {
+			result.put("access-token", loginUser.getAuthToken());
+			result.put("loginUser", loginUser.getUser_id());
+			result.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} else {
 			result.put("message", FAIL);
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			status = HttpStatus.NO_CONTENT;
 		}		
 		return new ResponseEntity<Map<String,Object>>(result, status);
 	}
