@@ -82,7 +82,6 @@ const routineModule = {
     createRoutines({ commit }, routine) {
       commit;
       const API_URL = `${REST_API}/routines/`;
-      console.log(routine.date);
       axios
         .post(API_URL, null, {
           params: {

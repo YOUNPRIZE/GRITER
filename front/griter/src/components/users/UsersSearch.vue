@@ -67,7 +67,6 @@ export default {
   },
   created() {
     this.getUsers();
-    // console.log(this.users);
   }
 };
 </script>

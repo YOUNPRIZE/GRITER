@@ -121,7 +121,6 @@ export default {
       "deleteRoutine"
     ]),
     updateRtn() {
-      // console.log(this.specificRoutine)
       this.updateRoutine(this.specificRoutine);
     },
     deleteRtn() {
@@ -133,7 +132,6 @@ export default {
       window.location.href.lastIndexOf("/") + 1
     );
     this.getRoutine(routine_id);
-    // console.log(this.routine)
   }
 };
 </script>

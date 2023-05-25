@@ -90,7 +90,6 @@ export default {
       window.location.href.lastIndexOf("/") + 1
     );
     this.getDiet(diet_id);
-    console.log(this.diet)
   }
 };
 </script>

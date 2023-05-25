@@ -84,7 +84,6 @@ export default {
       }, "100");
 
       let interval = setInterval(() => {
-        console.log("데이터 갱신");
         this.getLoginUser(user_id)
           .then(() => {
             // 로그인한 사용자 정보 가져오기 완료
@@ -124,7 +123,6 @@ export default {
                 dates: new Date(this.diets[i - this.routines.length - 1].date)
               });
             }
-            console.log(this.attributes);
           });
       }, "5");
     }
@@ -171,7 +169,6 @@ export default {
     //         dates: new Date(this.diets[i - this.routines.length - 1].date)
     //       });
     //     }
-    //     console.log(this.attributes);
     //   });
   }
 };

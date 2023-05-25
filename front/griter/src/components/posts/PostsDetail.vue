@@ -228,7 +228,6 @@ export default {
         post_id: this.post[0].post_id
       };
       this.getComment(newComment);
-      console.log(this.comment);
       this.createComment(this.comment);
       this.updateData();
     },
@@ -254,13 +253,11 @@ export default {
     },
     showPostDeleteModal(deletePostId) {
       event.preventDefault();
-      console.log(deletePostId);
       this.isPostDeleteModalOpen = true;
       this.deletePostId = deletePostId;
     },
     showCommentDeleteModal(deleteCommentId) {
       event.preventDefault();
-      console.log(deleteCommentId);
       this.isCommentDeleteModalOpen = true;
       this.deleteCommentId = deleteCommentId;
     },
@@ -271,7 +268,6 @@ export default {
       this.deleteCommentId = "";
     },
     deletePost() {
-      console.log(this.deletePostId);
       this.delete(this.deletePostId);
       this.closeDeleteModal();
       setTimeout(() => {
@@ -279,7 +275,6 @@ export default {
       }, "10");
     },
     deleteComment() {
-      console.log(this.deletePostId);
       this.commentDelete(this.deleteCommentId);
       this.closeDeleteModal();
       this.updateData();
