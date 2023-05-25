@@ -17,14 +17,14 @@ const userModule = {
     USER_LOGIN: (state, payload) => {
       state.loginUser = payload;
     },
+    GET_LOGINUSER: (state, payload) => {
+      state.loginUser = payload;
+    },
     GET_USER: (state, payload) => {
       state.user = payload;
     },
     GET_USERS: (state, payload) => {
       state.users = payload;
-    },
-    GET_LOGINUSER: (state, payload) => {
-      state.loginUser = payload;
     },
     // UPDATE_USER: (state, payload) => {
     //   state.loginUser = payload;
@@ -67,12 +67,11 @@ const userModule = {
           sessionStorage.setItem("access-token", res.data["access-token"]);
           localStorage.setItem("loginUser", res.data["loginUser"]);
           commit("USER_LOGIN", loginUser);
-          router.push({ name: "home" }).catch(() => {});
         })
         .catch((err) => {
           console.log(err);
           alert("로그인 실패");
-          commit("USER_LOGIN", "fail");
+          commit("GET_LOGINUSER", "fail");
         });
     },
     getUser: ({ commit }, user_id) => {

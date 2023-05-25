@@ -5,25 +5,10 @@
       <form action="" class="login-form">
         <div class="login-form-input">
           <div class="label">ID</div>
-          <!-- <input type="text" class="id" required/> -->
-          <input
-            type="text"
-            class="form-control"
-            id="nickname"
-            v-model="user.nickname"
-            @keydown.enter="login"
-            required
-          />
+          <input type="text" class="form-control" id="nickname" v-model="user.nickname" @keydown.enter="login" required />
           <div class="label">Password</div>
-          <!-- <input type="password" class="password" required/> -->
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            v-model="user.password"
-            @keydown.enter="login"
-            required
-          />
+          <input type="password" class="form-control" id="password" v-model="user.password" @keydown.enter="login"
+            required />
         </div>
         <div class="buttons">
           <button @click="login" class="btn btn-primary" id="login-btn">Login</button>
@@ -59,21 +44,22 @@ export default {
     ...mapState("userModule", ["loginUser"]),
   },
   methods: {
-    ...mapActions("userModule", {
-      doLogin: "userLogin",
-    }),
-    login() {
-      console.log(this.user);
-      this.doLogin(this.user);
-      if(this.loginUser === 'fail'){
-        alert("로그인 실패");
-        // alert 먼저 띄우고 새로고침 하기위함
-        setTimeout(()=>{
-          router.go(0);
-        }, 0);
-      }
-    },
+    ...mapActions("userModule", ["userLogin"]),
+  login() {
+    console.log(this.user);
+    // alert(this.user.nickname);
+    this.userLogin(this.user);
+    if (this.loginUser === 'fail') {
+      alert("로그인 실패");
+      // alert 먼저 띄우고 새로고침 하기위함
+      setTimeout(() => {
+        router.go(0);
+      }, "100");
+    } else{
+      router.push({ name: "home" });
+    }
   },
+},
 };
 </script>
 
