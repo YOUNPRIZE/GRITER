@@ -40,6 +40,10 @@ export default {
       this.$router.go(0);
     } else self.name = "";
   },
+  created(){
+    sessionStorage.removeItem("access-token");
+    localStorage.removeItem("loginUser");
+  },
   computed: {
     ...mapState("userModule", ["loginUser"]),
   },
@@ -49,14 +53,13 @@ export default {
     console.log(this.user);
     // alert(this.user.nickname);
     this.userLogin(this.user);
-    if (this.loginUser === 'fail') {
-      alert("로그인 실패");
+    if (sessionStorage.getItem("access-token")) {
+      router.push({ name: "home" });
+    } else{
       // alert 먼저 띄우고 새로고침 하기위함
       setTimeout(() => {
         router.go(0);
       }, "100");
-    } else{
-      router.push({ name: "home" });
     }
   },
 },
