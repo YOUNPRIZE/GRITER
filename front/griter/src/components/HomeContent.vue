@@ -13,7 +13,7 @@
         <!-- 대시보드 미리보기 항목들 -->
         <div v-for="(post, index) in posts" :key="index" class="group-item">
           <router-link :to="{ name: 'PostsDetail', params: { post_id: post.post_id } }">
-            <div class="dashboard-content-post">
+            <div class="dashboard-content-post">  
               <div class="dashboard-content-post-left">
                 <div class="dashboard-content-post-title">
                   <span>{{ post.title }}</span>
@@ -66,7 +66,8 @@
         </div>
         <div class="line"></div>
         <div class="userInfo-content">
-          <img src id="profile-image" alt />
+          <img v-if="loginUser.gender === 'M'" src="../assets/man.png" class="profile-img" alt="" />
+              <img v-else src="../assets/woman.png" class="profile-img" alt="" />
           <div class="userInfo-info">
             <!-- 아이디 -->
             <h5>{{ loginUser.nickname }}</h5>
@@ -93,7 +94,6 @@
         <div class="calendar-content">
           <v-calendar
             @click:day="handleDayClick"
-            is-dark
             is-expanded
             :attributes="attributes"
           />
@@ -261,6 +261,14 @@ main {
 .calendar {
   width: 33rem;
   margin-left: 4rem;
+}
+
+.profile-img {
+  width: 5rem;
+  height: 5rem;
+  /* border: solid red 1px; */
+  border-radius: 100%;
+  margin-left: -0.8rem;
 }
 
 .userInfo {

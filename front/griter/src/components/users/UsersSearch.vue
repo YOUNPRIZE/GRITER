@@ -8,13 +8,7 @@
             <span class="input-group-text">
               <box-icon name="search"></box-icon>
             </span>
-            <input
-              class="form-control"
-              id="search"
-              type="text"
-              placeholder="Search"
-              @input="searchUsers($event)"
-            />
+            <input class="form-control" id="search" type="text" placeholder="Search" @input="searchUsers($event)" />
           </div>
         </form>
       </div>
@@ -29,7 +23,8 @@
       <div v-for="(user, index) in users" :key="index" class="group-item-1" id="followers-content">
         <div id="followers-content-userInfo">
           <div class="followers-content-userInfo">
-            <img src alt />
+            <img v-if="user.gender === 'M'" src="../../assets/man.png" class="profile-img" alt="" style="margin-left: 0.5rem; width: 3rem; height: 3rem;"/>
+            <img v-else src="../../assets/woman.png" class="profile-img" alt="" style="margin-left: 0.5rem; width: 3rem; height: 3rem;"/>
             <span>{{ user.name }}</span>
             <span>{{ user.nickname }}</span>
             <span>{{ user.email }}</span>
@@ -111,9 +106,11 @@ main {
   flex-direction: column;
   overflow: auto;
 }
+
 #followers-content::-webkit-scrollbar {
   width: 0.5rem;
 }
+
 #followers-content::-webkit-scrollbar-thumb {
   background-color: rgb(190, 190, 190);
   border-radius: 10px;
@@ -128,25 +125,29 @@ main {
   flex-direction: row;
   justify-content: space-around;
 }
-.followers-head > span {
+
+.followers-head>span {
   /* border: solid 1px red; */
   font-weight: bold;
 }
 
-.followers-head > span:nth-child(1),
-.followers-content-userInfo > img {
+.followers-head>span:nth-child(1),
+.followers-content-userInfo>img {
   width: 10%;
 }
-.followers-head > span:nth-child(2),
-.followers-content-userInfo > span:nth-child(2) {
+
+.followers-head>span:nth-child(2),
+.followers-content-userInfo>span:nth-child(2) {
   width: 23%;
 }
-.followers-head > span:nth-child(3),
-.followers-content-userInfo > span:nth-child(3) {
+
+.followers-head>span:nth-child(3),
+.followers-content-userInfo>span:nth-child(3) {
   width: 23%;
 }
-.followers-head > span:nth-child(4),
-.followers-content-userInfo > span:nth-child(4) {
+
+.followers-head>span:nth-child(4),
+.followers-content-userInfo>span:nth-child(4) {
   width: 44%;
 }
 
@@ -155,12 +156,14 @@ main {
   display: flex;
   flex-direction: column;
 }
+
 .followers-content-userInfo {
   /* padding: 1rem; */
   margin: 0.5rem 0 0.5rem 0;
   height: 3rem;
 }
-.followers-content-userInfo > * {
+
+.followers-content-userInfo>* {
   display: flex;
   flex-direction: column;
   justify-content: center;
