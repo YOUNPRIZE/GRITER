@@ -23,11 +23,11 @@
         </div>
         <div class="userinfo-content">
           <img src alt style="
-                  height: 15rem;
-                  width: 15rem;
-                  border: solid 1px red;
-                  border-radius: 100%;
-                " />
+                      height: 15rem;
+                      width: 15rem;
+                      border: solid 1px red;
+                      border-radius: 100%;
+                    " />
           <div class="userinfo-content-info">
             <div class="userinfo-content-info-item">
               <span>Name</span>
@@ -167,11 +167,11 @@
                 </div>
                 <div class="myPost-content-post-writerInfo">
                   <img src alt style="
-                                  width: 30px;
-                                  height: 30px;
-                                  border-radius: 100%;
-                                  border: solid 1px red;
-                                " />
+                                      width: 30px;
+                                      height: 30px;
+                                      border-radius: 100%;
+                                      border: solid 1px red;
+                                    " />
                   <span class="myPost-content-post-writer">{{ post.nickname }}</span>
                 </div>
               </div>
@@ -350,9 +350,9 @@ export default {
     updateData() {
       const user_id = router.currentRoute.params.user_id;
       const loginUser_id = localStorage.getItem("loginUser");
-      setTimeout(()=>{
+      setTimeout(() => {
         clearInterval(interval);
-      }, "1000");
+      }, "100");
       let interval = setInterval(() => {
         this.callFollowers(user_id);
         this.callFollowing(user_id);
@@ -363,7 +363,19 @@ export default {
             break;
           }
         }
+      }, "10");
+    },
+    updateData2() {
+      const loginUser_id = localStorage.getItem("loginUser");
+      setTimeout(() => {
+        clearInterval(interval);
       }, "100");
+      let interval = setInterval(() => {
+        this.getLoginUser(loginUser_id);
+        this.getPostsByUserId(loginUser_id);
+        this.callFollowers(loginUser_id);
+        this.callFollowing(loginUser_id);
+      }, "10");
     }
   },
   created() {
@@ -373,15 +385,13 @@ export default {
     console.log(loginUser_id);
     console.log(router.currentRoute.name);
     if (router.currentRoute.name == "myPage") {
-      this.getLoginUser(loginUser_id);
-      this.getPostsByUserId(loginUser_id);
-      this.callFollowers(loginUser_id);
-      this.callFollowing(loginUser_id);
+      this.updateData2();
     } else {
       this.getLoginUser(loginUser_id);
       this.getUser(user_id);
       this.getPostsByUserId(user_id);
       this.myPage = false;
+      this.updateData();
     }
   },
 };

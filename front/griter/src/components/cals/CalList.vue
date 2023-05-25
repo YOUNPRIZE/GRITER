@@ -12,14 +12,8 @@
           </router-link>
         </div>
       </div>
-      <v-calendar
-        is-expanded
-        class="is-dark custom-calendar max-w-full"
-        id="cal"
-        :masks="masks"
-        :attributes="attributes"
-        disable-page-swipe
-      >
+      <v-calendar is-expanded class="is-dark custom-calendar max-w-full" id="cal" :masks="masks" :attributes="attributes"
+        disable-page-swipe>
         <template v-slot:day-content="{ day, attributes }">
           <div class="flex flex-col h-full z-10 overflow-hidden">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
@@ -32,18 +26,12 @@
                 :class="attr.customData.class"
               >{{ attr.customData.title }}</p>-->
               <template v-for="attr in attributes">
-                <p
-                  @click="movetoRoutineDetail(attr.customData.id)"
-                  :key="attr.key"
+                <p @click="movetoRoutineDetail(attr.customData.id)" :key="attr.key"
                   v-if="attr.customData.class === 'griter-workout'"
-                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-workout"
-                >{{ attr.customData.title }}</p>
-                <p
-                  @click="movetoDietDetail(attr.customData.id)"
-                  :key="attr.key"
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-workout">{{ attr.customData.title }}</p>
+                <p @click="movetoDietDetail(attr.customData.id)" :key="attr.key"
                   v-if="attr.customData.class === 'griter-diet'"
-                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-diet"
-                >{{ attr.customData.title }}</p>
+                  class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 griter-diet">{{ attr.customData.title }}</p>
               </template>
             </div>
           </div>
@@ -87,51 +75,104 @@ export default {
     },
     movetoDietDetail(params) {
       router.push({ name: "DietsDetail", params: { diet_id: params } });
+    },
+    updateData() {
+      const user_id = localStorage.getItem("loginUser");
+
+      setTimeout(() => {
+        clearInterval(interval);
+      }, "100");
+
+      let interval = setInterval(() => {
+        console.log("데이터 갱신");
+        this.getLoginUser(user_id)
+          .then(() => {
+            // 로그인한 사용자 정보 가져오기 완료
+            this.getUserRoutines(user_id);
+          })
+          .then(() => {
+            // 사용자 루틴 정보 가져오기 완료
+            const len = this.routines.length;
+            for (let i = 1; i <= len; i++) {
+              this.attributes.push({
+                key: i,
+                customData: {
+                  title: this.routines[i - 1].exercise,
+                  class: "griter-workout",
+                  id: this.routines[i - 1].routine_id
+                },
+                dates: new Date(this.routines[i - 1].date)
+              });
+            }
+            this.getUserDiets(user_id);
+          })
+          .then(() => {
+            // 사용자 식단 정보 가져오기 완료
+            const len2 = this.diets.length;
+            for (
+              let i = this.routines.length + 1;
+              i <= this.routines.length + len2;
+              i++
+            ) {
+              this.attributes.push({
+                key: i,
+                customData: {
+                  title: this.diets[i - this.routines.length - 1].kind,
+                  class: "griter-diet",
+                  id: this.diets[i - this.routines.length - 1].diet_id
+                },
+                dates: new Date(this.diets[i - this.routines.length - 1].date)
+              });
+            }
+            console.log(this.attributes);
+          });
+      }, "5");
     }
   },
   created() {
-    const user_id = localStorage.getItem("loginUser");
-    this.getLoginUser(user_id)
-      .then(() => {
-        // 로그인한 사용자 정보 가져오기 완료
-        return this.getUserRoutines(user_id);
-      })
-      .then(() => {
-        // 사용자 루틴 정보 가져오기 완료
-        const len = this.routines.length;
-        for (let i = 1; i <= len; i++) {
-          this.attributes.push({
-            key: i,
-            customData: {
-              title: this.routines[i - 1].exercise,
-              class: "griter-workout",
-              id: this.routines[i - 1].routine_id
-            },
-            dates: new Date(this.routines[i - 1].date)
-          });
-        }
-        return this.getUserDiets(user_id);
-      })
-      .then(() => {
-        // 사용자 식단 정보 가져오기 완료
-        const len2 = this.diets.length;
-        for (
-          let i = this.routines.length + 1;
-          i <= this.routines.length + len2;
-          i++
-        ) {
-          this.attributes.push({
-            key: i,
-            customData: {
-              title: this.diets[i - this.routines.length - 1].kind,
-              class: "griter-diet",
-              id: this.diets[i - this.routines.length - 1].diet_id
-            },
-            dates: new Date(this.diets[i - this.routines.length - 1].date)
-          });
-        }
-        console.log(this.attributes);
-      });
+    this.updateData();
+    // const user_id = localStorage.getItem("loginUser");
+    // this.getLoginUser(user_id)
+    //   .then(() => {
+    //     // 로그인한 사용자 정보 가져오기 완료
+    //     this.getUserRoutines(user_id);
+    //   })
+    //   .then(() => {
+    //     // 사용자 루틴 정보 가져오기 완료
+    //     const len = this.routines.length;
+    //     for (let i = 1; i <= len; i++) {
+    //       this.attributes.push({
+    //         key: i,
+    //         customData: {
+    //           title: this.routines[i - 1].exercise,
+    //           class: "griter-workout",
+    //           id: this.routines[i - 1].routine_id
+    //         },
+    //         dates: new Date(this.routines[i - 1].date)
+    //       });
+    //     }
+    //     this.getUserDiets(user_id);
+    //   })
+    //   .then(() => {
+    //     // 사용자 식단 정보 가져오기 완료
+    //     const len2 = this.diets.length;
+    //     for (
+    //       let i = this.routines.length + 1;
+    //       i <= this.routines.length + len2;
+    //       i++
+    //     ) {
+    //       this.attributes.push({
+    //         key: i,
+    //         customData: {
+    //           title: this.diets[i - this.routines.length - 1].kind,
+    //           class: "griter-diet",
+    //           id: this.diets[i - this.routines.length - 1].diet_id
+    //         },
+    //         dates: new Date(this.diets[i - this.routines.length - 1].date)
+    //       });
+    //     }
+    //     console.log(this.attributes);
+    //   });
   }
 };
 </script>
@@ -167,6 +208,7 @@ p.griter-diet {
   padding: 1rem;
   padding-bottom: 1rem;
 }
+
 /* Add the dark mode styles */
 .custom-calendar.is-dark .vc-container .vc-header {
   background-color: #1a202c;

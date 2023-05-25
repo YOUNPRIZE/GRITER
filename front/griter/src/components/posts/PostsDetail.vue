@@ -56,20 +56,18 @@
               <span>{{ post[0].category }}</span>
             </div>
             <div class="postdetail-main-generateddate">
-              <span
-                v-if="
+              <span v-if="
                 JSON.stringify(post[0].generated_date) ===
                 JSON.stringify(post[0].modified_date)
-              "
-              >
+              ">
                 {{ post[0].generated_date[0] }}.{{ post[0].generated_date[1] }}.{{
-                post[0].generated_date[2]
+                  post[0].generated_date[2]
                 }}
                 {{ post[0].generated_date[3] }}:{{ post[0].generated_date[4] }}
               </span>
               <span v-else>
                 {{ post[0].modified_date[0] }}.{{ post[0].modified_date[1] }}.{{
-                post[0].modified_date[2]
+                  post[0].modified_date[2]
                 }}
                 {{ post[0].modified_date[3] }}:{{ post[0].modified_date[4] }}(수정됨)
               </span>
@@ -89,12 +87,7 @@
         <div class="postdetail-comments">
           <span class="detail-key">Comments</span>
           <div class="postdetail-comments-content">
-            <div
-              v-for="(comment, index) in comments"
-              :key="index"
-              class="group-item"
-              id="all-comments"
-            >
+            <div v-for="(comment, index) in comments" :key="index" class="group-item" id="all-comments">
               <div class="comment">
                 <div id="comment-writer">{{ comment.nickname }}</div>
                 <div v-if="editingCommentId !== comment.comment_id" id="comment-content">
@@ -112,18 +105,9 @@
                 <div v-else-if="editingCommentId === comment.comment_id" id="comment-content">
                   <fieldset>
                     <div class="comment-content-editing">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="comment-content-editing"
-                        :value="comment.content"
-                        @keydown.enter="updateComment"
-                      />
-                      <input
-                        type="hidden"
-                        id="comment-comment_id-editing"
-                        :value="comment.comment_id"
-                      />
+                      <input type="text" class="form-control" id="comment-content-editing" :value="comment.content"
+                        @keydown.enter="updateComment" />
+                      <input type="hidden" id="comment-comment_id-editing" :value="comment.comment_id" />
                       <!-- <input type="hidden" id="comment-user_id-editing" :value="comment.user_id">
                       <input type="hidden" id="comment-post_id-editing" :value="comment.post_id">-->
                       <div class="comment-edit-buttons">
@@ -138,20 +122,18 @@
                   </fieldset>
                 </div>
                 <div id="comment-date">
-                  <span
-                    v-if="
+                  <span v-if="
                     JSON.stringify(comment.generated_date) ===
                     JSON.stringify(comment.modified_date)
-                  "
-                  >
+                  ">
                     {{ comment.generated_date[0] }}.{{ comment.generated_date[1] }}.{{
-                    post[0].generated_date[2]
+                      post[0].generated_date[2]
                     }}
                     {{ comment.generated_date[3] }}:{{ comment.generated_date[4] }}
                   </span>
                   <span v-else>
                     {{ comment.modified_date[0] }}.{{ comment.modified_date[1] }}.{{
-                    comment.modified_date[2]
+                      comment.modified_date[2]
                     }}
                     {{ comment.modified_date[3] }}:{{ comment.modified_date[4] }}(수정됨)
                   </span>
@@ -164,23 +146,9 @@
       <div class="entercomment">
         <div class="line"></div>
         <fieldset class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter comment here"
-            aria-describedby="button-addon2"
-            v-model="commentContent"
-            name="content"
-            id="content"
-            required
-            @keydown.enter="writeComment"
-          />
-          <button
-            type="submit"
-            class="btn btn-outline-primary"
-            id="button-addon2"
-            @click="writeComment"
-          >Write</button>
+          <input type="text" class="form-control" placeholder="Enter comment here" aria-describedby="button-addon2"
+            v-model="commentContent" name="content" id="content" required @keydown.enter="writeComment" />
+          <button type="submit" class="btn btn-outline-primary" id="button-addon2" @click="writeComment">Write</button>
         </fieldset>
       </div>
     </div>
@@ -241,20 +209,16 @@ export default {
         user_id: this.loginUser.user_id,
         post_id: this.post[0].post_id
       };
-      this.createPostLike(param).then(() => {
-        this.isLiked = true;
-        localStorage.setItem("isLiked", true);
-      });
+      this.createPostLike(param)
+      this.updateData();
     },
     unliked() {
       const param = {
         user_id: this.loginUser.user_id,
         post_id: this.post[0].post_id
       };
-      this.deletePostLike(param).then(() => {
-        this.isLiked = false;
-        localStorage.setItem("isLiked", false);
-      });
+      this.deletePostLike(param);
+      this.updateData();
     },
     writeComment() {
       const newComment = {
@@ -320,25 +284,34 @@ export default {
       this.closeDeleteModal();
       this.updateData();
     },
-    updateData(){
+    updateData() {
       const post_id = this.$route.params.post_id;
+      const userId = localStorage.getItem("loginUser");
       setTimeout(() => {
         clearInterval(interval);
-      }, "500");
+      }, "50");
       let interval = setInterval(() => {
-        console.log("데이터 갱신");
         this.getComments(post_id);
-      }, "100");
+        this.getPostLikeByUser({ user_id: userId });
+        let len = this.postLiked.length;
+        this.isLiked = false;
+        for (let i = 0; i < len; i++) {
+          if (this.postLiked[i].post_id == post_id) {
+            this.isLiked = true;
+            break;
+          }
+        }
+      }, "10");
     }
   },
   created() {
     const post_id = this.$route.params.post_id;
     const userId = localStorage.getItem("loginUser");
+    this.updateData();
     this.getPostLikeByUser({ user_id: userId }).then(() => {
       let len = this.postLiked.length;
-      console.log(this.postLiked);
       for (let i = 0; i < len; i++) {
-        if (this.postLiked[i].post_id === post_id) {
+        if (this.postLiked[i].post_id == post_id) {
           this.isLiked = true;
           break;
         }
@@ -444,7 +417,7 @@ export default {
   color: var(--font-color-3);
 }
 
-.postdetail-main-aside > span {
+.postdetail-main-aside>span {
   margin-bottom: 1rem;
 }
 
@@ -457,7 +430,7 @@ export default {
   margin-left: 2rem;
 }
 
-.postdetail-main-value > span {
+.postdetail-main-value>span {
   margin-bottom: 1rem;
 }
 
@@ -604,7 +577,7 @@ fieldset {
   display: flex;
 }
 
-.dashboard-content-post-btn > button {
+.dashboard-content-post-btn>button {
   border: none;
   background-color: transparent;
   font-size: x-large;
@@ -616,8 +589,8 @@ fieldset {
   margin-left: 2rem;
 }
 
-#comment-buttons > button,
-.comment-edit-buttons > button {
+#comment-buttons>button,
+.comment-edit-buttons>button {
   border: none;
   background-color: transparent;
 }
