@@ -1,4 +1,4 @@
-CREATE DATABASE griter;
+CREATE DATABASE IF NOT EXISTS griter;
 USE griter;
 
 # USER TABLE
@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `posts` (
 		REFERENCES `users` (`user_id`)
     	ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 # INSERT POST DUMMY DATA
 INSERT INTO posts (post_id, user_id, title, content, generated_date, modified_date, view_cnt, like_cnt, category) 
 values (0, 1, "아침 운동 깜빡했다..", "내일은 꼭 간다!!", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
@@ -65,14 +64,15 @@ values (0, 1, "아침 운동 깜빡했다..", "내일은 꼭 간다!!", DEFAULT,
 (0, 12, "오빠랑 공부할래??", "오빠가 알려줄게.", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유"),
 (0, 13, "지각할까봐", "급하게 왔는데 편의점 좀 다녀와도 될까요??", DEFAULT, DEFAULT, DEFAULT, DEFAULT, "자유");
 
+
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
     `image_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 image ID 값
-    `post_id` INT NOT NULL, # 게시물 ID
-    `img_path` VARCHAR(200) NOT NULL, # image 경로
-    CONSTRAINT `fk_image_post`
-		FOREIGN KEY (`post_id`)
-		REFERENCES `posts` (`post_id`)
+    `user_id` INT NOT NULL UNIQUE, # 사용자 ID
+    `data` BLOB,
+    CONSTRAINT `fk_image_user`
+		FOREIGN KEY (`user_id`)
+		REFERENCES `users` (`user_id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `routines` (
     `user_id` INT NOT NULL,
     `exercise` VARCHAR(100) NOT NULL, # 운동 종류? 종목 ex) 달리기, 스쿼트
     `type` VARCHAR(100) NOT NULL, # ex) 유산소, 하체, 어깨, 이두 etc..
-    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
+    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 운동한 날짜
     `time` INT DEFAULT NULL, # 운동 시간 (선택적?)
     `sets` INT DEFAULT NULL, # 유산소 운동 했을 경우 sets, reps, weight 필요 없으므로 NULLABLE
     `reps` INT DEFAULT NULL,
@@ -228,7 +228,7 @@ DROP TABLE IF EXISTS `diets`;
 CREATE TABLE IF NOT EXISTS `diets` (
     `diet_id` INT AUTO_INCREMENT PRIMARY KEY, # 고유 ID값, PK
     `user_id` INT NOT NULL,
-    `date` DATETIME DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
+    `date` DATE DEFAULT (CURRENT_DATE) NOT NULL, # 날짜
     `meal` VARCHAR(20) NOT NULL, # 아침, 점심, 저녁, 간식 등
     `kind` VARCHAR(100) NOT NULL, # 무슨 종류? 계란, 고구마 등등 입력
     `gram` INT DEFAULT 0, # 섭취한 음식의 무게
@@ -247,4 +247,4 @@ values (0, 1, DEFAULT, "점심", "닭가슴살", 100, 200),
 (0, 2, DEFAULT, "저녁", "치킨", 300, 1203),
 (0, 3, DEFAULT, "아침", "과일", 100, 400),
 (0, 3, DEFAULT, "점심", "로제떡볶이", 400, 1245),
-(0, 3, DEFAULT, "저녁", "치킨", 300, 1102),
+(0, 3, DEFAULT, "저녁", "치킨", 300, 1102);
