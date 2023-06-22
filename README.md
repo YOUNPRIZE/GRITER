@@ -16,59 +16,59 @@
 
 ## **1️⃣ 프로젝트 일정**
 
-![GANTT CHART](https://github.com/YOUNPRIZE/GRITER/assets/76830587/3df3ea7f-5403-4686-84cb-cf681c89dfd6)
+![gantt](assets/gantt.png)
 
-## **1️⃣ 팀원 정보 및 업무 분담 내역**
+## **2️⃣ 팀원 정보 및 업무 분담 내역**
 
 | 이름   | 역할 | 설명           |
 | ------ | ---- | -------------- |
-| 박재민 | FE && BE    | Vue Component 설계 및 전반적인 프론트엔드 구현 + 백엔드 검토 |
+| 박재민 | FE && BE    | Vue Component 설계 및 프론트엔드 구현 + 백엔드 검토 |
 | 조윤상 | BE && FE  | SpringBoot REST API 설계 및 백엔드 구현 + 프론트엔드 검토 |
 
-## **2️⃣ UI 디자인 및 프로토타입**
+## **3️⃣ UI 디자인 및 프로토타입**
 
 * 로그인
 
-![LogIn](https://github.com/YOUNPRIZE/GRITER/assets/76830587/4965eccb-1000-4557-b880-fd4738cebd6a)
+![gantt](assets/login.png)
 
 * 회원가입
 
-![Sign Up](https://github.com/YOUNPRIZE/GRITER/assets/76830587/63ed5591-2209-40ce-96f1-ea77f5b20a58)
+![gantt](assets/create.png)
 
 * 홈페이지
 
-![Home](https://github.com/YOUNPRIZE/GRITER/assets/76830587/a17b99fb-dcb4-4ef1-8e9d-458d41540ebb)
+![gantt](assets/home.png)
 
 * 게시판
 
-![DashBoard](https://github.com/YOUNPRIZE/GRITER/assets/76830587/d9b4fb22-2817-493b-a7a6-2d8b9b23cd1d)
+![gantt](assets/board.png)
 
 * 글 등록
 
-![Post](https://github.com/YOUNPRIZE/GRITER/assets/76830587/6d6748fa-d49d-4756-92eb-582e5e5cf686)
+![gantt](assets/createpost.png)
 
 * 글 상세
 
-![Detail](https://github.com/YOUNPRIZE/GRITER/assets/76830587/361bfe15-3e1a-498e-9326-80b82264e91e)
+![gantt](assets/detailpost.png)
 
 * 마이 페이지
 
-![MyPage](https://github.com/YOUNPRIZE/GRITER/assets/76830587/33ae3e32-8bbd-4bc2-bf39-1bf2dc163ea1)
+![gantt](assets/mypage.png)
 
 * 달력
 
-![Calender](https://github.com/YOUNPRIZE/GRITER/assets/76830587/b09a7aad-cd4e-4305-84d9-41a3ea1a701e)
+![gantt](assets/calendar.png)
 <br>
 
 <!--## **3️⃣ 목표 서비스 구현 및 실제 구현 정도** -->
 
-## **3️⃣ 서비스 명세서**
+## **4️⃣ 서비스 명세서**
 - [API 명세서](https://circular-ear-098.notion.site/63605c790ee94654a969fbd19b5dc299?v=a80ec7fc2ccf42888ef39c8d1050ee3e)
 
-## **4️⃣ 데이터베이스 모델링 (ERD)**
-  ![ERD](https://github.com/YOUNPRIZE/GRITER/assets/76830587/fc264cf0-f9d8-48a7-b3b3-594bf9dad94e)
+## **5️⃣ 데이터베이스 모델링 (ERD)**
+  ![gantt](assets/erd.png)
 
-## **5️⃣ 컴포넌트 구조**
+## **6️⃣ 컴포넌트 구조**
 
 📱 FrontEnd
 ```javascript
@@ -206,11 +206,31 @@
 ```
 <br>
 
-## **6️⃣ 서비스 대표 기능 및 실제 구현 화면**
+## **7️⃣ 서비스 대표 기능 및 실제 구현 화면**
 
-<br>
+* 홈페이지
 
-## **7️⃣ 배포 서버 URL**
+![gantt](assets/com/home.png)
+
+* 사용자 정보
+
+![gantt](assets/com/info.png)
+
+* 커뮤니티
+
+![gantt](assets/com/list.png)
+
+* 게시물 상세
+
+![gantt](assets/com/detail.png)
+
+* 캘린더
+
+![gantt](assets/com/cal.png)
+
+* 사용자 검색
+
+![gantt](assets/com/users.png)
 
 <br>
 
@@ -228,3 +248,7 @@
 
 
 😜 조윤상
+
+* REST API 설계 및 구현은 크게 어렵지 않았으나, DB 설계 시, 어려움을 느꼈습니다.
+* Vue.js, Html, Css 의 길은 멀고도 험하다는 것을 깨달았습니다.
+* 항상 '할 수 있다'는 동기부여를 해주고 긍정적인 마음가짐을 지닌 Pair 재민이에게 항상 감사합니다!!
